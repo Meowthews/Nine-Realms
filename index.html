@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nine Realms: Path of the Dao</title>
+  <style>
+    :root {
+      --panel: rgba(10, 25, 22, 0.84);
+      --panel-strong: rgba(8, 19, 17, 0.94);
+      --line: rgba(176, 139, 74, 0.3);
+      --gold: #e6c988;
+      --jade: #8fd0b2;
+      --mist: #d8dfd5;
+      --muted: #94a89b;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+      color: var(--mist);
+      background:
+        radial-gradient(circle at top, rgba(107, 142, 114, 0.16), transparent 35%),
+        radial-gradient(circle at 80% 15%, rgba(201, 111, 66, 0.12), transparent 22%),
+        linear-gradient(180deg, #0a1714 0%, #07110f 55%, #040808 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 80%);
+      pointer-events: none;
+      opacity: 0.2;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1260px, calc(100% - 2rem));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.45rem;
+      padding: 0.45rem;
+      border-radius: 999px;
+      background: rgba(6, 12, 11, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(16px);
+      z-index: 30;
+    }
+
+    .lang-toggle button {
+      border: 1px solid rgba(230, 201, 136, 0.16);
+      background: rgba(12, 28, 24, 0.72);
+      color: var(--mist);
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .lang-toggle button.active {
+      background: linear-gradient(135deg, rgba(230, 201, 136, 0.2), rgba(143, 208, 178, 0.16));
+      color: #fff1c4;
+      border-color: rgba(230, 201, 136, 0.42);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.65rem;
+      margin-top: 1rem;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 10, 10, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      z-index: 5;
+    }
+
+    .brand {
+      font-family: "Palatino Linotype", "Book Antiqua", "Iowan Old Style", serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-size: 0.92rem;
+      padding-left: 0.35rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .nav a,
+    .cta {
+      text-decoration: none;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(13, 29, 25, 0.66);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .nav a:hover,
+    .cta:hover {
+      transform: translateY(-2px);
+      border-color: rgba(230, 201, 136, 0.56);
+      background: rgba(18, 37, 33, 0.88);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+      padding: 3rem 0 2rem;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .feature-card,
+    .path-card,
+    .quote-card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 3rem;
+      background:
+        linear-gradient(135deg, rgba(230, 201, 136, 0.08), transparent 45%),
+        linear-gradient(180deg, rgba(143, 208, 178, 0.1), transparent 60%);
+    }
+
+    .eyebrow {
+      color: var(--jade);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      font-family: "Palatino Linotype", "Book Antiqua", "Iowan Old Style", serif;
+      margin: 0 0 1rem;
+      line-height: 1.05;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: #f7edd0;
+    }
+
+    p, li { line-height: 1.7; color: var(--mist); }
+
+    .lede {
+      font-size: 1.12rem;
+      color: #ebefea;
+      max-width: 54rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.8rem;
+    }
+
+    .cta.primary {
+      background: linear-gradient(135deg, rgba(230, 201, 136, 0.18), rgba(201, 111, 66, 0.12));
+      color: #fff1c4;
+    }
+
+    .hero-visual {
+      background:
+        linear-gradient(180deg, rgba(4, 8, 8, 0.05), rgba(4, 8, 8, 0.75)),
+        url("https://i.imgur.com/v7YyRqK.jpeg") center/cover no-repeat;
+      display: flex;
+      align-items: end;
+      padding: 2rem;
+      min-height: 100%;
+    }
+
+    .hero-visual .caption {
+      background: rgba(5, 11, 10, 0.72);
+      border: 1px solid rgba(230, 201, 136, 0.24);
+      border-radius: 20px;
+      padding: 1rem 1.1rem;
+      max-width: 22rem;
+    }
+
+    .section { padding: 1.4rem 0 0.4rem; }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 40rem;
+    }
+
+    .features,
+    .paths,
+    .highlights {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .features { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .feature-card,
+    .path-card,
+    .quote-card,
+    .panel { padding: 1.5rem; }
+
+    .kicker {
+      display: inline-block;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(143, 208, 178, 0.12);
+      color: var(--jade);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    .paths { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    ul { margin: 0; padding-left: 1.1rem; }
+    .highlights { grid-template-columns: 1.3fr 0.7fr; align-items: start; }
+
+    .quote-card {
+      background:
+        linear-gradient(180deg, rgba(201, 111, 66, 0.08), transparent 55%),
+        var(--panel-strong);
+    }
+
+    .quote-card blockquote {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.6;
+      color: #f1e7c8;
+      font-family: "Palatino Linotype", "Book Antiqua", serif;
+    }
+
+    .quote-card footer {
+      margin-top: 1rem;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold);
+      font-size: 1.35rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .highlights,
+      .features,
+      .paths { grid-template-columns: 1fr; }
+
+      .hero-copy { padding: 2rem; }
+
+      .topbar {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lang-toggle {
+        top: auto;
+        bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-toggle" aria-label="Language selector">
+    <button type="button" data-lang-switch="en">EN</button>
+    <button type="button" data-lang-switch="zh">中文</button>
+    <button type="button" data-lang-switch="ja">日本語</button>
+  </div>
+
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand" data-i18n="brand">Nine Realms: Path of the Dao</div>
+      <nav class="nav">
+        <a href="index.html" data-i18n="navHome">Home</a>
+        <a href="guide.html" data-i18n="navGuide">Quick Start &amp; Wiki</a>
+        <a href="changelog.html" data-i18n="navChangelog">Changelog</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <article class="hero-card hero-copy">
+          <div class="eyebrow" data-i18n="eyebrow">A Xianxia Progression Mod For Elin</div>
+          <h1 data-i18n="heroTitle">The Dao Does Not Forgive Hesitation.</h1>
+          <p class="lede" data-i18n="heroLede">Nine Realms: Path of the Dao brings long-form cultivation progression into Elin. Open the first gate, choose your path, temper your body or refine your qi, and push upward through mortal limits toward the immortal realms.</p>
+          <p data-i18n="heroBody">This is not a sprint system. Cultivation drains stamina and mana. Advancement stalls at the gate until you risk a breakthrough. Failure hurts. Success changes everything.</p>
+          <div class="actions">
+            <a class="cta primary" href="guide.html" data-i18n="ctaGuide">Begin The Journey</a>
+            <a class="cta" href="changelog.html" data-i18n="ctaChangelog">Read The Changelog</a>
+          </div>
+        </article>
+
+        <aside class="hero-card hero-visual">
+          <div class="caption">
+            <strong style="display:block;color:var(--gold);margin-bottom:0.45rem;" data-i18n="captionTitle">Current Direction</strong>
+            <span data-i18n="captionBody">Body and Qi cultivation are live, with rogue cultivation support, shared immortal realms, breakthrough risk, and a dedicated in-game cultivation menu.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <div>
+            <h2 data-i18n="addsTitle">What The Mod Adds</h2>
+            <p data-i18n="addsBody">A framework-first cultivation experience built around pacing, path identity, resource pressure, and dangerous realm progression.</p>
+          </div>
+        </div>
+        <div class="features">
+          <article class="feature-card">
+            <div class="kicker" data-i18n="feat1Kicker">Initiation</div>
+            <h3 data-i18n="feat1Title">Open The First Gate</h3>
+            <p data-i18n-html="feat1Body">Take the <strong>Cultivation Initiate</strong> feat to unlock cultivation itself, then commit to Body, Qi, or remain a rogue wanderer for a slower and broader ascent.</p>
+          </article>
+          <article class="feature-card">
+            <div class="kicker" data-i18n="feat2Kicker">Progression</div>
+            <h3 data-i18n="feat2Title">Nine Mortal Realms, Nine Immortal Realms</h3>
+            <p data-i18n="feat2Body">Body and Qi paths each climb through nine distinct major realms before converging into nine shared immortal realms that raise the ceiling to truly absurd heights.</p>
+          </article>
+          <article class="feature-card">
+            <div class="kicker" data-i18n="feat3Kicker">Risk</div>
+            <h3 data-i18n="feat3Title">Breakthroughs Matter</h3>
+            <p data-i18n="feat3Body">Realm progress stops at the gate. If you want the next realm, you must challenge the bottleneck and accept the chance of lightning backlash, stat loss pressure, and collapse.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <div>
+            <h2 data-i18n="pathsTitle">Three Ways To Walk</h2>
+            <p data-i18n="pathsBody">Each route carries a different texture. Formal paths gain stronger efficiencies and breakthroughs, while rogues trade certainty for breadth.</p>
+          </div>
+        </div>
+        <div class="paths">
+          <article class="path-card">
+            <div class="kicker" data-i18n="bodyKicker">Body</div>
+            <h3 data-i18n="bodyTitle">Body Cultivator</h3>
+            <p data-i18n="bodyBody">Skin to marrow, flesh to iron. Body cultivation leans into direct physical supremacy.</p>
+            <ul>
+              <li data-i18n="bodyLi1">Primary growth: STR, DEX, PV, SPD</li>
+              <li data-i18n="bodyLi2">Resource reward focus: max HP and stamina</li>
+              <li data-i18n="bodyLi3">Realms culminate in Indestructible Body before immortality</li>
+            </ul>
+          </article>
+          <article class="path-card">
+            <div class="kicker" data-i18n="qiKicker">Qi</div>
+            <h3 data-i18n="qiTitle">Qi Practitioner</h3>
+            <p data-i18n="qiBody">Gather breath, condense spirit, establish foundation, and climb through classic xianxia milestones.</p>
+            <ul>
+              <li data-i18n="qiLi1">Primary growth: CHA, INT, WIL, DV</li>
+              <li data-i18n="qiLi2">Resource reward focus: max HP and mana</li>
+              <li data-i18n="qiLi3">Realms culminate in Tribulation Transcendence before immortality</li>
+            </ul>
+          </article>
+          <article class="path-card">
+            <div class="kicker" data-i18n="rogueKicker">Rogue</div>
+            <h3 data-i18n="rogueTitle">Rogue Cultivator</h3>
+            <p data-i18n="rogueBody">No sect. No scripture. No formal gate. A rogue cultivator improves more slowly, but across a broader set of attributes.</p>
+            <ul>
+              <li data-i18n="rogueLi1">Can cultivate without choosing Body or Qi</li>
+              <li data-i18n="rogueLi2">Cannot formally break through</li>
+              <li data-i18n="rogueLi3">Can still advance up to the current shared cap</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="highlights">
+          <article class="panel">
+            <div class="kicker" data-i18n="orientKicker">Orientation</div>
+            <h2 data-i18n="orientTitle">Designed For The Long Road</h2>
+            <p data-i18n="orientBody">Power in Nine Realms arrives the way it should: slowly, painfully, and then all at once. Lower realms are meant to take time. Formal paths become more efficient at higher tiers. Breakthrough success drops as the heavens demand more from you.</p>
+            <div class="stats">
+              <div class="stat">
+                <strong>18,000</strong>
+                <span data-i18n="stat1">Current total cultivation cap for the live realm ladder.</span>
+              </div>
+              <div class="stat">
+                <strong>18</strong>
+                <span data-i18n="stat2">Total major realms currently supported across path and immortal progression.</span>
+              </div>
+              <div class="stat">
+                <strong>3</strong>
+                <span data-i18n="stat3">Core modes of practice: Body, Qi, and Rogue cultivation.</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="quote-card">
+            <blockquote data-i18n="quote">"The mortal body is a cracked vessel. The mortal soul is a candle in the wind. Yet between heaven and earth, even a nameless wanderer may seize a thread of the Dao."</blockquote>
+            <footer data-i18n="quoteFooter">From the mod's own opening invocation</footer>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-i18n="footer">Nine Realms: Path of the Dao</footer>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        pageTitle: "Nine Realms: Path of the Dao",
+        brand: "Nine Realms: Path of the Dao",
+        navHome: "Home",
+        navGuide: "Quick Start & Wiki",
+        navChangelog: "Changelog",
+        eyebrow: "A Xianxia Progression Mod For Elin",
+        heroTitle: "The Dao Does Not Forgive Hesitation.",
+        heroLede: "Nine Realms: Path of the Dao brings long-form cultivation progression into Elin. Open the first gate, choose your path, temper your body or refine your qi, and push upward through mortal limits toward the immortal realms.",
+        heroBody: "This is not a sprint system. Cultivation drains stamina and mana. Advancement stalls at the gate until you risk a breakthrough. Failure hurts. Success changes everything.",
+        ctaGuide: "Begin The Journey",
+        ctaChangelog: "Read The Changelog",
+        captionTitle: "Current Direction",
+        captionBody: "Body and Qi cultivation are live, with rogue cultivation support, shared immortal realms, breakthrough risk, and a dedicated in-game cultivation menu.",
+        addsTitle: "What The Mod Adds",
+        addsBody: "A framework-first cultivation experience built around pacing, path identity, resource pressure, and dangerous realm progression.",
+        feat1Kicker: "Initiation",
+        feat1Title: "Open The First Gate",
+        feat1Body: "Take the <strong>Cultivation Initiate</strong> feat to unlock cultivation itself, then commit to Body, Qi, or remain a rogue wanderer for a slower and broader ascent.",
+        feat2Kicker: "Progression",
+        feat2Title: "Nine Mortal Realms, Nine Immortal Realms",
+        feat2Body: "Body and Qi paths each climb through nine distinct major realms before converging into nine shared immortal realms that raise the ceiling to truly absurd heights.",
+        feat3Kicker: "Risk",
+        feat3Title: "Breakthroughs Matter",
+        feat3Body: "Realm progress stops at the gate. If you want the next realm, you must challenge the bottleneck and accept the chance of lightning backlash, stat loss pressure, and collapse.",
+        pathsTitle: "Three Ways To Walk",
+        pathsBody: "Each route carries a different texture. Formal paths gain stronger efficiencies and breakthroughs, while rogues trade certainty for breadth.",
+        bodyKicker: "Body",
+        bodyTitle: "Body Cultivator",
+        bodyBody: "Skin to marrow, flesh to iron. Body cultivation leans into direct physical supremacy.",
+        bodyLi1: "Primary growth: STR, DEX, PV, SPD",
+        bodyLi2: "Resource reward focus: max HP and stamina",
+        bodyLi3: "Realms culminate in Indestructible Body before immortality",
+        qiKicker: "Qi",
+        qiTitle: "Qi Practitioner",
+        qiBody: "Gather breath, condense spirit, establish foundation, and climb through classic xianxia milestones.",
+        qiLi1: "Primary growth: CHA, INT, WIL, DV",
+        qiLi2: "Resource reward focus: max HP and mana",
+        qiLi3: "Realms culminate in Tribulation Transcendence before immortality",
+        rogueKicker: "Rogue",
+        rogueTitle: "Rogue Cultivator",
+        rogueBody: "No sect. No scripture. No formal gate. A rogue cultivator improves more slowly, but across a broader set of attributes.",
+        rogueLi1: "Can cultivate without choosing Body or Qi",
+        rogueLi2: "Cannot formally break through",
+        rogueLi3: "Can still advance up to the current shared cap",
+        orientKicker: "Orientation",
+        orientTitle: "Designed For The Long Road",
+        orientBody: "Power in Nine Realms arrives the way it should: slowly, painfully, and then all at once. Lower realms are meant to take time. Formal paths become more efficient at higher tiers. Breakthrough success drops as the heavens demand more from you.",
+        stat1: "Current total cultivation cap for the live realm ladder.",
+        stat2: "Total major realms currently supported across path and immortal progression.",
+        stat3: "Core modes of practice: Body, Qi, and Rogue cultivation.",
+        quote: "\"The mortal body is a cracked vessel. The mortal soul is a candle in the wind. Yet between heaven and earth, even a nameless wanderer may seize a thread of the Dao.\"",
+        quoteFooter: "From the mod's own opening invocation",
+        footer: "Nine Realms: Path of the Dao"
+      },
+      zh: {
+        pageTitle: "九境：道途",
+        brand: "九境：道途",
+        navHome: "主页",
+        navGuide: "快速开始与百科",
+        navChangelog: "更新日志",
+        eyebrow: "Elin 的仙侠修炼模组",
+        heroTitle: "大道不容犹疑。",
+        heroLede: "《九境：道途》将长线修炼成长带入 Elin。开启第一道玄关，选择你的道路，淬炼肉身或凝炼真气，从凡俗之躯一步步攀向不朽仙境。",
+        heroBody: "这不是冲刺型系统。修炼会消耗体力与法力。进境会在关隘前停下，直到你冒险尝试突破。失败会反噬，成功则会彻底改变一切。",
+        ctaGuide: "踏上修行之路",
+        ctaChangelog: "查看更新日志",
+        captionTitle: "当前方向",
+        captionBody: "体修与练气玩法现已实装，包含散修支持、共享仙境、突破风险，以及专属修炼菜单。",
+        addsTitle: "模组带来了什么",
+        addsBody: "这是一个以节奏、流派辨识度、资源压力和危险突破为核心的修炼框架。",
+        feat1Kicker: "入门",
+        feat1Title: "开启第一道玄关",
+        feat1Body: "取得 <strong>修行入门</strong> 特质来解锁修炼本身，然后选择体修、练气，或者作为散修缓慢而广泛地前行。",
+        feat2Kicker: "进境",
+        feat2Title: "九重凡境，九重仙境",
+        feat2Body: "体修与练气各自攀登九个主要境界，随后在九个共享仙境中汇流，把上限抬升到真正惊人的高度。",
+        feat3Kicker: "风险",
+        feat3Title: "突破至关重要",
+        feat3Body: "修为会停在关口。若想踏入下一境，你就必须直面瓶颈，并承受雷劫反噬、状态崩坏与失败代价。",
+        pathsTitle: "三种行路方式",
+        pathsBody: "每条道路都有不同的质感。正式流派拥有更强的效率与突破收益，而散修则以确定性换取广度。",
+        bodyKicker: "体",
+        bodyTitle: "体修",
+        bodyBody: "由皮入髓，以血肉铸铁。体修追求的是最直接的肉身压制力。",
+        bodyLi1: "主要成长：STR、DEX、PV、SPD",
+        bodyLi2: "资源奖励倾向：最大生命与体力",
+        bodyLi3: "在成仙前以不灭体作为凡境终点",
+        qiKicker: "气",
+        qiTitle: "练气士",
+        qiBody: "纳气、凝气、筑基、结丹，沿着经典仙侠脉络一步步攀升。",
+        qiLi1: "主要成长：CHA、INT、WIL、DV",
+        qiLi2: "资源奖励倾向：最大生命与法力",
+        qiLi3: "在成仙前以渡劫作为凡境终点",
+        rogueKicker: "散",
+        rogueTitle: "散修",
+        rogueBody: "无门无派，无经无典，无正式关隘。散修成长更慢，但属性分布更广。",
+        rogueLi1: "不选体修或练气也能修炼",
+        rogueLi2: "无法进行正式突破",
+        rogueLi3: "仍可提升到当前共享上限",
+        orientKicker: "定位",
+        orientTitle: "为漫长修途而设计",
+        orientBody: "《九境》的力量增长应该是这样到来的：缓慢、痛苦，然后骤然爆发。低境界本就该花时间。正式流派在高境界会更轻松，而突破成功率则会随着境界提升而下降。",
+        stat1: "当前实装的总修为上限。",
+        stat2: "现已支持的主要境界总数。",
+        stat3: "三种核心修行模式：体修、练气、散修。",
+        quote: "\"凡躯如裂器，凡魂如风中之烛。然而天地之间，纵使无名行者，也可攥住一缕大道。\"",
+        quoteFooter: "取自模组本身的开场词",
+        footer: "九境：道途"
+      },
+      ja: {
+        pageTitle: "九境：道の途",
+        brand: "九境：道の途",
+        navHome: "ホーム",
+        navGuide: "クイックスタートと百科",
+        navChangelog: "更新履歴",
+        eyebrow: "Elin 向け仙侠修行モッド",
+        heroTitle: "大道はためらいを許さない。",
+        heroLede: "『九境：道の途』は、長期的な修行成長を Elin に持ち込みます。第一の玄関を開き、道を選び、肉体を鍛えるか気を練り、凡身の限界を越えて不朽の仙境へ進みましょう。",
+        heroBody: "これは短距離走のようなシステムではありません。修行は体力とマナを消耗します。進境は関門で止まり、突破に挑むまで先へは進めません。失敗は痛く、成功はすべてを変えます。",
+        ctaGuide: "修行を始める",
+        ctaChangelog: "更新履歴を見る",
+        captionTitle: "現在の実装方向",
+        captionBody: "体修と練気はすでに実装済みで、散修対応、共有仙境、突破リスク、専用の修行メニューも備えています。",
+        addsTitle: "このモッドが加えるもの",
+        addsBody: "テンポ、流派ごとの個性、資源圧、そして危険な突破を軸にした修行フレームワークです。",
+        feat1Kicker: "入門",
+        feat1Title: "最初の玄関を開く",
+        feat1Body: "<strong>修行入門</strong> 特技を取得して修行を解放し、その後に体修、練気、あるいは散修としてゆっくり広く歩む道を選びます。",
+        feat2Kicker: "進境",
+        feat2Title: "九つの凡境、九つの仙境",
+        feat2Body: "体修と練気はそれぞれ九つの主要境界を登り、その後は九つの共有仙境へ合流して、上限を一気に押し上げます。",
+        feat3Kicker: "危険",
+        feat3Title: "突破は重要",
+        feat3Body: "修為は関門で止まります。次の境界へ進みたければ、瓶頸に挑み、雷撃反動や崩壊の危険を受け入れなければなりません。",
+        pathsTitle: "三つの歩み方",
+        pathsBody: "どの道にも固有の手触りがあります。正式な流派は効率と突破報酬に優れ、散修は確実性の代わりに幅広さを得ます。",
+        bodyKicker: "体",
+        bodyTitle: "体修",
+        bodyBody: "皮から髄へ、肉体を鋼へ。体修は直接的な肉体支配を目指します。",
+        bodyLi1: "主な成長：STR、DEX、PV、SPD",
+        bodyLi2: "資源報酬の中心：最大 HP と体力",
+        bodyLi3: "成仙前の終点は不滅身",
+        qiKicker: "気",
+        qiTitle: "練気士",
+        qiBody: "気を集め、凝縮し、築基し、王道の仙侠段階を一歩ずつ登っていきます。",
+        qiLi1: "主な成長：CHA、INT、WIL、DV",
+        qiLi2: "資源報酬の中心：最大 HP とマナ",
+        qiLi3: "成仙前の終点は渡劫",
+        rogueKicker: "散",
+        rogueTitle: "散修",
+        rogueBody: "門派なし、経典なし、正式な関門なし。散修は成長が遅い代わりに、属性の広がりがあります。",
+        rogueLi1: "体修や練気を選ばなくても修行可能",
+        rogueLi2: "正式な突破はできない",
+        rogueLi3: "現在の共有上限までは到達できる",
+        orientKicker: "方向性",
+        orientTitle: "長い修行路のための設計",
+        orientBody: "『九境』の力は、こうして訪れるべきです。ゆっくり、痛みを伴い、そして一気に。低境界は時間がかかるように設計されており、正式流派は高境界でより効率的になります。一方で突破成功率は境界が上がるほど下がります。",
+        stat1: "現在実装されている総修為上限。",
+        stat2: "現在対応している主要境界の総数。",
+        stat3: "三つの中核修行形態：体修、練気、散修。",
+        quote: "\"凡なる肉体はひび割れた器。凡なる魂は風の中の灯火。それでも天地の狭間で、名もなき旅人が道の一筋を掴むことはできる。\"",
+        quoteFooter: "モッド冒頭の一節より",
+        footer: "九境：道の途"
+      }
+    };
+
+    function applyLanguage(lang) {
+      const selected = translations[lang] ? lang : "en";
+      const dict = translations[selected];
+      document.documentElement.lang = selected;
+      document.title = dict.pageTitle;
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.getAttribute("data-i18n");
+        if (dict[key]) node.textContent = dict[key];
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+        const key = node.getAttribute("data-i18n-html");
+        if (dict[key]) node.innerHTML = dict[key];
+      });
+      document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+        button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
+      });
+      localStorage.setItem("nr-site-lang", selected);
+    }
+
+    const savedLang = localStorage.getItem("nr-site-lang") || "en";
+    applyLanguage(savedLang);
+    document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+      button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));
+    });
+  </script>
+</body>
+</html>
