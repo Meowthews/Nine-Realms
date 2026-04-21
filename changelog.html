@@ -12,6 +12,12 @@
       --jade: #8fceb2;
       --ink: #e0e9e1;
       --muted: #97a99d;
+      --released-bg: rgba(143, 206, 178, 0.18);
+      --released-line: rgba(143, 206, 178, 0.52);
+      --released-text: #c8f1dc;
+      --unreleased-bg: rgba(226, 196, 130, 0.18);
+      --unreleased-line: rgba(226, 196, 130, 0.52);
+      --unreleased-text: #ffe9b0;
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
     }
 
@@ -106,8 +112,7 @@
     }
 
     .hero,
-    .entry,
-    .summary {
+    .entry {
       background: var(--panel);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 28px;
@@ -133,9 +138,9 @@
 
     h1 {
       margin: 0 0 0.8rem;
-      font-size: clamp(2.5rem, 6vw, 4.3rem);
+      font-size: clamp(3rem, 7vw, 5rem);
       color: #f7edd0;
-      line-height: 1.05;
+      line-height: 1.02;
     }
 
     h2 {
@@ -145,12 +150,6 @@
     }
 
     p, li { line-height: 1.7; }
-
-    .summary {
-      margin-top: 1rem;
-      padding: 1.2rem 1.4rem;
-      border-left: 4px solid var(--jade);
-    }
 
     .timeline {
       margin-top: 1.2rem;
@@ -180,15 +179,32 @@
       margin-bottom: 1rem;
     }
 
-    .tag {
+    .tag,
+    .status {
       display: inline-block;
-      padding: 0.35rem 0.68rem;
+      padding: 0.38rem 0.72rem;
       border-radius: 999px;
-      background: rgba(143, 206, 178, 0.12);
-      color: var(--jade);
       font-size: 0.8rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .tag {
+      background: rgba(143, 206, 178, 0.12);
+      color: var(--jade);
+    }
+
+    .status.released {
+      background: var(--released-bg);
+      border: 1px solid var(--released-line);
+      color: var(--released-text);
+    }
+
+    .status.unreleased {
+      background: var(--unreleased-bg);
+      border: 1px solid var(--unreleased-line);
+      color: var(--unreleased-text);
     }
 
     ul { margin: 0; padding-left: 1.1rem; }
@@ -223,16 +239,30 @@
 
     <section class="hero">
       <div class="eyebrow" data-i18n="eyebrow">Release History</div>
-      <h1 data-i18n="heroTitle">Version Trail Through 1.2.0</h1>
-      <p data-i18n-html="heroBody">This page tracks released changes through <strong>version 1.2.0</strong>. Work on <strong>version 1.3.0</strong> is still in progress, so it is intentionally not listed here yet.</p>
+      <h1 data-i18n="heroTitle">Release History</h1>
+      <p data-i18n="heroBody">This page tracks released and unreleased changes.</p>
     </section>
-
-    <section class="summary" data-i18n="summary">The biggest steps so far have been the cultivation framework itself, the addition of Body and Qi paths, rogue support, in-game wiki and changelog windows, localization, and the expansion from five shared immortal realms to the full nine-realm immortal ladder. This archive was verified against the pre-1.3.0 backup source.</section>
 
     <section class="timeline">
       <article class="entry">
         <div class="meta">
+          <span class="tag" data-i18n="tag130">Version 1.3.0</span>
+          <span class="status unreleased" data-i18n="statusUnreleased">Unreleased</span>
+        </div>
+        <h2 data-i18n="v130Title">Journal Access And Menu Flow Updates</h2>
+        <ul>
+          <li data-i18n="v130a">Moved access to the Nine Realms menu into the Journal with a dedicated bottom button, replacing the old standalone cultivation menu action flow.</li>
+          <li data-i18n="v130b">Retired the legacy menu ability path and added cleanup so older menu ability data does not linger on the player.</li>
+          <li data-i18n="v130c">Hardened cultivation ability so it is no longer used by auto combat.</li>
+          <li data-i18n="v130d">Refreshed the cultivation menu layout into a larger tabbed panel and shifted wiki access toward the external Nine Realms web documentation.</li>
+          <li data-i18n="v130e">Adjusted cultivation costs from the older base 4 scaling model to the current stepped formal-path costs shown in the live release branch.</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="meta">
           <span class="tag" data-i18n="tag120">Version 1.2.0</span>
+          <span class="status unreleased" data-i18n="statusUnreleased">Unreleased</span>
         </div>
         <h2 data-i18n="v120Title">Shared Immortal Expansion</h2>
         <ul>
@@ -246,6 +276,7 @@
       <article class="entry">
         <div class="meta">
           <span class="tag" data-i18n="tag111">Version 1.1.1</span>
+          <span class="status released" data-i18n="statusReleased">Released</span>
         </div>
         <h2 data-i18n="v111Title">Stability And UI Corrections</h2>
         <ul>
@@ -258,6 +289,7 @@
       <article class="entry">
         <div class="meta">
           <span class="tag" data-i18n="tag110">Version 1.1.0</span>
+          <span class="status released" data-i18n="statusReleased">Released</span>
         </div>
         <h2 data-i18n="v110Title">Localization And Rogue Growth</h2>
         <ul>
@@ -270,6 +302,7 @@
       <article class="entry">
         <div class="meta">
           <span class="tag" data-i18n="tag100">Version 1.0.0</span>
+          <span class="status released" data-i18n="statusReleased">Released</span>
         </div>
         <h2 data-i18n="v100Title">Initial Release</h2>
         <ul>
@@ -280,24 +313,9 @@
           <li data-i18n="v100e">Added passive realm bonuses, breakthrough rewards, the cultivation menu, the in-game Nine Realms Wiki, and the changelog window.</li>
         </ul>
       </article>
-
-      <article class="entry">
-        <div class="meta">
-          <span class="tag" data-i18n="tagLaunch">Launch Archive</span>
-        </div>
-        <h2 data-i18n="launchTitle">What 1.0.0 Established</h2>
-        <ul>
-          <li data-i18n-html="launchA"><strong>Cultivation:</strong> Cultivation Initiate, the Cultivate long action, hidden progress, realm thresholds, four stages per realm, and breakthrough gates.</li>
-          <li data-i18n-html="launchB"><strong>Paths:</strong> Body Cultivator, Qi Practitioner, and Rogue Cultivator support for players who refuse a formal school.</li>
-          <li data-i18n-html="launchC"><strong>Stat Growth:</strong> Body focused on STR, DEX, PV, and SPD. Qi focused on CHA, INT, WIL, DV, and Meditation. Repeated cultivation could permanently improve stats.</li>
-          <li data-i18n-html="launchD"><strong>Breakthroughs:</strong> Breakthrough attempts, scaling odds, realm rewards, and lightning backlash on failure.</li>
-          <li data-i18n-html="launchE"><strong>Interface:</strong> The cultivation menu, the in-game Nine Realms Wiki, and the changelog window itself.</li>
-          <li data-i18n-html="launchF"><strong>Future Work At The Time:</strong> more visuals, custom trainers, Dao scrolls, Body and Qi techniques, Dao Paths, Dan Dao integration, pills, and more breakthrough events.</li>
-        </ul>
-      </article>
     </section>
 
-    <footer class="footer" data-i18n="footer">Changelog coverage ends at version 1.2.0 by design.</footer>
+    <footer class="footer" data-i18n="footer">Release history page for Nine Realms: Path of the Dao.</footer>
   </div>
 
   <script>
@@ -309,9 +327,17 @@
         navGuide: "Quick Start & Wiki",
         navChangelog: "Changelog",
         eyebrow: "Release History",
-        heroTitle: "Version Trail Through 1.2.0",
-        heroBody: "This page tracks released changes through <strong>version 1.2.0</strong>. Work on <strong>version 1.3.0</strong> is still in progress, so it is intentionally not listed here yet.",
-        summary: "The biggest steps so far have been the cultivation framework itself, the addition of Body and Qi paths, rogue support, in-game wiki and changelog windows, localization, and the expansion from five shared immortal realms to the full nine-realm immortal ladder. This archive was verified against the pre-1.3.0 backup source.",
+        heroTitle: "Release History",
+        heroBody: "This page tracks released and unreleased changes.",
+        tag130: "Version 1.3.0",
+        statusUnreleased: "Unreleased",
+        statusReleased: "Released",
+        v130Title: "Journal Access And Menu Flow Updates",
+        v130a: "Moved access to the Nine Realms menu into the Journal with a dedicated bottom button, replacing the old standalone cultivation menu action flow.",
+        v130b: "Retired the legacy menu ability path and added cleanup so older menu ability data does not linger on the player.",
+        v130c: "Hardened cultivation ability syncing so Cultivate remains granted correctly while the old menu route is phased out.",
+        v130d: "Refreshed the cultivation menu layout into a larger tabbed panel and shifted wiki access toward the external Nine Realms web documentation.",
+        v130e: "Adjusted cultivation costs from the older base 4 scaling model to the current stepped formal-path costs shown in the live release branch.",
         tag120: "Version 1.2.0",
         v120Title: "Shared Immortal Expansion",
         v120a: "Expanded the higher shared immortal realms from five to nine, raising the current shared cap to 18000.",
@@ -335,15 +361,7 @@
         v100c: "Added hidden cultivation progress, realm thresholds, stages, and breakthrough gates.",
         v100d: "Added Body Cultivator, Qi Practitioner, and Rogue Cultivator support.",
         v100e: "Added passive realm bonuses, breakthrough rewards, the cultivation menu, the in-game Nine Realms Wiki, and the changelog window.",
-        tagLaunch: "Launch Archive",
-        launchTitle: "What 1.0.0 Established",
-        launchA: "<strong>Cultivation:</strong> Cultivation Initiate, the Cultivate long action, hidden progress, realm thresholds, four stages per realm, and breakthrough gates.",
-        launchB: "<strong>Paths:</strong> Body Cultivator, Qi Practitioner, and Rogue Cultivator support for players who refuse a formal school.",
-        launchC: "<strong>Stat Growth:</strong> Body focused on STR, DEX, PV, and SPD. Qi focused on CHA, INT, WIL, DV, and Meditation. Repeated cultivation could permanently improve stats.",
-        launchD: "<strong>Breakthroughs:</strong> Breakthrough attempts, scaling odds, realm rewards, and lightning backlash on failure.",
-        launchE: "<strong>Interface:</strong> The cultivation menu, the in-game Nine Realms Wiki, and the changelog window itself.",
-        launchF: "<strong>Future Work At The Time:</strong> more visuals, custom trainers, Dao scrolls, Body and Qi techniques, Dao Paths, Dan Dao integration, pills, and more breakthrough events.",
-        footer: "Changelog coverage ends at version 1.2.0 by design."
+        footer: "Release history page for Nine Realms: Path of the Dao."
       },
       zh: {
         pageTitle: "九境更新日志",
@@ -352,9 +370,17 @@
         navGuide: "快速开始与百科",
         navChangelog: "更新日志",
         eyebrow: "发布历史",
-        heroTitle: "截至 1.2.0 的版本轨迹",
-        heroBody: "本页记录截至 <strong>1.2.0</strong> 的已发布改动。<strong>1.3.0</strong> 仍在开发中，因此刻意没有列出。",
-        summary: "到目前为止，最大的几个阶段包括修炼框架本身、体修与练气流派、散修支持、游戏内百科与更新日志窗口、本地化，以及将共享仙境从五重扩展到完整九重。此档案已对照 1.3.0 之前的备份源码核实。",
+        heroTitle: "发布历史",
+        heroBody: "本页记录已发布与未发布的改动。",
+        tag130: "版本 1.3.0",
+        statusUnreleased: "未发布",
+        statusReleased: "已发布",
+        v130Title: "日志入口与菜单流程更新",
+        v130a: "将九境菜单入口整合进日志界面，并新增专用底部按钮，取代旧的独立修炼菜单行动流程。",
+        v130b: "移除了旧版菜单能力路径，并增加清理逻辑，避免老旧菜单能力数据残留在玩家身上。",
+        v130c: "强化了修炼能力同步，使旧菜单路线淘汰后，Cultivate 仍能被正确授予。",
+        v130d: "重做了修炼菜单布局，改为更大的分页面板，并将百科入口转向外部的 Nine Realms 网页文档。",
+        v130e: "将修炼消耗从旧的基础 4 点缩放模型调整为当前实装分支中的正式流派阶梯式消耗。",
         tag120: "版本 1.2.0",
         v120Title: "共享仙境扩展",
         v120a: "将高阶共享仙境从五重扩展到九重，把当前共享上限提升到 18000。",
@@ -378,15 +404,7 @@
         v100c: "加入隐藏修为、境界门槛、阶段系统与突破关口。",
         v100d: "加入体修、练气士与散修支持。",
         v100e: "加入被动境界加成、突破奖励、修炼菜单、游戏内九境百科与更新日志窗口。",
-        tagLaunch: "首发档案",
-        launchTitle: "1.0.0 奠定了什么",
-        launchA: "<strong>修炼：</strong>修行入门、修炼长行动、隐藏修为、境界门槛、每境四阶段与突破关口。",
-        launchB: "<strong>流派：</strong>体修、练气士，以及不选择正式宗门道路的散修支持。",
-        launchC: "<strong>属性成长：</strong>体修偏向 STR、DEX、PV、SPD；练气偏向 CHA、INT、WIL、DV 与 Meditation。重复修炼可永久提升属性。",
-        launchD: "<strong>突破：</strong>突破尝试、缩放几率、境界奖励，以及失败时的雷劫反噬。",
-        launchE: "<strong>界面：</strong>修炼菜单、游戏内九境百科，以及更新日志窗口本身。",
-        launchF: "<strong>当时的未来计划：</strong>更多视觉、训练师 NPC、道卷、体修与练气功法、道途系统、丹道联动、丹药，以及更多突破事件。",
-        footer: "本更新日志按设计只覆盖到 1.2.0。"
+        footer: "九境：道途 发布历史页面。"
       },
       ja: {
         pageTitle: "九境更新履歴",
@@ -395,9 +413,17 @@
         navGuide: "クイックスタートと百科",
         navChangelog: "更新履歴",
         eyebrow: "公開履歴",
-        heroTitle: "1.2.0 までの版本の流れ",
-        heroBody: "このページは <strong>1.2.0</strong> までの公開変更を記録しています。<strong>1.3.0</strong> は現在開発中のため、意図的に含めていません。",
-        summary: "ここまでの大きな節目は、修行フレームワーク自体、体修と練気の流派追加、散修対応、ゲーム内百科と更新履歴ウィンドウ、本地化、そして共有仙境を五重から完全な九重へ拡張したことです。この記録は 1.3.0 前のバックアップソースで確認済みです。",
+        heroTitle: "公開履歴",
+        heroBody: "このページは公開済みと未公開の変更を記録します。",
+        tag130: "バージョン 1.3.0",
+        statusUnreleased: "未公開",
+        statusReleased: "公開済み",
+        v130Title: "ジャーナル導線とメニュー更新",
+        v130a: "九境メニューへの導線をジャーナル内の専用ボタンへ移し、旧来の独立した修行メニュー行動フローを置き換えた。",
+        v130b: "旧メニュー能力ルートを整理し、古いメニュー能力データがプレイヤーに残らないようクリーンアップを追加した。",
+        v130c: "修行能力の同期を強化し、旧メニュールートを廃止しつつも Cultivate が正しく付与され続けるようにした。",
+        v130d: "修行メニューをより大きなタブ式パネルへ刷新し、百科導線を外部の Nine Realms ウェブ資料へ寄せた。",
+        v130e: "修行コストを旧来の基礎 4 スケーリング方式から、現行リリース枝の段階式正式流派コストへ調整した。",
         tag120: "バージョン 1.2.0",
         v120Title: "共有仙境の拡張",
         v120a: "上位の共有仙境を五重から九重へ拡張し、現在の共有上限を 18000 に引き上げた。",
@@ -421,15 +447,7 @@
         v100c: "隠し修為、境界しきい値、段階システム、突破関門を追加。",
         v100d: "体修、練気士、散修の対応を追加。",
         v100e: "境界ボーナス、突破報酬、修行メニュー、ゲーム内九境百科、更新履歴ウィンドウを追加。",
-        tagLaunch: "初期アーカイブ",
-        launchTitle: "1.0.0 が築いた基礎",
-        launchA: "<strong>修行：</strong>修行入門、修行の長時間アクション、隠し修為、境界しきい値、各境界四段階、突破関門。",
-        launchB: "<strong>流派：</strong>体修、練気士、そして正式な道を選ばないプレイヤー向けの散修対応。",
-        launchC: "<strong>属性成長：</strong>体修は STR、DEX、PV、SPD に集中し、練気は CHA、INT、WIL、DV、Meditation に集中。反復修行で属性が恒久的に伸びる。",
-        launchD: "<strong>突破：</strong>突破挑戦、スケーリングする成功率、境界報酬、失敗時の雷撃反動。",
-        launchE: "<strong>インターフェース：</strong>修行メニュー、ゲーム内九境百科、そして更新履歴ウィンドウ。",
-        launchF: "<strong>当時の今後の予定：</strong>さらなるビジュアル、訓練師 NPC、道巻、体修と練気の技法、道の系統、丹道連携、丹薬、さらなる突破イベント。",
-        footer: "この更新履歴は意図的に 1.2.0 までを対象としています。"
+        footer: "九境：道の途 の公開履歴ページ。"
       }
     };
 
@@ -441,10 +459,6 @@
       document.querySelectorAll("[data-i18n]").forEach((node) => {
         const key = node.getAttribute("data-i18n");
         if (dict[key]) node.textContent = dict[key];
-      });
-      document.querySelectorAll("[data-i18n-html]").forEach((node) => {
-        const key = node.getAttribute("data-i18n-html");
-        if (dict[key]) node.innerHTML = dict[key];
       });
       document.querySelectorAll("[data-lang-switch]").forEach((button) => {
         button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
