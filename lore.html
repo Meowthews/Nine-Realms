@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nine Realms Lore</title>
+  <style>
+    :root {
+      --gold: #e2c482;
+      --jade: #8fceb2;
+      --ink: #e0e9e1;
+      --muted: #97a99d;
+      --panel: rgba(11, 16, 15, 0.94);
+      --line: #2f2412;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Lucida Console", "Courier New", monospace;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(80, 55, 20, 0.08), transparent 10%),
+        radial-gradient(circle at top, rgba(143, 206, 178, 0.08), transparent 24%),
+        linear-gradient(180deg, #101613 0%, #0a0f0e 100%);
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 1.5rem));
+      margin: 0 auto;
+      padding-bottom: 3rem;
+    }
+
+    .lang-toggle {
+      margin: 1rem auto 0;
+      width: fit-content;
+      display: flex;
+      gap: 0.45rem;
+      padding: 0.45rem;
+      border: 3px solid #6f5527;
+      background: #111816;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .lang-toggle button,
+    .nav a,
+    .ghost-link,
+    .tab-button {
+      font: inherit;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 0.7rem 0.95rem;
+      border: 3px solid #6f5527;
+      background: #17201d;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.26);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .lang-toggle button.active,
+    .tab-button.active {
+      background: linear-gradient(135deg, rgba(226, 196, 130, 0.2), rgba(143, 206, 178, 0.16));
+      color: #fff1c4;
+    }
+
+    .topbar,
+    .hero,
+    .tabs,
+    .tab-panel,
+    .archive-card,
+    .ability-card,
+    .details-card,
+    .tech-card {
+      border: 4px solid var(--line);
+      background: var(--panel);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.42);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 1.2rem 1.6rem;
+      margin-top: 1rem;
+      background:
+        linear-gradient(180deg, rgba(226, 196, 130, 0.08), rgba(143, 206, 178, 0.03)),
+        var(--panel);
+    }
+
+    .brand,
+    h1, h2, h3 {
+      font-family: "Georgia", "Times New Roman", serif;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .brand {
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .hero {
+      margin-top: 1rem;
+      padding: 2.1rem;
+      background:
+        linear-gradient(180deg, rgba(226, 196, 130, 0.08), transparent 35%),
+        linear-gradient(180deg, rgba(143, 206, 178, 0.04), transparent 60%),
+        var(--panel);
+    }
+
+    .eyebrow {
+      color: var(--jade);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.78rem;
+      margin-bottom: 0.9rem;
+    }
+
+    h1 {
+      margin: 0 0 0.9rem;
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      color: #f7edd0;
+      line-height: 1.02;
+    }
+
+    h2 {
+      margin: 0 0 0.8rem;
+      color: var(--gold);
+      font-size: 1.9rem;
+    }
+
+    h3 {
+      margin: 0 0 0.6rem;
+      color: #f7edd0;
+      font-size: 1.25rem;
+    }
+
+    p, li {
+      line-height: 1.75;
+      color: var(--ink);
+    }
+
+    .tabs {
+      margin-top: 1rem;
+      padding: 0.9rem;
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      min-width: 130px;
+    }
+
+    .tech-filter {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .tech-filter button {
+      font: inherit;
+      color: var(--ink);
+      cursor: pointer;
+      padding: 0.7rem 0.95rem;
+      border: 3px solid #6f5527;
+      background: #17201d;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.26);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tech-filter button.active {
+      background: linear-gradient(135deg, rgba(226, 196, 130, 0.2), rgba(143, 206, 178, 0.16));
+      color: #fff1c4;
+    }
+
+    .tab-panel {
+      margin-top: 1rem;
+      padding: 1.35rem;
+    }
+
+    [data-tab-panel] {
+      display: none;
+    }
+
+    [data-tab-panel].active {
+      display: block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .archive-card,
+    .ability-card,
+    .details-card,
+    .tech-card {
+      padding: 1.2rem;
+      height: 100%;
+    }
+
+    .stamp {
+      display: inline-block;
+      padding: 0.35rem 0.7rem;
+      border: 2px solid #5d7231;
+      background: rgba(115, 142, 68, 0.14);
+      color: var(--jade);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .ability-shell {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .ability-icon {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      image-rendering: pixelated;
+      padding: 1rem;
+      border: 4px solid #6f5527;
+      background:
+        linear-gradient(180deg, rgba(226, 196, 130, 0.08), transparent 32%),
+        rgba(17, 24, 22, 0.96);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    .tech-shell {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .tech-card {
+      padding: 1.2rem;
+    }
+
+    .tech-image {
+      width: 100%;
+      image-rendering: pixelated;
+      padding: 1rem;
+      border: 4px solid #6f5527;
+      background:
+        linear-gradient(180deg, rgba(143, 206, 178, 0.08), transparent 32%),
+        rgba(17, 24, 22, 0.96);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    .mechanics-list,
+    .archive-list {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .quote-box {
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border: 4px solid #6f5527;
+      background: rgba(17, 24, 22, 0.96);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.38);
+      color: #f0ead8;
+      font-style: italic;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .grid,
+      .ability-shell,
+      .tech-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-toggle" aria-label="Language selector">
+    <button type="button" data-lang-switch="en">EN</button>
+    <button type="button" data-lang-switch="zh">中文</button>
+    <button type="button" data-lang-switch="ja">日本語</button>
+  </div>
+
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand" data-i18n="brand">Nine Realms Lore</div>
+      <nav class="nav">
+        <a href="index.html" data-i18n="navHome">Home</a>
+        <a href="guide.html" data-i18n="navGuide">Quick Start &amp; Wiki</a>
+        <a href="lore.html" data-i18n="navLore">Lore</a>
+        <a href="roadmap.html" data-i18n="navRoadmap">Roadmap</a>
+        <a href="changelog.html" data-i18n="navChangelog">Changelog</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow" data-i18n="eyebrow">Archive Of The Nine Realms</div>
+      <h1 data-i18n="heroTitle">Records Of The Nine Realms</h1>
+      <p data-i18n="heroBody">Gathered here are the written traces of the Nine Realms world: arts, abilities, sect records, path notes, and the mountain-bound inheritances that will deepen as the road unfolds.</p>
+      <a class="ghost-link" href="guide.html" data-i18n="heroLink">Return To The Wiki</a>
+    </section>
+
+    <section class="tabs" aria-label="Lore categories">
+      <button type="button" class="tab-button active" data-tab="abilities" data-i18n="tabAbilities">Abilities</button>
+      <button type="button" class="tab-button" data-tab="techniques" data-i18n="tabTechniques">Techniques &amp; Arts</button>
+      <button type="button" class="tab-button" data-tab="world" data-i18n="tabWorld">World</button>
+    </section>
+
+    <section class="tab-panel active" data-tab-panel="abilities">
+      <article class="ability-card">
+        <div class="stamp" data-i18n="abilityStamp">Documented Ability</div>
+        <div class="ability-shell">
+          <img class="ability-icon" src="https://i.imgur.com/2M8UdF8.png" alt="Cultivate ability icon">
+          <div>
+            <h2 data-i18n="abilityTitle">Cultivate</h2>
+            <p data-i18n="abilityFlavor">To cultivate is to sit before heaven and earth, draw breath through the mortal shell, and force spirit, body, and intent into alignment. It is not a burst of power. It is a deliberate act of ascent.</p>
+            <p data-i18n="abilityDesc">Cultivate is the core long-action ability unlocked through Cultivation Initiate. It is the primary method used to gain cultivation progress and push toward the next realm.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="mechanicsStamp">Mechanics</div>
+          <h3 data-i18n="mechanicsTitle">Cost And Flow</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="mechA">Cultivation is a long action that spends stamina and mana every tick.</li>
+            <li data-i18n="mechB">If stamina or mana drops too low, cultivation stops automatically.</li>
+            <li data-i18n="mechC">Rogue cultivators always pay 3 stamina and 3 mana per cultivation tick.</li>
+            <li data-i18n="mechD">Formal cultivators begin at the same cost, then improve to 2 and eventually 1 at higher tiers.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="progressStamp">Progress</div>
+          <h3 data-i18n="progressTitle">What It Builds Toward</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="progA">Each cultivation tick advances progress toward the current realm's cap.</li>
+            <li data-i18n="progB">Progress scales with Meditation, current realm, and path-relevant stats.</li>
+            <li data-i18n="progC">Body cultivation leans on STR, DEX, and PV. Qi cultivation leans on CHA, INT, WIL, and DV.</li>
+            <li data-i18n="progD">When progress reaches the gate, advancement pauses until a breakthrough is attempted.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="techniques">
+      <div class="tech-filter" aria-label="Technique filter">
+        <button type="button" class="active" data-tech-filter="all" data-i18n="filterAll">All</button>
+        <button type="button" data-tech-filter="neutral" data-i18n="filterNeutral">Neutral</button>
+        <button type="button" data-tech-filter="body" data-i18n="filterBody">Body Refiner</button>
+        <button type="button" data-tech-filter="qi" data-i18n="filterQi">Qi Practitioner</button>
+      </div>
+
+      <div data-tech-group="neutral">
+      <article class="tech-card">
+        <div class="stamp" data-i18n="neutralStamp">Neutral</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/po3WOhl.png" alt="Profound Qi Healing technique icon">
+          <div>
+            <h2 data-i18n="neutralTitle">Profound Qi Healing</h2>
+            <p data-i18n="neutralFlavor">A measured circulation of inward qi turns breath into mending force, drawing on inner reserves to quiet pain and knit flesh. It is not violent. It is the patient answer of a cultivator who refuses to fall.</p>
+            <p data-i18n="neutralDesc">Profound Qi Healing is a neutral healing art housed on the Techniques page of the cultivation menu. It converts qi into recovery and grows more efficient as formal cultivators rise through higher realms.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="neutralHowStamp">Function</div>
+          <h3 data-i18n="neutralHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="neutralA">It restores health every tick by draining mana, representing qi expenditure.</li>
+            <li data-i18n="neutralB">The technique is toggled within the cultivation menu.</li>
+            <li data-i18n="neutralC">Rogue or low-realm formal cultivators heal 2 HP per tick at a cost of 3 MP.</li>
+            <li data-i18n="neutralD">At realm 5 and above, it improves to 3 HP for 2 MP. At realm 9 and above, it improves again to 4 HP for 1 MP.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="neutralUseStamp">Technique Nature</div>
+          <h3 data-i18n="neutralUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="neutralE">This is a neutral healing technique centered on recovery rather than offense.</li>
+            <li data-i18n="neutralF">It gives cultivators a steady way to turn inner reserves into survivability.</li>
+            <li data-i18n="neutralG">Its efficiency deepens most sharply for formal paths as realms rise.</li>
+          </ul>
+        </article>
+      </div>
+      </div>
+
+      <div data-tech-group="body">
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="bodyTechStamp">Body Refiner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/Gw5VKzL.png" alt="Iron Skin technique icon">
+          <div>
+            <h2 data-i18n="bodyTechTitle">Iron Skin</h2>
+            <p data-i18n="bodyTechFlavor">Body qi is pressed outward until the skin takes on the feel of forged hide. Flesh grows dense, blows glance aside more easily, and movement loses some of its softness.</p>
+            <p data-i18n="bodyTechDesc">Iron Skin is the first body refiner technique. It is a body-path toggle that hardens the cultivator for direct punishment, trading nimbleness for a tougher frame.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="bodyHowStamp">Function</div>
+          <h3 data-i18n="bodyHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="bodyA">Iron Skin is a toggle technique with no per-tick stamina or mana cost.</li>
+            <li data-i18n="bodyB">At lower realms it grants +2 PV and -3 DV.</li>
+            <li data-i18n="bodyC">At realm 5 and above it becomes +3 PV and -2 DV.</li>
+            <li data-i18n="bodyD">At realm 9 and above it becomes +4 PV and -1 DV.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="bodyUseStamp">Technique Nature</div>
+          <h3 data-i18n="bodyUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="bodyE">It is a defensive body art built to blunt direct punishment.</li>
+            <li data-i18n="bodyF">The cost is not resource drain, but reduced evasiveness while it remains active.</li>
+            <li data-i18n="bodyG">As the body cultivator climbs higher realms, the protection improves and the drawback softens.</li>
+          </ul>
+        </article>
+      </div>
+      </div>
+
+      <div data-tech-group="qi">
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="qiTechStamp">Qi Practitioner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/oJilbvi.png" alt="Flowing Meridian technique icon">
+          <div>
+            <h2 data-i18n="qiTechTitle">Flowing Meridian</h2>
+            <p data-i18n="qiTechFlavor">Qi is threaded through the meridians until the body feels wind-borne and difficult to pin down. The price is that flesh and bone carry less certainty when a strike lands cleanly.</p>
+            <p data-i18n="qiTechDesc">Flowing Meridian is the first Qi Practitioner technique. It is a qi-path toggle that sharpens evasiveness and lightness while making the cultivator less suited to blunt impact.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="qiHowStamp">Function</div>
+          <h3 data-i18n="qiHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="qiA">Flowing Meridian is a toggle technique with no per-tick stamina or mana cost.</li>
+            <li data-i18n="qiB">At lower realms it grants +2 DV and -3 PV.</li>
+            <li data-i18n="qiC">At realm 5 and above it becomes +3 DV and -2 PV.</li>
+            <li data-i18n="qiD">At realm 9 and above it becomes +4 DV and -1 PV.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="qiUseStamp">Technique Nature</div>
+          <h3 data-i18n="qiUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="qiE">It is an evasive qi art built around lightness, flow, and repositioning.</li>
+            <li data-i18n="qiF">The cost is not resource drain, but reduced physical protection while it remains active.</li>
+            <li data-i18n="qiG">As realms rise, the evasive bonus grows and the protection penalty eases.</li>
+          </ul>
+        </article>
+      </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="world">
+      <div class="grid">
+        <article class="archive-card">
+          <div class="stamp" data-i18n="worldStamp">World Archive</div>
+          <h2 data-i18n="worldTitle">The Broader Nine Realms World</h2>
+          <p data-i18n="worldBody">Future records here will track the sects, territories, inheritance lines, path philosophies, and great figures that turn cultivation from a personal ladder into a world with pressure, history, and competing heavens.</p>
+        </article>
+
+        <article class="archive-card">
+          <div class="stamp" data-i18n="worldSoonStamp">Forthcoming Records</div>
+          <h2 data-i18n="worldSoonTitle">Opening Gates</h2>
+          <ul class="archive-list">
+            <li data-i18n="worldA">Sect overviews, leaders, and locations.</li>
+            <li data-i18n="worldB">Sword Dao, Dao of Music, and later Dao path notes.</li>
+            <li data-i18n="worldC">Technique entries, manuals, scrolls, and artifact records.</li>
+            <li data-i18n="worldD">Regional lore, hidden inheritances, and notable NPC cultivators.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer" data-i18n="footer">Nine Realms: Path of the Dao</footer>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        pageTitle: "Nine Realms Lore",
+        brand: "Nine Realms Lore",
+        navHome: "Home",
+        navGuide: "Quick Start & Wiki",
+        navLore: "Lore",
+        navRoadmap: "Roadmap",
+        navChangelog: "Changelog",
+        eyebrow: "Archive Of The Nine Realms",
+        heroTitle: "Records Of The Nine Realms",
+        heroBody: "Gathered here are the written traces of the Nine Realms world: arts, abilities, sect records, path notes, and the mountain-bound inheritances that will deepen as the road unfolds.",
+        heroLink: "Return To The Wiki",
+        tabAbilities: "Abilities",
+        tabTechniques: "Techniques & Arts",
+        tabWorld: "World",
+        filterAll: "All",
+        filterNeutral: "Neutral",
+        filterBody: "Body Refiner",
+        filterQi: "Qi Practitioner",
+        abilityStamp: "Documented Ability",
+        abilityTitle: "Cultivate",
+        abilityFlavor: "To cultivate is to sit before heaven and earth, draw breath through the mortal shell, and force spirit, body, and intent into alignment. It is not a burst of power. It is a deliberate act of ascent.",
+        abilityDesc: "Cultivate is the core long-action ability unlocked through Cultivation Initiate. It is the primary method used to gain cultivation progress and push toward the next realm.",
+        mechanicsStamp: "Mechanics",
+        mechanicsTitle: "Cost And Flow",
+        mechA: "Cultivation is a long action that spends stamina and mana every tick.",
+        mechB: "If stamina or mana drops too low, cultivation stops automatically.",
+        mechC: "Rogue cultivators always pay 3 stamina and 3 mana per cultivation tick.",
+        mechD: "Formal cultivators begin at the same cost, then improve to 2 and eventually 1 at higher tiers.",
+        progressStamp: "Progress",
+        progressTitle: "What It Builds Toward",
+        progA: "Each cultivation tick advances progress toward the current realm's cap.",
+        progB: "Progress scales with Meditation, current realm, and path-relevant stats.",
+        progC: "Body cultivation leans on STR, DEX, and PV. Qi cultivation leans on CHA, INT, WIL, and DV.",
+        progD: "When progress reaches the gate, advancement pauses until a breakthrough is attempted.",
+        techStamp: "Neutral Technique",
+        techTitle: "Profound Qi Healing",
+        techFlavor: "A measured circulation of inward qi turns breath into mending force, drawing on inner reserves to quiet pain and knit flesh. It is not violent. It is the patient answer of a cultivator who refuses to fall.",
+        techDesc: "Profound Qi Healing is the first neutral technique. It can be used without committing to only one formal cultivation style, and it is managed from the Techniques page inside the cultivation menu.",
+        techHowStamp: "Function",
+        techHowTitle: "How It Works",
+        techA: "Profound Qi Healing drains mana, representing qi expenditure, to restore health.",
+        techB: "It is intended as a sustained internal recovery tool rather than a burst attack art.",
+        techC: "The technique is toggled within the cultivation menu.",
+        techD: "Its role is to trade inner reserves for survivability during longer engagements and recovery windows.",
+        techUseStamp: "Technique Nature",
+        techUseTitle: "Role In Cultivation",
+        techE: "This is a neutral healing technique centered on recovery rather than offense.",
+        techF: "It gives cultivators a steady way to turn inner reserves into survivability.",
+        techG: "It belongs to the Techniques page of the cultivation menu, where it can be enabled as part of regular cultivation practice.",
+        worldStamp: "World Archive",
+        worldTitle: "The Broader Nine Realms World",
+        worldBody: "Future records here will track the sects, territories, inheritance lines, path philosophies, and great figures that turn cultivation from a personal ladder into a world with pressure, history, and competing heavens.",
+        worldSoonStamp: "Forthcoming Records",
+        worldSoonTitle: "Opening Gates",
+        worldA: "Sect overviews, leaders, and locations.",
+        worldB: "Sword Dao, Dao of Music, and later Dao path notes.",
+        worldC: "Technique entries, manuals, scrolls, and artifact records.",
+        worldD: "Regional lore, hidden inheritances, and notable NPC cultivators.",
+        footer: "Nine Realms: Path of the Dao"
+      },
+      zh: {
+        pageTitle: "九境设定",
+        brand: "九境设定",
+        navHome: "主页",
+        navGuide: "快速开始与百科",
+        navLore: "设定",
+        navRoadmap: "路线图",
+        navChangelog: "更新日志",
+        eyebrow: "九境档案",
+        heroTitle: "九境录",
+        heroBody: "这里收纳九境世界留下的文字痕迹：术法、能力、宗门记录、道路注解，以及会随着道途展开而不断加深的山门传承。",
+        heroLink: "返回百科",
+        tabAbilities: "能力",
+        tabTechniques: "功法与术法",
+        tabWorld: "世界",
+        filterAll: "全部",
+        filterNeutral: "中立",
+        filterBody: "体修",
+        filterQi: "练气士",
+        abilityStamp: "已记录能力",
+        abilityTitle: "修炼",
+        abilityFlavor: "修炼，便是盘坐于天地之间，以凡躯引气，以意志整合身、神、息。它不是一瞬的爆发，而是一场刻意而漫长的登阶。",
+        abilityDesc: "修炼是通过 Cultivation Initiate 解锁的核心长行动能力，也是获取修炼进度、冲击下一境界的主要方式。",
+        mechanicsStamp: "机制",
+        mechanicsTitle: "消耗与流程",
+        mechA: "修炼是长行动，每个 tick 都会消耗体力与法力。",
+        mechB: "当体力或法力过低时，修炼会自动停止。",
+        mechC: "散修每个修炼 tick 固定消耗 3 点体力与 3 点法力。",
+        mechD: "正式修士起初也是同样消耗，但在更高层次后会下降到 2，最终降低到 1。",
+        progressStamp: "进度",
+        progressTitle: "它会推动什么",
+        progA: "每次修炼 tick 都会推进当前境界的修炼进度。",
+        progB: "进度会受到 Meditation、当前境界，以及路径相关属性的影响。",
+        progC: "体修偏向 STR、DEX 与 PV。气修偏向 CHA、INT、WIL 与 DV。",
+        progD: "当进度触及关口后，晋升会暂停，直到尝试突破。",
+        techStamp: "中立功法",
+        techTitle: "玄气疗伤",
+        techFlavor: "以内息缓缓运转玄气，将体内真元化作疗伤之力，平息痛楚，缝合伤势。它不是凶烈杀术，而是修士不肯倒下时最沉稳的一口气。",
+        techDesc: "玄气疗伤是首个中立功法。不必完全依附单一路线，也可纳入修炼体系之中，并在修炼菜单的功法页面进行管理。",
+        techHowStamp: "作用方式",
+        techHowTitle: "它如何运作",
+        techA: "玄气疗伤会持续消耗法力，也就是真气，来恢复生命。",
+        techB: "它的定位是稳定的内修回复手段，而不是爆发型攻击术法。",
+        techC: "这一功法在修炼菜单中进行开关切换。",
+        techD: "它的核心价值，是在持久战与恢复阶段用内在储备换取生存能力。",
+        techUseStamp: "体系位置",
+        techUseTitle: "它在系统中的位置",
+        techE: "它是九境现有功法谱系中的首个中立功法。",
+        techF: "它标志着更完整功法与术法框架的开端。",
+        techG: "未来新的功法、术法与传承都会围绕这一页继续扩展。",
+        worldStamp: "世界档案",
+        worldTitle: "更广阔的九境世界",
+        worldBody: "未来这里会记录宗门、疆域、传承谱系、道路理念，以及那些让修炼不再只是个人阶梯，而成为一整个修真天地的势力与人物。",
+        worldSoonStamp: "后续记录",
+        worldSoonTitle: "将启之门",
+        worldA: "宗门概览、掌门与所在地。",
+        worldB: "剑道、乐道，以及后续大道路线记录。",
+        worldC: "功法条目、秘卷、卷轴与法器档案。",
+        worldD: "地域传闻、隐藏传承与具名 NPC 修士。",
+        footer: "九境：道途"
+      },
+      ja: {
+        pageTitle: "九境設定",
+        brand: "九境設定",
+        navHome: "ホーム",
+        navGuide: "クイックスタートと百科",
+        navLore: "設定",
+        navRoadmap: "ロードマップ",
+        navChangelog: "更新履歴",
+        eyebrow: "九境の記録庫",
+        heroTitle: "九境録",
+        heroBody: "ここには九境世界に残された文字の痕跡が集められます。術、能力、宗門記録、道の注釈、そして歩みとともに深まっていく山門の継承です。",
+        heroLink: "百科へ戻る",
+        tabAbilities: "能力",
+        tabTechniques: "技法と術",
+        tabWorld: "世界",
+        filterAll: "全表示",
+        filterNeutral: "中立",
+        filterBody: "体修",
+        filterQi: "練気士",
+        abilityStamp: "記録済み能力",
+        abilityTitle: "Cultivate",
+        abilityFlavor: "修行とは、天地の前に座し、凡身を通して気を引き、精神と肉体と意思をひとつに整えることです。それは一瞬の爆発ではなく、意志的で長い登段そのものです。",
+        abilityDesc: "Cultivate は Cultivation Initiate で解放される中核の長時間アクション能力であり、修行進行を得て次の境界へ進むための主な手段です。",
+        mechanicsStamp: "仕組み",
+        mechanicsTitle: "消費と流れ",
+        mechA: "修行は長時間アクションで、毎 tick ごとにスタミナとマナを消費します。",
+        mechB: "スタミナかマナが不足すると、自動的に修行は停止します。",
+        mechC: "散修は毎 tick で常にスタミナ 3 とマナ 3 を支払います。",
+        mechD: "正式な修士も最初は同じですが、高位へ進むと 2、最終的には 1 まで下がります。",
+        progressStamp: "進行",
+        progressTitle: "その先にあるもの",
+        progA: "各修行 tick は現在の境界上限へ向けた進行を積み上げます。",
+        progB: "進行量は Meditation、現在の境界、そしてルート関連能力値に左右されます。",
+        progC: "体修は STR、DEX、PV に寄り、気修は CHA、INT、WIL、DV に寄ります。",
+        progD: "進行が関門に達すると昇格は止まり、突破を試みるまで先へ進めません。",
+        techStamp: "中立技法",
+        techTitle: "Profound Qi Healing",
+        techFlavor: "内に巡る気を静かに回し、その呼吸を癒やしの力へと変える技です。痛みを鎮め、傷を閉じるそれは、激しい殺術ではなく、倒れぬと決めた修士の静かな答えです。",
+        techDesc: "Profound Qi Healing は最初の中立技法です。単一の正式ルートだけに縛られず扱うことができ、修行メニュー内の Techniques ページで管理されます。",
+        techHowStamp: "作用",
+        techHowTitle: "どう機能するか",
+        techA: "Profound Qi Healing はマナ、すなわち気を消費して HP を回復します。",
+        techB: "役割は爆発的な攻撃術ではなく、継続的な内的回復手段です。",
+        techC: "この技法は修行メニュー内で切り替えます。",
+        techD: "長期戦や立て直しの場面で、内なる蓄えを生存力へ変えるのが本質です。",
+        techUseStamp: "体系上の位置",
+        techUseTitle: "この技法の立ち位置",
+        techE: "これは現在の九境技法体系における最初の中立技法です。",
+        techF: "より広い技法と術の枠組みが始まったことを示します。",
+        techG: "今後の技法、術、継承はこのページの周囲へ広がっていきます。",
+        worldStamp: "世界記録",
+        worldTitle: "より広い九境世界",
+        worldBody: "今後ここには、宗門、勢力圏、継承の系譜、道の思想、そして修行を個人の階梯から歴史と圧力を持つ世界へ変える大人物たちが記録されていきます。",
+        worldSoonStamp: "後続記録",
+        worldSoonTitle: "これから開く門",
+        worldA: "宗門の概要、長や指導者、所在。",
+        worldB: "剣道、楽道、そして後続の大道ルート記録。",
+        worldC: "技法項目、秘巻、巻物、アーティファクトの記録。",
+        worldD: "地域伝承、隠された継承、固有名を持つ NPC 修士。",
+        footer: "九境：道の途"
+      }
+    };
+
+    Object.assign(translations.en, {
+      abilityTitle: "Cultivate",
+      neutralStamp: "Neutral",
+      neutralTitle: "Profound Qi Healing",
+      neutralFlavor: "A measured circulation of inward qi turns breath into mending force, drawing on inner reserves to quiet pain and knit flesh. It is not violent. It is the patient answer of a cultivator who refuses to fall.",
+      neutralDesc: "Profound Qi Healing is a neutral healing art housed on the Techniques page of the cultivation menu. It converts qi into recovery and grows more efficient as formal cultivators rise through higher realms.",
+      neutralHowStamp: "Function",
+      neutralHowTitle: "How It Works",
+      neutralA: "It restores health every tick by draining mana, representing qi expenditure.",
+      neutralB: "The technique is toggled within the cultivation menu.",
+      neutralC: "Rogue or low-realm formal cultivators heal 2 HP per tick at a cost of 3 MP.",
+      neutralD: "At realm 5 and above, it improves to 3 HP for 2 MP. At realm 9 and above, it improves again to 4 HP for 1 MP.",
+      neutralUseStamp: "Technique Nature",
+      neutralUseTitle: "Role In Cultivation",
+      neutralE: "This is a neutral healing technique centered on recovery rather than offense.",
+      neutralF: "It gives cultivators a steady way to turn inner reserves into survivability.",
+      neutralG: "Its efficiency deepens most sharply for formal paths as realms rise.",
+      bodyTechStamp: "Body Refiner",
+      bodyTechTitle: "Iron Skin",
+      bodyTechFlavor: "Body qi is pressed outward until the skin takes on the feel of forged hide. Flesh grows dense, blows glance aside more easily, and movement loses some of its softness.",
+      bodyTechDesc: "Iron Skin is the first body refiner technique. It is a body-path toggle that hardens the cultivator for direct punishment, trading nimbleness for a tougher frame.",
+      bodyHowStamp: "Function",
+      bodyHowTitle: "How It Works",
+      bodyA: "Iron Skin is a toggle technique with no per-tick stamina or mana cost.",
+      bodyB: "At lower realms it grants +2 PV and -3 DV.",
+      bodyC: "At realm 5 and above it becomes +3 PV and -2 DV.",
+      bodyD: "At realm 9 and above it becomes +4 PV and -1 DV.",
+      bodyUseStamp: "Technique Nature",
+      bodyUseTitle: "Role In Cultivation",
+      bodyE: "It is a defensive body art built to blunt direct punishment.",
+      bodyF: "The cost is not resource drain, but reduced evasiveness while it remains active.",
+      bodyG: "As the body cultivator climbs higher realms, the protection improves and the drawback softens.",
+      qiTechStamp: "Qi Practitioner",
+      qiTechTitle: "Flowing Meridian",
+      qiTechFlavor: "Qi is threaded through the meridians until the body feels wind-borne and difficult to pin down. The price is that flesh and bone carry less certainty when a strike lands cleanly.",
+      qiTechDesc: "Flowing Meridian is the first Qi Practitioner technique. It is a qi-path toggle that sharpens evasiveness and lightness while making the cultivator less suited to blunt impact.",
+      qiHowStamp: "Function",
+      qiHowTitle: "How It Works",
+      qiA: "Flowing Meridian is a toggle technique with no per-tick stamina or mana cost.",
+      qiB: "At lower realms it grants +2 DV and -3 PV.",
+      qiC: "At realm 5 and above it becomes +3 DV and -2 PV.",
+      qiD: "At realm 9 and above it becomes +4 DV and -1 PV.",
+      qiUseStamp: "Technique Nature",
+      qiUseTitle: "Role In Cultivation",
+      qiE: "It is an evasive qi art built around lightness, flow, and repositioning.",
+      qiF: "The cost is not resource drain, but reduced physical protection while it remains active.",
+      qiG: "As realms rise, the evasive bonus grows and the protection penalty eases."
+    });
+
+    Object.assign(translations.zh, {
+      neutralStamp: "\u4e2d\u7acb",
+      neutralTitle: "\u7384\u6c14\u7597\u4f24\u672f",
+      neutralFlavor: "\u4ee5\u5185\u606f\u7f13\u7f13\u8fd0\u8f6c\u7384\u6c14\uff0c\u5c06\u4f53\u5185\u771f\u5143\u5316\u4f5c\u7597\u4f24\u4e4b\u529b\uff0c\u5e73\u606f\u75db\u695a\uff0c\u7f1d\u5408\u4f24\u52bf\u3002\u5b83\u4e0d\u662f\u51f6\u70c8\u6740\u672f\uff0c\u800c\u662f\u4fee\u58eb\u4e0d\u80af\u5012\u4e0b\u65f6\u6700\u6c89\u7a33\u7684\u4e00\u53e3\u6c14\u3002",
+      neutralDesc: "\u7384\u6c14\u7597\u4f24\u672f\u662f\u6536\u5f55\u4e8e\u4fee\u70bc\u83dc\u5355\u529f\u6cd5\u9875\u4e2d\u7684\u4e2d\u7acb\u7597\u4f24\u672f\u6cd5\u3002\u5b83\u5c06\u771f\u6c14\u8f6c\u5316\u4e3a\u6062\u590d\u529b\uff0c\u5e76\u4f1a\u968f\u7740\u6b63\u5f0f\u9053\u8def\u5728\u9ad8\u5883\u754c\u4e2d\u53d8\u5f97\u66f4\u6709\u6548\u7387\u3002",
+      neutralHowStamp: "\u4f5c\u7528\u65b9\u5f0f",
+      neutralHowTitle: "\u5b83\u5982\u4f55\u8fd0\u4f5c",
+      neutralA: "\u5b83\u4f1a\u6bcf\u8df3\u6d88\u8017\u6cd5\u529b\uff0c\u4ee5\u771f\u6c14\u4e4b\u540d\u6062\u590d\u751f\u547d\u3002",
+      neutralB: "\u8fd9\u4e00\u672f\u6cd5\u5728\u4fee\u70bc\u83dc\u5355\u4e2d\u8fdb\u884c\u5f00\u5173\u5207\u6362\u3002",
+      neutralC: "\u6563\u4fee\u6216\u4f4e\u5883\u754c\u7684\u6b63\u5f0f\u4fee\u58eb\uff0c\u6bcf tick \u6062\u590d 2 \u70b9\u751f\u547d\uff0c\u6d88\u8017 3 \u70b9\u6cd5\u529b\u3002",
+      neutralD: "\u5728 5 \u91cd\u5883\u53ca\u4ee5\u4e0a\u65f6\uff0c\u63d0\u5347\u4e3a 2 \u70b9\u6cd5\u529b\u6062\u590d 3 \u70b9\u751f\u547d\u3002\u5728 9 \u91cd\u5883\u53ca\u4ee5\u4e0a\u65f6\uff0c\u8fdb\u4e00\u6b65\u63d0\u5347\u4e3a 1 \u70b9\u6cd5\u529b\u6062\u590d 4 \u70b9\u751f\u547d\u3002",
+      neutralUseStamp: "\u672f\u6cd5\u6027\u8d28",
+      neutralUseTitle: "\u5b83\u5728\u4fee\u70bc\u4e2d\u7684\u4f5c\u7528",
+      neutralE: "\u8fd9\u662f\u4e00\u95e8\u4ee5\u7597\u4f24\u6062\u590d\u4e3a\u6838\u5fc3\uff0c\u800c\u975e\u8fdb\u653b\u7206\u53d1\u7684\u4e2d\u7acb\u672f\u6cd5\u3002",
+      neutralF: "\u5b83\u8ba9\u4fee\u58eb\u80fd\u591f\u7a33\u5b9a\u5730\u628a\u5185\u5728\u50a8\u5907\u8f6c\u5316\u4e3a\u751f\u5b58\u80fd\u529b\u3002",
+      neutralG: "\u5b83\u7684\u6548\u7387\u4f1a\u968f\u7740\u6b63\u5f0f\u9053\u8def\u4e0e\u5883\u754c\u63d0\u5347\u800c\u660e\u663e\u52a0\u6df1\u3002",
+      bodyTechStamp: "\u4f53\u4fee",
+      bodyTechTitle: "\u94c1\u80a4\u672f",
+      bodyTechFlavor: "\u5c06\u4f53\u5185\u6c14\u8840\u538b\u5411\u76ae\u8089\u4e4b\u5916\uff0c\u76f4\u81f3\u76ae\u819c\u5982\u953b\u94c1\u822c\u7d27\u5bc6\u3002\u8089\u8eab\u4f1a\u66f4\u7a33\u56fa\uff0c\u4f46\u8eab\u6cd5\u4e5f\u4f1a\u5931\u53bb\u4e00\u90e8\u5206\u8f7b\u7075\u3002",
+      bodyTechDesc: "\u94c1\u80a4\u672f\u662f\u9996\u4e2a\u4f53\u4fee\u529f\u6cd5\u3002\u5b83\u662f\u4f53\u4fee\u8def\u7ebf\u7684\u5f00\u5173\u5f0f\u672f\u6cd5\uff0c\u4ee5\u7b28\u91cd\u6362\u53d6\u66f4\u5f3a\u7684\u6b63\u9762\u627f\u53d7\u529b\u3002",
+      bodyHowStamp: "\u4f5c\u7528\u65b9\u5f0f",
+      bodyHowTitle: "\u5b83\u5982\u4f55\u8fd0\u4f5c",
+      bodyA: "\u94c1\u80a4\u672f\u662f\u5f00\u5173\u5f0f\u672f\u6cd5\uff0c\u4e0d\u4f1a\u6bcf tick \u989d\u5916\u6d88\u8017\u4f53\u529b\u6216\u6cd5\u529b\u3002",
+      bodyB: "\u5728\u4f4e\u5883\u754c\u65f6\uff0c\u5b83\u63d0\u4f9b +2 PV \u4e0e -3 DV\u3002",
+      bodyC: "\u5728 5 \u91cd\u5883\u53ca\u4ee5\u4e0a\u65f6\uff0c\u53d8\u4e3a +3 PV \u4e0e -2 DV\u3002",
+      bodyD: "\u5728 9 \u91cd\u5883\u53ca\u4ee5\u4e0a\u65f6\uff0c\u53d8\u4e3a +4 PV \u4e0e -1 DV\u3002",
+      bodyUseStamp: "\u672f\u6cd5\u6027\u8d28",
+      bodyUseTitle: "\u5b83\u5728\u4fee\u70bc\u4e2d\u7684\u4f5c\u7528",
+      bodyE: "\u8fd9\u662f\u4e00\u95e8\u7528\u4e8e\u786c\u6297\u6b63\u9762\u6253\u51fb\u7684\u9632\u5fa1\u4f53\u672f\u3002",
+      bodyF: "\u5b83\u7684\u4ee3\u4ef7\u4e0d\u662f\u8d44\u6e90\u6d88\u8017\uff0c\u800c\u662f\u542f\u7528\u671f\u95f4\u95ea\u907f\u80fd\u529b\u7684\u4e0b\u964d\u3002",
+      bodyG: "\u968f\u7740\u4f53\u4fee\u5883\u754c\u63d0\u5347\uff0c\u5b83\u5e26\u6765\u7684\u62a4\u4f53\u6548\u679c\u4f1a\u589e\u5f3a\uff0c\u7f3a\u70b9\u4e5f\u4f1a\u51cf\u5f31\u3002",
+      qiTechStamp: "\u7ec3\u6c14\u58eb",
+      qiTechTitle: "\u6d41\u8109\u672f",
+      qiTechFlavor: "\u4ee4\u771f\u6c14\u6cbf\u7740\u7ecf\u8109\u4e0d\u65ad\u6d41\u8f6c\uff0c\u76f4\u5230\u8089\u8eab\u8f7b\u82e5\u98ce\u5f71\uff0c\u96be\u4ee5\u6349\u6478\u3002\u4ee3\u4ef7\u662f\u4e00\u65e6\u6b63\u9762\u53d7\u51fb\uff0c\u8089\u8eab\u4fbf\u66f4\u96be\u786c\u6297\u3002",
+      qiTechDesc: "\u6d41\u8109\u672f\u662f\u9996\u4e2a\u7ec3\u6c14\u58eb\u529f\u6cd5\u3002\u5b83\u662f\u7ec3\u6c14\u8def\u7ebf\u7684\u5f00\u5173\u5f0f\u672f\u6cd5\uff0c\u4ee5\u8f7b\u7075\u95ea\u8f6c\u6362\u53d6\u5bf9\u6b63\u9762\u786c\u6297\u80fd\u529b\u7684\u820d\u5f03\u3002",
+      qiHowStamp: "\u4f5c\u7528\u65b9\u5f0f",
+      qiHowTitle: "\u5b83\u5982\u4f55\u8fd0\u4f5c",
+      qiA: "\u6d41\u8109\u672f\u662f\u5f00\u5173\u5f0f\u672f\u6cd5\uff0c\u4e0d\u4f1a\u6bcf tick \u989d\u5916\u6d88\u8017\u4f53\u529b\u6216\u6cd5\u529b\u3002",
+      qiB: "\u5728\u4f4e\u5883\u754c\u65f6\uff0c\u5b83\u63d0\u4f9b +2 DV \u4e0e -3 PV\u3002",
+      qiC: "\u5728 5 \u91cd\u5883\u53ca\u4ee5\u4e0a\u65f6\uff0c\u53d8\u4e3a +3 DV \u4e0e -2 PV\u3002",
+      qiD: "\u5728 9 \u91cd\u5883\u53ca\u4ee5\u4e0a\u65f6\uff0c\u53d8\u4e3a +4 DV \u4e0e -1 PV\u3002",
+      qiUseStamp: "\u672f\u6cd5\u6027\u8d28",
+      qiUseTitle: "\u5b83\u5728\u4fee\u70bc\u4e2d\u7684\u4f5c\u7528",
+      qiE: "\u8fd9\u662f\u4e00\u95e8\u56f4\u7ed5\u8f7b\u7075\u3001\u6d41\u8f6c\u4e0e\u8eab\u6cd5\u7684\u95ea\u907f\u7c7b\u6c14\u672f\u3002",
+      qiF: "\u5b83\u7684\u4ee3\u4ef7\u4e0d\u662f\u8d44\u6e90\u6d88\u8017\uff0c\u800c\u662f\u542f\u7528\u671f\u95f4\u6b63\u9762\u9632\u62a4\u80fd\u529b\u7684\u4e0b\u964d\u3002",
+      qiG: "\u968f\u7740\u5883\u754c\u63d0\u5347\uff0c\u5b83\u5e26\u6765\u7684\u95ea\u907f\u4f18\u52bf\u4f1a\u589e\u957f\uff0c\u9632\u62a4\u60e9\u7f5a\u4e5f\u4f1a\u7f13\u548c\u3002"
+    });
+
+    Object.assign(translations.zh, {
+      techUseStamp: "\u672f\u6cd5\u6027\u8d28",
+      techUseTitle: "\u5b83\u5728\u4fee\u70bc\u4e2d\u7684\u4f5c\u7528",
+      techE: "\u8fd9\u662f\u4e00\u95e8\u4ee5\u7597\u4f24\u6062\u590d\u4e3a\u6838\u5fc3\uff0c\u800c\u975e\u8fdb\u653b\u7206\u53d1\u7684\u4e2d\u7acb\u672f\u6cd5\u3002",
+      techF: "\u5b83\u8ba9\u4fee\u58eb\u80fd\u591f\u7a33\u5b9a\u5730\u628a\u5185\u5728\u50a8\u5907\u8f6c\u5316\u4e3a\u751f\u5b58\u80fd\u529b\u3002",
+      techG: "\u5b83\u5f52\u5c5e\u4e8e\u4fee\u70bc\u83dc\u5355\u4e2d\u7684\u529f\u6cd5\u9875\u9762\uff0c\u53ef\u4f5c\u4e3a\u65e5\u5e38\u4fee\u70bc\u914d\u7f6e\u7684\u4e00\u90e8\u5206\u8fdb\u884c\u542f\u7528\u3002"
+    });
+
+    Object.assign(translations.ja, {
+      abilityTitle: "\u4fee\u884c",
+      neutralStamp: "\u4e2d\u7acb",
+      neutralTitle: "\u7384\u6c17\u7642\u50b7\u8853",
+      neutralFlavor: "\u5185\u306b\u5de1\u308b\u6c17\u3092\u9759\u304b\u306b\u56de\u3057\uff0c\u305d\u306e\u547c\u5438\u3092\u7652\u3084\u3057\u306e\u529b\u3078\u3068\u5909\u3048\u308b\u8853\u3067\u3059\u3002\u75db\u307f\u3092\u93ae\u3081\uff0c\u50b7\u3092\u9589\u3058\u308b\u305d\u308c\u306f\uff0c\u6fc0\u3057\u3044\u6bba\u8853\u3067\u306f\u306a\u304f\uff0c\u5012\u308c\u306c\u3068\u6c7a\u3081\u305f\u4fee\u58eb\u306e\u9759\u304b\u306a\u7b54\u3048\u3067\u3059\u3002",
+      neutralDesc: "\u7384\u6c17\u7642\u50b7\u8853\u306f\u3001\u4fee\u884c\u30e1\u30cb\u30e5\u30fc\u5185\u306e Techniques \u30da\u30fc\u30b8\u306b\u53ce\u3081\u3089\u308c\u305f\u4e2d\u7acb\u306e\u6cbb\u7652\u8853\u3067\u3059\u3002\u6c17\u3092\u56de\u5fa9\u529b\u3078\u5909\u3048\uff0c\u6b63\u5f0f\u306a\u9053\u3092\u6b69\u3080\u8005\u307b\u3069\u9ad8\u3044\u5883\u754c\u3067\u305d\u306e\u52b9\u7387\u3092\u6df1\u3081\u307e\u3059\u3002",
+      neutralHowStamp: "\u4f5c\u7528",
+      neutralHowTitle: "\u3069\u3046\u6a5f\u80fd\u3059\u308b\u304b",
+      neutralA: "\u6bcf tick \u3054\u3068\u306b\u30de\u30ca\u3092\u6d88\u8cbb\u3057\uff0c\u6c17\u3092\u7528\u3044\u3066 HP \u3092\u56de\u5fa9\u3057\u307e\u3059\u3002",
+      neutralB: "\u3053\u306e\u8853\u306f\u4fee\u884c\u30e1\u30cb\u30e5\u30fc\u5185\u3067\u5207\u308a\u66ff\u3048\u307e\u3059\u3002",
+      neutralC: "\u6563\u4fee\u307e\u305f\u306f\u4f4e\u5883\u754c\u306e\u6b63\u5f0f\u4fee\u58eb\u306f\u3001\u6bcf tick \u3067 3 MP \u3092\u652f\u6255\u3044 2 HP \u3092\u56de\u5fa9\u3057\u307e\u3059\u3002",
+      neutralD: "\u5883\u754c 5 \u4ee5\u4e0a\u3067\u306f 2 MP \u3067 3 HP\uff0c\u5883\u754c 9 \u4ee5\u4e0a\u3067\u306f 1 MP \u3067 4 HP \u3078\u3068\u5411\u4e0a\u3057\u307e\u3059\u3002",
+      neutralUseStamp: "\u6280\u6cd5\u306e\u6027\u8cea",
+      neutralUseTitle: "\u4fee\u884c\u306b\u304a\u3051\u308b\u5f79\u5272",
+      neutralE: "\u3053\u308c\u306f\u653b\u3081\u3067\u306f\u306a\u304f\u56de\u5fa9\u306b\u8ef8\u3092\u7f6e\u3044\u305f\u4e2d\u7acb\u6280\u6cd5\u3067\u3059\u3002",
+      neutralF: "\u4fee\u58eb\u304c\u5185\u306a\u308b\u84c4\u3048\u3092\u5b89\u5b9a\u3057\u3066\u751f\u5b58\u529b\u3078\u5909\u3048\u308b\u305f\u3081\u306e\u8853\u3067\u3059\u3002",
+      neutralG: "\u305d\u306e\u52b9\u7387\u306f\u3001\u6b63\u5f0f\u306a\u9053\u3068\u5883\u754c\u304c\u9ad8\u307e\u308b\u307b\u3069\u5927\u304d\u304f\u4f38\u3073\u307e\u3059\u3002",
+      bodyTechStamp: "\u4f53\u4fee",
+      bodyTechTitle: "\u9244\u819a\u8853",
+      bodyTechFlavor: "\u4f53\u5185\u306e\u6c17\u3092\u5916\u5074\u3078\u62bc\u3057\u51fa\u3057\uff0c\u76ae\u819a\u3092\u6253\u3061\u9375\u3048\u305f\u3088\u3046\u306a\u611f\u89e6\u307e\u3067\u5f15\u304d\u4e0a\u3052\u307e\u3059\u3002\u8089\u8eab\u306f\u5805\u304f\u306a\u308a\u307e\u3059\u304c\uff0c\u8eab\u306e\u3053\u306a\u3057\u306f\u305d\u306e\u3076\u3093\u9248\u308a\u307e\u3059\u3002",
+      bodyTechDesc: "\u9244\u819a\u8853\u306f\u6700\u521d\u306e\u4f53\u4fee\u6280\u6cd5\u3067\u3059\u3002\u4f53\u4fee\u30eb\u30fc\u30c8\u306e\u30c8\u30b0\u30eb\u8853\u3068\u3057\u3066\uff0c\u8089\u4f53\u3092\u9811\u5f35\u3089\u305b\u308b\u4ee3\u308f\u308a\u306b\u8eab\u3053\u306a\u3057\u3092\u624b\u653e\u3057\u307e\u3059\u3002",
+      bodyHowStamp: "\u4f5c\u7528",
+      bodyHowTitle: "\u3069\u3046\u6a5f\u80fd\u3059\u308b\u304b",
+      bodyA: "\u9244\u819a\u8853\u306f\u30c8\u30b0\u30eb\u6280\u6cd5\u3067\u3001\u6bcf tick \u306e\u30b9\u30bf\u30df\u30ca\u3084\u30de\u30ca\u6d88\u8cbb\u306f\u3042\u308a\u307e\u305b\u3093\u3002",
+      bodyB: "\u4f4e\u5883\u754c\u3067\u306f +2 PV \u3068 -3 DV \u3092\u4e0e\u3048\u307e\u3059\u3002",
+      bodyC: "\u5883\u754c 5 \u4ee5\u4e0a\u3067\u306f +3 PV \u3068 -2 DV \u306b\u306a\u308a\u307e\u3059\u3002",
+      bodyD: "\u5883\u754c 9 \u4ee5\u4e0a\u3067\u306f +4 PV \u3068 -1 DV \u306b\u306a\u308a\u307e\u3059\u3002",
+      bodyUseStamp: "\u6280\u6cd5\u306e\u6027\u8cea",
+      bodyUseTitle: "\u4fee\u884c\u306b\u304a\u3051\u308b\u5f79\u5272",
+      bodyE: "\u3053\u308c\u306f\u6b63\u9762\u304b\u3089\u306e\u6253\u6483\u3092\u8010\u3048\u308b\u305f\u3081\u306e\u9632\u5fa1\u4f53\u8853\u3067\u3059\u3002",
+      bodyF: "\u4ee3\u511f\u306f\u8cc7\u6e90\u6d88\u8cbb\u3067\u306f\u306a\u304f\uff0c\u767a\u52d5\u4e2d\u306e\u56de\u907f\u529b\u4f4e\u4e0b\u306b\u3042\u308a\u307e\u3059\u3002",
+      bodyG: "\u4f53\u4fee\u304c\u9ad8\u3044\u5883\u754c\u3078\u9032\u3080\u307b\u3069\u3001\u5b88\u308a\u306f\u5f37\u307e\u308a\u3001\u6b20\u70b9\u306f\u548c\u3089\u3044\u3067\u3044\u304d\u307e\u3059\u3002",
+      qiTechStamp: "\u7df4\u6c17\u58eb",
+      qiTechTitle: "\u6d41\u8108\u8853",
+      qiTechFlavor: "\u6c17\u3092\u7d4c\u8108\u3078\u6e21\u3089\u305b\u3066\u3044\u304f\u3068\u3001\u8089\u8eab\u306f\u98a8\u306b\u4e57\u308b\u3088\u3046\u306b\u8efd\u304f\u306a\u308a\uff0c\u6355\u307e\u3048\u306b\u304f\u304f\u306a\u308a\u307e\u3059\u3002\u305d\u306e\u4ee3\u511f\u3068\u3057\u3066\u3001\u4e00\u6483\u3092\u6b63\u9762\u304b\u3089\u53d7\u3051\u305f\u6642\u306e\u8010\u3048\u3084\u3059\u3055\u306f\u843d\u3061\u307e\u3059\u3002",
+      qiTechDesc: "\u6d41\u8108\u8853\u306f\u6700\u521d\u306e\u7df4\u6c17\u58eb\u6280\u6cd5\u3067\u3059\u3002\u7df4\u6c17\u30eb\u30fc\u30c8\u306e\u30c8\u30b0\u30eb\u8853\u3068\u3057\u3066\u3001\u8eab\u3053\u306a\u3057\u3068\u56de\u907f\u3092\u5f37\u3081\u308b\u4ee3\u308f\u308a\u306b\u3001\u6b63\u9762\u306e\u6253\u305f\u308c\u5f37\u3055\u3092\u624b\u653e\u3057\u307e\u3059\u3002",
+      qiHowStamp: "\u4f5c\u7528",
+      qiHowTitle: "\u3069\u3046\u6a5f\u80fd\u3059\u308b\u304b",
+      qiA: "\u6d41\u8108\u8853\u306f\u30c8\u30b0\u30eb\u6280\u6cd5\u3067\u3001\u6bcf tick \u306e\u30b9\u30bf\u30df\u30ca\u3084\u30de\u30ca\u6d88\u8cbb\u306f\u3042\u308a\u307e\u305b\u3093\u3002",
+      qiB: "\u4f4e\u5883\u754c\u3067\u306f +2 DV \u3068 -3 PV \u3092\u4e0e\u3048\u307e\u3059\u3002",
+      qiC: "\u5883\u754c 5 \u4ee5\u4e0a\u3067\u306f +3 DV \u3068 -2 PV \u306b\u306a\u308a\u307e\u3059\u3002",
+      qiD: "\u5883\u754c 9 \u4ee5\u4e0a\u3067\u306f +4 DV \u3068 -1 PV \u306b\u306a\u308a\u307e\u3059\u3002",
+      qiUseStamp: "\u6280\u6cd5\u306e\u6027\u8cea",
+      qiUseTitle: "\u4fee\u884c\u306b\u304a\u3051\u308b\u5f79\u5272",
+      qiE: "\u3053\u308c\u306f\u8efd\u3055\u3001\u6d41\u308c\u3001\u8eab\u3053\u306a\u3057\u3092\u4e3b\u8ef8\u3068\u3059\u308b\u56de\u907f\u306e\u6c17\u8853\u3067\u3059\u3002",
+      qiF: "\u4ee3\u511f\u306f\u8cc7\u6e90\u6d88\u8cbb\u3067\u306f\u306a\u304f\uff0c\u767a\u52d5\u4e2d\u306e\u7269\u7406\u7684\u306a\u5b88\u308a\u306e\u4f4e\u4e0b\u306b\u3042\u308a\u307e\u3059\u3002",
+      qiG: "\u5883\u754c\u304c\u4e0a\u304c\u308b\u307b\u3069\u3001\u56de\u907f\u30dc\u30fc\u30ca\u30b9\u306f\u4f38\u3073\u3001\u9632\u8b77\u30da\u30ca\u30eb\u30c6\u30a3\u306f\u548c\u3089\u3044\u3067\u3044\u304d\u307e\u3059\u3002"
+    });
+
+    Object.assign(translations.ja, {
+      techUseStamp: "\u6280\u6cd5\u306e\u6027\u8cea",
+      techUseTitle: "\u4fee\u884c\u306b\u304a\u3051\u308b\u5f79\u5272",
+      techE: "\u3053\u308c\u306f\u653b\u3081\u3067\u306f\u306a\u304f\u6cbb\u7652\u3068\u7acb\u3066\u76f4\u3057\u306b\u8ef8\u3092\u7f6e\u3044\u305f\u4e2d\u7acb\u6280\u6cd5\u3067\u3059\u3002",
+      techF: "\u4fee\u58eb\u304c\u5185\u306a\u308b\u84c4\u3048\u3092\u5b89\u5b9a\u3057\u3066\u751f\u5b58\u529b\u3078\u5909\u3048\u308b\u305f\u3081\u306e\u624b\u6bb5\u306b\u306a\u308a\u307e\u3059\u3002",
+      techG: "\u4fee\u884c\u30e1\u30cb\u30e5\u30fc\u5185\u306e Techniques \u30da\u30fc\u30b8\u306b\u5c5e\u3057\uff0c\u65e5\u3005\u306e\u4fee\u884c\u69cb\u6210\u306e\u4e00\u90e8\u3068\u3057\u3066\u6709\u52b9\u5316\u3067\u304d\u307e\u3059\u3002"
+    });
+
+    function applyLanguage(lang) {
+      const selected = translations[lang] ? lang : "en";
+      const dict = translations[selected];
+      document.documentElement.lang = selected;
+      document.title = dict.pageTitle;
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.getAttribute("data-i18n");
+        if (dict[key]) node.textContent = dict[key];
+      });
+      document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+        button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
+      });
+      localStorage.setItem("nr-site-lang", selected);
+    }
+
+    function setTab(name) {
+      document.querySelectorAll("[data-tab]").forEach((button) => {
+        button.classList.toggle("active", button.getAttribute("data-tab") === name);
+      });
+      document.querySelectorAll("[data-tab-panel]").forEach((panel) => {
+        panel.classList.toggle("active", panel.getAttribute("data-tab-panel") === name);
+      });
+    }
+
+    function setTechniqueFilter(name) {
+      document.querySelectorAll("[data-tech-filter]").forEach((button) => {
+        button.classList.toggle("active", button.getAttribute("data-tech-filter") === name);
+      });
+      document.querySelectorAll("[data-tech-group]").forEach((group) => {
+        const matches = name === "all" || group.getAttribute("data-tech-group") === name;
+        group.style.display = matches ? "" : "none";
+      });
+    }
+
+    const savedLang = localStorage.getItem("nr-site-lang") || "en";
+    applyLanguage(savedLang);
+    setTab("abilities");
+
+    document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+      button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));
+    });
+
+    document.querySelectorAll("[data-tab]").forEach((button) => {
+      button.addEventListener("click", () => setTab(button.getAttribute("data-tab")));
+    });
+
+    document.querySelectorAll("[data-tech-filter]").forEach((button) => {
+      button.addEventListener("click", () => setTechniqueFilter(button.getAttribute("data-tech-filter")));
+    });
+
+    setTechniqueFilter("all");
+  </script>
+</body>
+</html>
