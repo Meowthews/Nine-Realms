@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -365,27 +365,65 @@
 
       <div class="grid" style="margin-top:1rem;">
         <article class="details-card">
-          <div class="stamp" data-i18n="mechanicsStamp">Mechanics</div>
-          <h3 data-i18n="mechanicsTitle">Cost And Flow</h3>
+          <div class="stamp" data-i18n="cultivateHowStamp">Function</div>
+          <h3 data-i18n="cultivateHowTitle">How It Works</h3>
           <ul class="mechanics-list">
-            <li data-i18n="mechA">Cultivation is a long action that spends stamina and mana every tick.</li>
-            <li data-i18n="mechB">If stamina or mana drops too low, cultivation stops automatically.</li>
-            <li data-i18n="mechC">Rogue cultivators always pay 3 stamina and 3 mana per cultivation tick.</li>
-            <li data-i18n="mechD">Formal cultivators begin at the same cost, then improve to 2 and eventually 1 at higher tiers.</li>
+            <li data-i18n="cultivateA">Each cultivation tick spends stamina and MP: 3/3 by default, 2/2 at realm 5+, and 1/1 at realm 9+. Still Breath Sutra lowers each cost by 1, to a minimum of 1.</li>
+            <li data-i18n="cultivateB">Formal progress per tick is max(1, 1 + realm / 2 + Meditation / 150 + path stat bonus), then cultivation speed and Still Breath modifiers apply.</li>
+            <li data-i18n="cultivateC">Rogue progress per tick is max(1, 1 + Meditation / 250 + all rogue cultivation attributes / 1200).</li>
+            <li data-i18n="cultivateD">Realm gates are every 1000 progress up to 18000; formal paths pause at the next gate - 1 until breakthrough, while rogues can progress to the cap but cannot break through.</li>
           </ul>
         </article>
 
         <article class="details-card">
-          <div class="stamp" data-i18n="progressStamp">Progress</div>
-          <h3 data-i18n="progressTitle">What It Builds Toward</h3>
+          <div class="stamp" data-i18n="cultivateUseStamp">Ability Nature</div>
+          <h3 data-i18n="cultivateUseTitle">Role In Cultivation</h3>
           <ul class="mechanics-list">
-            <li data-i18n="progA">Each cultivation tick advances progress toward the current realm's cap.</li>
-            <li data-i18n="progB">Progress scales with Meditation, current realm, and path-relevant stats.</li>
-            <li data-i18n="progC">Body cultivation leans on STR, DEX, and PV. Qi cultivation leans on CHA, INT, WIL, and DV.</li>
-            <li data-i18n="progD">When progress reaches the gate, advancement pauses until a breakthrough is attempted.</li>
+            <li data-i18n="cultivateE">Formal stat gain chance is clamp(1 + realm + progress gained / 2 + Meditation / 100, 2%, 20%). Shared immortal realms add immortal rank and clamp to 25%.</li>
+            <li data-i18n="cultivateF">Rogue stat gain chance is clamp(1 + progress / 2000, 1%, 5%) and can roll STR, END, DEX, PER, LER, WIL, MAG, or CHA.</li>
+            <li data-i18n="cultivateG">Body cultivation rolls STR, END, DEX, PER, WIL, or PV. Qi cultivation rolls CHA, WIL, MAG, PER, LER, Meditation, or DV.</li>
+            <li data-i18n="cultivateH">Passive realm bonuses are Body: STR/END/DEX/PER/WIL +realm and PV +(realm * 2); Qi: CHA/PER/LER/WIL/MAG +realm and DV +(realm * 2).</li>
+            <li data-i18n="cultivateI">Body breakthrough success grants STR/END/DEX/PER/WIL +(2 + new realm), PV +(1 + new realm / 2), max HP +(10 + (new realm - 1) * 5), and max stamina by the same amount.</li>
+            <li data-i18n="cultivateJ">Qi breakthrough success grants CHA/PER/LER/WIL/MAG +(2 + new realm), Meditation and DV +(1 + new realm / 2), max HP +(10 + (new realm - 1) * 5), and max MP by the same amount.</li>
+            <li data-i18n="cultivateK">Shared immortal breakthrough success grants all cultivation attributes +(1 + immortal rank), PV/DV/Meditation +max(1, immortal rank / 2), and max HP/MP/stamina +(10 + (immortal rank - 1) * 10).</li>
           </ul>
         </article>
       </div>
+
+      <article class="ability-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="minorMeridianAbilityStamp">Documented Ability</div>
+        <div class="ability-shell">
+          <img class="ability-icon" src="https://i.imgur.com/V3tcjbx.png" alt="Open Minor Meridian ability icon">
+          <div>
+            <h2 data-i18n="minorMeridianTitle">Open Minor Meridian</h2>
+            <p data-i18n="minorMeridianFlavor">A minor meridian is not opened gently. The cultivator drives qi and blood into a narrow gate until it yields, forcing a sudden surge of progress. If the pulse twists, the same pressure bites back through the channels.</p>
+            <p data-i18n="minorMeridianAbilityDesc">Open Minor Meridian is a risky cultivation accelerator: spend MP and stamina for immediate progress, with a small chance of backlash.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="minorMeridianHowStamp">Function</div>
+          <h3 data-i18n="minorMeridianHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="minorMeridianA">Costs 8 + realm * 2 stamina and the same amount of MP.</li>
+            <li data-i18n="minorMeridianB">Grants 25 + realm * 5 + Meditation / 20 cultivation progress immediately.</li>
+            <li data-i18n="minorMeridianC">Backlash chance is min(18, 10 + realm)%; backlash deals MaxHP * min(18, 5 + realm * 2) / 100 and drains max(2, realm * 2) stamina and MP.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="minorMeridianUseStamp">Ability Nature</div>
+          <h3 data-i18n="minorMeridianUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="minorMeridianD">It is a risky accelerator for cultivators willing to force the gate.</li>
+            <li data-i18n="minorMeridianE">The reward is speed; the price is resource pressure and possible injury.</li>
+            <li data-i18n="minorMeridianF">It fits desperate pushes before a breakthrough or aggressive realm chasing.</li>
+          </ul>
+        </article>
+      </div>
+
     </section>
 
     <section class="tab-panel" data-tab-panel="techniques">
@@ -431,6 +469,75 @@
           </ul>
         </article>
       </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="stillBreathStamp">Neutral</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/0SXLXL9.png" alt="Still Breath Sutra technique icon">
+          <div>
+            <h2 data-i18n="stillBreathTitle">Still Breath Sutra</h2>
+            <p data-i18n="stillBreathFlavor">The sutra teaches a cultivator to make each breath narrow, quiet, and almost unmoving. Qi no longer rushes like a river; it gathers like winter mist, conserving the body's fire even as the pace of ascent becomes more measured.</p>
+            <p data-i18n="stillBreathDesc">Still Breath Sutra is a neutral passive for patient cultivation. It reduces the stamina and MP cost of cultivation by 1, but slightly lowers cultivation progress gained per tick.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="stillBreathHowStamp">Function</div>
+          <h3 data-i18n="stillBreathHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="stillBreathA">Reduces cultivation stamina cost by 1.</li>
+            <li data-i18n="stillBreathB">Reduces cultivation MP cost by 1.</li>
+            <li data-i18n="stillBreathC">Progress becomes 80% before realm 5, 85% at realm 5+, and 90% at realm 9+.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="stillBreathUseStamp">Technique Nature</div>
+          <h3 data-i18n="stillBreathUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="stillBreathD">Best suited to long, low-risk cultivation sessions.</li>
+            <li data-i18n="stillBreathE">It favors endurance and steadiness over rapid realm pressure.</li>
+            <li data-i18n="stillBreathF">Its flavor is restraint: wasting less qi, forcing less heaven.</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="hiddenVesselStamp">Neutral</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/cOdUwKW.png" alt="Hidden Vessel Art technique icon">
+          <div>
+            <h2 data-i18n="hiddenVesselTitle">Hidden Vessel Art</h2>
+            <p data-i18n="hiddenVesselFlavor">Old manuals speak of vessels beneath the known meridians, quiet channels that do not answer ordinary breathing methods. This art coaxes them open, giving the cultivator deeper reserves without demanding allegiance to body or qi alone.</p>
+            <p data-i18n="hiddenVesselDesc">Hidden Vessel Art is a neutral passive that increases max MP and max stamina by a small amount that scales with realm.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="hiddenVesselHowStamp">Function</div>
+          <h3 data-i18n="hiddenVesselHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="hiddenVesselA">Max MP increases by 4 + realm * 2.</li>
+            <li data-i18n="hiddenVesselB">Max stamina increases by 4 + realm * 2.</li>
+            <li data-i18n="hiddenVesselC">Examples: realm 1 gives +6, realm 5 gives +14, and realm 9 gives +22.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="hiddenVesselUseStamp">Technique Nature</div>
+          <h3 data-i18n="hiddenVesselUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="hiddenVesselD">It supports both formal paths without pushing either identity too hard.</li>
+            <li data-i18n="hiddenVesselE">The art makes longer technique chains and longer cultivation sessions easier to sustain.</li>
+            <li data-i18n="hiddenVesselF">Its gains are quiet, but they touch the two reserves every cultivator spends.</li>
+          </ul>
+        </article>
+      </div>
+
       </div>
 
       <div data-tech-group="body">
@@ -465,6 +572,108 @@
             <li data-i18n="bodyE">It is a defensive body art built to blunt direct punishment.</li>
             <li data-i18n="bodyF">The cost is not resource drain, but reduced evasiveness while it remains active.</li>
             <li data-i18n="bodyG">As the body cultivator climbs higher realms, the protection improves and the drawback softens.</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="boneTemperingStamp">Body Refiner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/hNPWrL5.png" alt="Bone Tempering Art technique icon">
+          <div>
+            <h2 data-i18n="boneTemperingTitle">Bone Tempering Art</h2>
+            <p data-i18n="boneTemperingFlavor">The art grinds qi into the skeleton until every bone remembers pressure. Marrow grows hot, joints settle like locked iron, and the cultivator becomes harder to break even when grace is sacrificed.</p>
+            <p data-i18n="boneTemperingDesc">Bone Tempering Art is a body passive that grants realm-scaled max HP and PV, with a small DV penalty.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="boneTemperingHowStamp">Function</div>
+          <h3 data-i18n="boneTemperingHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="boneTemperingA">Max HP increases by 8 + realm * 4.</li>
+            <li data-i18n="boneTemperingB">PV is +2 plus realm / 2 before realm 5, +4 at realm 5+, and +5 at realm 9+.</li>
+            <li data-i18n="boneTemperingC">DV penalty is -4 before realm 3, -3 at realm 3+, -2 at realm 5+, and -1 at realm 9+.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="boneTemperingUseStamp">Technique Nature</div>
+          <h3 data-i18n="boneTemperingUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="boneTemperingD">It is the clearest expression of the body path: endure first, move second.</li>
+            <li data-i18n="boneTemperingE">The art rewards higher realms with a sturdier frame and stronger guard.</li>
+            <li data-i18n="boneTemperingF">Its drawback keeps the body refiner grounded and heavy.</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="hundredScarsStamp">Body Refiner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/FYUmmLg.png" alt="Hundred Scars Scripture technique icon">
+          <div>
+            <h2 data-i18n="hundredScarsTitle">Hundred Scars Scripture</h2>
+            <p data-i18n="hundredScarsFlavor">Each wound is written into the flesh like a line of scripture. Pain becomes annotation, bruises become doctrine, and a body refiner who survives enough punishment begins to turn suffering into momentum.</p>
+            <p data-i18n="hundredScarsDesc">Hundred Scars Scripture is a body passive. When the cultivator takes damage, there is a small chance to gain cultivation progress or temporary toughness.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="hundredScarsHowStamp">Function</div>
+          <h3 data-i18n="hundredScarsHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="hundredScarsA">Drains 1 stamina per tick while active.</li>
+            <li data-i18n="hundredScarsB">When taking HP damage, has min(22, 8 + realm)% chance to grant 4 + realm * 2 cultivation progress.</li>
+            <li data-i18n="hundredScarsC">Also grants temporary PV + (1 + min(3, realm / 3)) for 20 + realm * 5 ticks.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="hundredScarsUseStamp">Technique Nature</div>
+          <h3 data-i18n="hundredScarsUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="hundredScarsD">It turns hardship into advancement without making pain feel free.</li>
+            <li data-i18n="hundredScarsE">The best body refiners can use battle itself as a rough cultivation chamber.</li>
+            <li data-i18n="hundredScarsF">It rewards survival, not recklessness.</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="bloodFurnaceStamp">Body Refiner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/2d1TOiy.png" alt="Blood Furnace technique icon">
+          <div>
+            <h2 data-i18n="bloodFurnaceTitle">Blood Furnace</h2>
+            <p data-i18n="bloodFurnaceFlavor">The dantian is stoked like a red furnace and the blood answers. Refined mana is burned down into heat, heat becomes breath, and breath becomes the raw stamina a body refiner needs to keep moving.</p>
+            <p data-i18n="bloodFurnaceDesc">Blood Furnace is a body passive that converts mana into stamina for body refiners.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="bloodFurnaceHowStamp">Function</div>
+          <h3 data-i18n="bloodFurnaceHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="bloodFurnaceA">Before realm 5, spends 3 MP per tick to restore 1 stamina.</li>
+            <li data-i18n="bloodFurnaceB">At realm 5+, spends 2 MP per tick to restore 2 stamina.</li>
+            <li data-i18n="bloodFurnaceC">At realm 9+, spends 1 MP per tick to restore 3 stamina; turns off if MP is insufficient.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="bloodFurnaceUseStamp">Technique Nature</div>
+          <h3 data-i18n="bloodFurnaceUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="bloodFurnaceD">It gives mana a body-path purpose without making the refiner feel like a spellcaster.</li>
+            <li data-i18n="bloodFurnaceE">The technique frames inner energy as fuel for flesh, blood, and motion.</li>
+            <li data-i18n="bloodFurnaceF">It is practical, brutal, and very readable as body refinement.</li>
           </ul>
         </article>
       </div>
@@ -567,7 +776,7 @@
         progressTitle: "What It Builds Toward",
         progA: "Each cultivation tick advances progress toward the current realm's cap.",
         progB: "Progress scales with Meditation, current realm, and path-relevant stats.",
-        progC: "Body cultivation leans on STR, DEX, and PV. Qi cultivation leans on CHA, INT, WIL, and DV.",
+        progC: "Body cultivation leans on STR, END, DEX, PER, WIL, and PV. Qi cultivation leans on CHA, PER, LER, WIL, MAG, and DV.",
         progD: "When progress reaches the gate, advancement pauses until a breakthrough is attempted.",
         techStamp: "Neutral Technique",
         techTitle: "Profound Qi Healing",
@@ -628,7 +837,7 @@
         progressTitle: "它会推动什么",
         progA: "每次修炼 tick 都会推进当前境界的修炼进度。",
         progB: "进度会受到 Meditation、当前境界，以及路径相关属性的影响。",
-        progC: "体修偏向 STR、DEX 与 PV。气修偏向 CHA、INT、WIL 与 DV。",
+        progC: "体修偏向 STR、END、DEX、PER、WIL 与 PV。气修偏向 CHA、PER、LER、WIL、MAG 与 DV。",
         progD: "当进度触及关口后，晋升会暂停，直到尝试突破。",
         techStamp: "中立功法",
         techTitle: "玄气疗伤",
@@ -689,7 +898,7 @@
         progressTitle: "その先にあるもの",
         progA: "各修行 tick は現在の境界上限へ向けた進行を積み上げます。",
         progB: "進行量は Meditation、現在の境界、そしてルート関連能力値に左右されます。",
-        progC: "体修は STR、DEX、PV に寄り、気修は CHA、INT、WIL、DV に寄ります。",
+        progC: "体修は STR、END、DEX、PER、WIL、PV に寄り、気修は CHA、PER、LER、WIL、MAG、DV に寄ります。",
         progD: "進行が関門に達すると昇格は止まり、突破を試みるまで先へ進めません。",
         techStamp: "中立技法",
         techTitle: "Profound Qi Healing",
@@ -879,6 +1088,318 @@
       techE: "\u3053\u308c\u306f\u653b\u3081\u3067\u306f\u306a\u304f\u6cbb\u7652\u3068\u7acb\u3066\u76f4\u3057\u306b\u8ef8\u3092\u7f6e\u3044\u305f\u4e2d\u7acb\u6280\u6cd5\u3067\u3059\u3002",
       techF: "\u4fee\u58eb\u304c\u5185\u306a\u308b\u84c4\u3048\u3092\u5b89\u5b9a\u3057\u3066\u751f\u5b58\u529b\u3078\u5909\u3048\u308b\u305f\u3081\u306e\u624b\u6bb5\u306b\u306a\u308a\u307e\u3059\u3002",
       techG: "\u4fee\u884c\u30e1\u30cb\u30e5\u30fc\u5185\u306e Techniques \u30da\u30fc\u30b8\u306b\u5c5e\u3057\uff0c\u65e5\u3005\u306e\u4fee\u884c\u69cb\u6210\u306e\u4e00\u90e8\u3068\u3057\u3066\u6709\u52b9\u5316\u3067\u304d\u307e\u3059\u3002"
+    });
+
+    Object.assign(translations.en, {
+      minorMeridianAbilityStamp: "Documented Ability",
+      minorMeridianTitle: "Open Minor Meridian",
+      minorMeridianFlavor: "A minor meridian is not opened gently. The cultivator drives qi and blood into a narrow gate until it yields, forcing a sudden surge of progress. If the pulse twists, the same pressure bites back through the channels.",
+      minorMeridianAbilityDesc: "Open Minor Meridian is a risky cultivation accelerator: spend MP and stamina for immediate progress, with a small chance of backlash.",
+      cultivateHowStamp: "Function",
+      cultivateHowTitle: "How It Works",
+      cultivateA: "Each cultivation tick spends stamina and MP: 3/3 by default, 2/2 at realm 5+, and 1/1 at realm 9+. Still Breath Sutra lowers each cost by 1, to a minimum of 1.",
+      cultivateB: "Formal progress per tick is max(1, 1 + realm / 2 + Meditation / 150 + path stat bonus), then cultivation speed and Still Breath modifiers apply.",
+      cultivateC: "Rogue progress per tick is max(1, 1 + Meditation / 250 + all rogue cultivation attributes / 1200).",
+      cultivateD: "Realm gates are every 1000 progress up to 18000; formal paths pause at the next gate - 1 until breakthrough, while rogues can progress to the cap but cannot break through.",
+      cultivateUseStamp: "Ability Nature",
+      cultivateUseTitle: "Role In Cultivation",
+      cultivateE: "Formal stat gain chance is clamp(1 + realm + progress gained / 2 + Meditation / 100, 2%, 20%). Shared immortal realms add immortal rank and clamp to 25%.",
+      cultivateF: "Rogue stat gain chance is clamp(1 + progress / 2000, 1%, 5%) and can roll STR, END, DEX, PER, LER, WIL, MAG, or CHA.",
+      cultivateG: "Body cultivation rolls STR, END, DEX, PER, WIL, or PV. Qi cultivation rolls CHA, WIL, MAG, PER, LER, Meditation, or DV.",
+      cultivateH: "Passive realm bonuses are Body: STR/END/DEX/PER/WIL +realm and PV +(realm * 2); Qi: CHA/PER/LER/WIL/MAG +realm and DV +(realm * 2).",
+      cultivateI: "Body breakthrough success grants STR/END/DEX/PER/WIL +(2 + new realm), PV +(1 + new realm / 2), max HP +(10 + (new realm - 1) * 5), and max stamina by the same amount.",
+      cultivateJ: "Qi breakthrough success grants CHA/PER/LER/WIL/MAG +(2 + new realm), Meditation and DV +(1 + new realm / 2), max HP +(10 + (new realm - 1) * 5), and max MP by the same amount.",
+      cultivateK: "Shared immortal breakthrough success grants all cultivation attributes +(1 + immortal rank), PV/DV/Meditation +max(1, immortal rank / 2), and max HP/MP/stamina +(10 + (immortal rank - 1) * 10).",
+      stillBreathStamp: "Neutral",
+      stillBreathTitle: "Still Breath Sutra",
+      stillBreathFlavor: "The sutra teaches a cultivator to make each breath narrow, quiet, and almost unmoving. Qi no longer rushes like a river; it gathers like winter mist, conserving the body's fire even as the pace of ascent becomes more measured.",
+      stillBreathDesc: "Still Breath Sutra is a neutral passive for patient cultivation. It reduces the stamina and MP cost of cultivation by 1, but slightly lowers cultivation progress gained per tick.",
+      stillBreathHowStamp: "Function",
+      stillBreathHowTitle: "How It Works",
+      stillBreathA: "Reduces cultivation stamina cost by 1.",
+      stillBreathB: "Reduces cultivation MP cost by 1.",
+      stillBreathC: "Progress becomes 80% before realm 5, 85% at realm 5+, and 90% at realm 9+.",
+      stillBreathUseStamp: "Technique Nature",
+      stillBreathUseTitle: "Role In Cultivation",
+      stillBreathD: "Best suited to long, low-risk cultivation sessions.",
+      stillBreathE: "It favors endurance and steadiness over rapid realm pressure.",
+      stillBreathF: "Its flavor is restraint: wasting less qi, forcing less heaven.",
+      hiddenVesselStamp: "Neutral",
+      hiddenVesselTitle: "Hidden Vessel Art",
+      hiddenVesselFlavor: "Old manuals speak of vessels beneath the known meridians, quiet channels that do not answer ordinary breathing methods. This art coaxes them open, giving the cultivator deeper reserves without demanding allegiance to body or qi alone.",
+      hiddenVesselDesc: "Hidden Vessel Art is a neutral passive that increases max MP and max stamina by a small amount that scales with realm.",
+      hiddenVesselHowStamp: "Function",
+      hiddenVesselHowTitle: "How It Works",
+      hiddenVesselA: "Max MP increases by 4 + realm * 2.",
+      hiddenVesselB: "Max stamina increases by 4 + realm * 2.",
+      hiddenVesselC: "Examples: realm 1 gives +6, realm 5 gives +14, and realm 9 gives +22.",
+      hiddenVesselUseStamp: "Technique Nature",
+      hiddenVesselUseTitle: "Role In Cultivation",
+      hiddenVesselD: "It supports both formal paths without pushing either identity too hard.",
+      hiddenVesselE: "The art makes longer technique chains and longer cultivation sessions easier to sustain.",
+      hiddenVesselF: "Its gains are quiet, but they touch the two reserves every cultivator spends.",
+      minorMeridianStamp: "Neutral Ability",
+      minorMeridianDesc: "Open Minor Meridian is a neutral custom ability. It spends MP and stamina for an immediate chunk of cultivation progress, with a small chance of backlash.",
+      minorMeridianHowStamp: "Function",
+      minorMeridianHowTitle: "How It Works",
+      minorMeridianA: "Costs 8 + realm * 2 stamina and the same amount of MP.",
+      minorMeridianB: "Grants 25 + realm * 5 + Meditation / 20 cultivation progress immediately.",
+      minorMeridianC: "Backlash chance is min(18, 10 + realm)%; backlash deals MaxHP * min(18, 5 + realm * 2) / 100 and drains max(2, realm * 2) stamina and MP.",
+      minorMeridianUseStamp: "Ability Nature",
+      minorMeridianUseTitle: "Role In Cultivation",
+      minorMeridianD: "It is a risky accelerator for cultivators willing to force the gate.",
+      minorMeridianE: "The reward is speed; the price is resource pressure and possible injury.",
+      minorMeridianF: "It fits desperate pushes before a breakthrough or aggressive realm chasing.",
+      boneTemperingStamp: "Body Refiner",
+      boneTemperingTitle: "Bone Tempering Art",
+      boneTemperingFlavor: "The art grinds qi into the skeleton until every bone remembers pressure. Marrow grows hot, joints settle like locked iron, and the cultivator becomes harder to break even when grace is sacrificed.",
+      boneTemperingDesc: "Bone Tempering Art is a body passive that grants realm-scaled max HP and PV, with a small DV penalty.",
+      boneTemperingHowStamp: "Function",
+      boneTemperingHowTitle: "How It Works",
+      boneTemperingA: "Max HP increases by 8 + realm * 4.",
+      boneTemperingB: "PV is +2 plus realm / 2 before realm 5, +4 at realm 5+, and +5 at realm 9+.",
+      boneTemperingC: "DV penalty is -4 before realm 3, -3 at realm 3+, -2 at realm 5+, and -1 at realm 9+.",
+      boneTemperingUseStamp: "Technique Nature",
+      boneTemperingUseTitle: "Role In Cultivation",
+      boneTemperingD: "It is the clearest expression of the body path: endure first, move second.",
+      boneTemperingE: "The art rewards higher realms with a sturdier frame and stronger guard.",
+      boneTemperingF: "Its drawback keeps the body refiner grounded and heavy.",
+      hundredScarsStamp: "Body Refiner",
+      hundredScarsTitle: "Hundred Scars Scripture",
+      hundredScarsFlavor: "Each wound is written into the flesh like a line of scripture. Pain becomes annotation, bruises become doctrine, and a body refiner who survives enough punishment begins to turn suffering into momentum.",
+      hundredScarsDesc: "Hundred Scars Scripture is a body passive. When the cultivator takes damage, there is a small chance to gain cultivation progress or temporary toughness.",
+      hundredScarsHowStamp: "Function",
+      hundredScarsHowTitle: "How It Works",
+      hundredScarsA: "Drains 1 stamina per tick while active.",
+      hundredScarsB: "When taking HP damage, has min(22, 8 + realm)% chance to grant 4 + realm * 2 cultivation progress.",
+      hundredScarsC: "Also grants temporary PV + (1 + min(3, realm / 3)) for 20 + realm * 5 ticks.",
+      hundredScarsUseStamp: "Technique Nature",
+      hundredScarsUseTitle: "Role In Cultivation",
+      hundredScarsD: "It turns hardship into advancement without making pain feel free.",
+      hundredScarsE: "The best body refiners can use battle itself as a rough cultivation chamber.",
+      hundredScarsF: "It rewards survival, not recklessness.",
+      bloodFurnaceStamp: "Body Refiner",
+      bloodFurnaceTitle: "Blood Furnace",
+      bloodFurnaceFlavor: "The dantian is stoked like a red furnace and the blood answers. Refined mana is burned down into heat, heat becomes breath, and breath becomes the raw stamina a body refiner needs to keep moving.",
+      bloodFurnaceDesc: "Blood Furnace is a body passive that converts mana into stamina for body refiners.",
+      bloodFurnaceHowStamp: "Function",
+      bloodFurnaceHowTitle: "How It Works",
+      bloodFurnaceA: "Before realm 5, spends 3 MP per tick to restore 1 stamina.",
+      bloodFurnaceB: "At realm 5+, spends 2 MP per tick to restore 2 stamina.",
+      bloodFurnaceC: "At realm 9+, spends 1 MP per tick to restore 3 stamina; turns off if MP is insufficient.",
+      bloodFurnaceUseStamp: "Technique Nature",
+      bloodFurnaceUseTitle: "Role In Cultivation",
+      bloodFurnaceD: "It gives mana a body-path purpose without making the refiner feel like a spellcaster.",
+      bloodFurnaceE: "The technique frames inner energy as fuel for flesh, blood, and motion.",
+      bloodFurnaceF: "It is practical, brutal, and very readable as body refinement."
+    });
+
+    Object.assign(translations.zh, {
+      minorMeridianAbilityStamp: "记录能力",
+      minorMeridianTitle: "开辟小脉",
+      minorMeridianFlavor: "小脉从来不是温柔打开的。修士以气血冲击狭窄关窍，逼其骤然松动，换来一段突进式的修行进展。若脉息走岔，同样的压力便会反噬经络。",
+      minorMeridianAbilityDesc: "开辟小脉是高风险的修炼加速能力：消耗法力与体力，立即获得修行进度，并有小概率遭受反噬。",
+      cultivateHowStamp: "作用方式",
+      cultivateHowTitle: "它如何运作",
+      cultivateA: "每个修炼 tick 消耗体力与法力：默认 3/3，5 重境及以上为 2/2，9 重境及以上为 1/1。静息经会让两项消耗各降低 1，最低为 1。",
+      cultivateB: "正式道路每 tick 进度为 max(1, 1 + 境界 / 2 + Meditation / 150 + 道路属性加成)，之后再应用修炼速度与静息经修正。",
+      cultivateC: "散修每 tick 进度为 max(1, 1 + Meditation / 250 + 所有散修修炼属性 / 1200)。",
+      cultivateD: "境界关隘每 1000 进度一层，最高到 18000；正式道路会停在下一关隘 - 1，直到突破。散修可推进到上限，但不能突破。",
+      cultivateUseStamp: "能力性质",
+      cultivateUseTitle: "它在修炼中的作用",
+      cultivateE: "正式道路属性成长率为 clamp(1 + 境界 + 本 tick 获得进度 / 2 + Meditation / 100, 2%, 20%)。共通仙境额外加入仙境阶位，并上限为 25%。",
+      cultivateF: "散修属性成长率为 clamp(1 + 进度 / 2000, 1%, 5%)，可成长 STR、END、DEX、PER、LER、WIL、MAG、CHA。",
+      cultivateG: "体修可成长 STR、END、DEX、PER、WIL 或 PV。练气士可成长 CHA、WIL、MAG、PER、LER、Meditation 或 DV。",
+      cultivateH: "被动境界加成为：体修 STR/END/DEX/PER/WIL +境界，PV +(境界 * 2)；练气士 CHA/PER/LER/WIL/MAG +境界，DV +(境界 * 2)。",
+      cultivateI: "体修突破成功会获得 STR/END/DEX/PER/WIL +(2 + 新境界)，PV +(1 + 新境界 / 2)，最大 HP +(10 + (新境界 - 1) * 5)，最大体力也提高同等数值。",
+      cultivateJ: "练气突破成功会获得 CHA/PER/LER/WIL/MAG +(2 + 新境界)，Meditation 与 DV +(1 + 新境界 / 2)，最大 HP +(10 + (新境界 - 1) * 5)，最大 MP 也提高同等数值。",
+      cultivateK: "共通仙境突破成功会让所有修炼属性 +(1 + 仙境阶位)，PV/DV/Meditation +max(1, 仙境阶位 / 2)，最大 HP/MP/体力 +(10 + (仙境阶位 - 1) * 10)。",
+      stillBreathStamp: "中立",
+      stillBreathTitle: "静息经",
+      stillBreathFlavor: "此经教修士将每一口呼吸压得细、静、近乎不动。真气不再奔流如河，而是如冬雾般凝聚，保存身中火候，也让攀升的步伐变得更为缓慢。",
+      stillBreathDesc: "静息经是偏向耐心修炼的中立被动。它让修炼的体力与法力消耗各降低 1，但每 tick 获得的修行进度会略微下降。",
+      stillBreathHowStamp: "作用方式",
+      stillBreathHowTitle: "它如何运作",
+      stillBreathA: "修炼体力消耗降低 1。",
+      stillBreathB: "修炼法力消耗降低 1。",
+      stillBreathC: "修行进度在 5 重境前变为 80%，5 重境及以上为 85%，9 重境及以上为 90%。",
+      stillBreathUseStamp: "术法性质",
+      stillBreathUseTitle: "它在修炼中的作用",
+      stillBreathD: "最适合长时间、低风险的修炼。",
+      stillBreathE: "它偏向耐久与稳定，而不是快速冲关。",
+      stillBreathF: "其意在克制：少耗一分气，少逼一分天。",
+      hiddenVesselStamp: "中立",
+      hiddenVesselTitle: "隐脉法",
+      hiddenVesselFlavor: "古卷记载，经脉之下仍有隐脉，寻常吐纳难以唤醒。此法徐徐诱其开启，使修士拥有更深的储备，而不必完全归属体修或练气一路。",
+      hiddenVesselDesc: "隐脉法是中立被动，会按境界提高最大法力与最大体力。",
+      hiddenVesselHowStamp: "作用方式",
+      hiddenVesselHowTitle: "它如何运作",
+      hiddenVesselA: "最大法力提高 4 + 境界 * 2。",
+      hiddenVesselB: "最大体力提高 4 + 境界 * 2。",
+      hiddenVesselC: "例：1 重境为 +6，5 重境为 +14，9 重境为 +22。",
+      hiddenVesselUseStamp: "术法性质",
+      hiddenVesselUseTitle: "它在修炼中的作用",
+      hiddenVesselD: "它支援两条正式道路，却不会把身份推向某一边。",
+      hiddenVesselE: "此法让更长的术法链与更久的修炼过程更容易维持。",
+      hiddenVesselF: "收益沉静，却正好触及每个修士都会消耗的两种储备。",
+      minorMeridianStamp: "中立能力",
+      minorMeridianDesc: "开辟小脉是中立自定义能力。它消耗法力与体力，立即获得一段修行进度，并有小概率反噬。",
+      minorMeridianHowStamp: "作用方式",
+      minorMeridianHowTitle: "它如何运作",
+      minorMeridianA: "消耗 8 + 境界 * 2 点体力，并消耗同等数值的法力。",
+      minorMeridianB: "立即获得 25 + 境界 * 5 + Meditation / 20 点修行进度。",
+      minorMeridianC: "反噬概率为 min(18, 10 + 境界)%。反噬造成 MaxHP * min(18, 5 + 境界 * 2) / 100 伤害，并额外流失 max(2, 境界 * 2) 点体力与法力。",
+      minorMeridianUseStamp: "能力性质",
+      minorMeridianUseTitle: "它在修炼中的作用",
+      minorMeridianD: "这是愿意强行叩关者使用的高风险加速手段。",
+      minorMeridianE: "回报是速度，代价是资源压力与可能受伤。",
+      minorMeridianF: "适合突破前的孤注一掷，或激进追境时使用。",
+      boneTemperingStamp: "体修",
+      boneTemperingTitle: "炼骨法",
+      boneTemperingFlavor: "此法将真气磨入骨骼，使每一寸骨都记住压力。骨髓生热，关节如铁锁沉定，修士即使牺牲轻灵，也更难被击垮。",
+      boneTemperingDesc: "炼骨法是体修被动，按境界提高最大生命与 PV，并附带少量 DV 惩罚。",
+      boneTemperingHowStamp: "作用方式",
+      boneTemperingHowTitle: "它如何运作",
+      boneTemperingA: "最大生命提高 8 + 境界 * 4。",
+      boneTemperingB: "5 重境前 PV 为 +2 加上 境界 / 2，5 重境及以上为 +4，9 重境及以上为 +5。",
+      boneTemperingC: "DV 惩罚为：3 重境前 -4，3 重境及以上 -3，5 重境及以上 -2，9 重境及以上 -1。",
+      boneTemperingUseStamp: "术法性质",
+      boneTemperingUseTitle: "它在修炼中的作用",
+      boneTemperingD: "这是体修道路最直白的体现：先能承受，再谈移动。",
+      boneTemperingE: "境界越高，此法越能带来坚固肉身与稳重护势。",
+      boneTemperingF: "它的缺点让体修显得沉重而扎实。",
+      hundredScarsStamp: "体修",
+      hundredScarsTitle: "百痕经",
+      hundredScarsFlavor: "每一道伤口都像经文一样写入血肉。疼痛成了注脚，瘀痕成了教义，熬过足够惩罚的体修，终能把苦痛化作前进之势。",
+      hundredScarsDesc: "百痕经是体修被动。受到伤害时，有小概率获得修行进度或短暂坚韧。",
+      hundredScarsHowStamp: "作用方式",
+      hundredScarsHowTitle: "它如何运作",
+      hundredScarsA: "启用期间每 tick 消耗 1 点体力。",
+      hundredScarsB: "受到 HP 伤害时，有 min(22, 8 + 境界)% 概率获得 4 + 境界 * 2 点修行进度。",
+      hundredScarsC: "同时获得临时 PV + (1 + min(3, 境界 / 3))，持续 20 + 境界 * 5 tick。",
+      hundredScarsUseStamp: "术法性质",
+      hundredScarsUseTitle: "它在修炼中的作用",
+      hundredScarsD: "它把苦难化作进境，却不会让疼痛显得毫无代价。",
+      hundredScarsE: "优秀的体修能把战斗本身当成粗粝的修炼室。",
+      hundredScarsF: "它奖励的是存活，而不是鲁莽。",
+      bloodFurnaceStamp: "体修",
+      bloodFurnaceTitle: "血炉",
+      bloodFurnaceFlavor: "丹田被点燃如赤炉，血液随之回应。法力被烧成热，热化作息，息又成为体修继续行动所需的原始体力。",
+      bloodFurnaceDesc: "血炉是体修被动，会为体修把法力转化为体力。",
+      bloodFurnaceHowStamp: "作用方式",
+      bloodFurnaceHowTitle: "它如何运作",
+      bloodFurnaceA: "5 重境前，每 tick 消耗 3 MP，恢复 1 点体力。",
+      bloodFurnaceB: "5 重境及以上，每 tick 消耗 2 MP，恢复 2 点体力。",
+      bloodFurnaceC: "9 重境及以上，每 tick 消耗 1 MP，恢复 3 点体力；MP 不足时会自动关闭。",
+      bloodFurnaceUseStamp: "术法性质",
+      bloodFurnaceUseTitle: "它在修炼中的作用",
+      bloodFurnaceD: "它让法力拥有体修式用途，却不会让体修变得像施法者。",
+      bloodFurnaceE: "此法把内在能量视作血肉、气息与行动的燃料。",
+      bloodFurnaceF: "它实用、粗烈，而且一眼便能读出体修味道。"
+    });
+
+    Object.assign(translations.ja, {
+      minorMeridianAbilityStamp: "記録済み能力",
+      minorMeridianTitle: "小経脈開通",
+      minorMeridianFlavor: "小さな経脈は穏やかには開きません。修士は気と血を狭い関門へ押し込み、無理にこじ開けて急激な進行を得ます。脈が乱れれば、その圧はそのまま経絡を噛み返します。",
+      minorMeridianAbilityDesc: "小経脈開通は危険な修行加速能力です。MP とスタミナを消費して即座に進行を得ますが、小確率で反動を受けます。",
+      cultivateHowStamp: "作用",
+      cultivateHowTitle: "どう機能するか",
+      cultivateA: "修行 tick ごとにスタミナと MP を消費します。基本は 3/3、境界 5+ で 2/2、境界 9+ で 1/1 です。静息経はそれぞれの消費を 1 下げ、最低値は 1 です。",
+      cultivateB: "正式道の毎 tick 進行は max(1, 1 + 境界 / 2 + Meditation / 150 + 道の能力ボーナス) で、その後に修行速度と静息経の補正が入ります。",
+      cultivateC: "散修の毎 tick 進行は max(1, 1 + Meditation / 250 + 散修修行属性合計 / 1200) です。",
+      cultivateD: "境界の関門は 1000 進行ごとにあり、上限は 18000 です。正式道は次の関門 - 1 で止まり、突破まで進みません。散修は上限まで進めますが突破できません。",
+      cultivateUseStamp: "能力の性質",
+      cultivateUseTitle: "修行における役割",
+      cultivateE: "正式道の能力成長率は clamp(1 + 境界 + この tick の進行 / 2 + Meditation / 100, 2%, 20%) です。共通仙境では仙境ランクを加え、上限は 25% になります。",
+      cultivateF: "散修の能力成長率は clamp(1 + 進行 / 2000, 1%, 5%) で、STR、END、DEX、PER、LER、WIL、MAG、CHA を成長候補にします。",
+      cultivateG: "体修は STR、END、DEX、PER、WIL、PV を成長候補にします。練気士は CHA、WIL、MAG、PER、LER、Meditation、DV を成長候補にします。",
+      cultivateH: "境界の常時ボーナスは、体修が STR/END/DEX/PER/WIL +境界、PV +(境界 * 2)。練気士が CHA/PER/LER/WIL/MAG +境界、DV +(境界 * 2) です。",
+      cultivateI: "体修の突破成功は STR/END/DEX/PER/WIL +(2 + 新境界)、PV +(1 + 新境界 / 2)、最大 HP +(10 + (新境界 - 1) * 5)、最大スタミナも同量増加します。",
+      cultivateJ: "練気の突破成功は CHA/PER/LER/WIL/MAG +(2 + 新境界)、Meditation と DV +(1 + 新境界 / 2)、最大 HP +(10 + (新境界 - 1) * 5)、最大 MP も同量増加します。",
+      cultivateK: "共通仙境の突破成功は全修行属性 +(1 + 仙境ランク)、PV/DV/Meditation +max(1, 仙境ランク / 2)、最大 HP/MP/スタミナ +(10 + (仙境ランク - 1) * 10) を与えます。",
+      stillBreathStamp: "中立",
+      stillBreathTitle: "静息経",
+      stillBreathFlavor: "この経は、修士に一息一息を細く、静かに、ほとんど動かぬほど抑える術を教えます。気は川のように奔らず、冬霧のように集まり、身中の火を守るかわりに上昇の歩みは穏やかになります。",
+      stillBreathDesc: "静息経は、忍耐ある修行のための中立パッシブです。修行時のスタミナと MP 消費をそれぞれ 1 下げますが、毎 tick の修行進行は少し低下します。",
+      stillBreathHowStamp: "作用",
+      stillBreathHowTitle: "どう機能するか",
+      stillBreathA: "修行スタミナ消費を 1 下げます。",
+      stillBreathB: "修行 MP 消費を 1 下げます。",
+      stillBreathC: "進行量は境界 5 未満で 80%、境界 5+ で 85%、境界 9+ で 90% になります。",
+      stillBreathUseStamp: "技法の性質",
+      stillBreathUseTitle: "修行における役割",
+      stillBreathD: "長く低リスクな修行に向いています。",
+      stillBreathE: "急いで関門を押すより、耐久と安定を重んじます。",
+      stillBreathF: "その本質は節制です。気を無駄にせず、天を無理に押さないことです。",
+      hiddenVesselStamp: "中立",
+      hiddenVesselTitle: "隠脈法",
+      hiddenVesselFlavor: "古い書は、既知の経脈の下に、通常の呼吸法では応じない静かな脈があると語ります。この法はそれを少しずつ開かせ、体修にも気修にも偏りすぎない深い蓄えを与えます。",
+      hiddenVesselDesc: "隠脈法は中立パッシブで、境界に応じて最大 MP と最大スタミナを増やします。",
+      hiddenVesselHowStamp: "作用",
+      hiddenVesselHowTitle: "どう機能するか",
+      hiddenVesselA: "最大 MP が 4 + 境界 * 2 増加します。",
+      hiddenVesselB: "最大スタミナが 4 + 境界 * 2 増加します。",
+      hiddenVesselC: "例：境界 1 で +6、境界 5 で +14、境界 9 で +22。",
+      hiddenVesselUseStamp: "技法の性質",
+      hiddenVesselUseTitle: "修行における役割",
+      hiddenVesselD: "どちらかの正式ルートへ強く寄せず、両方を支えます。",
+      hiddenVesselE: "長い技法連携や長時間の修行を維持しやすくします。",
+      hiddenVesselF: "伸びは静かですが、すべての修士が使う二つの蓄えに触れます。",
+      minorMeridianStamp: "中立能力",
+      minorMeridianDesc: "小経脈開通は中立のカスタム能力です。MP とスタミナを消費して即座に修行進行を得ますが、小確率で反動を受けます。",
+      minorMeridianHowStamp: "作用",
+      minorMeridianHowTitle: "どう機能するか",
+      minorMeridianA: "8 + 境界 * 2 のスタミナと、同量の MP を消費します。",
+      minorMeridianB: "即座に 25 + 境界 * 5 + Meditation / 20 の修行進行を得ます。",
+      minorMeridianC: "反動確率は min(18, 10 + 境界)% です。反動は MaxHP * min(18, 5 + 境界 * 2) / 100 のダメージを与え、さらに max(2, 境界 * 2) のスタミナと MP を失わせます。",
+      minorMeridianUseStamp: "能力の性質",
+      minorMeridianUseTitle: "修行における役割",
+      minorMeridianD: "関門を力で押し開けたい修士のための危険な加速手段です。",
+      minorMeridianE: "報酬は速さであり、代償は資源圧迫と負傷の可能性です。",
+      minorMeridianF: "突破前の強行や、攻めた境界追いに向いています。",
+      boneTemperingStamp: "体修",
+      boneTemperingTitle: "鍛骨法",
+      boneTemperingFlavor: "この法は気を骨へ擦り込み、あらゆる骨に圧を覚えさせます。髄は熱を帯び、関節は鉄錠のように沈み、身軽さを犠牲にしても修士は砕けにくくなります。",
+      boneTemperingDesc: "鍛骨法は体修パッシブで、境界に応じて最大 HP と PV を増やし、少し DV ペナルティを受けます。",
+      boneTemperingHowStamp: "作用",
+      boneTemperingHowTitle: "どう機能するか",
+      boneTemperingA: "最大 HP が 8 + 境界 * 4 増加します。",
+      boneTemperingB: "PV は境界 5 未満で +2 に 境界 / 2 を加え、境界 5+ で +4、境界 9+ で +5 になります。",
+      boneTemperingC: "DV ペナルティは、境界 3 未満で -4、境界 3+ で -3、境界 5+ で -2、境界 9+ で -1 です。",
+      boneTemperingUseStamp: "技法の性質",
+      boneTemperingUseTitle: "修行における役割",
+      boneTemperingD: "体修の道を最も分かりやすく示します。まず耐え、動くのはその後です。",
+      boneTemperingE: "高い境界ほど、より頑丈な身体と強い守りを与えます。",
+      boneTemperingF: "その欠点が、体修を重く地に足のついた存在にします。",
+      hundredScarsStamp: "体修",
+      hundredScarsTitle: "百痕経",
+      hundredScarsFlavor: "傷の一つ一つが、経文の一行のように肉へ刻まれます。痛みは注釈となり、痣は教義となり、十分な罰を生き残った体修は苦痛を前進の勢いへ変え始めます。",
+      hundredScarsDesc: "百痕経は体修パッシブです。ダメージを受けた時、小確率で修行進行または一時的な堅さを得ます。",
+      hundredScarsHowStamp: "作用",
+      hundredScarsHowTitle: "どう機能するか",
+      hundredScarsA: "有効中は毎 tick 1 スタミナを消費します。",
+      hundredScarsB: "HP ダメージを受けると、min(22, 8 + 境界)% の確率で 4 + 境界 * 2 の修行進行を得ます。",
+      hundredScarsC: "さらに一時 PV + (1 + min(3, 境界 / 3)) を 20 + 境界 * 5 tick 得ます。",
+      hundredScarsUseStamp: "技法の性質",
+      hundredScarsUseTitle: "修行における役割",
+      hundredScarsD: "苦難を進境へ変えますが、痛みを無料にはしません。",
+      hundredScarsE: "優れた体修は、戦いそのものを荒い修行場として使えます。",
+      hundredScarsF: "報いるのは生存であって、無謀ではありません。",
+      bloodFurnaceStamp: "体修",
+      bloodFurnaceTitle: "血炉",
+      bloodFurnaceFlavor: "丹田は赤い炉のように焚かれ、血が応じます。精錬されたマナは熱へ、熱は息へ、息は体修が動き続けるための生のスタミナへと変わります。",
+      bloodFurnaceDesc: "血炉は体修パッシブで、体修のためにマナをスタミナへ変換します。",
+      bloodFurnaceHowStamp: "作用",
+      bloodFurnaceHowTitle: "どう機能するか",
+      bloodFurnaceA: "境界 5 未満では、毎 tick 3 MP を消費して 1 スタミナを回復します。",
+      bloodFurnaceB: "境界 5+ では、毎 tick 2 MP を消費して 2 スタミナを回復します。",
+      bloodFurnaceC: "境界 9+ では、毎 tick 1 MP を消費して 3 スタミナを回復します。MP 不足時は自動で解除されます。",
+      bloodFurnaceUseStamp: "技法の性質",
+      bloodFurnaceUseTitle: "修行における役割",
+      bloodFurnaceD: "マナに体修らしい用途を与えつつ、体修を術士のようには見せません。",
+      bloodFurnaceE: "この技法は内なる力を肉、血、動きの燃料として扱います。",
+      bloodFurnaceF: "実用的で荒々しく、体修らしさがはっきり読める技法です。"
     });
 
     function applyLanguage(lang) {

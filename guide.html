@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -399,8 +399,8 @@
         <h2 data-i18n="glanceTitle">At A Glance</h2>
         <ul>
           <li data-i18n="glance1">Rogue cultivators can keep training, but they cannot formally break through.</li>
-          <li data-i18n="glance2">Body cultivation focuses on STR, DEX, PV, and SPD.</li>
-          <li data-i18n="glance3">Qi cultivation focuses on CHA, INT, WIL, DV, and Meditation.</li>
+          <li data-i18n="glance2">Body cultivation focuses on STR, END, DEX, PER, WIL, and PV.</li>
+          <li data-i18n="glance3">Qi cultivation focuses on CHA, PER, LER, WIL, MAG, DV, and Meditation.</li>
           <li data-i18n="glance4">Formal cultivators become more efficient as their realms rise.</li>
           <li data-i18n="glance5">Shared immortal realms unlock after the ninth Body or Qi realm.</li>
           <li data-i18n="glance6">The cultivation menu is reached through the in-game player journal.</li>
@@ -518,7 +518,7 @@ Stages divide each 1000-point realm into Early / Middle / Late / Peak</code>
           </div>
           <div class="mini-card">
             <h3 data-i18n="progressTitle">Progress Per Tick</h3>
-            <p data-i18n="progressBody">Progress scales from meditation, your current realm, and path-relevant stats. Body uses STR, DEX, and PV. Qi uses CHA, INT, WIL, and DV.</p>
+            <p data-i18n="progressBody">Progress scales from meditation, your current realm, and path-relevant stats. Body uses STR, END, DEX, PER, WIL, and PV. Qi uses CHA, PER, LER, WIL, MAG, and DV.</p>
           </div>
           <div class="mini-card">
             <h3 data-i18n="gainTitle">Repeated Training Gains</h3>
@@ -537,10 +537,10 @@ Formal progress/tick =
 1 + realm / 2 + Meditation / 150 + path stat bonus
 
 Body path bonus =
-(STR + DEX) / 250 + PV / 100, capped at +12
+(STR + END + DEX + PER + WIL) / 625 + PV / 100, capped at +12
 
 Qi path bonus =
-(CHA + INT + WIL) / 350 + DV / 125, capped at +12</code>
+(CHA + PER + LER + WIL + MAG) / 625 + DV / 125, capped at +12</code>
         </article>
 
         <article class="formula">
@@ -570,18 +570,18 @@ and is clamped to 2% - 25%</code>
           <tbody>
             <tr>
               <td data-i18n="tableBody11">Body Cultivator</td>
-              <td data-i18n="tableBody12">STR, DEX, PV, SPD</td>
-              <td data-i18n="tableBody13">STR/DEX spikes, sturdier PV, more HP and stamina</td>
+              <td data-i18n="tableBody12">STR, END, DEX, PER, WIL, PV</td>
+              <td data-i18n="tableBody13">STR/END/DEX/PER/WIL spikes, sturdier PV, more HP and stamina</td>
             </tr>
             <tr>
               <td data-i18n="tableBody21">Qi Practitioner</td>
-              <td data-i18n="tableBody22">CHA, INT, WIL, Meditation, DV</td>
-              <td data-i18n="tableBody23">CHA/INT/WIL spikes, stronger Meditation and DV, more HP and mana</td>
+              <td data-i18n="tableBody22">CHA, PER, LER, WIL, MAG, Meditation, DV</td>
+              <td data-i18n="tableBody23">CHA/PER/LER/WIL/MAG spikes, stronger Meditation and DV, more HP and mana</td>
             </tr>
             <tr>
               <td data-i18n="tableBody31">Shared Immortal Realms</td>
-              <td data-i18n="tableBody32">Broad growth across core attributes</td>
-              <td data-i18n="tableBody33">All-around increases, including PV, DV, SPD, Meditation, HP, mana, and stamina</td>
+              <td data-i18n="tableBody32">Broad growth across all cultivation attributes</td>
+              <td data-i18n="tableBody33">All-around increases, including PV, DV, Meditation, HP, mana, and stamina</td>
             </tr>
             <tr>
               <td data-i18n="tableBody41">Rogue Cultivator</td>
@@ -679,8 +679,8 @@ Extra mana loss = max(5, realm * 3)</code>
         step5Body: "When you are standing at the gate, use the cultivation menu to attempt a breakthrough. Success advances you. Failure triggers backlash.",
         glanceTitle: "At A Glance",
         glance1: "Rogue cultivators can keep training, but they cannot formally break through.",
-        glance2: "Body cultivation focuses on STR, DEX, PV, and SPD.",
-        glance3: "Qi cultivation focuses on CHA, INT, WIL, DV, and Meditation.",
+        glance2: "Body cultivation focuses on STR, END, DEX, PER, WIL, and PV.",
+        glance3: "Qi cultivation focuses on CHA, PER, LER, WIL, MAG, DV, and Meditation.",
         glance4: "Formal cultivators become more efficient as their realms rise.",
         glance5: "Shared immortal realms unlock after the ninth Body or Qi realm.",
         glance6: "The cultivation menu is reached through the in-game player journal.",
@@ -737,11 +737,11 @@ Extra mana loss = max(5, realm * 3)</code>
         costTitle: "Cultivation Cost",
         costBody: "Rogue cultivators always pay 3 stamina and 3 mana per cultivation tick. Formal cultivators also start at 3 and improve to 2 at higher mid-realms, then 1 once they reach the top tiers.",
         progressTitle: "Progress Per Tick",
-        progressBody: "Progress scales from meditation, your current realm, and path-relevant stats. Body uses STR, DEX, and PV. Qi uses CHA, INT, WIL, and DV.",
+        progressBody: "Progress scales from meditation, your current realm, and path-relevant stats. Body uses STR, END, DEX, PER, WIL, and PV. Qi uses CHA, PER, LER, WIL, MAG, and DV.",
         gainTitle: "Repeated Training Gains",
         gainBody: "Every cultivation session can permanently improve attributes. Formal paths get sharper odds and more focused growth as their realm rises. Rogues grow broader, slower, and less reliably.",
         formula1Title: "Progress Formula Summary",
-        formula1Code: "Rogue progress/tick =\n1 + Meditation / 250 + rogue attribute total / 1200\n\nFormal progress/tick =\n1 + realm / 2 + Meditation / 150 + path stat bonus\n\nBody path bonus =\n(STR + DEX) / 250 + PV / 100, capped at +12\n\nQi path bonus =\n(CHA + INT + WIL) / 350 + DV / 125, capped at +12",
+        formula1Code: "Rogue progress/tick =\n1 + Meditation / 250 + rogue attribute total / 1200\n\nFormal progress/tick =\n1 + realm / 2 + Meditation / 150 + path stat bonus\n\nBody path bonus =\n(STR + END + DEX + PER + WIL) / 625 + PV / 100, capped at +12\n\nQi path bonus =\n(CHA + PER + LER + WIL + MAG) / 625 + DV / 125, capped at +12",
         formula2Title: "Stat Gain Summary",
         formula2Code: "Rogue gain chance =\n1 + progress / 2000, clamped to 1% - 5%\n\nFormal gain chance =\n1 + realm + progress gained this tick / 2 + Meditation / 100\nClamped to 2% - 20%\n\nShared immortal gain chance gains extra rank scaling\nand is clamped to 2% - 25%",
         tableTitle: "Path Focus Table",
@@ -749,14 +749,14 @@ Extra mana loss = max(5, realm * 3)</code>
         tableHead2: "Repeated cultivation tends to grow",
         tableHead3: "Breakthrough rewards emphasize",
         tableBody11: "Body Cultivator",
-        tableBody12: "STR, DEX, PV, SPD",
-        tableBody13: "STR/DEX spikes, sturdier PV, more HP and stamina",
+        tableBody12: "STR, END, DEX, PER, WIL, PV",
+        tableBody13: "STR/END/DEX/PER/WIL spikes, sturdier PV, more HP and stamina",
         tableBody21: "Qi Practitioner",
-        tableBody22: "CHA, INT, WIL, Meditation, DV",
-        tableBody23: "CHA/INT/WIL spikes, stronger Meditation and DV, more HP and mana",
+        tableBody22: "CHA, PER, LER, WIL, MAG, Meditation, DV",
+        tableBody23: "CHA/PER/LER/WIL/MAG spikes, stronger Meditation and DV, more HP and mana",
         tableBody31: "Shared Immortal Realms",
-        tableBody32: "Broad growth across core attributes",
-        tableBody33: "All-around increases, including PV, DV, SPD, Meditation, HP, mana, and stamina",
+        tableBody32: "Broad growth across all cultivation attributes",
+        tableBody33: "All-around increases, including PV, DV, Meditation, HP, mana, and stamina",
         tableBody41: "Rogue Cultivator",
         tableBody42: "STR, END, DEX, PER, LER, WIL, MAG, CHA",
         tableBody43: "No formal breakthrough rewards",
@@ -804,8 +804,8 @@ Extra mana loss = max(5, realm * 3)</code>
         step5Body: "当你站在关口前时，就可以在修炼菜单中尝试突破。成功晋升，失败反噬。",
         glanceTitle: "一眼看懂",
         glance1: "散修可以持续修炼，但不能正式突破。",
-        glance2: "体修侧重 STR、DEX、PV、SPD。",
-        glance3: "练气侧重 CHA、INT、WIL、DV 与 Meditation。",
+        glance2: "体修侧重 STR、END、DEX、PER、WIL、PV。",
+        glance3: "练气侧重 CHA、PER、LER、WIL、MAG、DV 与 Meditation。",
         glance4: "正式修士会随着境界提高而变得更高效。",
         glance5: "共享仙境会在第九个体修或练气大境界之后解锁。",
         glance6: "修炼菜单可通过游戏内玩家日志进入。",
@@ -862,11 +862,11 @@ Extra mana loss = max(5, realm * 3)</code>
         costTitle: "修炼消耗",
         costBody: "散修每个 tick 固定消耗 3 点体力与 3 点法力。正式修士也从 3 开始，在更高的中期境界下降到 2，到顶层后降到 1。",
         progressTitle: "每 tick 修为增长",
-        progressBody: "修为增长取决于冥想、当前境界以及流派相关属性。体修使用 STR、DEX、PV；练气使用 CHA、INT、WIL、DV。",
+        progressBody: "修为增长取决于冥想、当前境界以及流派相关属性。体修使用 STR、END、DEX、PER、WIL、PV；练气使用 CHA、PER、LER、WIL、MAG、DV。",
         gainTitle: "重复修炼成长",
         gainBody: "每次修炼都有机会永久提升属性。正式流派随着境界提升会获得更高几率与更聚焦的成长，散修则更宽、更慢、更不稳定。",
         formula1Title: "修为公式摘要",
-        formula1Code: "散修每 tick 修为 =\n1 + Meditation / 250 + 散修属性总和 / 1200\n\n正式流派每 tick 修为 =\n1 + 境界 / 2 + Meditation / 150 + 流派属性加成\n\n体修加成 =\n(STR + DEX) / 250 + PV / 100，最高 +12\n\n练气加成 =\n(CHA + INT + WIL) / 350 + DV / 125，最高 +12",
+        formula1Code: "散修每 tick 修为 =\n1 + Meditation / 250 + 散修属性总和 / 1200\n\n正式流派每 tick 修为 =\n1 + 境界 / 2 + Meditation / 150 + 流派属性加成\n\n体修加成 =\n(STR + END + DEX + PER + WIL) / 625 + PV / 100，最高 +12\n\n练气加成 =\n(CHA + PER + LER + WIL + MAG) / 625 + DV / 125，最高 +12",
         formula2Title: "属性成长摘要",
         formula2Code: "散修成长率 =\n1 + 修为 / 2000，限制在 1% - 5%\n\n正式流派成长率 =\n1 + 境界 + 本 tick 获得修为 / 2 + Meditation / 100\n限制在 2% - 20%\n\n共享仙境成长率还会加入仙境阶位\n并限制在 2% - 25%",
         tableTitle: "流派侧重点",
@@ -874,14 +874,14 @@ Extra mana loss = max(5, realm * 3)</code>
         tableHead2: "重复修炼倾向成长",
         tableHead3: "突破奖励侧重",
         tableBody11: "体修",
-        tableBody12: "STR、DEX、PV、SPD",
-        tableBody13: "更高的 STR/DEX、更厚的 PV、更多 HP 与体力",
+        tableBody12: "STR、END、DEX、PER、WIL、PV",
+        tableBody13: "更高的 STR/END/DEX/PER/WIL、更厚的 PV、更多 HP 与体力",
         tableBody21: "练气士",
-        tableBody22: "CHA、INT、WIL、Meditation、DV",
-        tableBody23: "更高的 CHA/INT/WIL、更强的 Meditation 与 DV、更多 HP 与法力",
+        tableBody22: "CHA、PER、LER、WIL、MAG、Meditation、DV",
+        tableBody23: "更高的 CHA/PER/LER/WIL/MAG、更强的 Meditation 与 DV、更多 HP 与法力",
         tableBody31: "共享仙境",
         tableBody32: "核心属性的广泛成长",
-        tableBody33: "全方位提升，包括 PV、DV、SPD、Meditation、HP、法力、体力",
+        tableBody33: "全方位提升，包括 PV、DV、Meditation、HP、法力、体力",
         tableBody41: "散修",
         tableBody42: "STR、END、DEX、PER、LER、WIL、MAG、CHA",
         tableBody43: "没有正式突破奖励",
@@ -929,8 +929,8 @@ Extra mana loss = max(5, realm * 3)</code>
         step5Body: "関門に立ったら修行メニューから突破を試みます。成功すれば昇格し、失敗すれば反動が来ます。",
         glanceTitle: "ひと目で分かる",
         glance1: "散修は修行を続けられますが、正式な突破はできません。",
-        glance2: "体修は STR、DEX、PV、SPD を重視します。",
-        glance3: "練気は CHA、INT、WIL、DV、Meditation を重視します。",
+        glance2: "体修は STR、END、DEX、PER、WIL、PV を重視します。",
+        glance3: "練気は CHA、PER、LER、WIL、MAG、DV、Meditation を重視します。",
         glance4: "正式な修士は境界が上がるほど効率が良くなります。",
         glance5: "共有仙境は体修または練気の第九大境界後に解放されます。",
         glance6: "修行メニューはゲーム内プレイヤージャーナルから開きます。",
@@ -987,11 +987,11 @@ Extra mana loss = max(5, realm * 3)</code>
         costTitle: "修行コスト",
         costBody: "散修は各 tick ごとに体力 3 とマナ 3 を固定で支払います。正式修士も最初は 3 から始まり、中位以降で 2、最上位では 1 まで下がります。",
         progressTitle: "1 tick ごとの進度",
-        progressBody: "進度は Meditation、現在の境界、そして流派に対応する属性で伸びます。体修は STR、DEX、PV、練気は CHA、INT、WIL、DV を使います。",
+        progressBody: "進度は Meditation、現在の境界、そして流派に対応する属性で伸びます。体修は STR、END、DEX、PER、WIL、PV、練気は CHA、PER、LER、WIL、MAG、DV を使います。",
         gainTitle: "反復修行による成長",
         gainBody: "各修行セッションで属性が恒久的に伸びる可能性があります。正式流派は境界が上がるほど確率も焦点も鋭くなり、散修はより広く、遅く、不安定に成長します。",
         formula1Title: "進度式の要約",
-        formula1Code: "散修の 1 tick 進度 =\n1 + Meditation / 250 + 散修属性合計 / 1200\n\n正式流派の 1 tick 進度 =\n1 + 境界 / 2 + Meditation / 150 + 流派属性ボーナス\n\n体修ボーナス =\n(STR + DEX) / 250 + PV / 100、最大 +12\n\n練気ボーナス =\n(CHA + INT + WIL) / 350 + DV / 125、最大 +12",
+        formula1Code: "散修の 1 tick 進度 =\n1 + Meditation / 250 + 散修属性合計 / 1200\n\n正式流派の 1 tick 進度 =\n1 + 境界 / 2 + Meditation / 150 + 流派属性ボーナス\n\n体修ボーナス =\n(STR + END + DEX + PER + WIL) / 625 + PV / 100、最大 +12\n\n練気ボーナス =\n(CHA + PER + LER + WIL + MAG) / 625 + DV / 125、最大 +12",
         formula2Title: "属性成長の要約",
         formula2Code: "散修の成長率 =\n1 + 進度 / 2000、1% - 5% に制限\n\n正式流派の成長率 =\n1 + 境界 + この tick の進度増加 / 2 + Meditation / 100\n2% - 20% に制限\n\n共有仙境では仙境ランク補正が加わり\n2% - 25% に制限",
         tableTitle: "流派ごとの重点",
@@ -999,14 +999,14 @@ Extra mana loss = max(5, realm * 3)</code>
         tableHead2: "反復修行で伸びやすいもの",
         tableHead3: "突破報酬の重点",
         tableBody11: "体修",
-        tableBody12: "STR、DEX、PV、SPD",
-        tableBody13: "STR/DEX の上昇、厚い PV、より多い HP と体力",
+        tableBody12: "STR、END、DEX、PER、WIL、PV",
+        tableBody13: "STR/END/DEX/PER/WIL の上昇、厚い PV、より多い HP と体力",
         tableBody21: "練気士",
-        tableBody22: "CHA、INT、WIL、Meditation、DV",
-        tableBody23: "CHA/INT/WIL の上昇、Meditation と DV の強化、より多い HP とマナ",
+        tableBody22: "CHA、PER、LER、WIL、MAG、Meditation、DV",
+        tableBody23: "CHA/PER/LER/WIL/MAG の上昇、Meditation と DV の強化、より多い HP とマナ",
         tableBody31: "共有仙境",
         tableBody32: "中核属性全体への広い成長",
-        tableBody33: "PV、DV、SPD、Meditation、HP、マナ、体力を含む全方位強化",
+        tableBody33: "PV、DV、Meditation、HP、マナ、体力を含む全方位強化",
         tableBody41: "散修",
         tableBody42: "STR、END、DEX、PER、LER、WIL、MAG、CHA",
         tableBody43: "正式な突破報酬なし",
