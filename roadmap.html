@@ -16,6 +16,7 @@
       --complete: #6d8c40;
       --planned: #8d6b2f;
       --future: #58749b;
+      --release: #a45778;
     }
 
     * { box-sizing: border-box; }
@@ -187,7 +188,7 @@
 
     .roadmap-track {
       display: grid;
-      grid-template-columns: repeat(5, minmax(180px, 1fr));
+      grid-template-columns: repeat(6, minmax(170px, 1fr));
       gap: 1rem;
       position: relative;
       align-items: stretch;
@@ -204,11 +205,15 @@
       background:
         linear-gradient(90deg,
           rgba(109, 140, 64, 0.95) 0%,
-          rgba(109, 140, 64, 0.95) 22%,
-          rgba(141, 107, 47, 0.95) 22%,
-          rgba(141, 107, 47, 0.95) 64%,
-          rgba(88, 116, 155, 0.95) 64%,
-          rgba(88, 116, 155, 0.95) 100%);
+          rgba(109, 140, 64, 0.95) 17%,
+          rgba(141, 107, 47, 0.95) 17%,
+          rgba(141, 107, 47, 0.95) 50%,
+          rgba(164, 87, 120, 0.95) 50%,
+          rgba(164, 87, 120, 0.95) 67%,
+          rgba(88, 116, 155, 0.95) 67%,
+          rgba(88, 116, 155, 0.95) 83%,
+          rgba(164, 87, 120, 0.95) 83%,
+          rgba(164, 87, 120, 0.95) 100%);
       box-shadow: 0 0 0 3px rgba(12, 16, 15, 0.9), 0 0 0 6px rgba(226, 196, 130, 0.16);
     }
 
@@ -236,10 +241,12 @@
     .milestone.complete::before { background: var(--complete); }
     .milestone.planned::before { background: var(--planned); }
     .milestone.future::before { background: var(--future); }
+    .milestone.release::before { background: var(--release); }
 
     .milestone.complete { border-color: var(--complete); }
     .milestone.planned { border-color: var(--planned); }
     .milestone.future { border-color: var(--future); }
+    .milestone.release { border-color: var(--release); }
 
     .badge,
     .version-tag {
@@ -259,6 +266,7 @@
     .complete .badge { color: #caeaa0; background: rgba(109, 140, 64, 0.18); }
     .planned .badge { color: #f2d5a1; background: rgba(141, 107, 47, 0.18); }
     .future .badge { color: #c9dbf0; background: rgba(88, 116, 155, 0.18); }
+    .release .badge { color: #f5c6d7; background: rgba(164, 87, 120, 0.2); }
 
     .version-tag {
       margin-top: 0.8rem;
@@ -350,14 +358,14 @@
     <section class="hero">
       <div class="eyebrow" data-i18n="eyebrow">Heavenly Route</div>
       <h1 data-i18n="heroTitle">The Road Through The Nine Realms</h1>
-      <p data-i18n="heroBody">The foundation arc is already complete. The next ascents focus on fuller techniques, rarer treasures, new Dao identities, and the living sect world that waits beyond version 2.0.0.</p>
+      <p data-i18n="heroBody">The foundation arc is already complete. The next ascents focus on fuller techniques, rarer treasures, the Eternal Exchange Pavilion, new Dao identities, and the living sect world beyond version 2.0.0.</p>
       <a class="ghost-link" href="changelog.html" data-i18n="heroLink">Read Release History</a>
     </section>
 
     <section class="roadmap-shell">
       <div class="roadmap-heading">
         <h2 data-i18n="graphicTitle">Heavenly Progression</h2>
-        <p data-i18n="graphicBody">Each milestone marks a larger phase of the mod's ascent, from the completed cultivation bedrock to the future opening of sects, treasures, arts, and named Dao lineages.</p>
+        <p data-i18n="graphicBody">Each milestone marks a larger phase of the mod's ascent, from the completed cultivation bedrock to treasures, auction commerce, arts, named Dao lineages, and future sect life.</p>
       </div>
 
       <div class="roadmap-track">
@@ -377,10 +385,12 @@
             <li data-i18n="card2b">Qi path arts and techniques expanded.</li>
             <li data-i18n="card2c">Rogue path support strengthened through shared options.</li>
           </ul>
+          <span class="version-tag" data-i18n="card2Version">Versions 1.5.0 through 1.8.0</span>
         </article>
 
         <article class="milestone planned">
           <span class="badge" data-i18n="card3Status">Planned</span>
+          <span class="badge" data-i18n="card3Type">Item Update</span>
           <h3 data-i18n="card3Title">Treasures Of The Mortal And Immortal Worlds</h3>
           <p data-i18n="card3Body">Scrolls, Natural Treasures, and Artifacts will deepen inheritance hunting, item identity, and long-term build planning.</p>
           <ul>
@@ -388,27 +398,38 @@
             <li data-i18n="card3b">Natural Treasures and rare resource finds.</li>
             <li data-i18n="card3c">Artifacts with stronger cultivation presence.</li>
           </ul>
-          <span class="version-tag" data-i18n="card3Version">Item Update</span>
+          <span class="version-tag" data-i18n="card3Version">Version 1.9.0</span>
         </article>
 
-        <article class="milestone future">
-          <span class="badge" data-i18n="card4Status">Future Arc</span>
-          <h3 data-i18n="card4Title">Sword Dao And Dao Of Music</h3>
-          <p data-i18n="card4Body">New Dao identities will open beyond the current cultivation paths, with their own flavor, progression tracks, and room for distinct leveling systems.</p>
+        <article class="milestone release">
+          <span class="badge" data-i18n="card4Status">Version 2.0.0</span>
+          <h3 data-i18n="card4Title">Eternal Exchange Pavilion</h3>
+          <p data-i18n="card4Body">A classic xianxia auction hall where cultivators can buy rare items, techniques, scrolls, and treasures, then sell their own finds across the Nine Realms.</p>
           <ul>
-            <li data-i18n="card4a">Sword Dao.</li>
-            <li data-i18n="card4b">Dao of Music.</li>
+            <li data-i18n="card4a">Auction lots for rare techniques, scrolls, and treasures.</li>
+            <li data-i18n="card4b">Buy valuable items from cultivators across the Nine Realms.</li>
+            <li data-i18n="card4c">Rotating pavilion stock and high-value exchange events.</li>
           </ul>
         </article>
 
         <article class="milestone future">
-          <span class="badge" data-i18n="card5Status">Version 2.0.0</span>
-          <h3 data-i18n="card5Title">Sects And NPCs</h3>
-          <p data-i18n="card5Body">The broader Nine Realms world answers back with sects, notable cultivators, and NPC presence that turns the mod from a personal ascent into a living cultivation landscape.</p>
+          <span class="badge" data-i18n="card5Status">Future Arc</span>
+          <h3 data-i18n="card5Title">Sword Dao And Dao Of Music</h3>
+          <p data-i18n="card5Body">New Dao identities will open beyond the current cultivation paths, with their own flavor, progression tracks, and room for distinct leveling systems.</p>
           <ul>
-            <li data-i18n="card5a">Sects and their spheres of influence.</li>
-            <li data-i18n="card5b">Named NPC cultivators.</li>
-            <li data-i18n="card5c">A stronger world presence across future content.</li>
+            <li data-i18n="card5a">Sword Dao.</li>
+            <li data-i18n="card5b">Dao of Music.</li>
+          </ul>
+        </article>
+
+        <article class="milestone release">
+          <span class="badge" data-i18n="card6Status">Version 3.0.0</span>
+          <h3 data-i18n="card6Title">Sects And NPCs</h3>
+          <p data-i18n="card6Body">The broader Nine Realms world answers back with sects, notable cultivators, and NPC presence that turns the mod from a personal ascent into a living cultivation landscape.</p>
+          <ul>
+            <li data-i18n="card6a">Sects and their spheres of influence.</li>
+            <li data-i18n="card6b">Named NPC cultivators.</li>
+            <li data-i18n="card6c">A stronger world presence across future content.</li>
           </ul>
         </article>
       </div>
@@ -429,10 +450,10 @@
         navChangelog: "Changelog",
         eyebrow: "Heavenly Route",
         heroTitle: "The Road Through The Nine Realms",
-        heroBody: "The foundation arc is already complete. The next ascents focus on fuller techniques, rarer treasures, new Dao identities, and the living sect world that waits beyond version 2.0.0.",
+        heroBody: "The foundation arc is already complete. The next ascents focus on fuller techniques, rarer treasures, the Eternal Exchange Pavilion, new Dao identities, and the living sect world beyond version 2.0.0.",
         heroLink: "Read Release History",
         graphicTitle: "Heavenly Progression",
-        graphicBody: "Each milestone marks a larger phase of the mod's ascent, from the completed cultivation bedrock to the future opening of sects, treasures, arts, and named Dao lineages.",
+        graphicBody: "Each milestone marks a larger phase of the mod's ascent, from the completed cultivation bedrock to treasures, auction commerce, arts, named Dao lineages, and future sect life.",
         card1Status: "Completed",
         card1Title: "Foundation Arc",
         card1Body: "Cultivation systems, realms, breakthroughs, menu flow, wiki support, changelogs, visual polish, and the first neutral technique already stand as the completed first scripture.",
@@ -443,24 +464,32 @@
         card2a: "Body path arts and techniques expanded.",
         card2b: "Qi path arts and techniques expanded.",
         card2c: "Rogue path support strengthened through shared options.",
+        card2Version: "Versions 1.5.0 through 1.8.0",
         card3Status: "Planned",
+        card3Type: "Item Update",
         card3Title: "Treasures Of The Mortal And Immortal Worlds",
         card3Body: "Scrolls, Natural Treasures, and Artifacts will deepen inheritance hunting, item identity, and long-term build planning.",
         card3a: "Scrolls and inheritance items.",
         card3b: "Natural Treasures and rare resource finds.",
         card3c: "Artifacts with stronger cultivation presence.",
-        card3Version: "Item Update",
-        card4Status: "Future Arc",
-        card4Title: "Sword Dao And Dao Of Music",
-        card4Body: "New Dao identities will open beyond the current cultivation paths, with their own flavor, progression tracks, and room for distinct leveling systems.",
-        card4a: "Sword Dao.",
-        card4b: "Dao of Music.",
-        card5Status: "Version 2.0.0",
-        card5Title: "Sects And NPCs",
-        card5Body: "The broader Nine Realms world answers back with sects, notable cultivators, and NPC presence that turns the mod from a personal ascent into a living cultivation landscape.",
-        card5a: "Sects and their spheres of influence.",
-        card5b: "Named NPC cultivators.",
-        card5c: "A stronger world presence across future content.",
+        card3Version: "Version 1.9.0",
+        card4Status: "Version 2.0.0",
+        card4Title: "Eternal Exchange Pavilion",
+        card4Body: "A classic xianxia auction hall where cultivators can buy rare items, techniques, scrolls, and treasures, then sell their own finds across the Nine Realms.",
+        card4a: "Auction lots for rare techniques, scrolls, and treasures.",
+        card4b: "Buy valuable items from cultivators across the Nine Realms.",
+        card4c: "Rotating pavilion stock and high-value exchange events.",
+        card5Status: "Future Arc",
+        card5Title: "Sword Dao And Dao Of Music",
+        card5Body: "New Dao identities will open beyond the current cultivation paths, with their own flavor, progression tracks, and room for distinct leveling systems.",
+        card5a: "Sword Dao.",
+        card5b: "Dao of Music.",
+        card6Status: "Version 3.0.0",
+        card6Title: "Sects And NPCs",
+        card6Body: "The broader Nine Realms world answers back with sects, notable cultivators, and NPC presence that turns the mod from a personal ascent into a living cultivation landscape.",
+        card6a: "Sects and their spheres of influence.",
+        card6b: "Named NPC cultivators.",
+        card6c: "A stronger world presence across future content.",
         footer: "Nine Realms: Path of the Dao"
       },
       zh: {
@@ -552,6 +581,56 @@
         footer: "九境：道の途"
       }
     };
+
+    Object.assign(translations.zh, {
+      heroBody: "奠基篇已经完成。接下来的登阶，将集中在更完整的功法与术法、更稀有的宝物、永恒交换阁、全新的大道身份，以及 2.0.0 之后的宗门世界。",
+      graphicBody: "每一个阶段都代表模组飞升路上的更高层次，从已完成的修炼根基，到珍宝、拍卖交易、术法、具名大道传承，以及未来的宗门生活。",
+      card2Version: "版本 1.5.0 至 1.8.0",
+      card3Type: "物品更新",
+      card3Version: "版本 1.9.0",
+      card4Status: "版本 2.0.0",
+      card4Title: "永恒交换阁",
+      card4Body: "一座经典修仙拍卖会，修士可以购买稀有物品、功法、卷轴与珍宝，也能将自己的收获卖给九境各方修士。",
+      card4a: "稀有功法、卷轴与珍宝拍品。",
+      card4b: "从九境各方修士手中购买高价值物品。",
+      card4c: "轮换阁藏与高价值交易盛会。",
+      card5Status: "未来篇",
+      card5Title: "剑道与乐道",
+      card5Body: "新的大道身份将超出当前三条修炼路径，拥有独立风格、成长轨迹，以及容纳专属升级系统的空间。",
+      card5a: "剑道。",
+      card5b: "乐道。",
+      card6Status: "版本 3.0.0",
+      card6Title: "宗门与 NPC",
+      card6Body: "更广阔的九境世界将开始回应玩家，带来宗门、知名修士，以及让模组从个人飞升走向鲜活修真天地的 NPC 存在。",
+      card6a: "宗门与其势力范围。",
+      card6b: "具名 NPC 修士。",
+      card6c: "在后续内容中更强的世界存在感。"
+    });
+
+    Object.assign(translations.ja, {
+      heroBody: "基礎篇はすでに完成しています。これからの登段は、より充実した技法と術、より希少な宝物、永恒交換閣、新たな大道の系譜、そして 2.0.0 の先に待つ宗門世界へ向かいます。",
+      graphicBody: "各段階は、このモッドがより高い層へ昇っていく節目です。完成済みの修行基盤から、宝物、競売交易、術、名を持つ大道の系譜、そして将来の宗門生活へ続きます。",
+      card2Version: "バージョン 1.5.0 から 1.8.0",
+      card3Type: "アイテム更新",
+      card3Version: "バージョン 1.9.0",
+      card4Status: "バージョン 2.0.0",
+      card4Title: "永恒交換閣",
+      card4Body: "古典的な仙侠オークション会場。修士は希少な品、技法、巻物、宝物を購入でき、自分の収穫を九境の修士たちへ売却できます。",
+      card4a: "希少な技法、巻物、宝物の競売品。",
+      card4b: "九境の修士たちから価値ある品を購入。",
+      card4c: "入れ替わる閣の品揃えと高額交換イベント。",
+      card5Status: "未来篇",
+      card5Title: "剣道と楽道",
+      card5Body: "新たな大道の系譜は、現在の修行ルートを越えて開かれ、独自の雰囲気、成長軌道、そして専用成長システムのための余地を持ちます。",
+      card5a: "剣道。",
+      card5b: "楽道。",
+      card6Status: "バージョン 3.0.0",
+      card6Title: "宗門と NPC",
+      card6Body: "より広い九境の世界が応え始め、宗門、名のある修士、そして個人の登天を生きた修真世界へ変える NPC の存在が加わります。",
+      card6a: "宗門とその勢力圏。",
+      card6b: "固有名を持つ NPC 修士。",
+      card6c: "将来コンテンツ全体に広がる、より強い世界感。"
+    });
 
     function applyLanguage(lang) {
       const selected = translations[lang] ? lang : "en";
