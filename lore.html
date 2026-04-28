@@ -714,6 +714,76 @@
           </ul>
         </article>
       </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="jadeVeilStamp">Qi Practitioner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/OBx2BPe.png" alt="Jade Veil Breathing technique icon">
+          <div>
+            <h2 data-i18n="jadeVeilTitle">Jade Veil Breathing</h2>
+            <p data-i18n="jadeVeilFlavor">The practitioner exhales through the dantian until pale jade mist gathers around the meridians. Blades find only a shifting veil, but the body beneath grows less willing to meet force directly.</p>
+            <p data-i18n="jadeVeilDesc">Jade Veil Breathing is a learned Qi Practitioner passive. It increases max MP and DV by realm, but lowers PV while active.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="jadeVeilHowStamp">Function</div>
+          <h3 data-i18n="jadeVeilHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="jadeVeilA">Jade Veil Breathing is a toggle technique learned from a future scroll or inheritance source, not an automatic Qi path unlock.</li>
+            <li data-i18n="jadeVeilB">Max MP increases by 8 + realm * 4.</li>
+            <li data-i18n="jadeVeilC">DV is +2 + realm / 2 before realm 5, +4 at realm 5+, and +5 at realm 9+.</li>
+            <li data-i18n="jadeVeilD">PV penalty is -4 before realm 3, -3 at realm 3+, -2 at realm 5+, and -1 at realm 9+.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="jadeVeilUseStamp">Technique Nature</div>
+          <h3 data-i18n="jadeVeilUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="jadeVeilE">It gives Qi Practitioners a defensive art built on mist, motion, and spiritual reserve rather than armor-like toughness.</li>
+            <li data-i18n="jadeVeilF">The max MP bonus supports longer technique use and extended cultivation pacing.</li>
+            <li data-i18n="jadeVeilG">The PV penalty keeps the art fragile when a clean hit lands, preserving the Qi path's evasive identity.</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="tech-card" style="margin-top:1rem;">
+        <div class="stamp" data-i18n="clearSpringStamp">Qi Practitioner</div>
+        <div class="tech-shell">
+          <img class="tech-image" src="https://i.imgur.com/1dvdJJz.png" alt="Clear Spring Aura technique icon">
+          <div>
+            <h2 data-i18n="clearSpringTitle">Clear Spring Aura</h2>
+            <p data-i18n="clearSpringFlavor">A Qi Practitioner loosens the dantian into a quiet spring and lets its mist drift through trusted meridians nearby. The art is gentle by design: not a miracle cure, but a steady field of clear water that keeps companions from slipping too quickly toward death.</p>
+            <p data-i18n="clearSpringDesc">Clear Spring Aura is a learned Qi Practitioner support art. It is toggled from the Techniques page and slowly drains the practitioner's MP to restore a very small amount of HP to the user and party members in the current area.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid" style="margin-top:1rem;">
+        <article class="details-card">
+          <div class="stamp" data-i18n="clearSpringHowStamp">Function</div>
+          <h3 data-i18n="clearSpringHowTitle">How It Works</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="clearSpringA">Clear Spring Aura is a toggle technique learned from a future scroll or inheritance source, not an automatic Qi path unlock.</li>
+            <li data-i18n="clearSpringB">Before realm 5, every 5 technique ticks it spends 1 MP and restores 1 HP.</li>
+            <li data-i18n="clearSpringC">At realm 5 and above, the pulse improves to every 4 ticks. At realm 9 and above, it improves to every 3 ticks.</li>
+            <li data-i18n="clearSpringD">Each pulse affects the practitioner and PC-party members who are alive in the current area. If MP is insufficient, the aura turns itself off.</li>
+          </ul>
+        </article>
+
+        <article class="details-card">
+          <div class="stamp" data-i18n="clearSpringUseStamp">Technique Nature</div>
+          <h3 data-i18n="clearSpringUseTitle">Role In Cultivation</h3>
+          <ul class="mechanics-list">
+            <li data-i18n="clearSpringE">It gives Qi Practitioners a support identity built around field upkeep rather than personal toughness.</li>
+            <li data-i18n="clearSpringF">The healing is intentionally tiny, but it reaches the party and rewards sustained MP management.</li>
+            <li data-i18n="clearSpringG">It pairs naturally with future aura and damage arts, letting Qi Practitioners become battlefield anchors instead of only evasive duelists.</li>
+          </ul>
+        </article>
+      </div>
       </div>
     </section>
 
@@ -1402,8 +1472,128 @@
       bloodFurnaceF: "実用的で荒々しく、体修らしさがはっきり読める技法です。"
     });
 
+    Object.assign(translations.en, {
+      clearSpringStamp: "Qi Practitioner",
+      clearSpringTitle: "Clear Spring Aura",
+      clearSpringFlavor: "A Qi Practitioner loosens the dantian into a quiet spring and lets its mist drift through trusted meridians nearby. The art is gentle by design: not a miracle cure, but a steady field of clear water that keeps companions from slipping too quickly toward death.",
+      clearSpringDesc: "Clear Spring Aura is a learned Qi Practitioner support art. It is toggled from the Techniques page and slowly drains the practitioner's MP to restore a very small amount of HP to the user and party members in the current area.",
+      clearSpringHowStamp: "Function",
+      clearSpringHowTitle: "How It Works",
+      clearSpringA: "Clear Spring Aura is a toggle technique learned from a future scroll or inheritance source, not an automatic Qi path unlock.",
+      clearSpringB: "Before realm 5, every 5 technique ticks it spends 1 MP and restores 1 HP.",
+      clearSpringC: "At realm 5 and above, the pulse improves to every 4 ticks. At realm 9 and above, it improves to every 3 ticks.",
+      clearSpringD: "Each pulse affects the practitioner and PC-party members who are alive in the current area. If MP is insufficient, the aura turns itself off.",
+      clearSpringUseStamp: "Technique Nature",
+      clearSpringUseTitle: "Role In Cultivation",
+      clearSpringE: "It gives Qi Practitioners a support identity built around field upkeep rather than personal toughness.",
+      clearSpringF: "The healing is intentionally tiny, but it reaches the party and rewards sustained MP management.",
+      clearSpringG: "It pairs naturally with future aura and damage arts, letting Qi Practitioners become battlefield anchors instead of only evasive duelists.",
+      jadeVeilStamp: "Qi Practitioner",
+      jadeVeilTitle: "Jade Veil Breathing",
+      jadeVeilFlavor: "The practitioner exhales through the dantian until pale jade mist gathers around the meridians. Blades find only a shifting veil, but the body beneath grows less willing to meet force directly.",
+      jadeVeilDesc: "Jade Veil Breathing is a learned Qi Practitioner passive. It increases max MP and DV by realm, but lowers PV while active.",
+      jadeVeilHowStamp: "Function",
+      jadeVeilHowTitle: "How It Works",
+      jadeVeilA: "Jade Veil Breathing is a toggle technique learned from a future scroll or inheritance source, not an automatic Qi path unlock.",
+      jadeVeilB: "Max MP increases by 8 + realm * 4.",
+      jadeVeilC: "DV is +2 + realm / 2 before realm 5, +4 at realm 5+, and +5 at realm 9+.",
+      jadeVeilD: "PV penalty is -4 before realm 3, -3 at realm 3+, -2 at realm 5+, and -1 at realm 9+.",
+      jadeVeilUseStamp: "Technique Nature",
+      jadeVeilUseTitle: "Role In Cultivation",
+      jadeVeilE: "It gives Qi Practitioners a defensive art built on mist, motion, and spiritual reserve rather than armor-like toughness.",
+      jadeVeilF: "The max MP bonus supports longer technique use and extended cultivation pacing.",
+      jadeVeilG: "The PV penalty keeps the art fragile when a clean hit lands, preserving the Qi path's evasive identity."
+    });
+
+    Object.assign(translations.zh, {
+      clearSpringStamp: "练气士",
+      clearSpringTitle: "清泉灵域",
+      clearSpringFlavor: "练气士将丹田松开成一眼静泉，使清雾沿着身旁可信之人的经脉缓缓流转。此术本就温和：不是起死回生的奇迹，而是一片清水灵域，让同伴不至于太快滑向死地。",
+      clearSpringDesc: "清泉灵域是需要习得的练气士支援功法。它可在功法页面切换，缓慢消耗施术者的法力，为自身与当前区域内的队友恢复极少量生命。",
+      clearSpringHowStamp: "作用方式",
+      clearSpringHowTitle: "它如何运作",
+      clearSpringA: "清泉灵域是切换型功法，需通过未来卷轴或传承来源习得，不会随练气道路自动解锁。",
+      clearSpringB: "5 重境前，每 5 次功法 tick 消耗 1 MP，并恢复 1 HP。",
+      clearSpringC: "5 重境及以上变为每 4 tick 触发一次；9 重境及以上变为每 3 tick 触发一次。",
+      clearSpringD: "每次灵域脉冲影响施术者与当前区域内仍存活的玩家队友。若 MP 不足，灵域会自行关闭。",
+      clearSpringUseStamp: "功法性质",
+      clearSpringUseTitle: "它在修炼中的作用",
+      clearSpringE: "它让练气士拥有围绕灵域维持展开的支援定位，而不是依靠个人硬度。",
+      clearSpringF: "治疗量刻意很小，但能覆盖队伍，并奖励持续的 MP 管理。",
+      clearSpringG: "它能自然衔接未来的灵域与伤害术法，让练气士成为战场支点，而不只是轻灵的决斗者。",
+      jadeVeilStamp: "练气士",
+      jadeVeilTitle: "玉雾息法",
+      jadeVeilFlavor: "修士自丹田吐纳，令淡淡玉色灵雾绕行经脉。刀锋所触多是流动雾幕，但雾下肉身也更不适合正面硬受重击。",
+      jadeVeilDesc: "玉雾息法是需要习得的练气士被动功法。它随境界提高最大魔力与DV，但开启时会降低PV。",
+      jadeVeilHowStamp: "作用方式",
+      jadeVeilHowTitle: "它如何运作",
+      jadeVeilA: "玉雾息法是切换型功法，需通过未来卷轴或传承来源习得，不会随练气道路自动解锁。",
+      jadeVeilB: "最大魔力提高 8 + 境界 * 4。",
+      jadeVeilC: "5 重境前，DV 为 +2 + 境界 / 2；5 重境及以上为 +4；9 重境及以上为 +5。",
+      jadeVeilD: "PV 惩罚在 3 重境前为 -4，3 重境及以上为 -3，5 重境及以上为 -2，9 重境及以上为 -1。",
+      jadeVeilUseStamp: "功法性质",
+      jadeVeilUseTitle: "它在修炼中的作用",
+      jadeVeilE: "它让练气士获得一种以灵雾、身法与灵力储备为核心的防御术，而不是披甲硬抗式的坚韧。",
+      jadeVeilF: "最大魔力加成能支撑更长时间的功法运转与修炼节奏。",
+      jadeVeilG: "PV 惩罚保留了被正面命中时的脆弱感，使练气道路继续偏向轻灵闪避。"
+    });
+
+    Object.assign(translations.ja, {
+      clearSpringStamp: "練気士",
+      clearSpringTitle: "清泉霊域",
+      clearSpringFlavor: "練気士は丹田を静かな泉のようにほどき、その霧を近くの信頼できる経脈へ流す。これは奇跡の治癒ではなく、仲間が死へ傾きすぎないよう支える、澄んだ水の領域である。",
+      clearSpringDesc: "清泉霊域は習得型の練気士支援技法です。Techniques ページで切り替え、術者の MP をゆるやかに消費して、術者と現在エリア内の仲間の HP をごく少量回復します。",
+      clearSpringHowStamp: "作用",
+      clearSpringHowTitle: "どう機能するか",
+      clearSpringA: "清泉霊域は将来の巻物や継承源から習得する切り替え技法であり、練気ルートで自動解放されません。",
+      clearSpringB: "境界 5 未満では、技法 tick 5 回ごとに 1 MP を消費し、1 HP を回復します。",
+      clearSpringC: "境界 5 以上では 4 tick ごと、境界 9 以上では 3 tick ごとに発動します。",
+      clearSpringD: "各脈動は術者と、現在エリア内で生存している PC パーティーメンバーに作用します。MP が不足すると霊域は自動で解除されます。",
+      clearSpringUseStamp: "技法性質",
+      clearSpringUseTitle: "修行における役割",
+      clearSpringE: "個人の硬さではなく、場を維持する支援役として練気士を立たせます。",
+      clearSpringF: "回復量は意図的に小さいものの、パーティーに届き、継続的な MP 管理を報います。",
+      clearSpringG: "今後の霊域や攻撃術と自然につながり、練気士を単なる回避型の決闘者ではなく戦場の支点にします。",
+      jadeVeilStamp: "練気士",
+      jadeVeilTitle: "玉霧息法",
+      jadeVeilFlavor: "修士は丹田から息を吐き、淡い玉色の霧を経脈の周りへ集める。刃は揺れる薄衣を捉えるばかりだが、その下の身体は正面から力を受けることに弱くなる。",
+      jadeVeilDesc: "玉霧息法は習得型の練気士パッシブです。境界に応じて最大 MP と DV を高めますが、有効中は PV が低下します。",
+      jadeVeilHowStamp: "作用",
+      jadeVeilHowTitle: "どう機能するか",
+      jadeVeilA: "玉霧息法は将来の巻物や継承源から習得する切り替え技法であり、練気ルートで自動解放されません。",
+      jadeVeilB: "最大 MP が 8 + 境界 * 4 増加します。",
+      jadeVeilC: "DV は境界 5 未満で +2 + 境界 / 2、境界 5+ で +4、境界 9+ で +5 です。",
+      jadeVeilD: "PV ペナルティは境界 3 未満で -4、境界 3+ で -3、境界 5+ で -2、境界 9+ で -1 です。",
+      jadeVeilUseStamp: "技法性質",
+      jadeVeilUseTitle: "修行における役割",
+      jadeVeilE: "鎧のような硬さではなく、霧、動き、霊力の蓄えによる練気士らしい防御を与えます。",
+      jadeVeilF: "最大 MP ボーナスは長い技法運用と長時間の修行を支えます。",
+      jadeVeilG: "PV ペナルティにより、直撃を受けた時の脆さを残し、練気ルートの回避的な個性を保ちます。"
+    });
+
+    function normalizeLanguage(lang) {
+      if (lang === "jp") return "ja";
+      if (lang === "cn" || lang === "zh-cn" || lang === "zh_CN") return "zh";
+      return translations[lang] ? lang : "en";
+    }
+
+    function getRequestedLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("lang") || localStorage.getItem("nr-site-lang") || "en";
+    }
+
+    function syncLanguageLinks(selected) {
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href.indexOf(".html") === -1) return;
+        const parts = href.split("#");
+        const base = parts[0].split("?")[0];
+        link.setAttribute("href", base + "?lang=" + selected + (parts[1] ? "#" + parts[1] : ""));
+      });
+    }
+
     function applyLanguage(lang) {
-      const selected = translations[lang] ? lang : "en";
+      const selected = normalizeLanguage(lang);
       const dict = translations[selected];
       document.documentElement.lang = selected;
       document.title = dict.pageTitle;
@@ -1415,6 +1605,7 @@
         button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
       });
       localStorage.setItem("nr-site-lang", selected);
+      syncLanguageLinks(selected);
     }
 
     function setTab(name) {
@@ -1436,7 +1627,7 @@
       });
     }
 
-    const savedLang = localStorage.getItem("nr-site-lang") || "en";
+    const savedLang = getRequestedLanguage();
     applyLanguage(savedLang);
     setTab("abilities");
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -640,7 +640,7 @@
             <h3 data-i18n="bodyTitle">Body Cultivator</h3>
             <p data-i18n="bodyBody">Skin to marrow, flesh to iron. Body cultivation leans into direct physical supremacy.</p>
             <ul>
-              <li data-i18n="bodyLi1">Primary growth: STR, DEX, PV, SPD</li>
+              <li data-i18n="bodyLi1">Primary growth: STR, END, DEX, PER, WIL, PV</li>
               <li data-i18n="bodyLi2">Resource reward focus: max HP and stamina</li>
               <li data-i18n="bodyLi3">Realms culminate in Indestructible Body before immortality</li>
             </ul>
@@ -650,7 +650,7 @@
             <h3 data-i18n="qiTitle">Qi Practitioner</h3>
             <p data-i18n="qiBody">Gather breath, condense spirit, establish foundation, and climb through classic xianxia milestones.</p>
             <ul>
-              <li data-i18n="qiLi1">Primary growth: CHA, INT, WIL, DV</li>
+              <li data-i18n="qiLi1">Primary growth: CHA, PER, LER, WIL, MAG, DV</li>
               <li data-i18n="qiLi2">Resource reward focus: max HP and mana</li>
               <li data-i18n="qiLi3">Realms culminate in Tribulation Transcendence before immortality</li>
             </ul>
@@ -742,13 +742,13 @@
         bodyKicker: "Body",
         bodyTitle: "Body Cultivator",
         bodyBody: "Skin to marrow, flesh to iron. Body cultivation leans into direct physical supremacy.",
-        bodyLi1: "Primary growth: STR, DEX, PV, SPD",
+        bodyLi1: "Primary growth: STR, END, DEX, PER, WIL, PV",
         bodyLi2: "Resource reward focus: max HP and stamina",
         bodyLi3: "Realms culminate in Indestructible Body before immortality",
         qiKicker: "Qi",
         qiTitle: "Qi Practitioner",
         qiBody: "Gather breath, condense spirit, establish foundation, and climb through classic xianxia milestones.",
-        qiLi1: "Primary growth: CHA, INT, WIL, DV",
+        qiLi1: "Primary growth: CHA, PER, LER, WIL, MAG, DV",
         qiLi2: "Resource reward focus: max HP and mana",
         qiLi3: "Realms culminate in Tribulation Transcendence before immortality",
         rogueKicker: "Rogue",
@@ -806,13 +806,13 @@
         bodyKicker: "体",
         bodyTitle: "体修",
         bodyBody: "由皮入髓，以血肉铸铁。体修追求的是最直接的肉身压制力。",
-        bodyLi1: "主要成长：STR、DEX、PV、SPD",
+        bodyLi1: "主要成长：STR、END、DEX、PER、WIL、PV",
         bodyLi2: "资源奖励倾向：最大生命与体力",
         bodyLi3: "在成仙前以不灭体作为凡境终点",
         qiKicker: "气",
         qiTitle: "练气士",
         qiBody: "纳气、凝气、筑基、结丹，沿着经典仙侠脉络一步步攀升。",
-        qiLi1: "主要成长：CHA、INT、WIL、DV",
+        qiLi1: "主要成长：CHA、PER、LER、WIL、MAG、DV",
         qiLi2: "资源奖励倾向：最大生命与法力",
         qiLi3: "在成仙前以渡劫作为凡境终点",
         rogueKicker: "散",
@@ -870,13 +870,13 @@
         bodyKicker: "体",
         bodyTitle: "体修",
         bodyBody: "皮から髄へ、肉体を鋼へ。体修は直接的な肉体支配を目指します。",
-        bodyLi1: "主な成長：STR、DEX、PV、SPD",
+        bodyLi1: "主な成長：STR、END、DEX、PER、WIL、PV",
         bodyLi2: "資源報酬の中心：最大 HP と体力",
         bodyLi3: "成仙前の終点は不滅身",
         qiKicker: "気",
         qiTitle: "練気士",
         qiBody: "気を集め、凝縮し、築基し、王道の仙侠段階を一歩ずつ登っていきます。",
-        qiLi1: "主な成長：CHA、INT、WIL、DV",
+        qiLi1: "主な成長：CHA、PER、LER、WIL、MAG、DV",
         qiLi2: "資源報酬の中心：最大 HP とマナ",
         qiLi3: "成仙前の終点は渡劫",
         rogueKicker: "散",
@@ -897,8 +897,29 @@
       }
     };
 
+    function normalizeLanguage(lang) {
+      if (lang === "jp") return "ja";
+      if (lang === "cn" || lang === "zh-cn" || lang === "zh_CN") return "zh";
+      return translations[lang] ? lang : "en";
+    }
+
+    function getRequestedLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("lang") || localStorage.getItem("nr-site-lang") || "en";
+    }
+
+    function syncLanguageLinks(selected) {
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href.indexOf(".html") === -1) return;
+        const parts = href.split("#");
+        const base = parts[0].split("?")[0];
+        link.setAttribute("href", base + "?lang=" + selected + (parts[1] ? "#" + parts[1] : ""));
+      });
+    }
+
     function applyLanguage(lang) {
-      const selected = translations[lang] ? lang : "en";
+      const selected = normalizeLanguage(lang);
       const dict = translations[selected];
       document.documentElement.lang = selected;
       document.title = dict.pageTitle;
@@ -914,9 +935,10 @@
         button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
       });
       localStorage.setItem("nr-site-lang", selected);
+      syncLanguageLinks(selected);
     }
 
-    const savedLang = localStorage.getItem("nr-site-lang") || "en";
+    const savedLang = getRequestedLanguage();
     applyLanguage(savedLang);
     document.querySelectorAll("[data-lang-switch]").forEach((button) => {
       button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));

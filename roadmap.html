@@ -632,8 +632,29 @@
       card6c: "将来コンテンツ全体に広がる、より強い世界感。"
     });
 
+    function normalizeLanguage(lang) {
+      if (lang === "jp") return "ja";
+      if (lang === "cn" || lang === "zh-cn" || lang === "zh_CN") return "zh";
+      return translations[lang] ? lang : "en";
+    }
+
+    function getRequestedLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("lang") || localStorage.getItem("nr-site-lang") || "en";
+    }
+
+    function syncLanguageLinks(selected) {
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href.indexOf(".html") === -1) return;
+        const parts = href.split("#");
+        const base = parts[0].split("?")[0];
+        link.setAttribute("href", base + "?lang=" + selected + (parts[1] ? "#" + parts[1] : ""));
+      });
+    }
+
     function applyLanguage(lang) {
-      const selected = translations[lang] ? lang : "en";
+      const selected = normalizeLanguage(lang);
       const dict = translations[selected];
       document.documentElement.lang = selected;
       document.title = dict.pageTitle;
@@ -645,9 +666,10 @@
         button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
       });
       localStorage.setItem("nr-site-lang", selected);
+      syncLanguageLinks(selected);
     }
 
-    const savedLang = localStorage.getItem("nr-site-lang") || "en";
+    const savedLang = getRequestedLanguage();
     applyLanguage(savedLang);
     document.querySelectorAll("[data-lang-switch]").forEach((button) => {
       button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));

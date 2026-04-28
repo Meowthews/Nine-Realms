@@ -324,6 +324,8 @@
           <li data-i18n="v160c">Balance change: SPD scaling made Body Refiners act more often and scale much faster and higher than Qi Practitioners. Body cultivation now rolls STR, END, DEX, PER, and PV. Qi cultivation now rolls CHA, WIL, MAG, PER, LER, Meditation, and DV.</li>
           <li data-i18n="v160d">Removed INT stat increases from cultivation rewards because INT currently does nothing in base game Elin, even though it exists in game logic.</li>
           <li data-i18n="v160e">Eternal Exchange Pavilion framework set up; access is currently denied.</li>
+          <li data-i18n="v160f">Added Clear Spring Aura, a learned Qi Practitioner support art that slowly spends MP to provide tiny HP sustain for the user and current-area party members.</li>
+          <li data-i18n="v160g">Added Jade Veil Breathing as a new Qi Practitioner art.</li>
         </ul>
       </article>
 
@@ -463,6 +465,8 @@
         v160c: "Balance change: SPD scaling made Body Refiners act more often and scale much faster and higher than Qi Practitioners. Body cultivation now rolls STR, END, DEX, PER, and PV. Qi cultivation now rolls CHA, WIL, MAG, PER, LER, Meditation, and DV.",
         v160d: "Removed INT stat increases from cultivation rewards because INT currently does nothing in base game Elin, even though it exists in game logic.",
         v160e: "Eternal Exchange Pavilion framework set up; access is currently denied.",
+        v160f: "Added Clear Spring Aura, a learned Qi Practitioner support art that slowly spends MP to provide tiny HP sustain for the user and current-area party members.",
+        v160g: "Added Jade Veil Breathing as a new Qi Practitioner art.",
         tag150: "Version 1.5.0",
         v150Title: "Technique Icons And First Path Arts",
         v150a: "Added a custom icon for Profound Qi Healing.",
@@ -533,6 +537,8 @@
         v160c: "平衡调整：SPD 成长会让体修行动次数更多，并比练气士成长得更快、更高。现在体修成长池为 STR、END、DEX、PER、PV；练气成长池为 CHA、WIL、MAG、PER、LER、Meditation、DV。",
         v160d: "移除修炼奖励中的 INT 成长，因为 INT 目前在 Elin 基础游戏中没有实际作用，尽管它存在于游戏逻辑里。",
         v160e: "永恒交换阁框架已搭建完成；当前入口仍被拒绝访问。",
+        v160f: "新增清泉灵域：需要习得的练气士支援功法，会缓慢消耗 MP，为自身与当前区域内的队友提供极少量 HP 续航。",
+        v160g: "新增玉帘吐纳，作为新的练气士功法。",
         tag150: "版本 1.5.0",
         v150Title: "功法图标与首批流派术法",
         v150a: "为玄气疗伤加入了自定义图标。",
@@ -603,6 +609,8 @@
         v160c: "バランス調整：SPD 成長により体修は行動回数が増え、練気士より速く高く伸びすぎていました。現在、体修は STR、END、DEX、PER、PV を成長候補にし、練気は CHA、WIL、MAG、PER、LER、Meditation、DV を成長候補にします。",
         v160d: "INT はゲームロジック上存在するものの、現在の Elin 本編では実質的な効果がないため、修行報酬から INT 成長を削除しました。",
         v160e: "永恒交換閣のフレームワークを構築しました。現在、アクセスは拒否されています。",
+        v160f: "清泉霊域を追加。習得型の練気士支援技法で、MP をゆるやかに消費し、術者と現在エリア内の仲間にごく小さな HP 維持を与えます。",
+        v160g: "新たな練気士技法として玉帘吐納を追加しました。",
         tag150: "バージョン 1.5.0",
         v150Title: "技法アイコンと最初の流派術",
         v150a: "Profound Qi Healing に専用アイコンを追加。",
@@ -657,8 +665,29 @@
       }
     };
 
+    function normalizeLanguage(lang) {
+      if (lang === "jp") return "ja";
+      if (lang === "cn" || lang === "zh-cn" || lang === "zh_CN") return "zh";
+      return translations[lang] ? lang : "en";
+    }
+
+    function getRequestedLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("lang") || localStorage.getItem("nr-site-lang") || "en";
+    }
+
+    function syncLanguageLinks(selected) {
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href.indexOf(".html") === -1) return;
+        const parts = href.split("#");
+        const base = parts[0].split("?")[0];
+        link.setAttribute("href", base + "?lang=" + selected + (parts[1] ? "#" + parts[1] : ""));
+      });
+    }
+
     function applyLanguage(lang) {
-      const selected = translations[lang] ? lang : "en";
+      const selected = normalizeLanguage(lang);
       const dict = translations[selected];
       document.documentElement.lang = selected;
       document.title = dict.pageTitle;
@@ -670,9 +699,10 @@
         button.classList.toggle("active", button.getAttribute("data-lang-switch") === selected);
       });
       localStorage.setItem("nr-site-lang", selected);
+      syncLanguageLinks(selected);
     }
 
-    const savedLang = localStorage.getItem("nr-site-lang") || "en";
+    const savedLang = getRequestedLanguage();
     applyLanguage(savedLang);
     document.querySelectorAll("[data-lang-switch]").forEach((button) => {
       button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));
