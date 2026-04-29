@@ -1,0 +1,3002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nine Realms: Path of the Dao, a Xianxia cultivation mod for Elin.">
+  <title>Nine Realms: Path of the Dao</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fffaf0;
+      --paper-2: #f7efe0;
+      --paper-3: #efe0c3;
+      --ink: #201811;
+      --ink-soft: #5e5141;
+      --red: #a71f16;
+      --red-dark: #75140f;
+      --gold: #c99228;
+      --gold-soft: #f1d38c;
+      --jade: #3e7f65;
+      --water: #426e8a;
+      --wood: #637c39;
+      --metal: #e8e2d3;
+      --fire: #c2452e;
+      --earth: #a27542;
+      --line: rgba(32, 24, 17, 0.16);
+      --line-strong: rgba(117, 20, 15, 0.32);
+      --shadow: 0 24px 70px rgba(62, 39, 18, 0.18);
+      --pixel-shadow: 5px 5px 0 rgba(32, 24, 17, 0.12);
+      --radius: 8px;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --body: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+      --mono: "Lucida Console", "Courier New", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--body);
+      background:
+        radial-gradient(circle at 8% 12%, rgba(167, 31, 22, 0.10), transparent 18rem),
+        radial-gradient(circle at 92% 10%, rgba(201, 146, 40, 0.18), transparent 20rem),
+        linear-gradient(90deg, rgba(32, 24, 17, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(32, 24, 17, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, auto, 18px 18px, 18px 18px, auto;
+      image-rendering: auto;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background:
+        linear-gradient(110deg, transparent 0 18%, rgba(255, 255, 255, 0.45) 18% 20%, transparent 20% 100%),
+        repeating-linear-gradient(0deg, rgba(32, 24, 17, 0.025) 0 1px, transparent 1px 5px);
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+    }
+
+    body::after {
+      background-image:
+        radial-gradient(circle at 18% 22%, rgba(32, 24, 17, 0.075) 0 1px, transparent 1px),
+        radial-gradient(circle at 72% 35%, rgba(167, 31, 22, 0.08) 0 1px, transparent 1px);
+      background-size: 26px 26px, 34px 34px;
+      opacity: 0.28;
+    }
+
+    a { color: inherit; }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .ink-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.45;
+      mix-blend-mode: multiply;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.8rem 0;
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      min-height: 44px;
+      padding: 0.5rem 0.8rem;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.88);
+      box-shadow: var(--pixel-shadow);
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      color: var(--paper);
+      background: var(--red);
+      border: 2px solid var(--gold);
+      font-family: var(--serif);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .brand-text {
+      display: grid;
+      gap: 0.1rem;
+      line-height: 1;
+    }
+
+    .brand-title {
+      color: var(--red-dark);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .brand-sub {
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.45rem;
+      padding: 0.35rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.78);
+      box-shadow: 0 12px 40px rgba(62, 39, 18, 0.10);
+    }
+
+    .nav a,
+    .brush-button,
+    .tab-button,
+    .filter-button,
+    .lang-switch button {
+      position: relative;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid rgba(32, 24, 17, 0.18);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.58);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 180ms ease, color 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .nav a::after,
+    .brush-button::after,
+    .tab-button::after,
+    .filter-button::after,
+    .lang-switch button::after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      right: 9px;
+      bottom: 6px;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, rgba(167, 31, 22, 0.20), rgba(201, 146, 40, 0.26), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms ease;
+    }
+
+    .nav a:hover,
+    .nav a.active,
+    .brush-button:hover,
+    .tab-button:hover,
+    .tab-button.active,
+    .filter-button:hover,
+    .filter-button.active,
+    .lang-switch button:hover,
+    .lang-switch button.active {
+      transform: translate(-1px, -1px);
+      border-color: rgba(167, 31, 22, 0.45);
+      color: var(--red-dark);
+      background: rgba(255, 250, 240, 0.94);
+    }
+
+    .nav a:hover::after,
+    .nav a.active::after,
+    .brush-button:hover::after,
+    .tab-button:hover::after,
+    .tab-button.active::after,
+    .filter-button:hover::after,
+    .filter-button.active::after,
+    .lang-switch button:hover::after,
+    .lang-switch button.active::after {
+      transform: scaleX(1);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.45rem;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 0.3rem;
+      padding: 0.3rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.78);
+      box-shadow: 0 12px 40px rgba(62, 39, 18, 0.10);
+    }
+
+    .lang-switch button {
+      min-height: 36px;
+      padding: 0.5rem 0.62rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+    }
+
+    #kofi-widget-overlay,
+    .floatingchat-container-wrap {
+      bottom: 1rem !important;
+      right: 1rem !important;
+      z-index: 40 !important;
+    }
+
+    .hero {
+      min-height: 690px;
+      display: grid;
+      align-items: end;
+      margin-top: 0.5rem;
+      padding: 7rem 0 3rem;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0 calc(50% - 50vw);
+      z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.42), rgba(255, 250, 240, 0.88) 77%, var(--paper)),
+        linear-gradient(90deg, rgba(32, 24, 17, 0.62), transparent 50%),
+        url("https://i.imgur.com/xNOWPl8.jpeg") center / cover no-repeat;
+      filter: saturate(0.96) contrast(1.06);
+    }
+
+    .hero::after {
+      content: "道";
+      position: absolute;
+      right: 1rem;
+      top: 3.8rem;
+      z-index: -1;
+      color: rgba(117, 20, 15, 0.10);
+      font-family: var(--serif);
+      font-size: 13rem;
+      font-weight: 900;
+      line-height: 1;
+      transform: rotate(-8deg);
+    }
+
+    .hero-content {
+      max-width: 780px;
+      padding-bottom: 1rem;
+    }
+
+    .eyebrow,
+    .kicker,
+    .badge {
+      color: var(--red-dark);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+      padding: 0.45rem 0.65rem;
+      border: 1px solid rgba(167, 31, 22, 0.28);
+      background: rgba(255, 250, 240, 0.72);
+      box-shadow: 4px 4px 0 rgba(167, 31, 22, 0.12);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: var(--serif);
+      line-height: 1.05;
+      font-weight: 900;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: 5.6rem;
+      color: var(--red-dark);
+      text-shadow:
+        2px 2px 0 rgba(255, 250, 240, 0.9),
+        5px 5px 0 rgba(201, 146, 40, 0.18);
+    }
+
+    .brush-title {
+      position: relative;
+      display: inline;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      background:
+        linear-gradient(transparent 58%, rgba(201, 146, 40, 0.28) 58% 78%, transparent 78%),
+        linear-gradient(90deg, rgba(117, 20, 15, 0.10), transparent 60%);
+    }
+
+    .lede {
+      max-width: 680px;
+      margin: 1.2rem 0 0;
+      color: #211914;
+      font-size: 1.18rem;
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+
+    .hero-copy {
+      margin-top: 0.8rem;
+      max-width: 650px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.4rem;
+    }
+
+    .brush-button.primary {
+      color: var(--paper);
+      border-color: var(--red-dark);
+      background:
+        linear-gradient(135deg, rgba(117, 20, 15, 0.96), rgba(167, 31, 22, 0.92)),
+        var(--red);
+      box-shadow: 5px 5px 0 rgba(201, 146, 40, 0.30);
+    }
+
+    .brush-button.primary:hover {
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(167, 31, 22, 0.98), rgba(117, 20, 15, 0.94)),
+        var(--red);
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      position: relative;
+    }
+
+    .section + .section {
+      border-top: 1px solid rgba(32, 24, 17, 0.08);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.5rem;
+      align-items: end;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading h2 {
+      color: var(--red-dark);
+      font-size: 2.9rem;
+      text-shadow: 3px 3px 0 rgba(201, 146, 40, 0.16);
+    }
+
+    .section-heading p {
+      max-width: 720px;
+      margin: 0.7rem 0 0;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+
+    .at-a-glance {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: -2rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.86);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      min-height: 112px;
+      padding: 0.95rem;
+      border: 1px solid rgba(32, 24, 17, 0.12);
+      border-top: 4px solid var(--red);
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--red-dark);
+      font-family: var(--serif);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .ink-divider {
+      grid-column: 1 / -1;
+      width: 100%;
+      height: 10px;
+      margin: 1.1rem auto 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(117, 20, 15, 0.68), transparent 62%),
+        linear-gradient(90deg, transparent, rgba(117, 20, 15, 0.78), rgba(201, 146, 40, 0.72), rgba(32, 24, 17, 0.45), transparent);
+      clip-path: polygon(0 35%, 8% 10%, 24% 42%, 45% 18%, 72% 48%, 100% 24%, 100% 72%, 74% 56%, 49% 84%, 26% 54%, 9% 88%, 0 60%);
+    }
+
+    .feature-grid,
+    .path-grid,
+    .dao-grid,
+    .thanks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card,
+    .feature-card,
+    .path-card,
+    .dao-card,
+    .lore-card,
+    .timeline-card,
+    .thanks-card,
+    .road-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 250, 240, 0.86)),
+        var(--paper-2);
+      box-shadow: var(--pixel-shadow);
+      overflow: hidden;
+    }
+
+    .feature-card,
+    .path-card,
+    .thanks-card,
+    .road-card {
+      padding: 1.25rem;
+    }
+
+    .card::before,
+    .feature-card::before,
+    .path-card::before,
+    .dao-card::before,
+    .lore-card::before,
+    .timeline-card::before,
+    .thanks-card::before,
+    .road-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--red), var(--gold));
+    }
+
+    .feature-card h3,
+    .path-card h3,
+    .dao-card h3,
+    .thanks-card h3,
+    .road-card h3,
+    .lore-card h3,
+    .timeline-card h3 {
+      margin-top: 0.55rem;
+      color: var(--ink);
+      font-size: 1.45rem;
+    }
+
+    p,
+    li {
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    ul {
+      margin: 0.7rem 0 0;
+      padding-left: 1.15rem;
+    }
+
+    .dao-section {
+      padding-top: 0;
+    }
+
+    .dao-card {
+      min-height: 100%;
+      padding: 1.25rem;
+    }
+
+    .dao-card.mystery {
+      display: grid;
+      align-content: center;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.70), rgba(255, 250, 240, 0.90)),
+        repeating-linear-gradient(45deg, rgba(167, 31, 22, 0.06) 0 6px, transparent 6px 14px),
+        var(--paper-2);
+    }
+
+    .unreleased-mark {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 28px;
+      padding: 0.28rem 0.55rem;
+      border: 1px solid rgba(167, 31, 22, 0.32);
+      border-radius: var(--radius);
+      color: var(--red-dark);
+      background: rgba(167, 31, 22, 0.08);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .unreleased-mark::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      box-shadow: 0 0 0 3px rgba(167, 31, 22, 0.12);
+      transform: rotate(45deg);
+    }
+
+    .dao-symbol {
+      display: grid;
+      place-items: center;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+      border: 2px solid rgba(201, 146, 40, 0.65);
+      color: var(--red-dark);
+      background: rgba(255, 255, 255, 0.62);
+      box-shadow: 4px 4px 0 rgba(32, 24, 17, 0.10);
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .image-frame {
+      min-height: 430px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-3);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background-position: center;
+      background-size: cover;
+      image-rendering: auto;
+      transform: scale(1.02);
+      transition: opacity 620ms ease, transform 1600ms ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .image-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent, rgba(32, 24, 17, 0.48)),
+        linear-gradient(90deg, rgba(255, 250, 240, 0.20), transparent);
+    }
+
+    .showcase-panel {
+      display: grid;
+      align-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.86);
+      box-shadow: var(--pixel-shadow);
+    }
+
+    .icon-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .icon-row img {
+      width: 70px;
+      height: 70px;
+      padding: 0.35rem;
+      border: 1px solid rgba(117, 20, 15, 0.22);
+      background: #fff;
+      image-rendering: pixelated;
+      box-shadow: 4px 4px 0 rgba(32, 24, 17, 0.12);
+    }
+
+    .tabs,
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .lore-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .lore-index {
+      position: sticky;
+      top: 5.75rem;
+      display: grid;
+      gap: 0.7rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.88);
+      box-shadow: var(--pixel-shadow);
+    }
+
+    .search {
+      width: 100%;
+      min-height: 42px;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .lore-results {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .lore-card {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1rem 1rem 1rem 1.25rem;
+    }
+
+    .lore-card.no-image {
+      grid-template-columns: 1fr;
+    }
+
+    .lore-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      padding: 0.55rem;
+      border: 1px solid rgba(32, 24, 17, 0.12);
+      background: rgba(255, 255, 255, 0.76);
+      image-rendering: pixelated;
+    }
+
+    .lore-card .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid rgba(167, 31, 22, 0.22);
+      background: rgba(167, 31, 22, 0.07);
+      color: var(--red-dark);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .mechanics {
+      margin-top: 0.8rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .mechanics li {
+      padding: 0.55rem 0.65rem;
+      border-left: 3px solid rgba(201, 146, 40, 0.65);
+      background: rgba(255, 255, 255, 0.48);
+      list-style: none;
+    }
+
+    .scroll-shell {
+      position: relative;
+    }
+
+    .scroll-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0.9rem;
+      width: 4rem;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, var(--paper));
+    }
+
+    .scroll-hint {
+      margin: -0.5rem 0 0.85rem;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .roadmap-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(270px, 330px);
+      gap: 0.75rem;
+      position: relative;
+      padding-top: 2rem;
+      padding-right: 4rem;
+      padding-bottom: 1rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: x proximity;
+      scrollbar-color: var(--red) rgba(32, 24, 17, 0.10);
+    }
+
+    .roadmap-track::before {
+      content: "";
+      position: absolute;
+      left: 1rem;
+      width: max(95%, calc((330px + 0.75rem) * var(--road-count, 6)));
+      top: 0.8rem;
+      height: 8px;
+      border: 1px solid rgba(32, 24, 17, 0.22);
+      background: linear-gradient(90deg, var(--wood), var(--gold), var(--red), var(--water));
+      box-shadow: 4px 4px 0 rgba(32, 24, 17, 0.10);
+    }
+
+    .road-card {
+      min-height: 100%;
+      padding-top: 1.4rem;
+      scroll-snap-align: start;
+    }
+
+    .road-card::after {
+      content: "";
+      position: absolute;
+      left: 1.1rem;
+      top: -1.7rem;
+      width: 22px;
+      height: 22px;
+      border: 3px solid var(--paper);
+      background: var(--red);
+      box-shadow: 0 0 0 2px rgba(32, 24, 17, 0.18);
+      transform: rotate(45deg);
+    }
+
+    .timeline {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(320px, 420px);
+      gap: 0.85rem;
+      padding-right: 4rem;
+      padding-bottom: 1rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: x proximity;
+      scrollbar-color: var(--red) rgba(32, 24, 17, 0.10);
+    }
+
+    .timeline-card {
+      padding: 1.15rem 1.2rem 1.15rem 1.45rem;
+      scroll-snap-align: start;
+      max-height: 520px;
+      overflow-y: auto;
+      scrollbar-color: var(--gold) rgba(32, 24, 17, 0.10);
+      background:
+        linear-gradient(90deg, var(--red) 0 5px, transparent 5px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 250, 240, 0.86)),
+        var(--paper-2);
+      background-attachment: scroll, scroll, scroll;
+    }
+
+    .timeline-card::before {
+      display: none;
+    }
+
+    .timeline-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: center;
+      margin-bottom: 0.55rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0.25rem 0.55rem;
+      border: 1px solid rgba(62, 127, 101, 0.28);
+      background: rgba(62, 127, 101, 0.08);
+      color: var(--jade);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .status.unreleased {
+      border-color: rgba(167, 31, 22, 0.28);
+      background: rgba(167, 31, 22, 0.08);
+      color: var(--red-dark);
+    }
+
+    .thanks-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .credits {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .credit {
+      padding: 0.8rem;
+      border: 1px solid rgba(32, 24, 17, 0.12);
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .credit strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--red-dark);
+      font-family: var(--serif);
+      font-size: 1.1rem;
+    }
+
+    .footer {
+      padding: 3rem 0 2.5rem;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    .footer .seal {
+      display: inline-grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 0.8rem;
+      color: var(--paper);
+      background: var(--red);
+      border: 3px double var(--gold-soft);
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: 1.4rem;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 560ms ease, transform 560ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .showcase,
+      .lore-layout,
+      .thanks-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lore-index {
+        position: relative;
+        top: auto;
+      }
+
+      .road-card::after {
+        top: -1.7rem;
+        left: 1.1rem;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .shell {
+        width: min(100% - 1rem, 1180px);
+      }
+
+      .hero {
+        min-height: 620px;
+        padding-top: 5rem;
+      }
+
+      h1 {
+        font-size: 3.7rem;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading h2 {
+        font-size: 2.25rem;
+      }
+
+      .feature-grid,
+      .path-grid,
+      .dao-grid,
+      .at-a-glance {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-track {
+        grid-auto-columns: minmax(260px, 86vw);
+      }
+
+      .timeline {
+        grid-auto-columns: minmax(280px, 88vw);
+      }
+
+      .lore-card {
+        grid-template-columns: 84px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .brand {
+        align-items: flex-start;
+      }
+
+      .nav a {
+        flex: 1 1 45%;
+      }
+
+      .header-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .lang-switch {
+        justify-content: center;
+      }
+
+      #kofi-widget-overlay,
+      .floatingchat-container-wrap {
+        bottom: 0.65rem !important;
+        right: 0.65rem !important;
+        transform: scale(0.92);
+        transform-origin: bottom right;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .hero::after {
+        font-size: 8rem;
+      }
+
+      .lore-card {
+        grid-template-columns: 1fr;
+      }
+
+      .lore-card img {
+        width: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="ink-canvas" aria-hidden="true"></canvas>
+
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Nine Realms home">
+        <span class="brand-mark">&#20061;</span>
+        <span class="brand-text">
+          <span class="brand-title">Nine Realms</span>
+          <span class="brand-sub">Path of the Dao</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#home" data-i18n="navHome">Home</a>
+        <a href="#paths" data-i18n="navPaths">Paths</a>
+        <a href="#lore" data-i18n="navLore">Lore Wiki</a>
+        <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
+        <a href="#changelog" data-i18n="navChangelog">Changelog</a>
+        <a href="#thanks" data-i18n="navThanks">Thanks</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" aria-label="Language selector">
+          <button type="button" class="active" data-lang="en">EN</button>
+          <button type="button" data-lang="zh">&#20013;&#25991;</button>
+          <button type="button" data-lang="ja">&#26085;&#26412;&#35486;</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-content reveal">
+          <div class="eyebrow" data-i18n="heroEyebrow">A Xianxia Cultivation Mod For Elin</div>
+          <h1><span class="brush-title" data-i18n="heroTitle">Nine Realms: Path of the Dao</span></h1>
+          <p class="lede" data-i18n="heroLede">Open the first gate, temper flesh into scripture, refine breath into qi, and risk each breakthrough on the long ascent from mortal limits to Dao Ancestor.</p>
+          <p class="hero-copy" data-i18n="heroCopy">Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.</p>
+          <div class="hero-actions">
+            <a class="brush-button primary" href="#lore" data-i18n="openArchive">Open The Archive</a>
+            <a class="brush-button" href="#changelog" data-i18n="readHistory">Read Release History</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="at-a-glance reveal" aria-label="Mod summary statistics">
+        <div class="stat-card"><strong>18,000</strong><span data-i18n="statCap">current total cultivation cap</span></div>
+        <div class="stat-card"><strong>18</strong><span data-i18n="statRealms">major realms across mortal and immortal ascent</span></div>
+        <div class="stat-card"><strong>3</strong><span data-i18n="statModes">core cultivation modes: Body, Qi, Rogue</span></div>
+        <div class="stat-card"><strong>9 + 9</strong><span data-i18n="statSplit">path realms plus shared immortal realms</span></div>
+        <div class="ink-divider" aria-hidden="true"></div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="overviewEyebrow">Current Scripture</div>
+            <h2 data-i18n="overviewTitle">What The Mod Adds</h2>
+            <p data-i18n="overviewBody">A cultivation experience built around pacing, path identity, resource pressure, dangerous bottlenecks, and techniques that make the fantasy readable inside Elin.</p>
+          </div>
+        </div>
+
+        <div class="showcase reveal">
+          <article class="image-frame" aria-label="Nine Realms screenshots">
+            <div class="slide active" style="background-image:url('https://i.imgur.com/xNOWPl8.jpeg')"></div>
+            <div class="slide" style="background-image:url('https://i.imgur.com/pu02INM.jpeg')"></div>
+            <div class="slide" style="background-image:url('https://i.imgur.com/v7YyRqK.jpeg')"></div>
+          </article>
+          <aside class="showcase-panel">
+            <div>
+              <div class="kicker" data-i18n="journalKicker">Journal Access</div>
+              <h3 data-i18n="journalTitle">Find Cultivation In The Player Journal</h3>
+              <p data-i18n="journalBody">After awakening Cultivation Initiate, open the in-game player journal and use the Nine Realms entry to reach the cultivation menu. That journal route is the main doorway into the system.</p>
+              <div class="icon-row" aria-label="Ability icons">
+                <img src="https://i.imgur.com/2M8UdF8.png" alt="Cultivate ability icon">
+                <img src="https://i.imgur.com/HeC3TOK.png" alt="Cultivation menu icon">
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="paths">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="pathsEyebrow">Three Ways To Walk</div>
+            <h2 data-i18n="pathsTitle">Choose A Cultivation Identity</h2>
+            <p data-i18n="pathsBody">Formal paths gain stronger efficiencies and breakthroughs. Rogues trade certainty for breadth, advancing without crossing formal realm gates.</p>
+          </div>
+        </div>
+
+        <div class="path-grid reveal">
+          <article class="path-card">
+            <div class="kicker" data-i18n="bodyKicker">Body</div>
+            <h3 data-i18n="bodyTitle">Body Cultivator</h3>
+            <p data-i18n="bodyBody">Skin to marrow, flesh to iron. Body cultivation leans into direct physical supremacy.</p>
+            <ul>
+              <li data-i18n="bodyLi1">Primary growth: STR, END, DEX, PER, WIL, PV</li>
+              <li data-i18n="bodyLi2">Resource reward focus: max HP and stamina</li>
+              <li data-i18n="bodyLi3">Realms culminate in Indestructible Body before immortality</li>
+            </ul>
+          </article>
+          <article class="path-card">
+            <div class="kicker" data-i18n="qiKicker">Qi</div>
+            <h3 data-i18n="qiTitle">Qi Practitioner</h3>
+            <p data-i18n="qiBody">Breath, spirit, and hidden flow. Qi cultivation favors evasion, magical bearing, meditation, and refined reserves.</p>
+            <ul>
+              <li data-i18n="qiLi1">Primary growth: CHA, PER, LER, WIL, MAG, DV, Meditation</li>
+              <li data-i18n="qiLi2">Resource reward focus: max HP and MP</li>
+              <li data-i18n="qiLi3">Realms culminate in Tribulation Transcendence before immortality</li>
+            </ul>
+          </article>
+          <article class="path-card">
+            <div class="kicker" data-i18n="rogueKicker">Rogue</div>
+            <h3 data-i18n="rogueTitle">Rogue Cultivator</h3>
+            <p data-i18n="rogueBody">A wanderer without formal inheritance. Rogues can train broadly and slowly, but cannot formally break through.</p>
+            <ul>
+              <li data-i18n="rogueLi1">Broad stat rolls across physical and spiritual attributes</li>
+              <li data-i18n="rogueLi2">Can progress to the current cap without formal gates</li>
+              <li data-i18n="rogueLi3">Best for flexible, uncertain, outsider-style play</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section dao-section" id="dao-paths">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="daoEyebrow">Dao Paths</div>
+            <h2 data-i18n="daoTitle">Arts Beyond The Three Roads</h2>
+            <p data-i18n="daoBody">Dao paths are independent from Body, Qi, and Rogue cultivation. They follow separate requirements, progression rules, and leveling systems, allowing a cultivator's chosen Dao to grow beside their realm without replacing it.</p>
+          </div>
+        </div>
+
+        <div class="dao-grid reveal">
+          <article class="dao-card">
+            <span class="unreleased-mark" data-i18n="unreleased">Unreleased</span>
+            <div class="dao-symbol" aria-hidden="true">剑</div>
+            <div class="kicker" data-i18n="swordDaoKicker">Sword Dao</div>
+            <h3 data-i18n="swordDaoTitle">A Single Edge Splits The Clouds</h3>
+            <p data-i18n="swordDaoBody">The Sword Dao is the way of intent made sharp. A cultivator tempers heart, breath, and blade until one sword light can cross a thousand li and cut through doubt before it cuts through flesh.</p>
+          </article>
+
+          <article class="dao-card">
+            <span class="unreleased-mark" data-i18n="unreleased">Unreleased</span>
+            <div class="dao-symbol" aria-hidden="true">音</div>
+            <div class="kicker" data-i18n="musicDaoKicker">Dao Of Music</div>
+            <h3 data-i18n="musicDaoTitle">The World Answers The True Note</h3>
+            <p data-i18n="musicDaoBody">The Dao of Music turns rhythm into law and melody into pressure on the soul. One clear note may calm killing intent, call the wind, disturb meridians, or make heaven and earth tremble in harmony.</p>
+          </article>
+
+          <article class="dao-card mystery">
+            <span class="unreleased-mark" data-i18n="futureDaoStatus">Future Dao</span>
+            <div class="dao-symbol" aria-hidden="true">?</div>
+            <div class="kicker" data-i18n="futureDaoKicker">More Paths Await</div>
+            <h3 data-i18n="futureDaoTitle">The Dao Has Ten Thousand Branches</h3>
+            <p data-i18n="futureDaoBody">Not every inheritance has surfaced. Future Dao paths will open new identities with their own trials, thresholds, and methods of enlightenment.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="lore">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="loreEyebrow">Archive Of The Nine Realms</div>
+            <h2 data-i18n="loreTitle">Lore Wiki</h2>
+            <p data-i18n="loreBody">Records of realms, abilities, techniques, arts, cultivation systems, and future world lore for sects, NPC cultivators, and pavilions. Filter the archive or search by name, path, mechanic, or flavor text.</p>
+          </div>
+          <a class="brush-button" href="#roadmap" data-i18n="futureArcs">View Future Arcs</a>
+        </div>
+
+        <div class="lore-layout reveal">
+          <aside class="lore-index">
+            <input class="search" id="loreSearch" type="search" placeholder="Search the archive" aria-label="Search lore archive" data-i18n-placeholder="searchPlaceholder">
+            <div class="tabs" aria-label="Lore category tabs">
+              <button class="tab-button active" type="button" data-category="all" data-i18n="filterAll">All</button>
+              <button class="tab-button" type="button" data-category="realm" data-i18n="filterRealms">Realms</button>
+              <button class="tab-button" type="button" data-category="ability" data-i18n="filterAbilities">Abilities</button>
+              <button class="tab-button" type="button" data-category="neutral" data-i18n="filterNeutral">Neutral</button>
+              <button class="tab-button" type="button" data-category="body" data-i18n="filterBody">Body</button>
+              <button class="tab-button" type="button" data-category="qi" data-i18n="filterQi">Qi</button>
+              <button class="tab-button" type="button" data-category="world" data-i18n="filterWorld">World</button>
+            </div>
+          </aside>
+          <div class="lore-results" id="loreResults" aria-live="polite">
+            <article class="lore-card no-image">
+              <div>
+                <div class="meta"><span class="tag">Progression</span><span class="tag">Realms</span></div>
+                <div class="kicker">Cultivation Structure</div>
+                <h3>Realms &amp; Stages</h3>
+                <p>Every major realm spans 1000 cultivation progress. Formal paths move through Early, Middle, Late, and Peak stages, then pause at the gate until breakthrough succeeds.</p>
+                <ul class="mechanics">
+                  <li>Thresholds run from 1000 through the current 18000 cap.</li>
+                  <li>Formal paths stop at the next threshold - 1 until breakthrough.</li>
+                  <li>Shared immortal realms unlock after the ninth Body or Qi realm.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="lore-card">
+              <img src="https://i.imgur.com/2M8UdF8.png" alt="Cultivate ability icon">
+              <div>
+                <div class="meta"><span class="tag">Ability</span><span class="tag">Long Action</span></div>
+                <div class="kicker">Core Ability</div>
+                <h3>Cultivate</h3>
+                <p>To cultivate is to sit before heaven and earth, draw breath through the mortal shell, and force spirit, body, and intent into alignment.</p>
+                <ul class="mechanics">
+                  <li>Unlocked through Cultivation Initiate.</li>
+                  <li>Each tick spends stamina and MP.</li>
+                  <li>Realm gates create breakthrough bottlenecks.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="lore-card no-image">
+              <div>
+                <div class="meta"><span class="tag">Dao</span><span class="tag">Unreleased</span></div>
+                <div class="kicker">Independent Progression</div>
+                <h3>Dao Paths</h3>
+                <p>Dao paths are independent from Body, Qi, and Rogue cultivation. They use their own requirements, progression rules, and leveling systems.</p>
+                <ul class="mechanics">
+                  <li>Current planned Dao paths: Sword Dao and Dao of Music.</li>
+                  <li>Dao progression is separate from cultivation realm progression.</li>
+                  <li>Future Dao paths may introduce their own trials and thresholds.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="roadmapEyebrow">Heavenly Route</div>
+            <h2 data-i18n="roadmapTitle">Roadmap</h2>
+            <p data-i18n="roadmapBody">The foundation arc is complete. The next ascents focus on fuller techniques, rarer treasures, the Eternal Exchange Pavilion, new Dao identities, and a living sect world.</p>
+          </div>
+        </div>
+
+        <div class="scroll-hint" data-i18n="scrollHint">Scroll sideways to see future milestones</div>
+        <div class="scroll-shell reveal">
+          <div class="roadmap-track" id="roadmapTrack"></div>
+        </div>
+      </section>
+
+      <section class="section" id="changelog">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="changelogEyebrow">Release History</div>
+            <h2 data-i18n="changelogTitle">Changelog</h2>
+            <p data-i18n="changelogBody">Released and upcoming changes for Nine Realms, arranged as a compact timeline.</p>
+          </div>
+        </div>
+        <div class="scroll-hint" data-i18n="changelogScrollHint">Scroll sideways for older releases</div>
+        <div class="scroll-shell reveal">
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </section>
+
+      <section class="section" id="thanks">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="thanksEyebrow">Community Acknowledgements</div>
+            <h2 data-i18n="thanksTitle">Thanks For Shaping The Path</h2>
+            <p data-i18n="thanksBody">Nine Realms has been shaped by ideas, feedback, testing, discussion, and support from people who cared enough to help the mod grow.</p>
+          </div>
+        </div>
+
+        <div class="thanks-grid reveal">
+          <article class="thanks-card">
+            <div class="kicker" data-i18n="ideasKicker">Ideas &amp; Feedback</div>
+            <h3 data-i18n="ideasTitle">Community Contributions</h3>
+            <p data-i18n="ideasBody">Thanks to everyone whose suggestions, balance thoughts, bug reports, lore ideas, or discussion helped guide features that made their way into Nine Realms.</p>
+            <ul>
+              <li data-i18n="ideasLi1">Feature ideas and cultivation system suggestions</li>
+              <li data-i18n="ideasLi2">Balance feedback from play sessions</li>
+              <li data-i18n="ideasLi3">Bug reports, edge cases, and usability notes</li>
+              <li data-i18n="ideasLi4">Lore, naming, and worldbuilding inspiration</li>
+            </ul>
+            <div class="credits">
+              <div class="credit">
+                <strong>headshotkill25</strong>
+                <span data-i18n="contribHeadshot">Suggested aura-like domains that spread their influence through nearby allies, inspiring party-wide effects with a more sect technique feel.</span>
+              </div>
+              <div class="credit">
+                <strong>Tangent Logic</strong>
+                <span data-i18n="contribTangent">Reported the auto combat mage issue where cultivation was being utilized by the auto combat AI.</span>
+              </div>
+            </div>
+          </article>
+          <article class="thanks-card">
+            <div class="kicker" data-i18n="supportKicker">Tippers & Supporters</div>
+            <h3 data-i18n="supportTitle">Ko-fi Support</h3>
+            <p data-i18n="supportBody">Thanks to everyone who has tipped or supported through Ko-fi. Tips and support are never required, but they are greatly appreciated and help keep development of Nine Realms moving.</p>
+            <p data-i18n="supportCta">Supporters may be listed here as a small thank-you, with permission.</p>
+            <div class="credit">
+              <strong data-i18n="creditTitle">Credit Notes</strong>
+              <span data-i18n="creditBody">Credits are listed with permission where possible. If you would like your name changed, removed, or credited differently, please contact Meowthews on Steam.</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="seal">&#36947;</div>
+      <div data-i18n="footerTitle">Nine Realms: Path of the Dao</div>
+    </footer>
+  </div>
+
+  <script>
+    const loreEntries = [
+      {
+        category: "realm",
+        title: "Realms & Stages",
+        path: "Cultivation Structure",
+        tags: ["Progression", "Thresholds", "Wiki"],
+        flavor: "Every major realm spans 1000 cultivation progress. Formal paths move through Early, Middle, Late, and Peak stages, then pause at the gate until breakthrough succeeds.",
+        mechanics: [
+          "Thresholds: 1000, 2000, 3000 ... up to 18000.",
+          "Formal paths stop at next threshold - 1 until breakthrough.",
+          "Shared immortal realms unlock after the ninth Body or Qi realm."
+        ]
+      },
+      {
+        category: "realm",
+        title: "Body Realms",
+        path: "Body Path",
+        tags: ["Body", "Nine Mortal Realms"],
+        flavor: "Skin Tempering, Muscle Forging, Tendon Strengthening, Bone Tempering, Marrow Cleansing, Blood Refinement, Organ Refinement, Golden Body, Indestructible Body.",
+        mechanics: [
+          "Body cultivation rolls STR, END, DEX, PER, WIL, or PV.",
+          "Passive bonuses: STR/END/DEX/PER/WIL +realm and PV +(realm * 2).",
+          "Breakthroughs grant physical stats, PV, max HP, and max stamina."
+        ]
+      },
+      {
+        category: "realm",
+        title: "Qi Realms",
+        path: "Qi Path",
+        tags: ["Qi", "Nine Mortal Realms"],
+        flavor: "Qi Gathering, Qi Condensation, Foundation Establishment, Core Formation, Nascent Soul, Soul Transformation, Void Refinement, Body Integration, Tribulation Transcendence.",
+        mechanics: [
+          "Qi cultivation rolls CHA, WIL, MAG, PER, LER, Meditation, or DV.",
+          "Passive bonuses: CHA/PER/LER/WIL/MAG +realm and DV +(realm * 2).",
+          "Breakthroughs grant spiritual stats, Meditation, DV, max HP, and max MP."
+        ]
+      },
+      {
+        category: "realm",
+        title: "Shared Immortal Realms",
+        path: "Immortal Path",
+        tags: ["Immortal", "Endgame"],
+        flavor: "True Immortal, Earth Immortal, Heavenly Immortal, Profound Immortal, Golden Immortal, Taiyi Immortal, Immortal King, Immortal Emperor, Dao Ancestor.",
+        mechanics: [
+          "Shared immortal realms provide broad cultivation gains and stronger breakthrough rewards.",
+          "Immortal breakthroughs grant all cultivation attributes, PV, DV, Meditation, max HP, max MP, and stamina.",
+          "Current shared cap reaches 18000 cultivation progress."
+        ]
+      },
+      {
+        category: "world",
+        title: "Sects",
+        path: "World Lore",
+        tags: ["World", "Sects", "Coming Arc"],
+        flavor: "Beyond the player's secluded cultivation, the Nine Realms will be shaped by mountain gates, inheritance halls, rival doctrines, and spheres of influence that give the world a living cultivation order.",
+        mechanics: [
+          "A world arc category for sect identity and influence.",
+          "Built to house future relationships between sects, elders, rivals, and disciples.",
+          "This branch of the archive will expand as named factions enter the mod."
+        ]
+      },
+      {
+        category: "world",
+        title: "Named NPC Cultivators",
+        path: "World Lore",
+        tags: ["World", "NPCs", "Coming Arc"],
+        flavor: "Every long road gathers rivals, elders, wandering immortals, and half-mad geniuses. This archive branch will record the cultivators whose names become part of the Nine Realms.",
+        mechanics: [
+          "Prepared for Version 3.0.0 and beyond.",
+          "Intended for notable cultivators, teachers, rivals, and sect figures.",
+          "Designed to grow as the world gains named characters."
+        ]
+      },
+      {
+        category: "world",
+        title: "Eternal Exchange Pavilion",
+        path: "World Lore",
+        tags: ["World", "Auction", "Pavilion"],
+        flavor: "Beyond mortal markets, cultivators whisper of a pavilion where scrolls, natural treasures, and artifacts change hands beneath sealed lanterns and watchful eyes.",
+        mechanics: [
+          "The pavilion is a sealed auction hall for rare techniques, scrolls, and treasures.",
+          "Its doors are tied to a later exchange-focused content arc.",
+          "Expected to connect long-term item hunting with the broader Nine Realms economy."
+        ]
+      },
+      {
+        category: "world",
+        title: "Dao Paths",
+        path: "Independent Progression",
+        tags: ["World", "Dao", "Unreleased"],
+        flavor: "Dao paths are independent from the three core cultivation modes. They are not Body, Qi, or Rogue paths; they use their own requirements, leveling systems, and methods of enlightenment.",
+        mechanics: [
+          "Current planned Dao paths: Sword Dao and Dao of Music.",
+          "Dao progression is separate from cultivation realm progression.",
+          "Future Dao paths may introduce their own trials, unlocks, and thresholds."
+        ]
+      },
+      {
+        category: "world",
+        title: "Sword Dao",
+        path: "Dao Path",
+        tags: ["Dao", "Sword", "Unreleased"],
+        flavor: "The Sword Dao is the way of intent made sharp. A cultivator tempers heart, breath, and blade until one sword light can cross a thousand li and cut through doubt before it cuts through flesh.",
+        mechanics: [
+          "Unreleased.",
+          "Independent from Body, Qi, and Rogue cultivation.",
+          "Planned to use its own requirements and leveling system."
+        ]
+      },
+      {
+        category: "world",
+        title: "Dao Of Music",
+        path: "Dao Path",
+        tags: ["Dao", "Music", "Unreleased"],
+        flavor: "The Dao of Music turns rhythm into law and melody into pressure on the soul. One clear note may calm killing intent, call the wind, disturb meridians, or make heaven and earth tremble in harmony.",
+        mechanics: [
+          "Unreleased.",
+          "Independent from Body, Qi, and Rogue cultivation.",
+          "Planned to use its own requirements and leveling system."
+        ]
+      },
+      {
+        category: "ability",
+        title: "Cultivate",
+        path: "Core Ability",
+        image: "https://i.imgur.com/2M8UdF8.png",
+        tags: ["Ability", "Long Action"],
+        flavor: "To cultivate is to sit before heaven and earth, draw breath through the mortal shell, and force spirit, body, and intent into alignment. It is not a burst of power. It is a deliberate act of ascent.",
+        mechanics: [
+          "Unlocked through Cultivation Initiate.",
+          "Each tick spends stamina and MP: 3/3 by default, 2/2 at realm 5+, and 1/1 at realm 9+.",
+          "Realm gates are every 1000 progress. Formal paths pause at the next gate - 1 until breakthrough."
+        ]
+      },
+      {
+        category: "ability",
+        title: "Open Minor Meridian",
+        path: "Risk Ability",
+        image: "https://i.imgur.com/V3tcjbx.png",
+        tags: ["Ability", "Accelerator"],
+        flavor: "A minor meridian is not opened gently. The cultivator drives qi and blood into a narrow gate until it yields, forcing a sudden surge of progress. If the pulse twists, the same pressure bites back through the channels.",
+        mechanics: [
+          "Costs 8 + realm * 2 stamina and the same amount of MP.",
+          "Grants 25 + realm * 5 + Meditation / 20 cultivation progress immediately.",
+          "Backlash chance is min(18, 10 + realm)%."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Profound Qi Healing",
+        path: "Neutral Technique",
+        image: "https://i.imgur.com/po3WOhl.png",
+        tags: ["Neutral", "Healing", "Toggle"],
+        flavor: "A measured circulation of inward qi turns breath into mending force, drawing on inner reserves to quiet pain and knit flesh.",
+        mechanics: [
+          "Restores health every tick by draining mana.",
+          "Low realms heal 2 HP at a cost of 3 MP.",
+          "Realm 5+ improves to 3 HP for 2 MP; realm 9+ improves to 4 HP for 1 MP."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Still Breath Sutra",
+        path: "Neutral Passive",
+        image: "https://i.imgur.com/0SXLXL9.png",
+        tags: ["Neutral", "Passive", "Efficiency"],
+        flavor: "The sutra teaches a cultivator to make each breath narrow, quiet, and almost unmoving. Qi gathers like winter mist, conserving the body's fire.",
+        mechanics: [
+          "Reduces cultivation stamina cost by 1.",
+          "Reduces cultivation MP cost by 1.",
+          "Progress becomes 80% before realm 5, 85% at realm 5+, and 90% at realm 9+."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Hidden Vessel Art",
+        path: "Neutral Passive",
+        image: "https://i.imgur.com/cOdUwKW.png",
+        tags: ["Neutral", "Reserves"],
+        flavor: "Old manuals speak of vessels beneath the known meridians, quiet channels that do not answer ordinary breathing methods.",
+        mechanics: [
+          "Max MP increases by 4 + realm * 2.",
+          "Max stamina increases by 4 + realm * 2.",
+          "Examples: realm 1 gives +6, realm 5 gives +14, and realm 9 gives +22."
+        ]
+      },
+      {
+        category: "body",
+        title: "Iron Skin",
+        path: "Body Technique",
+        image: "https://i.imgur.com/Gw5VKzL.png",
+        tags: ["Body", "Toggle", "Defense"],
+        flavor: "Body qi is pressed outward until the skin takes on the feel of forged hide. Flesh grows dense, blows glance aside more easily, and movement loses some softness.",
+        mechanics: [
+          "Toggle technique with no per-tick stamina or mana cost.",
+          "At lower realms: +2 PV and -3 DV.",
+          "At realm 9+: +4 PV and -1 DV."
+        ]
+      },
+      {
+        category: "body",
+        title: "Bone Tempering Art",
+        path: "Body Passive",
+        image: "https://i.imgur.com/hNPWrL5.png",
+        tags: ["Body", "Passive", "HP"],
+        flavor: "The art grinds qi into the skeleton until every bone remembers pressure. Marrow grows hot, joints settle like locked iron, and the cultivator becomes harder to break.",
+        mechanics: [
+          "Max HP increases by 8 + realm * 4.",
+          "PV is +2 plus realm / 2 before realm 5, +4 at realm 5+, and +5 at realm 9+.",
+          "DV penalty softens as realms rise."
+        ]
+      },
+      {
+        category: "body",
+        title: "Hundred Scars Scripture",
+        path: "Body Passive",
+        image: "https://i.imgur.com/FYUmmLg.png",
+        tags: ["Body", "Damage", "Progress"],
+        flavor: "Each wound is written into the flesh like a line of scripture. Pain becomes annotation, bruises become doctrine, and survival becomes momentum.",
+        mechanics: [
+          "Drains 1 stamina per tick while active.",
+          "When taking HP damage, has min(22, 8 + realm)% chance to grant cultivation progress.",
+          "Also grants temporary PV for 20 + realm * 5 ticks."
+        ]
+      },
+      {
+        category: "body",
+        title: "Blood Furnace",
+        path: "Body Passive",
+        image: "https://i.imgur.com/2d1TOiy.png",
+        tags: ["Body", "Stamina", "Conversion"],
+        flavor: "The dantian is stoked like a red furnace and the blood answers. Refined mana is burned down into the raw stamina a body refiner needs.",
+        mechanics: [
+          "Before realm 5, spends 3 MP per tick to restore 1 stamina.",
+          "At realm 5+, spends 2 MP per tick to restore 2 stamina.",
+          "At realm 9+, spends 1 MP per tick to restore 3 stamina."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Flowing Meridian",
+        path: "Qi Technique",
+        image: "https://i.imgur.com/oJilbvi.png",
+        tags: ["Qi", "Toggle", "Evasion"],
+        flavor: "Qi is threaded through the meridians until the body feels wind-borne and difficult to pin down.",
+        mechanics: [
+          "Toggle technique with no per-tick stamina or mana cost.",
+          "At lower realms: +2 DV and -3 PV.",
+          "At realm 9+: +4 DV and -1 PV."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Jade Veil Breathing",
+        path: "Qi Passive",
+        image: "https://i.imgur.com/OBx2BPe.png",
+        tags: ["Qi", "MP", "Evasion"],
+        flavor: "The practitioner exhales through the dantian until pale jade mist gathers around the meridians. Blades find only a shifting veil.",
+        mechanics: [
+          "Learned from a future scroll or inheritance source.",
+          "Max MP increases by 8 + realm * 4.",
+          "DV rises by realm while PV receives a penalty that softens over time."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Clear Spring Aura",
+        path: "Qi Support Art",
+        image: "https://i.imgur.com/1dvdJJz.png",
+        tags: ["Qi", "Aura", "Party Support"],
+        flavor: "A Qi Practitioner loosens the dantian into a quiet spring and lets its mist drift through trusted meridians nearby.",
+        mechanics: [
+          "Learned from a future scroll or inheritance source.",
+          "Before realm 5, every 5 technique ticks spends 1 MP and restores 1 HP.",
+          "Pulses affect the practitioner and PC-party members alive in the current area."
+        ]
+      }
+    ];
+
+    const loreLocale = {
+      zh: {
+        "Realms & Stages": {
+          title: "境界与阶段",
+          path: "修行结构",
+          tags: ["进度", "门槛", "百科"],
+          flavor: "每个大境界横跨 1000 点修行进度。正式路线会在其中经历初期、中期、后期、巅峰四个阶段，抵达关口后必须突破成功才能继续前进。",
+          mechanics: [
+            "门槛：1000、2000、3000……直到 18000。",
+            "正式路线会停在下一个门槛 - 1，直到突破成功。",
+            "炼体或练气第九境之后会开启共通仙境。"
+          ]
+        },
+        "Body Realms": {
+          title: "炼体境界",
+          path: "炼体路线",
+          tags: ["炼体", "九大凡境"],
+          flavor: "炼皮、锻肌、强筋、淬骨、洗髓、炼血、炼脏、金身、不灭体。",
+          mechanics: [
+            "炼体修行会提升 STR、END、DEX、PER、WIL 或 PV。",
+            "被动加成：STR/END/DEX/PER/WIL + 当前境界，PV +(当前境界 * 2)。",
+            "突破奖励提供肉身属性、PV、最大 HP 与最大体力。"
+          ]
+        },
+        "Qi Realms": {
+          title: "练气境界",
+          path: "练气路线",
+          tags: ["练气", "九大凡境"],
+          flavor: "聚气、凝气、筑基、结丹、元婴、化神、炼虚、合体、渡劫。",
+          mechanics: [
+            "练气修行会提升 CHA、WIL、MAG、PER、LER、Meditation 或 DV。",
+            "被动加成：CHA/PER/LER/WIL/MAG + 当前境界，DV +(当前境界 * 2)。",
+            "突破奖励提供灵性属性、Meditation、DV、最大 HP 与最大 MP。"
+          ]
+        },
+        "Shared Immortal Realms": {
+          title: "共通仙境",
+          path: "仙道路线",
+          tags: ["仙境", "后期"],
+          flavor: "真仙、地仙、天仙、玄仙、金仙、太乙仙、仙王、仙帝、道祖。",
+          mechanics: [
+            "共通仙境提供更广泛的修行成长与更强突破奖励。",
+            "仙境突破会提升所有修行属性、PV、DV、Meditation、最大 HP、最大 MP 与体力。",
+            "当前共通上限为 18000 修行进度。"
+          ]
+        },
+        "Sects": {
+          title: "宗门",
+          path: "未来世界设定",
+          tags: ["世界", "宗门", "计划中"],
+          flavor: "九境的宗门尚未正式写入档案。未来山门、传承殿、相争道统与势力范围会让世界拥有鲜活的修行秩序。",
+          mechanics: [
+            "计划用于更大的世界篇章。",
+            "预计支持宗门身份、势力影响与未来 NPC 关系。",
+            "当前作为设定分类预留，方便档案继续扩展。"
+          ]
+        },
+        "Named NPC Cultivators": {
+          title: "具名 NPC 修士",
+          path: "未来世界设定",
+          tags: ["世界", "NPC", "计划中"],
+          flavor: "漫长道途总会遇见对手、长老、游方仙人和半疯的天才。他们尚未踏入九境，但档案已为他们留名。",
+          mechanics: [
+            "计划用于 3.0.0 以及之后的版本。",
+            "用于记录重要修士、师长、敌手与宗门人物。",
+            "当前还没有正式 NPC 名册。"
+          ]
+        },
+        "Eternal Exchange Pavilion": {
+          title: "永恒交易阁",
+          path: "未来世界设定",
+          tags: ["世界", "拍卖", "楼阁"],
+          flavor: "凡俗市场之外，修士们低声谈起一座楼阁：在封印灯火与众目窥视之下，卷轴、天材地宝与神器在其中易主。",
+          mechanics: [
+            "框架已经建立；当前入口仍被拒绝。",
+            "计划作为稀有功法、卷轴与宝物的拍卖堂。",
+            "预计把长期寻宝与更广阔的九境经济连接起来。"
+          ]
+        },
+        "Dao Paths": {
+          title: "道途",
+          path: "独立成长",
+          tags: ["世界", "道", "未发布"],
+          flavor: "道途独立于三大核心修行模式。它们不是炼体、练气或散修路线，而是拥有自身条件、等级系统与悟道方式的独立传承。",
+          mechanics: [
+            "当前计划道途：剑道与音律之道。",
+            "道途成长独立于境界修行进度。",
+            "未来道途可能加入各自的试炼、解锁与门槛。"
+          ]
+        },
+        "Sword Dao": {
+          title: "剑道",
+          path: "道途",
+          tags: ["道", "剑", "未发布"],
+          flavor: "剑道，是意志化锋之路。修士淬炼心、息与刃，直至一线剑光可越千里，先斩心中迟疑，再斩眼前血肉。",
+          mechanics: [
+            "未发布。",
+            "独立于炼体、练气与散修。",
+            "计划使用自身条件与等级系统。"
+          ]
+        },
+        "Dao Of Music": {
+          title: "音律之道",
+          path: "道途",
+          tags: ["道", "音律", "未发布"],
+          flavor: "音律之道以节拍成法，以旋律压魂。一声清音可平杀意、唤长风、乱经脉，也可令天地随之共鸣震颤。",
+          mechanics: [
+            "未发布。",
+            "独立于炼体、练气与散修。",
+            "计划使用自身条件与等级系统。"
+          ]
+        },
+        "Cultivate": {
+          title: "修炼",
+          path: "核心能力",
+          tags: ["能力", "长动作"],
+          flavor: "所谓修炼，是端坐于天地之前，引气入凡躯，令灵、身、意归于一线。它不是爆发，而是一场有意识的登阶。",
+          mechanics: [
+            "通过修行入门解锁。",
+            "每次修炼消耗体力与 MP：默认 3/3，境界 5+ 为 2/2，境界 9+ 为 1/1。",
+            "境界关口每 1000 进度出现一次。正式路线会停在下一关口 - 1，直到突破。"
+          ]
+        },
+        "Open Minor Meridian": {
+          title: "冲开小脉",
+          path: "风险能力",
+          tags: ["能力", "加速"],
+          flavor: "小脉不是温柔开启的。修士以气血冲击狭窄关隘，强迫它让路；若脉息逆转，同样的压力便会反噬经络。",
+          mechanics: [
+            "消耗 8 + 境界 * 2 体力，以及等量 MP。",
+            "立即获得 25 + 境界 * 5 + Meditation / 20 修行进度。",
+            "反噬概率为 min(18, 10 + 境界)%。"
+          ]
+        },
+        "Profound Qi Healing": {
+          title: "玄气疗伤",
+          path: "通用功法",
+          tags: ["通用", "治疗", "开关"],
+          flavor: "平稳运转内气，将吐纳化为修补之力，借内在储备止痛续骨。",
+          mechanics: [
+            "每次跳动消耗 MP 并恢复 HP。",
+            "低境界以 3 MP 恢复 2 HP。",
+            "境界 5+ 为 2 MP 恢复 3 HP；境界 9+ 为 1 MP 恢复 4 HP。"
+          ]
+        },
+        "Still Breath Sutra": {
+          title: "止息经",
+          path: "通用被动",
+          tags: ["通用", "被动", "效率"],
+          flavor: "此经教修士令呼吸细窄、安静、近乎不动。气不再奔流如河，而如冬雾凝聚，保存肉身之火。",
+          mechanics: [
+            "修炼体力消耗降低 1。",
+            "修炼 MP 消耗降低 1。",
+            "进度在境界 5 前为 80%，境界 5+ 为 85%，境界 9+ 为 90%。"
+          ]
+        },
+        "Hidden Vessel Art": {
+          title: "隐脉术",
+          path: "通用被动",
+          tags: ["通用", "储备"],
+          flavor: "古老手札记载，常见经脉之下仍有隐脉，寻常吐纳无法唤醒。",
+          mechanics: [
+            "最大 MP 增加 4 + 境界 * 2。",
+            "最大体力增加 4 + 境界 * 2。",
+            "例：境界 1 为 +6，境界 5 为 +14，境界 9 为 +22。"
+          ]
+        },
+        "Iron Skin": {
+          title: "铁皮功",
+          path: "炼体功法",
+          tags: ["炼体", "开关", "防御"],
+          flavor: "体气外压，皮肉如锻革。血肉变得沉密，打击更容易滑开，动作却少了几分轻灵。",
+          mechanics: [
+            "开关型功法，无持续体力或 MP 消耗。",
+            "低境界：+2 PV，-3 DV。",
+            "境界 9+：+4 PV，-1 DV。"
+          ]
+        },
+        "Bone Tempering Art": {
+          title: "淬骨诀",
+          path: "炼体被动",
+          tags: ["炼体", "被动", "HP"],
+          flavor: "此术将气磨入骨骼，让每一寸骨都记住压力。髓热如炉，关节如锁，修士更难被击断。",
+          mechanics: [
+            "最大 HP 增加 8 + 境界 * 4。",
+            "PV 在境界 5 前为 +2 加 境界 / 2，境界 5+ 为 +4，境界 9+ 为 +5。",
+            "DV 惩罚会随境界提升而减轻。"
+          ]
+        },
+        "Hundred Scars Scripture": {
+          title: "百痕经",
+          path: "炼体被动",
+          tags: ["炼体", "受伤", "进度"],
+          flavor: "每一道伤痕都像经文刻入肉身。痛楚成注，瘀痕成义，活下来的修士把苦难化作前行之势。",
+          mechanics: [
+            "激活时每跳消耗 1 体力。",
+            "受到 HP 伤害时，有 min(22, 8 + 境界)% 概率获得修行进度。",
+            "同时获得持续 20 + 境界 * 5 跳的临时 PV。"
+          ]
+        },
+        "Blood Furnace": {
+          title: "血炉",
+          path: "炼体被动",
+          tags: ["炼体", "体力", "转化"],
+          flavor: "丹田如赤炉点燃，血液随之回应。精炼法力被烧成热息，热息再化作炼体者继续前进的体力。",
+          mechanics: [
+            "境界 5 前，每跳消耗 3 MP 恢复 1 体力。",
+            "境界 5+，每跳消耗 2 MP 恢复 2 体力。",
+            "境界 9+，每跳消耗 1 MP 恢复 3 体力。"
+          ]
+        },
+        "Flowing Meridian": {
+          title: "流脉术",
+          path: "练气功法",
+          tags: ["练气", "开关", "闪避"],
+          flavor: "气穿经脉，令身形似随风而动，难以被定住。",
+          mechanics: [
+            "开关型功法，无持续体力或 MP 消耗。",
+            "低境界：+2 DV，-3 PV。",
+            "境界 9+：+4 DV，-1 PV。"
+          ]
+        },
+        "Jade Veil Breathing": {
+          title: "玉帘吐纳",
+          path: "练气被动",
+          tags: ["练气", "MP", "闪避"],
+          flavor: "修士自丹田吐息，淡玉色雾气缠绕经脉。刀锋只触到流动的帘影。",
+          mechanics: [
+            "未来通过卷轴或传承来源学习。",
+            "最大 MP 增加 8 + 境界 * 4。",
+            "DV 随境界提升，PV 惩罚会逐渐减轻。"
+          ]
+        },
+        "Clear Spring Aura": {
+          title: "清泉灵域",
+          path: "练气辅助术",
+          tags: ["练气", "灵域", "队伍辅助"],
+          flavor: "练气修士令丹田化作一眼静泉，让雾气流过附近可信之人的经脉。",
+          mechanics: [
+            "未来通过卷轴或传承来源学习。",
+            "境界 5 前，每 5 次功法跳动消耗 1 MP 并恢复 1 HP。",
+            "脉冲影响施术者与当前区域内存活的 PC 队友。"
+          ]
+        }
+      },
+      ja: {
+        "Realms & Stages": {
+          title: "境界と段階",
+          path: "修行構造",
+          tags: ["進行", "門", "Wiki"],
+          flavor: "各大境界は 1000 修行進度で構成されます。正式な道は Early、Middle、Late、Peak を経て、突破に成功するまで門で止まります。",
+          mechanics: [
+            "しきい値：1000、2000、3000……18000 まで。",
+            "正式な道は次のしきい値 - 1 で突破まで止まります。",
+            "Body または Qi の第九境後に共有仙境が開きます。"
+          ]
+        },
+        "Body Realms": {
+          title: "身体修行の境界",
+          path: "身体の道",
+          tags: ["身体", "九つの凡境"],
+          flavor: "Skin Tempering、Muscle Forging、Tendon Strengthening、Bone Tempering、Marrow Cleansing、Blood Refinement、Organ Refinement、Golden Body、Indestructible Body。",
+          mechanics: [
+            "身体修行は STR、END、DEX、PER、WIL、PV を成長させます。",
+            "受動ボーナス：STR/END/DEX/PER/WIL + 境界、PV +(境界 * 2)。",
+            "突破は身体能力、PV、最大 HP、最大スタミナを与えます。"
+          ]
+        },
+        "Qi Realms": {
+          title: "気修行の境界",
+          path: "気の道",
+          tags: ["気", "九つの凡境"],
+          flavor: "Qi Gathering、Qi Condensation、Foundation Establishment、Core Formation、Nascent Soul、Soul Transformation、Void Refinement、Body Integration、Tribulation Transcendence。",
+          mechanics: [
+            "気修行は CHA、WIL、MAG、PER、LER、Meditation、DV を成長させます。",
+            "受動ボーナス：CHA/PER/LER/WIL/MAG + 境界、DV +(境界 * 2)。",
+            "突破は霊的能力、Meditation、DV、最大 HP、最大 MP を与えます。"
+          ]
+        },
+        "Shared Immortal Realms": {
+          title: "共有仙境",
+          path: "仙の道",
+          tags: ["仙境", "終盤"],
+          flavor: "True Immortal、Earth Immortal、Heavenly Immortal、Profound Immortal、Golden Immortal、Taiyi Immortal、Immortal King、Immortal Emperor、Dao Ancestor。",
+          mechanics: [
+            "共有仙境は広い成長と強い突破報酬を与えます。",
+            "仙境突破は全修行能力、PV、DV、Meditation、最大 HP、最大 MP、スタミナを高めます。",
+            "現在の共有上限は 18000 修行進度です。"
+          ]
+        },
+        "Sects": {
+          title: "宗派",
+          path: "今後の世界ロア",
+          tags: ["世界", "宗派", "予定"],
+          flavor: "九境の宗派はまだ正式に記録されていません。いずれ山門、継承殿、対立する教義、勢力圏が世界に生きた修行秩序を与えます。",
+          mechanics: [
+            "より大きな世界編のために予定されています。",
+            "宗派の個性、影響力、今後の NPC 関係を支える想定です。",
+            "資料が自然に拡張できるよう、現在は分類として予約されています。"
+          ]
+        },
+        "Named NPC Cultivators": {
+          title: "名を持つ NPC 修行者",
+          path: "今後の世界ロア",
+          tags: ["世界", "NPC", "予定"],
+          flavor: "長い道には必ず好敵手、長老、放浪仙人、半ば狂った天才が集います。彼らはまだ道へ踏み出していませんが、資料はその名のために場所を空けています。",
+          mechanics: [
+            "Version 3.0.0 以降に予定されています。",
+            "重要な修行者、師、ライバル、宗派人物の記録に使います。",
+            "正式な NPC 名簿はまだありません。"
+          ]
+        },
+        "Eternal Exchange Pavilion": {
+          title: "Eternal Exchange Pavilion",
+          path: "今後の世界ロア",
+          tags: ["世界", "競売", "楼閣"],
+          flavor: "俗世の市場の外で、修行者は囁きます。封じられた灯と視線の下、巻物、天材地宝、神器が持ち主を変える楼閣があると。",
+          mechanics: [
+            "枠組みは用意済みですが、現在は入場できません。",
+            "希少な技法、巻物、宝物の競売場として予定されています。",
+            "長期の宝探しと九境の広い経済をつなぐ想定です。"
+          ]
+        },
+        "Dao Paths": {
+          title: "Dao の道",
+          path: "独立進行",
+          tags: ["世界", "Dao", "未実装"],
+          flavor: "Dao の道は三つの中核修行モードから独立しています。身体、気、放浪の道ではなく、それぞれ独自の条件、レベル体系、悟りの方法を持つ別系統です。",
+          mechanics: [
+            "現在予定されている Dao：剣の Dao、音楽の Dao。",
+            "Dao 進行は修行境界の進行とは別です。",
+            "今後の Dao は独自の試練、解放条件、しきい値を持つ可能性があります。"
+          ]
+        },
+        "Sword Dao": {
+          title: "剣の Dao",
+          path: "Dao の道",
+          tags: ["Dao", "剣", "未実装"],
+          flavor: "剣の Dao は、意志を刃に変える道です。修行者は心、呼吸、刃を鍛え、一筋の剣光が千里を越え、肉を斬る前に迷いを断つまで磨きます。",
+          mechanics: [
+            "未実装。",
+            "身体、気、放浪修行から独立しています。",
+            "独自の条件とレベル体系を使う予定です。"
+          ]
+        },
+        "Dao Of Music": {
+          title: "音楽の Dao",
+          path: "Dao の道",
+          tags: ["Dao", "音楽", "未実装"],
+          flavor: "音楽の Dao は律を法に、旋律を魂への圧に変えます。一つの澄んだ音は殺意を鎮め、風を呼び、経脈を乱し、天地を調和の中で震わせます。",
+          mechanics: [
+            "未実装。",
+            "身体、気、放浪修行から独立しています。",
+            "独自の条件とレベル体系を使う予定です。"
+          ]
+        },
+        "Cultivate": {
+          title: "修行",
+          path: "中核能力",
+          tags: ["能力", "長時間行動"],
+          flavor: "修行とは天地の前に座し、凡身に気を通し、霊・身・意を一つに整えることです。爆発的な力ではなく、意志ある上昇です。",
+          mechanics: [
+            "Cultivation Initiate により解放されます。",
+            "各 tick でスタミナと MP を消費：基本 3/3、境界 5+ で 2/2、境界 9+ で 1/1。",
+            "境界の門は 1000 進度ごと。正式な道は突破まで次の門 - 1 で止まります。"
+          ]
+        },
+        "Open Minor Meridian": {
+          title: "小脈を開く",
+          path: "危険能力",
+          tags: ["能力", "加速"],
+          flavor: "小さな経脈は穏やかには開きません。修行者は気と血を狭い門へ押し込み、強引に進度を引き出します。脈が乱れれば、その圧は経絡を噛み返します。",
+          mechanics: [
+            "8 + 境界 * 2 のスタミナと同量の MP を消費します。",
+            "25 + 境界 * 5 + Meditation / 20 の修行進度を即時獲得します。",
+            "反動率は min(18, 10 + 境界)% です。"
+          ]
+        },
+        "Profound Qi Healing": {
+          title: "玄気治癒",
+          path: "共通技法",
+          tags: ["共通", "治癒", "切替"],
+          flavor: "内なる気を静かに巡らせ、呼吸を癒やしの力へ変え、内的な蓄えで痛みを鎮め肉体を繕います。",
+          mechanics: [
+            "tick ごとに MP を消費して HP を回復します。",
+            "低境界では 3 MP で 2 HP 回復します。",
+            "境界 5+ で 2 MP で 3 HP、境界 9+ で 1 MP で 4 HP になります。"
+          ]
+        },
+        "Still Breath Sutra": {
+          title: "静息経",
+          path: "共通受動",
+          tags: ["共通", "受動", "効率"],
+          flavor: "この経は呼吸を細く、静かに、ほとんど動かぬものにします。気は川のように奔らず、冬霧のように集まり、身体の火を保ちます。",
+          mechanics: [
+            "修行スタミナ消費を 1 減らします。",
+            "修行 MP 消費を 1 減らします。",
+            "進度は境界 5 前で 80%、境界 5+ で 85%、境界 9+ で 90% になります。"
+          ]
+        },
+        "Hidden Vessel Art": {
+          title: "隠脈術",
+          path: "共通受動",
+          tags: ["共通", "蓄え"],
+          flavor: "古い手引きは、既知の経脈の下に普通の呼吸法では応じない静かな脈があると語ります。",
+          mechanics: [
+            "最大 MP が 4 + 境界 * 2 増加します。",
+            "最大スタミナが 4 + 境界 * 2 増加します。",
+            "例：境界 1 で +6、境界 5 で +14、境界 9 で +22。"
+          ]
+        },
+        "Iron Skin": {
+          title: "鉄皮功",
+          path: "身体技法",
+          tags: ["身体", "切替", "防御"],
+          flavor: "身体の気を外へ押し広げ、皮膚を鍛えた革のようにします。肉は密になり、打撃は逸れやすくなりますが、動きの柔らかさは少し失われます。",
+          mechanics: [
+            "tick ごとのスタミナや MP 消費はない切替技法です。",
+            "低境界では +2 PV、-3 DV。",
+            "境界 9+ では +4 PV、-1 DV。"
+          ]
+        },
+        "Bone Tempering Art": {
+          title: "鍛骨術",
+          path: "身体受動",
+          tags: ["身体", "受動", "HP"],
+          flavor: "この術は気を骨に擦り込み、すべての骨に圧を覚えさせます。髄は熱を帯び、関節は鉄のように固まり、修行者は折れにくくなります。",
+          mechanics: [
+            "最大 HP が 8 + 境界 * 4 増加します。",
+            "PV は境界 5 前で +2 と 境界 / 2、境界 5+ で +4、境界 9+ で +5。",
+            "DV ペナルティは境界が上がるほど軽くなります。"
+          ]
+        },
+        "Hundred Scars Scripture": {
+          title: "百傷経",
+          path: "身体受動",
+          tags: ["身体", "被害", "進度"],
+          flavor: "傷は一つ一つ肉体へ経文のように刻まれます。痛みは注釈となり、痣は教義となり、生き延びた者は苦難を前進の力に変えます。",
+          mechanics: [
+            "有効中は tick ごとに 1 スタミナを消費します。",
+            "HP ダメージを受けた時、min(22, 8 + 境界)% の確率で修行進度を得ます。",
+            "同時に 20 + 境界 * 5 tick の一時 PV を得ます。"
+          ]
+        },
+        "Blood Furnace": {
+          title: "血炉",
+          path: "身体受動",
+          tags: ["身体", "スタミナ", "変換"],
+          flavor: "丹田を赤い炉のように燃やすと、血が応えます。精錬されたマナは熱へ、熱は身体修行者が動き続けるためのスタミナへ変わります。",
+          mechanics: [
+            "境界 5 前は tick ごとに 3 MP を消費し 1 スタミナを回復します。",
+            "境界 5+ では 2 MP で 2 スタミナを回復します。",
+            "境界 9+ では 1 MP で 3 スタミナを回復します。"
+          ]
+        },
+        "Flowing Meridian": {
+          title: "流脈術",
+          path: "気技法",
+          tags: ["気", "切替", "回避"],
+          flavor: "気を経脈に通し、身体を風に乗ったように軽く、捉えにくいものにします。",
+          mechanics: [
+            "tick ごとのスタミナや MP 消費はない切替技法です。",
+            "低境界では +2 DV、-3 PV。",
+            "境界 9+ では +4 DV、-1 PV。"
+          ]
+        },
+        "Jade Veil Breathing": {
+          title: "玉幕吐納",
+          path: "気受動",
+          tags: ["気", "MP", "回避"],
+          flavor: "修行者は丹田から息を吐き、淡い玉色の霧を経脈の周りに集めます。刃が触れるのは揺れる幕だけです。",
+          mechanics: [
+            "今後の巻物または継承源から学ぶ技法です。",
+            "最大 MP が 8 + 境界 * 4 増加します。",
+            "DV は境界に応じて上がり、PV ペナルティは徐々に軽くなります。"
+          ]
+        },
+        "Clear Spring Aura": {
+          title: "清泉霊域",
+          path: "気支援術",
+          tags: ["気", "霊域", "隊列支援"],
+          flavor: "気修行者は丹田を静かな泉のように緩め、その霧を近くの信頼できる経脈へ流します。",
+          mechanics: [
+            "今後の巻物または継承源から学ぶ技法です。",
+            "境界 5 前は 5 technique tick ごとに 1 MP を消費し 1 HP 回復します。",
+            "脈動は術者と同じエリアにいる生存中の PC パーティメンバーに及びます。"
+          ]
+        }
+      }
+    };
+
+   const roadmap = [
+      {
+        status: "Completed",
+        title: "Foundation Arc",
+        body: "Cultivation systems, realms, breakthroughs, menu flow, wiki support, changelogs, visual polish, and the first neutral technique stand as the completed first scripture.",
+        version: "Versions 1.0.0 through 1.4.0"
+      },
+      {
+        status: "Planned",
+        title: "Completed Techniques & Arts",
+        body: "The three cultivation paths receive fuller suites of techniques and arts, giving each route a stronger combat and progression identity.",
+        version: "Versions 1.5.0 through 1.8.0"
+      },
+      {
+        status: "Item Update",
+        title: "Treasures Of The Mortal And Immortal Worlds",
+        body: "Scrolls, Natural Treasures, and Artifacts deepen inheritance hunting, item identity, and long-term build planning.",
+        version: "Version 1.9.0"
+      },
+      {
+        status: "Version 2.0.0",
+        title: "Eternal Exchange Pavilion",
+        body: "A classic xianxia auction hall where cultivators can buy rare items, techniques, scrolls, and treasures, then sell their own finds.",
+        version: "Auction arc"
+      },
+      {
+        status: "Future Arc",
+        title: "Sword Dao And Dao Of Music",
+        body: "New Dao identities open beyond the current cultivation paths, with their own flavor, progression tracks, and distinct leveling systems.",
+        version: "Future systems"
+      },
+      {
+        status: "Version 3.0.0",
+        title: "Sects And NPCs",
+        body: "The broader Nine Realms world answers back with sects, notable cultivators, and NPC presence across the living cultivation landscape.",
+        version: "World arc"
+      },
+      {
+        status: "Beyond",
+        title: "The Road Does Not End",
+        body: "The road ahead is far and long. Though the mountain mist hides the next gate and the heavens test every step, the cultivator must persist, breath by breath, until the Dao reveals another path.",
+        version: "Future scripture"
+      }
+    ];
+
+    const changelog = [
+      {
+        version: "Version 1.6.0",
+        status: "Released",
+        title: "New Techniques, Debug Settings, And Balance Pass",
+        items: [
+          "Added new techniques and abilities: Still Breath Sutra, Hidden Vessel Art, Open Minor Meridian, Bone Tempering Art, Hundred Scars Scripture, and Blood Furnace.",
+          "Added Settings tools for cultivation speed multiplier, unlock all abilities, and reset progress. These are debug options and can break normal balance.",
+          "Balance change: Body cultivation now rolls STR, END, DEX, PER, and PV. Qi cultivation now rolls CHA, WIL, MAG, PER, LER, Meditation, and DV.",
+          "Eternal Exchange Pavilion introduced as a sealed future system.",
+          "Added Clear Spring Aura and Jade Veil Breathing as Qi Practitioner arts."
+        ]
+      },
+      {
+        version: "Version 1.5.0",
+        status: "Released",
+        title: "Technique Icons And First Path Arts",
+        items: [
+          "Added a custom icon for Profound Qi Healing.",
+          "Added Iron Skin Art, the first body cultivator technique.",
+          "Added Flowing Meridian, the first Qi Practitioner technique.",
+          "Fixed lag when techniques are toggled on during world map travel."
+        ]
+      },
+      {
+        version: "Version 1.4.0",
+        status: "Released",
+        title: "Neutral Techniques And Future Frameworks",
+        items: [
+          "Added the first neutral technique, Profound Qi Healing.",
+          "Started frameworks for future techniques, arts, and inheritance scrolls.",
+          "Added groundwork for future Dao paths and unique leveling systems.",
+          "Laid out the Techniques page in the cultivation menu."
+        ]
+      },
+      {
+        version: "Version 1.3.1",
+        status: "Released",
+        title: "Presentation And Ability Polish",
+        items: [
+          "Added custom cultivate ability icon.",
+          "Added custom wiki link icon.",
+          "Added custom cultivation menu style.",
+          "Fixed an issue where the cultivate ability could not be placed in the hot bar."
+        ]
+      },
+      {
+        version: "Version 1.3.0",
+        status: "Released",
+        title: "Journal Access And Menu Flow Updates",
+        items: [
+          "Moved access to the Nine Realms menu into the Journal with a dedicated bottom button.",
+          "Retired the legacy menu ability path and cleaned up older menu ability data.",
+          "Hardened cultivation ability so it is no longer used by auto combat.",
+          "Refreshed the cultivation menu layout into a larger tabbed panel.",
+          "Adjusted cultivation costs from a 4, 3, 2, 1 model to a 3, 2, 1 model."
+        ]
+      },
+      {
+        version: "Version 1.2.0",
+        status: "Released",
+        title: "Shared Immortal Expansion",
+        items: [
+          "Expanded the higher shared immortal realms from five to nine, raising the current shared cap to 18000.",
+          "Shared immortal realms now provide broad cultivation gains, breakthrough rewards, and passive bonuses.",
+          "The cultivation menu now shows current stamina and MP cost per cultivation tick.",
+          "Shared immortal realms now have stronger breakthrough rewards."
+        ]
+      },
+      {
+        version: "Version 1.1.1",
+        status: "Released",
+        title: "Stability And UI Corrections",
+        items: [
+          "Fixed a feat menu stability issue caused by cultivation path preview entries mutating player feat data.",
+          "Hardened Cultivation Initiate ability sync so Cultivate and the Cultivation Menu are granted more safely.",
+          "Corrected Rogue Cultivator menu progress display."
+        ]
+      },
+      {
+        version: "Version 1.1.0",
+        status: "Released",
+        title: "Localization And Rogue Growth",
+        items: [
+          "Added Chinese and Japanese localization.",
+          "Reduced Body Cultivator and Qi Practitioner feat costs from 5 to 2.",
+          "Removed the 999 progress cap for Rogue Cultivators."
+        ]
+      },
+      {
+        version: "Version 1.0.0",
+        status: "Released",
+        title: "Initial Release",
+        items: [
+          "Initial release of Nine Realms: Path of the Dao.",
+          "Added the Cultivation Initiate feat and the Cultivate long action.",
+          "Added hidden cultivation progress, realm thresholds, stages, and breakthrough gates.",
+          "Added Body Cultivator, Qi Practitioner, and Rogue Cultivator support.",
+          "Added passive realm bonuses, breakthrough rewards, the cultivation menu, in-game wiki, and changelog window."
+        ]
+      }
+    ];
+
+    const translations = {
+      en: {
+        pageTitle: "Nine Realms: Path of the Dao",
+        navHome: "Home",
+        navPaths: "Paths",
+        navLore: "Lore Wiki",
+        navRoadmap: "Roadmap",
+        navChangelog: "Changelog",
+        navThanks: "Thanks",
+        supportButton: "Support me",
+        heroEyebrow: "A Xianxia Cultivation Mod For Elin",
+        heroTitle: "Nine Realms: Path of the Dao",
+        heroLede: "Open the first gate, temper flesh into scripture, refine breath into qi, and risk each breakthrough on the long ascent from mortal limits to Dao Ancestor.",
+        heroCopy: "Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.",
+        openArchive: "Open The Archive",
+        readHistory: "Read Release History",
+        statCap: "current total cultivation cap",
+        statRealms: "major realms across mortal and immortal ascent",
+        statModes: "core cultivation modes: Body, Qi, Rogue",
+        statSplit: "path realms plus shared immortal realms",
+        overviewEyebrow: "Current Scripture",
+        overviewTitle: "What The Mod Adds",
+        overviewBody: "A cultivation experience built around pacing, path identity, resource pressure, dangerous bottlenecks, and techniques that make the fantasy readable inside Elin.",
+        journalKicker: "Journal Access",
+        journalTitle: "Find Cultivation In The Player Journal",
+        journalBody: "After awakening Cultivation Initiate, open the in-game player journal and use the Nine Realms entry to reach the cultivation menu. That journal route is the main doorway into the system.",
+        pathsEyebrow: "Three Ways To Walk",
+        pathsTitle: "Choose A Cultivation Identity",
+        pathsBody: "Formal paths gain stronger efficiencies and breakthroughs. Rogues trade certainty for breadth, advancing without crossing formal realm gates.",
+        bodyKicker: "Body",
+        bodyTitle: "Body Cultivator",
+        bodyBody: "Skin to marrow, flesh to iron. Body cultivation leans into direct physical supremacy.",
+        qiKicker: "Qi",
+        qiTitle: "Qi Practitioner",
+        qiBody: "Breath, spirit, and hidden flow. Qi cultivation favors evasion, magical bearing, meditation, and refined reserves.",
+        rogueKicker: "Rogue",
+        rogueTitle: "Rogue Cultivator",
+        rogueBody: "A wanderer without formal inheritance. Rogues can train broadly and slowly, but cannot formally break through.",
+        loreEyebrow: "Archive Of The Nine Realms",
+        loreTitle: "Lore Wiki",
+        loreBody: "Records of realms, abilities, techniques, arts, cultivation systems, and future world lore for sects, NPC cultivators, and pavilions. Filter the archive or search by name, path, mechanic, or flavor text.",
+        filterAll: "All",
+        filterRealms: "Realms",
+        filterAbilities: "Abilities",
+        filterNeutral: "Neutral",
+        filterBody: "Body",
+        filterQi: "Qi",
+        filterWorld: "World",
+        futureArcs: "View Future Arcs",
+        searchPlaceholder: "Search the archive",
+        roadmapEyebrow: "Heavenly Route",
+        roadmapTitle: "Roadmap",
+        roadmapBody: "The foundation arc is complete. The next ascents focus on fuller techniques, rarer treasures, the Eternal Exchange Pavilion, new Dao identities, and a living sect world.",
+        scrollHint: "Scroll sideways to see future milestones",
+        changelogEyebrow: "Release History",
+        changelogTitle: "Changelog",
+        changelogBody: "Released and upcoming changes for Nine Realms, arranged as a compact timeline.",
+        changelogScrollHint: "Scroll sideways for older releases",
+        thanksEyebrow: "Community Acknowledgements",
+        thanksTitle: "Thanks For Shaping The Path",
+        thanksBody: "Nine Realms has been shaped by ideas, feedback, testing, discussion, and support from people who cared enough to help the mod grow.",
+        supportKicker: "Tippers & Supporters",
+        supportTitle: "Ko-fi Support",
+        supportBody: "Thanks to everyone who has tipped or supported through Ko-fi. Tips and support are never required, but they are greatly appreciated and help keep development of Nine Realms moving."
+      },
+      zh: {
+        pageTitle: "九境：道途",
+        navHome: "首页",
+        navPaths: "修行路线",
+        navLore: "设定百科",
+        navRoadmap: "路线图",
+        navChangelog: "更新日志",
+        navThanks: "致谢",
+        supportButton: "支持我",
+        heroEyebrow: "Elin 仙侠修行模组",
+        heroTitle: "九境：道途",
+        heroLede: "开启第一道关隘，将血肉淬成经文，将吐纳炼为真气，在由凡入道的长路上冒险突破，直至道祖之境。",
+        heroCopy: "修行是有代价的闭关：它消耗体力与法力，在境界关口停滞，并奖赏能承受反噬的玩家。模组加入炼体、练气、散修路线，共通仙境，功法术式，日志入口菜单，以及持续扩展的设定档案。",
+        openArchive: "打开档案",
+        readHistory: "查看更新历史",
+        statCap: "当前修行总上限",
+        statRealms: "凡境与仙境合计大境界",
+        statModes: "核心修行模式：炼体、练气、散修",
+        statSplit: "路径九境加共通仙道九境",
+        overviewEyebrow: "当前篇章",
+        overviewTitle: "模组内容",
+        overviewBody: "一个以框架为核心的修行体验，强调节奏、路线身份、资源压力、危险瓶颈，以及能在 Elin 中读得懂的仙侠幻想。",
+        journalKicker: "日志入口",
+        journalTitle: "在玩家日志中找到修行菜单",
+        journalBody: "觉醒修行入门后，打开游戏内玩家日志，并使用 Nine Realms 入口进入修行菜单。该日志入口是当前系统的主要门径。",
+        pathsEyebrow: "三条道途",
+        pathsTitle: "选择修行身份",
+        pathsBody: "正式路线拥有更高效率与突破奖励。散修以确定性换取广度，在不跨越正式境界门槛的情况下继续前进。",
+        bodyKicker: "炼体",
+        bodyTitle: "炼体修士",
+        bodyBody: "由皮入髓，由肉成铁。炼体偏向直接而强硬的肉身优势。",
+        qiKicker: "练气",
+        qiTitle: "练气修士",
+        qiBody: "吐纳、神意与隐脉流转。练气偏向闪避、灵性、冥想与精炼储备。",
+        rogueKicker: "散修",
+        rogueTitle: "散修",
+        rogueBody: "没有正式传承的行者。散修可以更广、更慢地修炼，但无法正式突破。",
+        loreEyebrow: "九境档案",
+        loreTitle: "设定百科",
+        loreBody: "这里记录境界、能力、功法、术式、修行系统，以及未来关于宗门、NPC 修士与楼阁的世界设定。可按名称、路线、机制或风味文本搜索筛选。",
+        filterAll: "全部",
+        filterRealms: "境界",
+        filterAbilities: "能力",
+        filterNeutral: "通用",
+        filterBody: "炼体",
+        filterQi: "练气",
+        filterWorld: "世界",
+        futureArcs: "查看未来篇章",
+        searchPlaceholder: "搜索档案",
+        roadmapEyebrow: "登天路线",
+        roadmapTitle: "路线图",
+        roadmapBody: "基础篇章已经完成。后续将扩展完整功法、稀有宝物、永恒交易阁、新的道途身份，以及更鲜活的宗门世界。",
+        scrollHint: "横向滚动查看未来里程碑",
+        changelogEyebrow: "发布历史",
+        changelogTitle: "更新日志",
+        changelogBody: "已发布与未发布改动汇总为单页时间线。",
+        changelogScrollHint: "横向滚动查看旧版本",
+        thanksEyebrow: "社区致谢",
+        thanksTitle: "感谢共同塑造道途",
+        thanksBody: "九境的成长离不开想法、反馈、测试、讨论与支持。",
+        supportKicker: "打赏与支持者",
+        supportTitle: "Ko-fi 支持",
+        supportBody: "感谢所有通过 Ko-fi 打赏或支持的人。支持从来不是必须的，但我非常感激，它也帮助九境继续开发。"
+      },
+      ja: {
+        pageTitle: "九境：道の道",
+        navHome: "ホーム",
+        navPaths: "修行路",
+        navLore: "設定 Wiki",
+        navRoadmap: "ロードマップ",
+        navChangelog: "更新履歴",
+        navThanks: "謝辞",
+        supportButton: "支援する",
+        heroEyebrow: "Elin 向け仙侠修行 Mod",
+        heroTitle: "Nine Realms: Path of the Dao",
+        heroLede: "最初の門を開き、肉体を経典のように鍛え、呼吸を気へと磨き、凡俗の限界から道祖へ至る長い上昇で突破に挑む。",
+        heroCopy: "修行は意図的な行為です。スタミナとマナを消費し、境界の門で止まり、反動を生き延びた者に報酬を与えます。身体、気、放浪の修行ルート、共有仙境、技法、術、ジャーナル経由のメニュー、拡張されるロア資料を追加します。",
+        openArchive: "資料を開く",
+        readHistory: "更新履歴を見る",
+        statCap: "現在の修行総上限",
+        statRealms: "凡境と仙境を含む大境界数",
+        statModes: "中核修行モード：身体、気、放浪",
+        statSplit: "各道の九境と共有仙境",
+        overviewEyebrow: "現在の巻",
+        overviewTitle: "Mod の追加内容",
+        overviewBody: "進行速度、道の個性、資源圧、危険な瓶頸、そして Elin 内で読み取りやすい仙侠感を重視した修行体験です。",
+        journalKicker: "ジャーナル入口",
+        journalTitle: "プレイヤージャーナルで修行メニューを開く",
+        journalBody: "Cultivation Initiate を覚醒した後、ゲーム内のプレイヤージャーナルから Nine Realms の項目を使って修行メニューへ入ります。",
+        pathsEyebrow: "三つの道",
+        pathsTitle: "修行の個性を選ぶ",
+        pathsBody: "正式な道は効率と突破報酬に優れます。放浪修行者は確実性を捨てて幅広く成長し、正式な門を越えずに進みます。",
+        bodyKicker: "身体",
+        bodyTitle: "身体修行者",
+        bodyBody: "皮膚から骨髄へ、肉体から鉄へ。身体修行は直接的な身体優位に寄ります。",
+        qiKicker: "気",
+        qiTitle: "気修行者",
+        qiBody: "呼吸、精神、隠れた流れ。気修行は回避、霊性、瞑想、精錬された蓄えを重視します。",
+        rogueKicker: "放浪",
+        rogueTitle: "放浪修行者",
+        rogueBody: "正式な継承を持たない放浪者。広くゆっくり鍛えられますが、正式な突破はできません。",
+        loreEyebrow: "九境資料",
+        loreTitle: "ロア Wiki",
+        loreBody: "境界、能力、技法、術、修行システム、そして宗派・NPC 修行者・楼閣など今後の世界ロアの記録です。名前、道、仕組み、フレーバーで検索できます。",
+        filterAll: "全て",
+        filterRealms: "境界",
+        filterAbilities: "能力",
+        filterNeutral: "共通",
+        filterBody: "身体",
+        filterQi: "気",
+        filterWorld: "世界",
+        futureArcs: "今後の章を見る",
+        searchPlaceholder: "資料を検索",
+        roadmapEyebrow: "天へ至る道",
+        roadmapTitle: "ロードマップ",
+        roadmapBody: "基礎編は完成済みです。次は技法、希少な宝物、Eternal Exchange Pavilion、新たな Dao、宗派世界へ進みます。",
+        scrollHint: "横にスクロールして今後の節目を見る",
+        changelogEyebrow: "リリース履歴",
+        changelogTitle: "更新履歴",
+        changelogBody: "公開済み・未公開の変更を単一ページの履歴としてまとめています。",
+        changelogScrollHint: "横にスクロールして過去リリースを見る",
+        thanksEyebrow: "コミュニティ謝辞",
+        thanksTitle: "道を形作ってくれてありがとう",
+        thanksBody: "Nine Realms はアイデア、フィードバック、テスト、議論、支援によって育っています。",
+        supportKicker: "支援者",
+        supportTitle: "Ko-fi 支援",
+        supportBody: "Ko-fi で支援してくれた皆さんに感謝します。支援は必須ではありませんが、開発継続の大きな助けになります。"
+      }
+    };
+
+    Object.assign(translations.en, {
+      footerTitle: "Nine Realms: Path of the Dao",
+      daoEyebrow: "Dao Paths",
+      daoTitle: "Arts Beyond The Three Roads",
+      daoBody: "Dao paths are independent from Body, Qi, and Rogue cultivation. They follow separate requirements, progression rules, and leveling systems, allowing a cultivator's chosen Dao to grow beside their realm without replacing it.",
+      unreleased: "Unreleased",
+      swordDaoKicker: "Sword Dao",
+      swordDaoTitle: "A Single Edge Splits The Clouds",
+      swordDaoBody: "The Sword Dao is the way of intent made sharp. A cultivator tempers heart, breath, and blade until one sword light can cross a thousand li and cut through doubt before it cuts through flesh.",
+      musicDaoKicker: "Dao Of Music",
+      musicDaoTitle: "The World Answers The True Note",
+      musicDaoBody: "The Dao of Music turns rhythm into law and melody into pressure on the soul. One clear note may calm killing intent, call the wind, disturb meridians, or make heaven and earth tremble in harmony.",
+      futureDaoStatus: "Future Dao",
+      futureDaoKicker: "More Paths Await",
+      futureDaoTitle: "The Dao Has Ten Thousand Branches",
+      futureDaoBody: "Not every inheritance has surfaced. Future Dao paths will open new identities with their own trials, thresholds, and methods of enlightenment.",
+      bodyLi1: "Primary growth: STR, END, DEX, PER, WIL, PV",
+      bodyLi2: "Resource reward focus: max HP and stamina",
+      bodyLi3: "Realms culminate in Indestructible Body before immortality",
+      qiLi1: "Primary growth: CHA, PER, LER, WIL, MAG, DV, Meditation",
+      qiLi2: "Resource reward focus: max HP and MP",
+      qiLi3: "Realms culminate in Tribulation Transcendence before immortality",
+      rogueLi1: "Broad stat rolls across physical and spiritual attributes",
+      rogueLi2: "Can progress to the current cap without formal gates",
+      rogueLi3: "Best for flexible, uncertain, outsider-style play",
+      ideasKicker: "Ideas & Feedback",
+      ideasTitle: "Community Contributions",
+      ideasBody: "Thanks to everyone whose suggestions, balance thoughts, bug reports, lore ideas, or discussion helped guide features that made their way into Nine Realms.",
+      ideasLi1: "Feature ideas and cultivation system suggestions",
+      ideasLi2: "Balance feedback from play sessions",
+      ideasLi3: "Bug reports, edge cases, and usability notes",
+      ideasLi4: "Lore, naming, and worldbuilding inspiration",
+      contribHeadshot: "Suggested aura-like domains that spread their influence through nearby allies, inspiring party-wide effects with a more sect technique feel.",
+      contribTangent: "Reported the auto combat mage issue where cultivation was being utilized by the auto combat AI.",
+      supportCta: "Supporters may be listed here as a small thank-you, with permission.",
+      creditTitle: "Credit Notes",
+      creditBody: "Credits are listed with permission where possible. If you would like your name changed, removed, or credited differently, please contact Meowthews on Steam."
+    });
+
+    Object.assign(translations.zh, {
+      footerTitle: "九境：道途",
+      daoEyebrow: "道途",
+      daoTitle: "三路之外的艺与法",
+      daoBody: "道途独立于炼体、练气与散修。它们拥有各自的条件、进度规则与等级系统，能让修士的所悟之道与境界并行成长，而不替代境界。",
+      unreleased: "未发布",
+      swordDaoKicker: "剑道",
+      swordDaoTitle: "一剑光寒，分云裂霄",
+      swordDaoBody: "剑道是意志化锋之路。修士淬炼心、息与刃，直至一缕剑光可越千里，先斩心中迟疑，再斩眼前血肉。",
+      musicDaoKicker: "音律之道",
+      musicDaoTitle: "真音一起，天地相应",
+      musicDaoBody: "音律之道以节拍成法，以旋律压魂。一声清音可平杀意、唤长风、乱经脉，也可令天地随之共鸣震颤。",
+      futureDaoStatus: "未来道途",
+      futureDaoKicker: "更多道途尚在雾中",
+      futureDaoTitle: "大道三千，支流万象",
+      futureDaoBody: "并非所有传承都已现世。未来道途将带来新的身份、试炼、门槛与悟道方法。",
+      bodyLi1: "主要成长：STR、END、DEX、PER、WIL、PV",
+      bodyLi2: "资源奖励重点：最大 HP 与体力",
+      bodyLi3: "凡境终点为不灭体，之后进入仙境",
+      qiLi1: "主要成长：CHA、PER、LER、WIL、MAG、DV、Meditation",
+      qiLi2: "资源奖励重点：最大 HP 与 MP",
+      qiLi3: "凡境终点为渡劫，之后进入仙境",
+      rogueLi1: "在肉身与灵性属性之间进行更广泛成长",
+      rogueLi2: "可推进到当前上限，但不经过正式关口",
+      rogueLi3: "适合灵活、不确定、散修风格的玩法",
+      ideasKicker: "想法与反馈",
+      ideasTitle: "社区贡献",
+      ideasBody: "感谢所有提供建议、平衡想法、问题反馈、设定灵感或讨论的人，这些都帮助九境继续成形。",
+      ideasLi1: "功能想法与修行系统建议",
+      ideasLi2: "游玩过程中的平衡反馈",
+      ideasLi3: "问题报告、边界情况与易用性建议",
+      ideasLi4: "设定、命名与世界观灵感",
+      contribHeadshot: "建议加入能将影响扩散到附近队友的灵域式效果，为更具宗门术法感的队伍效果提供了灵感。",
+      contribTangent: "反馈了自动战斗中法师会使用修炼能力的问题。",
+      supportCta: "在获得许可后，支持者的名字可能会作为一份小小的感谢列在这里。",
+      creditTitle: "署名说明",
+      creditBody: "署名会尽可能在获得许可后列出。如果你希望更改、移除或调整署名，请在 Steam 上联系 Meowthews。"
+    });
+
+    Object.assign(translations.ja, {
+      pageTitle: "九境：道途",
+      heroTitle: "九境：道途",
+      footerTitle: "九境：道途",
+      daoEyebrow: "Dao の道",
+      daoTitle: "三つの道を越える術",
+      daoBody: "Dao の道は身体、気、放浪の修行から独立しています。それぞれ別の条件、進行規則、レベル体系を持ち、境界を置き換えずに修行者の Dao を育てます。",
+      unreleased: "未実装",
+      swordDaoKicker: "剣の Dao",
+      swordDaoTitle: "一筋の刃が雲を分かつ",
+      swordDaoBody: "剣の Dao は、意志を刃に変える道です。修行者は心、呼吸、刃を鍛え、一筋の剣光が千里を越え、肉を斬る前に迷いを断つまで磨きます。",
+      musicDaoKicker: "音楽の Dao",
+      musicDaoTitle: "真の音に世界が応える",
+      musicDaoBody: "音楽の Dao は律を法に、旋律を魂への圧に変えます。一つの澄んだ音は殺意を鎮め、風を呼び、経脈を乱し、天地を調和の中で震わせます。",
+      futureDaoStatus: "未来の Dao",
+      futureDaoKicker: "さらなる道が待つ",
+      futureDaoTitle: "Dao には万の枝がある",
+      futureDaoBody: "すべての継承が現れたわけではありません。今後の Dao は、独自の試練、門、悟りの方法を持つ新しい個性を開きます。",
+      bodyLi1: "主な成長：STR、END、DEX、PER、WIL、PV",
+      bodyLi2: "資源報酬：最大 HP とスタミナ",
+      bodyLi3: "凡境は Indestructible Body で頂点に達し、その後仙境へ進みます",
+      qiLi1: "主な成長：CHA、PER、LER、WIL、MAG、DV、Meditation",
+      qiLi2: "資源報酬：最大 HP と MP",
+      qiLi3: "凡境は Tribulation Transcendence で頂点に達し、その後仙境へ進みます",
+      rogueLi1: "肉体と霊的能力を幅広く伸ばします",
+      rogueLi2: "正式な門を越えずに現在の上限まで進めます",
+      rogueLi3: "柔軟で不確かな放浪者らしい遊び方に向きます",
+      ideasKicker: "アイデアとフィードバック",
+      ideasTitle: "コミュニティ貢献",
+      ideasBody: "提案、バランス意見、不具合報告、ロアの発想、議論によって Nine Realms の機能作りを助けてくれたすべての人に感謝します。",
+      ideasLi1: "機能案と修行システムの提案",
+      ideasLi2: "プレイ中のバランスフィードバック",
+      ideasLi3: "不具合報告、特殊ケース、使いやすさの指摘",
+      ideasLi4: "ロア、命名、世界観のインスピレーション",
+      contribHeadshot: "近くの味方へ影響を広げる領域のような効果を提案し、宗派技法らしいパーティ効果の着想になりました。",
+      contribTangent: "自動戦闘 AI が修行能力を使ってしまう問題を報告しました。",
+      supportCta: "許可を得た支援者は、小さな感謝としてここに掲載される場合があります。",
+      creditTitle: "クレジットについて",
+      creditBody: "クレジットは可能な限り許可を得て掲載します。名前の変更、削除、表記調整を希望する場合は Steam で Meowthews に連絡してください。"
+    });
+
+    const roadmapLocale = {
+      zh: [
+        { status: "已完成", title: "基础篇章", body: "修行系统、境界、突破、菜单流程、百科支持、更新记录、视觉打磨与第一门通用功法，已经构成第一卷根基。", version: "1.0.0 至 1.4.0" },
+        { status: "计划中", title: "完整功法与术式", body: "三条修行路线将获得更完整的功法与术式，让每条路拥有更鲜明的战斗与成长身份。", version: "1.5.0 至 1.8.0" },
+        { status: "物品更新", title: "凡界与仙界之宝", body: "卷轴、天材地宝与神器将深化传承搜寻、物品身份与长期养成规划。", version: "1.9.0" },
+        { status: "2.0.0", title: "永恒交易阁", body: "经典仙侠拍卖楼，修士可购得稀有物品、功法、卷轴与宝物，也可出售自身所得。", version: "拍卖篇章" },
+        { status: "未来篇章", title: "剑道与音律之道", body: "新的道途身份将在当前修行路线之外展开，拥有独立风味、进度轨道与等级系统。", version: "未来系统" },
+        { status: "3.0.0", title: "宗门与 NPC", body: "更广阔的九境世界将以宗门、具名修士与 NPC 存在回应玩家，让修行天地真正活起来。", version: "世界篇章" },
+        { status: "更远之路", title: "道途不止", body: "前路漫漫，道阻且长。纵使山雾遮住下一道关隘，天意步步试炼，修士仍须一息一息地坚持，直到大道再显新途。", version: "未来经卷" }
+      ],
+      ja: [
+        { status: "完了", title: "基礎編", body: "修行システム、境界、突破、メニュー導線、Wiki 支援、更新記録、視覚調整、最初の共通技法が第一の経典として整っています。", version: "1.0.0 から 1.4.0" },
+        { status: "予定", title: "技法と術の拡張", body: "三つの修行ルートにより充実した技法と術を追加し、それぞれの戦闘と成長の個性を強めます。", version: "1.5.0 から 1.8.0" },
+        { status: "アイテム更新", title: "凡界と仙界の宝", body: "巻物、天材地宝、神器が継承探し、アイテム個性、長期育成を深めます。", version: "1.9.0" },
+        { status: "2.0.0", title: "Eternal Exchange Pavilion", body: "希少な品、技法、巻物、宝を買い、自らの発見も売れる仙侠らしい競売楼です。", version: "競売編" },
+        { status: "今後の章", title: "剣の Dao と音楽の Dao", body: "現在の修行ルートを越えて、新しい Dao の個性、進行軌道、独自のレベル体系が開きます。", version: "今後のシステム" },
+        { status: "3.0.0", title: "宗派と NPC", body: "宗派、名を持つ修行者、NPC の存在によって、九境の世界が個人の修行を越えた生きた風景になります。", version: "世界編" },
+        { status: "その先", title: "道は終わらない", body: "前途は遠く長い。山霧が次の門を隠し、天が一歩ごとに試しても、修行者は一息ずつ進み続け、Dao が次の道を示す時を待ちます。", version: "未来の経典" }
+      ]
+    };
+
+    const changelogLocale = {
+      zh: [
+        { version: "版本 1.6.0", status: "已发布", title: "新功法、调试设置与平衡调整", items: ["加入新功法与能力：止息经、隐脉术、冲开小脉、淬骨诀、百痕经与血炉。", "加入修行速度倍率、解锁全部能力、重置进度等设置工具；这些是调试选项，可能破坏正常平衡。", "平衡调整：炼体现在提升 STR、END、DEX、PER 与 PV；练气现在提升 CHA、WIL、MAG、PER、LER、Meditation 与 DV。", "永恒交易阁作为封存的未来系统登场。", "加入清泉灵域与玉帘吐纳，作为练气修士术式。"] },
+        { version: "版本 1.5.0", status: "已发布", title: "功法图标与首批路线术式", items: ["加入玄气疗伤自定义图标。", "加入铁皮功，作为第一门炼体功法。", "加入流脉术，作为第一门练气功法。", "修复世界地图旅行中开启功法导致卡顿的问题。"] },
+        { version: "版本 1.4.0", status: "已发布", title: "通用功法与未来系统基础", items: ["加入第一门通用功法：玄气疗伤。", "开始搭建未来功法、术式与传承卷轴框架。", "加入未来道途与独立等级系统的基础。", "完成修行菜单中的功法页面布局。"] },
+        { version: "版本 1.3.1", status: "已发布", title: "表现与能力打磨", items: ["加入修炼能力自定义图标。", "加入百科链接自定义图标。", "加入自定义修行菜单样式。", "修复修炼能力无法放入快捷栏的问题。"] },
+        { version: "版本 1.3.0", status: "已发布", title: "日志入口与菜单流程更新", items: ["将 Nine Realms 菜单入口移入玩家日志，并加入专用底部按钮。", "移除旧菜单能力路径，并清理旧能力数据。", "强化修炼能力，避免被自动战斗使用。", "将修行菜单刷新为更大的分页面板。", "修行消耗从 4、3、2、1 模型调整为 3、2、1 模型。"] },
+        { version: "版本 1.2.0", status: "已发布", title: "共通仙境扩展", items: ["将更高共通仙境从五境扩展到九境，当前上限提高到 18000。", "共通仙境现在提供更广泛的修行成长、突破奖励与被动加成。", "修行菜单现在显示每次修行的体力与 MP 消耗。", "共通仙境突破奖励进一步增强。"] },
+        { version: "版本 1.1.1", status: "已发布", title: "稳定性与界面修正", items: ["修复修行路线预览条目改变玩家 feat 数据导致的稳定性问题。", "强化修行入门能力同步，使修炼与修行菜单更可靠地授予。", "修正散修菜单进度显示。"] },
+        { version: "版本 1.1.0", status: "已发布", title: "本地化与散修成长", items: ["加入中文与日文。", "炼体修士与练气修士 feat 消耗从 5 降至 2。", "移除散修 999 进度上限。"] },
+        { version: "版本 1.0.0", status: "已发布", title: "初始发布", items: ["九境：道途初始发布。", "加入修行入门 feat 与修炼长动作。", "加入隐藏修行进度、境界门槛、阶段与突破关口。", "加入炼体修士、练气修士与散修支持。", "加入被动境界加成、突破奖励、修行菜单、游戏内百科与更新窗口。"] }
+      ],
+      ja: [
+        { version: "Version 1.6.0", status: "公開済み", title: "新技法、デバッグ設定、バランス調整", items: ["新技法と能力を追加：静息経、隠脈術、小脈を開く、鍛骨術、百傷経、血炉。", "修行速度倍率、全能力解放、進度リセットの設定ツールを追加。これらはデバッグ用で通常バランスを崩す可能性があります。", "バランス調整：身体修行は STR、END、DEX、PER、PV を伸ばし、気修行は CHA、WIL、MAG、PER、LER、Meditation、DV を伸ばします。", "Eternal Exchange Pavilion を封印された今後のシステムとして追加。", "気修行者向けの術として清泉霊域と玉幕吐納を追加。"] },
+        { version: "Version 1.5.0", status: "公開済み", title: "技法アイコンと最初の道の術", items: ["玄気治癒の専用アイコンを追加。", "最初の身体技法として鉄皮功を追加。", "最初の気技法として流脈術を追加。", "ワールドマップ移動中に技法を有効化すると発生する遅延を修正。"] },
+        { version: "Version 1.4.0", status: "公開済み", title: "共通技法と今後の基盤", items: ["最初の共通技法、玄気治癒を追加。", "今後の技法、術、継承巻物の基盤を開始。", "今後の Dao と独自レベルシステムの土台を追加。", "修行メニュー内に技法ページを配置。"] },
+        { version: "Version 1.3.1", status: "公開済み", title: "表示と能力の調整", items: ["修行能力の専用アイコンを追加。", "Wiki リンク用アイコンを追加。", "専用修行メニュースタイルを追加。", "修行能力をホットバーに置けない問題を修正。"] },
+        { version: "Version 1.3.0", status: "公開済み", title: "ジャーナル導線とメニュー更新", items: ["Nine Realms メニューをプレイヤージャーナルへ移動し、専用ボタンを追加。", "旧メニュー能力経路を廃止し、古い能力データを整理。", "修行能力が自動戦闘で使われないよう強化。", "修行メニューをより大きなタブ式パネルへ刷新。", "修行コストを 4、3、2、1 モデルから 3、2、1 モデルへ調整。"] },
+        { version: "Version 1.2.0", status: "公開済み", title: "共有仙境の拡張", items: ["上位共有仙境を五境から九境へ拡張し、現在の上限を 18000 に上昇。", "共有仙境が広い成長、突破報酬、受動ボーナスを提供。", "修行メニューに現在のスタミナと MP コストを表示。", "共有仙境の突破報酬を強化。"] },
+        { version: "Version 1.1.1", status: "公開済み", title: "安定性と UI 修正", items: ["修行ルートのプレビューが player feat data を変化させる安定性問題を修正。", "Cultivation Initiate の同期を強化し、Cultivate と修行メニューをより安全に付与。", "Rogue Cultivator の進度表示を修正。"] },
+        { version: "Version 1.1.0", status: "公開済み", title: "ローカライズと Rogue 成長", items: ["中国語と日本語ローカライズを追加。", "Body Cultivator と Qi Practitioner の feat コストを 5 から 2 に低下。", "Rogue Cultivator の 999 進度上限を撤廃。"] },
+        { version: "Version 1.0.0", status: "公開済み", title: "初期リリース", items: ["九境：道途の初期リリース。", "Cultivation Initiate feat と Cultivate 長時間行動を追加。", "隠し修行進度、境界しきい値、段階、突破門を追加。", "身体修行者、気修行者、放浪修行者に対応。", "受動境界ボーナス、突破報酬、修行メニュー、ゲーム内 Wiki、更新ウィンドウを追加。"] }
+      ]
+    };
+
+    const state = {
+      category: "all",
+      query: "",
+      lang: "en"
+    };
+
+    const loreResults = document.querySelector("#loreResults");
+    const loreSearch = document.querySelector("#loreSearch");
+    const categoryButtons = [...document.querySelectorAll("[data-category]")];
+    const navLinks = [...document.querySelectorAll(".nav a")];
+    const langButtons = [...document.querySelectorAll("[data-lang]")];
+
+    function createList(items, className) {
+      const ul = document.createElement("ul");
+      if (className) ul.className = className;
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      return ul;
+    }
+
+    function getLoreEntry(entry) {
+      const langEntries = loreLocale[state.lang] || {};
+      const localized = langEntries[entry.title];
+      if (!localized) return entry;
+      return {
+        ...entry,
+        ...localized,
+        image: entry.image,
+        category: entry.category
+      };
+    }
+
+    function renderLore() {
+      const query = state.query.trim().toLowerCase();
+      const entries = loreEntries.filter((entry) => {
+        const localized = getLoreEntry(entry);
+        const categoryMatch = state.category === "all" || entry.category === state.category;
+        const entryTags = entry.tags || [];
+        const entryMechanics = entry.mechanics || [];
+        const localizedTags = localized.tags || [];
+        const localizedMechanics = localized.mechanics || [];
+        const haystack = [
+          entry.title,
+          entry.path,
+          entry.flavor,
+          entry.category,
+          ...entryTags,
+          ...entryMechanics,
+          localized.title,
+          localized.path,
+          localized.flavor,
+          ...localizedTags,
+          ...localizedMechanics
+        ].join(" ").toLowerCase();
+        return categoryMatch && (!query || haystack.includes(query));
+      });
+
+      loreResults.innerHTML = "";
+
+      if (!entries.length) {
+        const empty = document.createElement("article");
+        empty.className = "lore-card no-image";
+        empty.innerHTML = "<div><div class='kicker'>No Records Found</div><h3>The archive is quiet.</h3><p>Try another path, technique, or realm keyword.</p></div>";
+        loreResults.appendChild(empty);
+        return;
+      }
+
+      entries.forEach((sourceEntry) => {
+        const entry = getLoreEntry(sourceEntry);
+        const card = document.createElement("article");
+        card.className = `lore-card ${entry.image ? "" : "no-image"}`;
+
+        if (entry.image) {
+          const img = document.createElement("img");
+          img.src = entry.image;
+          img.alt = `${entry.title} icon`;
+          card.appendChild(img);
+        }
+
+        const body = document.createElement("div");
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        (entry.tags || []).forEach((tag) => {
+          const span = document.createElement("span");
+          span.className = "tag";
+          span.textContent = tag;
+          meta.appendChild(span);
+        });
+
+        const kicker = document.createElement("div");
+        kicker.className = "kicker";
+        kicker.textContent = entry.path;
+
+        const title = document.createElement("h3");
+        title.textContent = entry.title;
+
+        const flavor = document.createElement("p");
+        flavor.textContent = entry.flavor;
+
+        body.append(meta, kicker, title, flavor, createList(entry.mechanics || [], "mechanics"));
+        card.appendChild(body);
+        loreResults.appendChild(card);
+      });
+    }
+
+    function renderRoadmap() {
+      const track = document.querySelector("#roadmapTrack");
+      const items = roadmapLocale[state.lang] || roadmap;
+      track.innerHTML = "";
+      track.style.setProperty("--road-count", items.length);
+      items.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "road-card";
+        card.innerHTML = `
+          <span class="tag">${item.status}</span>
+          <h3>${item.title}</h3>
+          <p>${item.body}</p>
+          <span class="status">${item.version}</span>
+        `;
+        track.appendChild(card);
+      });
+    }
+
+    function renderChangelog() {
+      const timeline = document.querySelector("#timeline");
+      const entries = changelogLocale[state.lang] || changelog;
+      timeline.innerHTML = "";
+      entries.forEach((entry) => {
+        const card = document.createElement("article");
+        card.className = "timeline-card";
+        const statusClass = /Unreleased|未发布|未実装/.test(entry.status) ? "status unreleased" : "status";
+        card.innerHTML = `
+          <div class="timeline-head">
+            <span class="tag">${entry.version}</span>
+            <span class="${statusClass}">${entry.status}</span>
+          </div>
+          <h3>${entry.title}</h3>
+        `;
+        card.appendChild(createList(entry.items));
+        timeline.appendChild(card);
+      });
+    }
+
+    function setupFilters() {
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          state.category = button.dataset.category;
+          categoryButtons.forEach((item) => item.classList.toggle("active", item === button));
+          renderLore();
+        });
+      });
+
+      loreSearch.addEventListener("input", (event) => {
+        state.query = event.target.value;
+        renderLore();
+      });
+    }
+
+    function applyLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+      state.lang = lang;
+      document.documentElement.lang = lang;
+      document.title = dict.pageTitle;
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (dict[key]) node.textContent = dict[key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+        const key = node.dataset.i18nPlaceholder;
+        if (dict[key]) node.setAttribute("placeholder", dict[key]);
+      });
+      langButtons.forEach((button) => button.classList.toggle("active", button.dataset.lang === lang));
+      try {
+        window.localStorage.setItem("nine-realms-lang", lang);
+      } catch (error) {
+        document.documentElement.dataset.language = lang;
+      }
+      renderLore();
+      renderRoadmap();
+      renderChangelog();
+      refreshKofiWidget();
+    }
+
+    function setupLanguage() {
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+      });
+      let saved = "en";
+      try {
+        saved = window.localStorage.getItem("nine-realms-lang") || "en";
+      } catch (error) {
+        saved = "en";
+      }
+      applyLanguage(translations[saved] ? saved : "en");
+    }
+
+    function refreshKofiWidget() {
+      if (!window.kofiWidgetOverlay) return;
+
+      document.querySelectorAll("#kofi-widget-overlay, .floatingchat-container-wrap").forEach((node) => {
+        node.remove();
+      });
+
+      window.kofiWidgetOverlay.draw("meowthews", {
+        type: "floating-chat",
+        "floating-chat.donateButton.text": (translations[state.lang] || translations.en).supportButton,
+        "floating-chat.donateButton.background-color": "#a71f16",
+        "floating-chat.donateButton.text-color": "#fff"
+      });
+    }
+
+    function setupCarousel() {
+      const slides = [...document.querySelectorAll(".slide")];
+      let index = 0;
+      window.setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+      }, 4200);
+    }
+
+    function setupReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+    }
+
+    function setupNavSpy() {
+      const sections = navLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = `#${entry.target.id}`;
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === id);
+          });
+        });
+      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
+
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    function setupInkCanvas() {
+      const canvas = document.querySelector(".ink-canvas");
+      const context = canvas.getContext("2d");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const drops = Array.from({ length: reduceMotion ? 12 : 34 }, (_, i) => ({
+        x: Math.random(),
+        y: Math.random(),
+        size: 18 + Math.random() * 70,
+        speed: 0.0007 + Math.random() * 0.0018,
+        alpha: 0.028 + Math.random() * 0.045,
+        hue: i % 4 === 0 ? "167, 31, 22" : i % 5 === 0 ? "201, 146, 40" : "32, 24, 17"
+      }));
+
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(window.innerWidth * ratio);
+        canvas.height = Math.floor(window.innerHeight * ratio);
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      }
+
+      function draw() {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        drops.forEach((drop) => {
+          drop.y += drop.speed;
+          if (drop.y > 1.08) {
+            drop.y = -0.08;
+            drop.x = Math.random();
+          }
+          const x = drop.x * window.innerWidth;
+          const y = drop.y * window.innerHeight;
+          const gradient = context.createRadialGradient(x, y, 0, x, y, drop.size);
+          gradient.addColorStop(0, `rgba(${drop.hue}, ${drop.alpha})`);
+          gradient.addColorStop(0.42, `rgba(${drop.hue}, ${drop.alpha * 0.45})`);
+          gradient.addColorStop(1, `rgba(${drop.hue}, 0)`);
+          context.fillStyle = gradient;
+          context.beginPath();
+          context.ellipse(x, y, drop.size * 0.76, drop.size * 1.16, Math.sin(y * 0.01), 0, Math.PI * 2);
+          context.fill();
+        });
+        if (!reduceMotion) window.requestAnimationFrame(draw);
+      }
+
+      resize();
+      draw();
+      window.addEventListener("resize", resize);
+    }
+
+    renderLore();
+    renderRoadmap();
+    renderChangelog();
+    setupFilters();
+    setupLanguage();
+    setupCarousel();
+    setupReveal();
+    setupNavSpy();
+    setupInkCanvas();
+  </script>
+  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+  <script>
+    refreshKofiWidget();
+  </script>
+</body>
+</html>
