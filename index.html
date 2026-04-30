@@ -747,7 +747,8 @@
       grid-template-columns: 1fr;
     }
 
-    .lore-card img {
+    .lore-card img,
+    .placeholder-icon {
       width: 100%;
       aspect-ratio: 1;
       object-fit: contain;
@@ -755,6 +756,19 @@
       border: 1px solid rgba(32, 24, 17, 0.12);
       background: rgba(255, 255, 255, 0.76);
       image-rendering: pixelated;
+    }
+
+    .placeholder-icon {
+      display: grid;
+      place-items: center;
+      color: rgba(120, 27, 19, 0.7);
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      line-height: 1;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(199, 160, 82, 0.2), transparent 58%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 245, 236, 0.86));
+      box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.58);
     }
 
     .lore-card .meta {
@@ -1088,7 +1102,8 @@
         grid-template-columns: 1fr;
       }
 
-      .lore-card img {
+      .lore-card img,
+      .placeholder-icon {
         width: 96px;
       }
     }
@@ -1149,7 +1164,7 @@
         <div class="section-heading reveal">
           <div>
             <div class="eyebrow" data-i18n="overviewEyebrow">Current Scripture</div>
-            <h2 data-i18n="overviewTitle">What The Mod Adds</h2>
+            <h2 data-i18n="overviewTitle">What This Mod Adds</h2>
             <p data-i18n="overviewBody">A cultivation experience built around pacing, path identity, resource pressure, dangerous bottlenecks, and techniques that make the fantasy readable inside Elin.</p>
           </div>
         </div>
@@ -1550,6 +1565,45 @@
         ]
       },
       {
+        category: "ability",
+        title: "Piercing Qi Finger",
+        path: "Qi Practitioner Ability",
+        placeholderIcon: "?",
+        tags: ["Qi", "Ability", "Single Target"],
+        flavor: "The cultivator gathers breath into one fingertip until meridian force narrows into a bright thread. One point is enough: when qi is condensed without waste, a finger can pierce armor, flesh, and hesitation alike.",
+        mechanics: [
+          "Qi Practitioner only; requires Cultivation Initiate and the technique unlocked.",
+          "Costs 9 MP before realm 5, 7 MP at realm 5+, and 5 MP at realm 9+.",
+          "Deals about 18 + realm * 7 + (MAG + WIL) / 6 magic damage to one target."
+        ]
+      },
+      {
+        category: "ability",
+        title: "Ninefold Spirit Arrow",
+        path: "Qi Practitioner Ability",
+        placeholderIcon: "?",
+        tags: ["Qi", "Ability", "Efficient"],
+        flavor: "Nine faint lights overlap into a single spirit arrow, each layer thin as mist and sharp as intent. It is not the loudest art beneath heaven, but it flies often, true, and with little waste.",
+        mechanics: [
+          "Qi Practitioner only; requires Cultivation Initiate and the technique unlocked.",
+          "Costs 4 MP before realm 5, 3 MP at realm 5+, and 2 MP at realm 9+.",
+          "Deals about 10 + realm * 4 + (MAG + WIL) / 10 magic damage to one target."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Loose Qi Palm",
+        path: "Neutral Ability",
+        placeholderIcon: "?",
+        tags: ["Neutral", "Ability", "Melee"],
+        flavor: "A plain palm, a rough breath, and a scatter of true qi. It is the sort of imperfect art a wandering cultivator survives on before a proper inheritance teaches the hand how to become thunder.",
+        mechanics: [
+          "Requires an adjacent target, Cultivation Initiate, and the technique unlocked.",
+          "Costs 3 stamina and 3 MP.",
+          "Deals impact damage from 10 + (STR + END + MAG + WIL) / 16, then scales with realm by path."
+        ]
+      },
+      {
         category: "neutral",
         title: "Profound Qi Healing",
         path: "Neutral Technique",
@@ -1586,6 +1640,58 @@
           "Max MP increases by 4 + realm * 2.",
           "Max stamina increases by 4 + realm * 2.",
           "Examples: realm 1 gives +6, realm 5 gives +14, and realm 9 gives +22."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Borrowed Foundation Scripture",
+        path: "Neutral Passive",
+        placeholderIcon: "?",
+        tags: ["Neutral", "Passive", "Attributes"],
+        flavor: "A scripture stitched from fragments of other lineages. Its foundation is borrowed, not born from one true source, but even a borrowed stair can lift a mortal one step closer to the clouds.",
+        mechanics: [
+          "Flat passive spread that does not scale with realm.",
+          "Raises STR, END, DEX, PER, LER, WIL, MAG, CHA, and Meditation by 1.",
+          "Useful as a broad early foundation rather than a deep late-realm inheritance."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Fate-Snatching Insight",
+        path: "Neutral Passive",
+        placeholderIcon: "?",
+        tags: ["Neutral", "Passive", "Risk"],
+        flavor: "Some insights are not earned cleanly. The cultivator listens for a loose thread in fate and pulls, stealing a sliver of progress before heaven notices the theft.",
+        mechanics: [
+          "When gaining cultivation progress, has a 6% chance to gain +2 extra progress.",
+          "Has a 2% chance to suffer minor backlash.",
+          "Does not scale with realm."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Dust-Step Evasion",
+        path: "Neutral Technique",
+        placeholderIcon: "?",
+        tags: ["Neutral", "Toggle", "Evasion"],
+        flavor: "A drifting footwork that hides loose qi in the joints and lets each step scatter like dust under a passing robe. The body becomes harder to pin down, though the path of cultivation slows while the art is maintained.",
+        mechanics: [
+          "Neutral toggle technique learned from a future scroll or inheritance source.",
+          "While active, DV +2, with another +1 at realm 4 and realm 8.",
+          "While active, cultivation progress gains are reduced to 90%."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Rootless Meridian",
+        path: "Neutral Passive",
+        placeholderIcon: "?",
+        tags: ["Neutral", "Passive", "Resources"],
+        flavor: "A meridian pattern for cultivators without a stable lineage, winding where orthodox channels refuse to settle. Those who walk without a root learn to carry spare breath and strength inside uncertain vessels.",
+        mechanics: [
+          "Passive resource technique that does not scale with realm.",
+          "Rogue cultivators gain +6 max MP and +6 max stamina.",
+          "Formal Body or Qi paths gain +3 max MP and +3 max stamina."
         ]
       },
       {
@@ -1638,6 +1744,32 @@
           "Before realm 5, spends 3 MP per tick to restore 1 stamina.",
           "At realm 5+, spends 2 MP per tick to restore 2 stamina.",
           "At realm 9+, spends 1 MP per tick to restore 3 stamina."
+        ]
+      },
+      {
+        category: "body",
+        title: "Mountain Ward Aura",
+        path: "Body Support Aura",
+        placeholderIcon: "?",
+        tags: ["Body", "Aura", "Party Support"],
+        flavor: "Blood force settles like a mountain around the party. Blades strike as if against stone steps, and every ally standing within the same field feels the body refiner's stubborn refusal to yield.",
+        mechanics: [
+          "Protects the practitioner and living PC-party members in the current zone.",
+          "Raises PV by 2 + realm / 3 before realm 5, +4 at realm 5+, and +5 at realm 9+.",
+          "While active, reserves 8 + realm * 2 max stamina from the practitioner."
+        ]
+      },
+      {
+        category: "body",
+        title: "Crimson Pulse Aura",
+        path: "Body Support Aura",
+        placeholderIcon: "?",
+        tags: ["Body", "Aura", "Party Support"],
+        flavor: "The practitioner's heartbeat rolls outward in crimson waves, lending vigor to trusted companions. For a moment, the party breathes with one furnace-like pulse.",
+        mechanics: [
+          "Empowers the practitioner and living PC-party members in the current zone.",
+          "Raises max HP by 12 + realm * 6.",
+          "While active, reserves 10 + realm * 3 max stamina from the practitioner."
         ]
       },
       {
@@ -1815,6 +1947,39 @@
             "反噬概率为 min(18, 10 + 境界)%。"
           ]
         },
+        "Piercing Qi Finger": {
+          title: "洞玄指",
+          path: "练气士能力",
+          tags: ["练气", "能力", "单体"],
+          flavor: "修士将吐纳凝于一指，使经脉真劲收束成一线微光。一点即可破敌；真气不散，便能贯甲、透骨，也贯穿心中迟疑。",
+          mechanics: [
+            "仅练气士可用；需要修行入门并解锁此术。",
+            "境界 5 前消耗 9 MP，境界 5+ 消耗 7 MP，境界 9+ 消耗 5 MP。",
+            "对单个目标造成约 18 + 境界 * 7 + (MAG + WIL) / 6 点魔法伤害。"
+          ]
+        },
+        "Ninefold Spirit Arrow": {
+          title: "九叠灵矢",
+          path: "练气士能力",
+          tags: ["练气", "能力", "高效"],
+          flavor: "九重灵光叠成一矢，每一层都薄如雾、利如念。它未必声势惊天，却胜在真、稳、少耗，可频频出手。",
+          mechanics: [
+            "仅练气士可用；需要修行入门并解锁此术。",
+            "境界 5 前消耗 4 MP，境界 5+ 消耗 3 MP，境界 9+ 消耗 2 MP。",
+            "对单个目标造成约 10 + 境界 * 4 + (MAG + WIL) / 10 点魔法伤害。"
+          ]
+        },
+        "Loose Qi Palm": {
+          title: "散气掌",
+          path: "中立能力",
+          tags: ["中立", "能力", "近战"],
+          flavor: "一掌、一息、一缕散乱真气。它是不成体系的粗浅战技，却也是散修在得到真正传承前赖以活命的手段。",
+          mechanics: [
+            "需要目标相邻、修行入门，并解锁此术。",
+            "消耗 3 体力与 3 MP。",
+            "基础冲击伤害为 10 + (STR + END + MAG + WIL) / 16，随后按道途与境界提高。"
+          ]
+        },
         "Profound Qi Healing": {
           title: "玄气疗伤",
           path: "通用功法",
@@ -1846,6 +2011,50 @@
             "最大 MP 增加 4 + 境界 * 2。",
             "最大体力增加 4 + 境界 * 2。",
             "例：境界 1 为 +6，境界 5 为 +14，境界 9 为 +22。"
+          ]
+        },
+        "Borrowed Foundation Scripture": {
+          title: "借基经",
+          path: "中立被动",
+          tags: ["中立", "被动", "属性"],
+          flavor: "由诸家残篇拼成的经诀。根基虽是借来，并非一脉天成，但借来的阶石也能让凡人向云端多迈一步。",
+          mechanics: [
+            "固定的广域被动加成，不随境界提高。",
+            "力量、耐力、敏捷、感知、悟性、意志、魔力、魅力、冥想各 +1。",
+            "适合作为早期广谱根基，而非后期深层传承。"
+          ]
+        },
+        "Fate-Snatching Insight": {
+          title: "夺机悟",
+          path: "中立被动",
+          tags: ["中立", "被动", "风险"],
+          flavor: "有些悟性并非坦然得来。修士聆听命数松动处，趁天意未察，偷取一线修为机缘。",
+          mechanics: [
+            "获得修行进度时，有 6% 概率额外获得 +2 进度。",
+            "有 2% 概率引发轻微反噬。",
+            "不会随境界提高。"
+          ]
+        },
+        "Dust-Step Evasion": {
+          title: "尘步遁身",
+          path: "中立功法",
+          tags: ["中立", "开关", "闪避"],
+          flavor: "一门飘忽身法，将散气藏于关节与步伐之间。一步落下如尘影散开，使身形更难被定住，但运转时修行之路也会稍稍放缓。",
+          mechanics: [
+            "中立开关型功法，未来通过卷轴或传承来源学习。",
+            "开启时 DV +2，并在第 4 与第 8 境界各额外 +1。",
+            "开启时，修为进度获取降至 90%。"
+          ]
+        },
+        "Rootless Meridian": {
+          title: "无根脉",
+          path: "中立被动",
+          tags: ["中立", "被动", "资源"],
+          flavor: "一门无稳定传承者常用的脉法，游走于正统经络不愿停留之处。无根之人，只能把多余的气息与力道藏在不定之脉里。",
+          mechanics: [
+            "不随境界提高的被动资源功法。",
+            "散修获得最大 MP +6 与最大体力 +6。",
+            "正式炼体或练气道途获得最大 MP +3 与最大体力 +3。"
           ]
         },
         "Iron Skin": {
@@ -1890,6 +2099,28 @@
             "境界 5 前，每跳消耗 3 MP 恢复 1 体力。",
             "境界 5+，每跳消耗 2 MP 恢复 2 体力。",
             "境界 9+，每跳消耗 1 MP 恢复 3 体力。"
+          ]
+        },
+        "Mountain Ward Aura": {
+          title: "镇岳血域",
+          path: "炼体辅助灵域",
+          tags: ["炼体", "灵域", "队伍辅助"],
+          flavor: "血力如山岳般沉落在队伍周身。刀剑劈来，仿佛撞上石阶；同域之内的同伴都能感到炼体者不肯退让的沉重意志。",
+          mechanics: [
+            "保护施术者与当前区域内存活的 PC 队友。",
+            "PV 在境界 5 前提高 2 + 境界 / 3，境界 5+ 为 +4，境界 9+ 为 +5。",
+            "开启期间，施术者最大体力保留消耗为 8 + 境界 * 2。"
+          ]
+        },
+        "Crimson Pulse Aura": {
+          title: "赤脉生域",
+          path: "炼体辅助灵域",
+          tags: ["炼体", "灵域", "队伍辅助"],
+          flavor: "施术者心跳化作赤色波纹向外鼓荡，把旺盛血气借给可信同伴。片刻之间，整支队伍仿佛共用一座血火熔炉。",
+          mechanics: [
+            "强化施术者与当前区域内存活的 PC 队友。",
+            "最大 HP 提高 12 + 境界 * 6。",
+            "开启期间，施术者最大体力保留消耗为 10 + 境界 * 3。"
           ]
         },
         "Flowing Meridian": {
@@ -2059,6 +2290,39 @@
             "反動率は min(18, 10 + 境界)% です。"
           ]
         },
+        "Piercing Qi Finger": {
+          title: "洞玄指",
+          path: "気修行者能力",
+          tags: ["気", "能力", "単体"],
+          flavor: "修行者は一指に呼吸を凝らし、経脈の力を細い光へ収束させます。一点に迷いがなければ、その指は鎧も肉も心のためらいも貫きます。",
+          mechanics: [
+            "気修行者専用。Cultivation Initiate とこの術の解放が必要です。",
+            "境界 5 前は 9 MP、境界 5+ は 7 MP、境界 9+ は 5 MP を消費します。",
+            "単体に約 18 + 境界 * 7 + (MAG + WIL) / 6 の魔法ダメージを与えます。"
+          ]
+        },
+        "Ninefold Spirit Arrow": {
+          title: "九重霊矢",
+          path: "気修行者能力",
+          tags: ["気", "能力", "効率"],
+          flavor: "九つの淡い光が重なり、一つの霊矢となります。天地を震わせる大術ではなくとも、少ない消耗で幾度も正確に放てる頼れる一手です。",
+          mechanics: [
+            "気修行者専用。Cultivation Initiate とこの術の解放が必要です。",
+            "境界 5 前は 4 MP、境界 5+ は 3 MP、境界 9+ は 2 MP を消費します。",
+            "単体に約 10 + 境界 * 4 + (MAG + WIL) / 10 の魔法ダメージを与えます。"
+          ]
+        },
+        "Loose Qi Palm": {
+          title: "散気掌",
+          path: "中立能力",
+          tags: ["中立", "能力", "近接"],
+          flavor: "一つの掌、一息、散った気の一筋。粗い術ですが、正式な継承を得る前の放浪修行者が生き延びるための手です。",
+          mechanics: [
+            "隣接した対象、Cultivation Initiate、この術の解放が必要です。",
+            "3 スタミナと 3 MP を消費します。",
+            "基礎衝撃ダメージは 10 + (STR + END + MAG + WIL) / 16。その後、道と境界に応じて伸びます。"
+          ]
+        },
         "Profound Qi Healing": {
           title: "玄気治癒",
           path: "共通技法",
@@ -2090,6 +2354,50 @@
             "最大 MP が 4 + 境界 * 2 増加します。",
             "最大スタミナが 4 + 境界 * 2 増加します。",
             "例：境界 1 で +6、境界 5 で +14、境界 9 で +22。"
+          ]
+        },
+        "Borrowed Foundation Scripture": {
+          title: "借基経",
+          path: "中立受動",
+          tags: ["中立", "受動", "能力"],
+          flavor: "諸流派の断片を継ぎ合わせた経です。借り物の基礎であっても、凡人を雲の上へ一歩近づける階となります。",
+          mechanics: [
+            "境界で伸びない固定の広域受動効果です。",
+            "STR、END、DEX、PER、LER、WIL、MAG、CHA、Meditation をそれぞれ +1。",
+            "深い後期継承ではなく、序盤の広い基礎として役立ちます。"
+          ]
+        },
+        "Fate-Snatching Insight": {
+          title: "奪機悟",
+          path: "中立受動",
+          tags: ["中立", "受動", "危険"],
+          flavor: "すべての悟りが清く得られるとは限りません。修行者は運命の緩んだ糸を聞き取り、天が気づく前に一片の機縁を奪います。",
+          mechanics: [
+            "修行進度を得た時、6% の確率で追加進度 +2。",
+            "2% の確率で軽い反動を受けます。",
+            "境界では伸びません。"
+          ]
+        },
+        "Dust-Step Evasion": {
+          title: "塵歩遁身",
+          path: "中立技法",
+          tags: ["中立", "切替", "回避"],
+          flavor: "関節と歩みに粗い気を潜ませる漂うような身法です。一歩ごとに塵の影が散るように身体を捉えにくくしますが、発動中は修行の歩みも少し遅くなります。",
+          mechanics: [
+            "今後の巻物または継承源から学ぶ中立の切替技法です。",
+            "発動中は DV +2。第4境界と第8境界でさらに +1。",
+            "発動中、修行進度の獲得は 90% になります。"
+          ]
+        },
+        "Rootless Meridian": {
+          title: "根無しの脈",
+          path: "中立受動",
+          tags: ["中立", "受動", "資源"],
+          flavor: "確かな系譜を持たない修行者のための脈法です。正統な経脈が定まらない場所を巡り、根を持たぬ者は不安定な器に余分な息と力を蓄えます。",
+          mechanics: [
+            "境界で伸びない受動資源技法です。",
+            "散修は最大 MP +6 と最大スタミナ +6。",
+            "正式な身体または気の道では最大 MP +3 と最大スタミナ +3。"
           ]
         },
         "Iron Skin": {
@@ -2134,6 +2442,28 @@
             "境界 5 前は tick ごとに 3 MP を消費し 1 スタミナを回復します。",
             "境界 5+ では 2 MP で 2 スタミナを回復します。",
             "境界 9+ では 1 MP で 3 スタミナを回復します。"
+          ]
+        },
+        "Mountain Ward Aura": {
+          title: "鎮岳血域",
+          path: "身体支援霊域",
+          tags: ["身体", "霊域", "隊列支援"],
+          flavor: "血の力が山のように仲間の周囲へ沈みます。刃は石段に打ちつけたように鈍り、同じ場に立つ仲間は身体修行者の退かぬ意志を感じます。",
+          mechanics: [
+            "術者と同じエリアにいる生存中の PC パーティメンバーを守ります。",
+            "PV は境界 5 前で 2 + 境界 / 3、境界 5+ で +4、境界 9+ で +5。",
+            "発動中、術者の最大スタミナを 8 + 境界 * 2 予約します。"
+          ]
+        },
+        "Crimson Pulse Aura": {
+          title: "赤脈生域",
+          path: "身体支援霊域",
+          tags: ["身体", "霊域", "隊列支援"],
+          flavor: "術者の鼓動が赤い波となって広がり、信頼する仲間へ活力を貸します。その一瞬、隊列は一つの血炉で呼吸します。",
+          mechanics: [
+            "術者と同じエリアにいる生存中の PC パーティメンバーを強化します。",
+            "最大 HP を 12 + 境界 * 6 増加させます。",
+            "発動中、術者の最大スタミナを 10 + 境界 * 3 予約します。"
           ]
         },
         "Flowing Meridian": {
@@ -2218,6 +2548,18 @@
     ];
 
     const changelog = [
+      {
+        version: "Version 1.7.0",
+        status: "Unreleased",
+        title: "New Combat Arts, Support Auras, And Neutral Passives",
+        items: [
+          "Added Qi Practitioner abilities: Piercing Qi Finger and Ninefold Spirit Arrow.",
+          "Added the neutral combat ability Loose Qi Palm.",
+          "Added Body support auras: Mountain Ward Aura and Crimson Pulse Aura.",
+          "Added neutral passives: Borrowed Foundation Scripture, Fate-Snatching Insight, and Rootless Meridian.",
+          "Added neutral evasion technique: Dust-Step Evasion."
+        ]
+      },
       {
         version: "Version 1.6.0",
         status: "Released",
@@ -2341,7 +2683,7 @@
         statModes: "core cultivation modes: Body, Qi, Rogue",
         statSplit: "path realms plus shared immortal realms",
         overviewEyebrow: "Current Scripture",
-        overviewTitle: "What The Mod Adds",
+        overviewTitle: "What This Mod Adds",
         overviewBody: "A cultivation experience built around pacing, path identity, resource pressure, dangerous bottlenecks, and techniques that make the fantasy readable inside Elin.",
         journalKicker: "Journal Access",
         journalTitle: "Find Cultivation In The Player Journal",
@@ -2657,6 +2999,7 @@
 
     const changelogLocale = {
       zh: [
+        { version: "版本 1.7.0", status: "未发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。"] },
         { version: "版本 1.6.0", status: "已发布", title: "新功法、调试设置与平衡调整", items: ["加入新功法与能力：止息经、隐脉术、冲开小脉、淬骨诀、百痕经与血炉。", "加入修行速度倍率、解锁全部能力、重置进度等设置工具；这些是调试选项，可能破坏正常平衡。", "平衡调整：炼体现在提升 STR、END、DEX、PER 与 PV；练气现在提升 CHA、WIL、MAG、PER、LER、Meditation 与 DV。", "永恒交易阁作为封存的未来系统登场。", "加入清泉灵域与玉帘吐纳，作为练气修士术式。"] },
         { version: "版本 1.5.0", status: "已发布", title: "功法图标与首批路线术式", items: ["加入玄气疗伤自定义图标。", "加入铁皮功，作为第一门炼体功法。", "加入流脉术，作为第一门练气功法。", "修复世界地图旅行中开启功法导致卡顿的问题。"] },
         { version: "版本 1.4.0", status: "已发布", title: "通用功法与未来系统基础", items: ["加入第一门通用功法：玄气疗伤。", "开始搭建未来功法、术式与传承卷轴框架。", "加入未来道途与独立等级系统的基础。", "完成修行菜单中的功法页面布局。"] },
@@ -2668,6 +3011,7 @@
         { version: "版本 1.0.0", status: "已发布", title: "初始发布", items: ["九境：道途初始发布。", "加入修行入门 feat 与修炼长动作。", "加入隐藏修行进度、境界门槛、阶段与突破关口。", "加入炼体修士、练气修士与散修支持。", "加入被动境界加成、突破奖励、修行菜单、游戏内百科与更新窗口。"] }
       ],
       ja: [
+        { version: "Version 1.7.0", status: "未公開", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。"] },
         { version: "Version 1.6.0", status: "公開済み", title: "新技法、デバッグ設定、バランス調整", items: ["新技法と能力を追加：静息経、隠脈術、小脈を開く、鍛骨術、百傷経、血炉。", "修行速度倍率、全能力解放、進度リセットの設定ツールを追加。これらはデバッグ用で通常バランスを崩す可能性があります。", "バランス調整：身体修行は STR、END、DEX、PER、PV を伸ばし、気修行は CHA、WIL、MAG、PER、LER、Meditation、DV を伸ばします。", "Eternal Exchange Pavilion を封印された今後のシステムとして追加。", "気修行者向けの術として清泉霊域と玉幕吐納を追加。"] },
         { version: "Version 1.5.0", status: "公開済み", title: "技法アイコンと最初の道の術", items: ["玄気治癒の専用アイコンを追加。", "最初の身体技法として鉄皮功を追加。", "最初の気技法として流脈術を追加。", "ワールドマップ移動中に技法を有効化すると発生する遅延を修正。"] },
         { version: "Version 1.4.0", status: "公開済み", title: "共通技法と今後の基盤", items: ["最初の共通技法、玄気治癒を追加。", "今後の技法、術、継承巻物の基盤を開始。", "今後の Dao と独自レベルシステムの土台を追加。", "修行メニュー内に技法ページを配置。"] },
@@ -2719,11 +3063,17 @@
       const query = state.query.trim().toLowerCase();
       const entries = loreEntries.filter((entry) => {
         const localized = getLoreEntry(entry);
-        const categoryMatch = state.category === "all" || entry.category === state.category;
         const entryTags = entry.tags || [];
         const entryMechanics = entry.mechanics || [];
         const localizedTags = localized.tags || [];
         const localizedMechanics = localized.mechanics || [];
+        const facetTerms = [
+          entry.category,
+          localized.category,
+          ...entryTags,
+          ...localizedTags
+        ].filter(Boolean).map((term) => String(term).toLowerCase());
+        const categoryMatch = state.category === "all" || facetTerms.includes(state.category);
         const haystack = [
           entry.title,
           entry.path,
@@ -2753,13 +3103,20 @@
       entries.forEach((sourceEntry) => {
         const entry = getLoreEntry(sourceEntry);
         const card = document.createElement("article");
-        card.className = `lore-card ${entry.image ? "" : "no-image"}`;
+        const hasIcon = entry.image || entry.placeholderIcon;
+        card.className = `lore-card ${hasIcon ? "" : "no-image"}`;
 
         if (entry.image) {
           const img = document.createElement("img");
           img.src = entry.image;
           img.alt = `${entry.title} icon`;
           card.appendChild(img);
+        } else if (entry.placeholderIcon) {
+          const placeholder = document.createElement("div");
+          placeholder.className = "placeholder-icon";
+          placeholder.setAttribute("aria-label", `${entry.title} placeholder icon`);
+          placeholder.textContent = entry.placeholderIcon;
+          card.appendChild(placeholder);
         }
 
         const body = document.createElement("div");
@@ -2813,7 +3170,7 @@
       entries.forEach((entry) => {
         const card = document.createElement("article");
         card.className = "timeline-card";
-        const statusClass = /Unreleased|未发布|未実装/.test(entry.status) ? "status unreleased" : "status";
+        const statusClass = /Unreleased|未发布|未公開|未実装/.test(entry.status) ? "status unreleased" : "status";
         card.innerHTML = `
           <div class="timeline-head">
             <span class="tag">${entry.version}</span>
