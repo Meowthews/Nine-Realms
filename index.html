@@ -393,8 +393,33 @@
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 0.75rem;
       margin-top: 1.4rem;
+    }
+
+    .version-badge {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.68rem 0.82rem;
+      border: 1px solid rgba(201, 146, 40, 0.55);
+      border-left: 4px solid var(--gold);
+      background: rgba(255, 250, 240, 0.76);
+      box-shadow: 4px 4px 0 rgba(117, 20, 15, 0.12);
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .version-badge strong {
+      color: var(--red-dark);
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1;
     }
 
     .brush-button.primary {
@@ -1148,6 +1173,7 @@
           <div class="hero-actions">
             <a class="brush-button primary" href="#lore" data-i18n="openArchive">Open The Archive</a>
             <a class="brush-button" href="#changelog" data-i18n="readHistory">Read Release History</a>
+            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>1.6.0</strong></div>
           </div>
         </div>
       </section>
@@ -2678,6 +2704,7 @@
         heroCopy: "Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.",
         openArchive: "Open The Archive",
         readHistory: "Read Release History",
+        statVersion: "current released version",
         statCap: "current total cultivation cap",
         statRealms: "major realms across mortal and immortal ascent",
         statModes: "core cultivation modes: Body, Qi, Rogue",
@@ -2742,6 +2769,7 @@
         heroCopy: "修行是有代价的闭关：它消耗体力与法力，在境界关口停滞，并奖赏能承受反噬的玩家。模组加入炼体、练气、散修路线，共通仙境，功法术式，日志入口菜单，以及持续扩展的设定档案。",
         openArchive: "打开档案",
         readHistory: "查看更新历史",
+        statVersion: "当前发布版本",
         statCap: "当前修行总上限",
         statRealms: "凡境与仙境合计大境界",
         statModes: "核心修行模式：炼体、练气、散修",
@@ -2806,6 +2834,7 @@
         heroCopy: "修行は意図的な行為です。スタミナとマナを消費し、境界の門で止まり、反動を生き延びた者に報酬を与えます。身体、気、放浪の修行ルート、共有仙境、技法、術、ジャーナル経由のメニュー、拡張されるロア資料を追加します。",
         openArchive: "資料を開く",
         readHistory: "更新履歴を見る",
+        statVersion: "現在の公開版",
         statCap: "現在の修行総上限",
         statRealms: "凡境と仙境を含む大境界数",
         statModes: "中核修行モード：身体、気、放浪",
