@@ -526,6 +526,23 @@
       gap: 1rem;
     }
 
+    .getting-started-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid rgba(117, 20, 15, 0.28);
+      background: rgba(201, 146, 40, 0.16);
+      color: var(--red-dark);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
     .card,
     .feature-card,
     .path-card,
@@ -1072,6 +1089,7 @@
       .feature-grid,
       .path-grid,
       .dao-grid,
+      .getting-started-grid,
       .at-a-glance {
         grid-template-columns: 1fr;
       }
@@ -1171,9 +1189,9 @@
           <p class="lede" data-i18n="heroLede">Open the first gate, temper flesh into scripture, refine breath into qi, and risk each breakthrough on the long ascent from mortal limits to Dao Ancestor.</p>
           <p class="hero-copy" data-i18n="heroCopy">Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.</p>
           <div class="hero-actions">
-            <a class="brush-button primary" href="#lore" data-i18n="openArchive">Open The Archive</a>
+            <a class="brush-button primary" href="#getting-started" data-i18n="startGuide">Getting Started</a>
             <a class="brush-button" href="#changelog" data-i18n="readHistory">Read Release History</a>
-            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>1.6.0</strong></div>
+            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>1.7.0</strong></div>
           </div>
         </div>
       </section>
@@ -1290,6 +1308,44 @@
             <div class="kicker" data-i18n="futureDaoKicker">More Paths Await</div>
             <h3 data-i18n="futureDaoTitle">The Dao Has Ten Thousand Branches</h3>
             <p data-i18n="futureDaoBody">Not every inheritance has surfaced. Future Dao paths will open new identities with their own trials, thresholds, and methods of enlightenment.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="getting-started">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="startEyebrow">First Steps</div>
+            <h2 data-i18n="startTitle">Getting Started</h2>
+            <p data-i18n="startBody">Begin with the first inner gate, open the journal menu, then cultivate until your path begins to take shape.</p>
+          </div>
+        </div>
+
+        <div class="feature-grid getting-started-grid reveal">
+          <article class="feature-card">
+            <span class="step-number">01</span>
+            <h3 data-i18n="startStep1Title">Awaken Cultivation</h3>
+            <p data-i18n="startStep1Body">Obtain the Cultivation Initiate feat. This is the first spark that unlocks Nine Realms progression.</p>
+          </article>
+          <article class="feature-card">
+            <span class="step-number">02</span>
+            <h3 data-i18n="startStep2Title">Open The Journal Menu</h3>
+            <p data-i18n="startStep2Body">After you have Cultivation Initiate, open the player journal and use the Nine Realms entry to access the cultivation menu.</p>
+          </article>
+          <article class="feature-card">
+            <span class="step-number">03</span>
+            <h3 data-i18n="startStep3Title">Cultivate And Rise</h3>
+            <p data-i18n="startStep3Body">Use Cultivate to gather progress, raise your cultivation level, and push toward the next realm gate.</p>
+          </article>
+          <article class="feature-card">
+            <span class="step-number">04</span>
+            <h3 data-i18n="startStep4Title">Choose A Path</h3>
+            <p data-i18n="startStep4Body">When you are ready to commit, take the next cultivation feat to choose Body, Qi, or the slower outsider road of Rogue cultivation.</p>
+          </article>
+          <article class="feature-card">
+            <span class="step-number">05</span>
+            <h3 data-i18n="startStep5Title">Seek Hidden Teachings</h3>
+            <p data-i18n="startStep5Body">Techniques, arts, and skills can be learned from technique scrolls found as rare enemy drops or through the Black Market. Later, deeper treasures will surface through the Eternal Exchange Pavilion.</p>
           </article>
         </div>
       </section>
@@ -2647,7 +2703,7 @@
     const changelog = [
       {
         version: "Version 1.7.0",
-        status: "Unreleased",
+        status: "Released",
         title: "New Combat Arts, Support Auras, And Neutral Passives",
         items: [
           "Added Qi Practitioner abilities: Piercing Qi Finger and Ninefold Spirit Arrow.",
@@ -2656,6 +2712,7 @@
           "Added neutral passives: Borrowed Foundation Scripture, Fate-Snatching Insight, and Rootless Meridian.",
           "Added neutral evasion technique: Dust-Step Evasion.",
           "Added technique scrolls that unlock additional cultivation abilities, arts, and techniques; they can appear very rarely at the Black Market Trader or drop from enemies at a very low chance.",
+          "Reduced Body Cultivator and Qi Practitioner feat costs from 2 to 1.",
           "Improved Japanese translations across the mod."
         ]
       },
@@ -2776,6 +2833,7 @@
         heroLede: "Open the first gate, temper flesh into scripture, refine breath into qi, and risk each breakthrough on the long ascent from mortal limits to Dao Ancestor.",
         heroCopy: "Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.",
         openArchive: "Open The Archive",
+        startGuide: "Getting Started",
         readHistory: "Read Release History",
         statVersion: "current released version",
         statCap: "current total cultivation cap",
@@ -2800,6 +2858,19 @@
         rogueKicker: "Rogue",
         rogueTitle: "Rogue Cultivator",
         rogueBody: "A wanderer without formal inheritance. Rogues can train broadly and slowly, but cannot formally break through.",
+        startEyebrow: "First Steps",
+        startTitle: "Getting Started",
+        startBody: "Begin with the first inner gate, open the journal menu, then cultivate until your path begins to take shape.",
+        startStep1Title: "Awaken Cultivation",
+        startStep1Body: "Obtain the Cultivation Initiate feat. This is the first spark that unlocks Nine Realms progression.",
+        startStep2Title: "Open The Journal Menu",
+        startStep2Body: "After you have Cultivation Initiate, open the player journal and use the Nine Realms entry to access the cultivation menu.",
+        startStep3Title: "Cultivate And Rise",
+        startStep3Body: "Use Cultivate to gather progress, raise your cultivation level, and push toward the next realm gate.",
+        startStep4Title: "Choose A Path",
+        startStep4Body: "When you are ready to commit, take the next cultivation feat to choose Body, Qi, or the slower outsider road of Rogue cultivation.",
+        startStep5Title: "Seek Hidden Teachings",
+        startStep5Body: "Techniques, arts, and skills can be learned from technique scrolls found as rare enemy drops or through the Black Market. Later, deeper treasures will surface through the Eternal Exchange Pavilion.",
         loreEyebrow: "Archive Of The Nine Realms",
         loreTitle: "Lore Wiki",
         loreBody: "Records of realms, abilities, techniques, arts, cultivation systems, and future world lore for sects, NPC cultivators, and pavilions. Filter the archive or search by name, path, mechanic, or flavor text.",
@@ -2842,6 +2913,7 @@
         heroLede: "开启第一道关隘，将血肉淬成经文，将吐纳炼为真气，在由凡入道的长路上冒险突破，直至道祖之境。",
         heroCopy: "修行是有代价的闭关：它消耗体力与法力，在境界关口停滞，并奖赏能承受反噬的玩家。模组加入炼体、练气、散修路线，共通仙境，功法术式，日志入口菜单，以及持续扩展的设定档案。",
         openArchive: "打开档案",
+        startGuide: "入门指南",
         readHistory: "查看更新历史",
         statVersion: "当前发布版本",
         statCap: "当前修行总上限",
@@ -2866,6 +2938,19 @@
         rogueKicker: "散修",
         rogueTitle: "散修",
         rogueBody: "没有正式传承的行者。散修可以更广、更慢地修炼，但无法正式突破。",
+        startEyebrow: "初入道途",
+        startTitle: "入门指南",
+        startBody: "先开启体内第一玄关，进入日志菜单，然后不断修炼，直到你的道途逐渐成形。",
+        startStep1Title: "觉醒修行",
+        startStep1Body: "获得修行入门 feat。这是开启九境成长的第一缕火种。",
+        startStep2Title: "打开日志菜单",
+        startStep2Body: "拥有修行入门后，打开玩家日志，并使用 Nine Realms 入口进入修行菜单。",
+        startStep3Title: "修炼并提升",
+        startStep3Body: "使用修炼来积累进度，提高修行等级，并逐步逼近下一道境界关口。",
+        startStep4Title: "选择道途",
+        startStep4Body: "准备正式踏上道路时，获取下一项修行 feat，选择炼体、练气，或更缓慢的散修之路。",
+        startStep5Title: "寻得隐藏传承",
+        startStep5Body: "功法、术式与技能可通过功法卷轴学习。卷轴可由敌人稀有掉落，或在黑市中寻得；之后，更深的宝物会在永恒交易阁中显现。",
         loreEyebrow: "九境档案",
         loreTitle: "设定百科",
         loreBody: "这里记录境界、能力、功法、术式、修行系统，以及未来关于宗门、NPC 修士与楼阁的世界设定。可按名称、路线、机制或风味文本搜索筛选。",
@@ -2908,6 +2993,7 @@
         heroLede: "最初の門を開き、肉体を経典のように鍛え、呼吸を気へと磨き、凡俗の限界から道祖へ至る長い上昇で突破に挑む。",
         heroCopy: "修行は意図的な行為です。スタミナとマナを消費し、境界の門で止まり、反動を生き延びた者に報酬を与えます。身体、気、放浪の修行ルート、共有仙境、技法、術、ジャーナル経由のメニュー、拡張されるロア資料を追加します。",
         openArchive: "資料を開く",
+        startGuide: "始め方",
         readHistory: "更新履歴を見る",
         statVersion: "現在の公開版",
         statCap: "現在の修行総上限",
@@ -2932,6 +3018,19 @@
         rogueKicker: "放浪",
         rogueTitle: "放浪修行者",
         rogueBody: "正式な継承を持たない放浪者。広くゆっくり鍛えられますが、正式な突破はできません。",
+        startEyebrow: "最初の一歩",
+        startTitle: "始め方",
+        startBody: "まず最初の内なる門を開き、ジャーナルメニューを開いて、道が形を取り始めるまで修行を重ねます。",
+        startStep1Title: "修行を目覚めさせる",
+        startStep1Body: "Cultivation Initiate feat を取得します。これが Nine Realms の成長を開く最初の火種です。",
+        startStep2Title: "ジャーナルメニューを開く",
+        startStep2Body: "Cultivation Initiate を得たら、プレイヤージャーナルを開き、Nine Realms の項目から修行メニューへ入ります。",
+        startStep3Title: "修行して高める",
+        startStep3Body: "Cultivate を使って進度を集め、修行レベルを上げ、次の境界の門へ近づきます。",
+        startStep4Title: "道を選ぶ",
+        startStep4Body: "正式に歩む準備ができたら、次の修行 feat を取得して身体、気、または遅く険しい放浪の道を選びます。",
+        startStep5Title: "隠された継承を探す",
+        startStep5Body: "技法、術、技能は技法巻物から学べます。巻物は敵から稀に落ちるほか、ブラックマーケットで見つかることがあります。後には、より深い宝物が Eternal Exchange Pavilion に現れます。",
         loreEyebrow: "九境資料",
         loreTitle: "ロア Wiki",
         loreBody: "境界、能力、技法、術、修行システム、そして宗派・NPC 修行者・楼閣など今後の世界ロアの記録です。名前、道、仕組み、フレーバーで検索できます。",
@@ -3104,7 +3203,7 @@
 
     const changelogLocale = {
       zh: [
-        { version: "版本 1.7.0", status: "未发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。", "加入可解锁其他修行能力、术式与功法的功法卷轴；可在黑市商人处极低概率出现，也能以极低概率从敌人身上掉落。", "改进模组日文翻译。"] },
+        { version: "版本 1.7.0", status: "已发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。", "加入可解锁其他修行能力、术式与功法的功法卷轴；可在黑市商人处极低概率出现，也能以极低概率从敌人身上掉落。", "炼体修士与练气修士 feat 消耗从 2 降至 1。", "改进模组日文翻译。"] },
         { version: "版本 1.6.0", status: "已发布", title: "新功法、调试设置与平衡调整", items: ["加入新功法与能力：止息经、隐脉术、冲开小脉、淬骨诀、百痕经与血炉。", "加入修行速度倍率、解锁全部能力、重置进度等设置工具；这些是调试选项，可能破坏正常平衡。", "平衡调整：炼体现在提升 STR、END、DEX、PER 与 PV；练气现在提升 CHA、WIL、MAG、PER、LER、Meditation 与 DV。", "永恒交易阁作为封存的未来系统登场。", "加入清泉灵域与玉帘吐纳，作为练气修士术式。"] },
         { version: "版本 1.5.0", status: "已发布", title: "功法图标与首批路线术式", items: ["加入玄气疗伤自定义图标。", "加入铁皮功，作为第一门炼体功法。", "加入流脉术，作为第一门练气功法。", "修复世界地图旅行中开启功法导致卡顿的问题。"] },
         { version: "版本 1.4.0", status: "已发布", title: "通用功法与未来系统基础", items: ["加入第一门通用功法：玄气疗伤。", "开始搭建未来功法、术式与传承卷轴框架。", "加入未来道途与独立等级系统的基础。", "完成修行菜单中的功法页面布局。"] },
@@ -3116,7 +3215,7 @@
         { version: "版本 1.0.0", status: "已发布", title: "初始发布", items: ["九境：道途初始发布。", "加入修行入门 feat 与修炼长动作。", "加入隐藏修行进度、境界门槛、阶段与突破关口。", "加入炼体修士、练气修士与散修支持。", "加入被动境界加成、突破奖励、修行菜单、游戏内百科与更新窗口。"] }
       ],
       ja: [
-        { version: "Version 1.7.0", status: "未公開", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。", "追加の修行能力、術、技法を解放できる技法巻物を追加。ブラックマーケット商人にごく稀に並び、敵からもごく低確率でドロップします。", "Mod 全体の日本語翻訳を改善。"] },
+        { version: "Version 1.7.0", status: "公開済み", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。", "追加の修行能力、術、技法を解放できる技法巻物を追加。ブラックマーケット商人にごく稀に並び、敵からもごく低確率でドロップします。", "Body Cultivator と Qi Practitioner の feat コストを 2 から 1 に低下。", "Mod 全体の日本語翻訳を改善。"] },
         { version: "Version 1.6.0", status: "公開済み", title: "新技法、デバッグ設定、バランス調整", items: ["新技法と能力を追加：静息経、隠脈術、小脈を開く、鍛骨術、百傷経、血炉。", "修行速度倍率、全能力解放、進度リセットの設定ツールを追加。これらはデバッグ用で通常バランスを崩す可能性があります。", "バランス調整：身体修行は STR、END、DEX、PER、PV を伸ばし、気修行は CHA、WIL、MAG、PER、LER、Meditation、DV を伸ばします。", "Eternal Exchange Pavilion を封印された今後のシステムとして追加。", "気修行者向けの術として清泉霊域と玉幕吐納を追加。"] },
         { version: "Version 1.5.0", status: "公開済み", title: "技法アイコンと最初の道の術", items: ["玄気治癒の専用アイコンを追加。", "最初の身体技法として鉄皮功を追加。", "最初の気技法として流脈術を追加。", "ワールドマップ移動中に技法を有効化すると発生する遅延を修正。"] },
         { version: "Version 1.4.0", status: "公開済み", title: "共通技法と今後の基盤", items: ["最初の共通技法、玄気治癒を追加。", "今後の技法、術、継承巻物の基盤を開始。", "今後の Dao と独自レベルシステムの土台を追加。", "修行メニュー内に技法ページを配置。"] },
