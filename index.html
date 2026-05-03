@@ -1314,6 +1314,7 @@
               <button class="tab-button" type="button" data-category="neutral" data-i18n="filterNeutral">Neutral</button>
               <button class="tab-button" type="button" data-category="body" data-i18n="filterBody">Body</button>
               <button class="tab-button" type="button" data-category="qi" data-i18n="filterQi">Qi</button>
+              <button class="tab-button" type="button" data-category="treasure" data-i18n="filterTreasure">Treasure</button>
               <button class="tab-button" type="button" data-category="world" data-i18n="filterWorld">World</button>
             </div>
           </aside>
@@ -1526,6 +1527,32 @@
           "The pavilion is a sealed auction hall for rare techniques, scrolls, and treasures.",
           "Its doors are tied to a later exchange-focused content arc.",
           "Expected to connect long-term item hunting with the broader Nine Realms economy."
+        ]
+      },
+      {
+        category: "world",
+        title: "Meridian Tide Ring",
+        path: "Treasure",
+        image: "https://i.imgur.com/6eCQRQq.png",
+        tags: ["Treasure", "Ring", "Stamina"],
+        flavor: "A Dao-forged ring whose inner tide follows the wearer's meridians. Its current is quiet, but when stamina runs low it sometimes returns a thread of spent strength, like spring water finding an old channel.",
+        mechanics: [
+          "Equippable ring treasure.",
+          "While worn, grants the Meridian Tide condition.",
+          "Each tick has a 25% chance to restore 2 stamina if the wearer is below max stamina."
+        ]
+      },
+      {
+        category: "world",
+        title: "Technique Scrolls",
+        path: "Treasure",
+        image: "https://i.imgur.com/GBZE3hU.jpeg",
+        tags: ["Treasure", "Scroll", "Techniques", "Arts"],
+        flavor: "Nine Realms technique scrolls are sealed inheritances left behind by wandering masters, broken sects, and nameless immortals. Their ink stirs like living qi, revealing hidden arts, forgotten techniques, and new skills only to cultivators whose inner path can bear the teaching.",
+        mechanics: [
+          "A treasure scroll that can teach hidden cultivation abilities, arts, techniques, and skills.",
+          "Some inheritances answer any cultivator; others belong only to a specific path.",
+          "To open one is to borrow a voice from an older Dao and carry its method into your own ascent."
         ]
       },
       {
@@ -1918,6 +1945,28 @@
             "预计把长期寻宝与更广阔的九境经济连接起来。"
           ]
         },
+        "Meridian Tide Ring": {
+          title: "经潮戒",
+          path: "宝物",
+          tags: ["宝物", "戒指", "体力"],
+          flavor: "一枚道铸戒指，内里潮息随佩戴者经脉暗暗流转。其势不显，却会在体力亏空时偶尔返还一缕余力，如春水重寻旧渠。",
+          mechanics: [
+            "可装备的戒指宝物。",
+            "佩戴时获得 Meridian Tide 状态。",
+            "若佩戴者体力未满，每次跳动有 25% 概率恢复 2 点体力。"
+          ]
+        },
+        "Technique Scrolls": {
+          title: "功法卷轴",
+          path: "宝物",
+          tags: ["宝物", "卷轴", "功法", "术式"],
+          flavor: "九境功法卷轴是游方高人、残破宗门与无名仙人留下的封存传承。卷中文字如活气游走，只会向能承受其道的修士显露隐藏术式、遗失功法与新的修行技能。",
+          mechanics: [
+            "宝物卷轴，可教授隐藏修行能力、术式、功法与技能。",
+            "有些传承回应所有修士，有些只属于特定道途。",
+            "展开卷轴，便是借来旧日大道的一缕声音，将其法门纳入自身登阶之路。"
+          ]
+        },
         "Dao Paths": {
           title: "道途",
           path: "独立成长",
@@ -2261,6 +2310,28 @@
             "長期の宝探しと九境の広い経済をつなぐ想定です。"
           ]
         },
+        "Meridian Tide Ring": {
+          title: "経潮の指輪",
+          path: "宝物",
+          tags: ["宝物", "指輪", "スタミナ"],
+          flavor: "道に鍛えられた指輪で、内なる潮が装備者の経脈に沿って静かに巡ります。力を使い果たした時、古い水路を見つける春水のように、わずかなスタミナを戻します。",
+          mechanics: [
+            "装備可能な指輪の宝物です。",
+            "装備中、Meridian Tide 状態を得ます。",
+            "装備者のスタミナが最大未満なら、各 tick で 25% の確率でスタミナを 2 回復します。"
+          ]
+        },
+        "Technique Scrolls": {
+          title: "技法の巻物",
+          path: "宝物",
+          tags: ["宝物", "巻物", "技法", "術"],
+          flavor: "Nine Realms の技法巻物は、放浪の達人、滅びた宗派、名もなき仙人が残した封じられた継承です。墨は生きた気のように揺れ、受け止められる修行者にだけ隠された術、失われた技法、新たな修行の技能を示します。",
+          mechanics: [
+            "隠された修行能力、術、技法、技能を授ける宝物の巻物です。",
+            "すべての修行者に応える継承もあれば、特定の道にしか開かれない継承もあります。",
+            "巻物を開くことは、古き Dao の声を借り、その法を自らの上昇へ刻むことです。"
+          ]
+        },
         "Dao Paths": {
           title: "Dao の道",
           path: "独立進行",
@@ -2545,7 +2616,7 @@
         status: "Item Update",
         title: "Treasures Of The Mortal And Immortal Worlds",
         body: "Scrolls, Natural Treasures, and Artifacts deepen inheritance hunting, item identity, and long-term build planning.",
-        version: "Version 1.9.0"
+        version: "Version 1.7.0 through 1.9.0"
       },
       {
         status: "Version 2.0.0",
@@ -2583,7 +2654,9 @@
           "Added the neutral combat ability Loose Qi Palm.",
           "Added Body support auras: Mountain Ward Aura and Crimson Pulse Aura.",
           "Added neutral passives: Borrowed Foundation Scripture, Fate-Snatching Insight, and Rootless Meridian.",
-          "Added neutral evasion technique: Dust-Step Evasion."
+          "Added neutral evasion technique: Dust-Step Evasion.",
+          "Added technique scrolls that unlock additional cultivation abilities, arts, and techniques; they can appear very rarely at the Black Market Trader or drop from enemies at a very low chance.",
+          "Improved Japanese translations across the mod."
         ]
       },
       {
@@ -2736,6 +2809,7 @@
         filterNeutral: "Neutral",
         filterBody: "Body",
         filterQi: "Qi",
+        filterTreasure: "Treasure",
         filterWorld: "World",
         futureArcs: "View Future Arcs",
         searchPlaceholder: "Search the archive",
@@ -2801,6 +2875,7 @@
         filterNeutral: "通用",
         filterBody: "炼体",
         filterQi: "练气",
+        filterTreasure: "宝物",
         filterWorld: "世界",
         futureArcs: "查看未来篇章",
         searchPlaceholder: "搜索档案",
@@ -2866,6 +2941,7 @@
         filterNeutral: "共通",
         filterBody: "身体",
         filterQi: "気",
+        filterTreasure: "宝物",
         filterWorld: "世界",
         futureArcs: "今後の章を見る",
         searchPlaceholder: "資料を検索",
@@ -3009,7 +3085,7 @@
       zh: [
         { status: "已完成", title: "基础篇章", body: "修行系统、境界、突破、菜单流程、百科支持、更新记录、视觉打磨与第一门通用功法，已经构成第一卷根基。", version: "1.0.0 至 1.4.0" },
         { status: "计划中", title: "完整功法与术式", body: "三条修行路线将获得更完整的功法与术式，让每条路拥有更鲜明的战斗与成长身份。", version: "1.5.0 至 1.8.0" },
-        { status: "物品更新", title: "凡界与仙界之宝", body: "卷轴、天材地宝与神器将深化传承搜寻、物品身份与长期养成规划。", version: "1.9.0" },
+        { status: "物品更新", title: "凡界与仙界之宝", body: "卷轴、天材地宝与神器将深化传承搜寻、物品身份与长期养成规划。", version: "1.7.0 至 1.9.0" },
         { status: "2.0.0", title: "永恒交易阁", body: "经典仙侠拍卖楼，修士可购得稀有物品、功法、卷轴与宝物，也可出售自身所得。", version: "拍卖篇章" },
         { status: "未来篇章", title: "剑道与音律之道", body: "新的道途身份将在当前修行路线之外展开，拥有独立风味、进度轨道与等级系统。", version: "未来系统" },
         { status: "3.0.0", title: "宗门与 NPC", body: "更广阔的九境世界将以宗门、具名修士与 NPC 存在回应玩家，让修行天地真正活起来。", version: "世界篇章" },
@@ -3018,7 +3094,7 @@
       ja: [
         { status: "完了", title: "基礎編", body: "修行システム、境界、突破、メニュー導線、Wiki 支援、更新記録、視覚調整、最初の共通技法が第一の経典として整っています。", version: "1.0.0 から 1.4.0" },
         { status: "予定", title: "技法と術の拡張", body: "三つの修行ルートにより充実した技法と術を追加し、それぞれの戦闘と成長の個性を強めます。", version: "1.5.0 から 1.8.0" },
-        { status: "アイテム更新", title: "凡界と仙界の宝", body: "巻物、天材地宝、神器が継承探し、アイテム個性、長期育成を深めます。", version: "1.9.0" },
+        { status: "アイテム更新", title: "凡界と仙界の宝", body: "巻物、天材地宝、神器が継承探し、アイテム個性、長期育成を深めます。", version: "1.7.0 から 1.9.0" },
         { status: "2.0.0", title: "Eternal Exchange Pavilion", body: "希少な品、技法、巻物、宝を買い、自らの発見も売れる仙侠らしい競売楼です。", version: "競売編" },
         { status: "今後の章", title: "剣の Dao と音楽の Dao", body: "現在の修行ルートを越えて、新しい Dao の個性、進行軌道、独自のレベル体系が開きます。", version: "今後のシステム" },
         { status: "3.0.0", title: "宗派と NPC", body: "宗派、名を持つ修行者、NPC の存在によって、九境の世界が個人の修行を越えた生きた風景になります。", version: "世界編" },
@@ -3028,7 +3104,7 @@
 
     const changelogLocale = {
       zh: [
-        { version: "版本 1.7.0", status: "未发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。"] },
+        { version: "版本 1.7.0", status: "未发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。", "加入可解锁其他修行能力、术式与功法的功法卷轴；可在黑市商人处极低概率出现，也能以极低概率从敌人身上掉落。", "改进模组日文翻译。"] },
         { version: "版本 1.6.0", status: "已发布", title: "新功法、调试设置与平衡调整", items: ["加入新功法与能力：止息经、隐脉术、冲开小脉、淬骨诀、百痕经与血炉。", "加入修行速度倍率、解锁全部能力、重置进度等设置工具；这些是调试选项，可能破坏正常平衡。", "平衡调整：炼体现在提升 STR、END、DEX、PER 与 PV；练气现在提升 CHA、WIL、MAG、PER、LER、Meditation 与 DV。", "永恒交易阁作为封存的未来系统登场。", "加入清泉灵域与玉帘吐纳，作为练气修士术式。"] },
         { version: "版本 1.5.0", status: "已发布", title: "功法图标与首批路线术式", items: ["加入玄气疗伤自定义图标。", "加入铁皮功，作为第一门炼体功法。", "加入流脉术，作为第一门练气功法。", "修复世界地图旅行中开启功法导致卡顿的问题。"] },
         { version: "版本 1.4.0", status: "已发布", title: "通用功法与未来系统基础", items: ["加入第一门通用功法：玄气疗伤。", "开始搭建未来功法、术式与传承卷轴框架。", "加入未来道途与独立等级系统的基础。", "完成修行菜单中的功法页面布局。"] },
@@ -3040,7 +3116,7 @@
         { version: "版本 1.0.0", status: "已发布", title: "初始发布", items: ["九境：道途初始发布。", "加入修行入门 feat 与修炼长动作。", "加入隐藏修行进度、境界门槛、阶段与突破关口。", "加入炼体修士、练气修士与散修支持。", "加入被动境界加成、突破奖励、修行菜单、游戏内百科与更新窗口。"] }
       ],
       ja: [
-        { version: "Version 1.7.0", status: "未公開", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。"] },
+        { version: "Version 1.7.0", status: "未公開", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。", "追加の修行能力、術、技法を解放できる技法巻物を追加。ブラックマーケット商人にごく稀に並び、敵からもごく低確率でドロップします。", "Mod 全体の日本語翻訳を改善。"] },
         { version: "Version 1.6.0", status: "公開済み", title: "新技法、デバッグ設定、バランス調整", items: ["新技法と能力を追加：静息経、隠脈術、小脈を開く、鍛骨術、百傷経、血炉。", "修行速度倍率、全能力解放、進度リセットの設定ツールを追加。これらはデバッグ用で通常バランスを崩す可能性があります。", "バランス調整：身体修行は STR、END、DEX、PER、PV を伸ばし、気修行は CHA、WIL、MAG、PER、LER、Meditation、DV を伸ばします。", "Eternal Exchange Pavilion を封印された今後のシステムとして追加。", "気修行者向けの術として清泉霊域と玉幕吐納を追加。"] },
         { version: "Version 1.5.0", status: "公開済み", title: "技法アイコンと最初の道の術", items: ["玄気治癒の専用アイコンを追加。", "最初の身体技法として鉄皮功を追加。", "最初の気技法として流脈術を追加。", "ワールドマップ移動中に技法を有効化すると発生する遅延を修正。"] },
         { version: "Version 1.4.0", status: "公開済み", title: "共通技法と今後の基盤", items: ["最初の共通技法、玄気治癒を追加。", "今後の技法、術、継承巻物の基盤を開始。", "今後の Dao と独自レベルシステムの土台を追加。", "修行メニュー内に技法ページを配置。"] },
