@@ -902,6 +902,19 @@
       scroll-snap-align: start;
     }
 
+    .road-card.completed {
+      border-color: rgba(62, 127, 101, 0.28);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(240, 236, 225, 0.86)),
+        repeating-linear-gradient(45deg, rgba(32, 24, 17, 0.045) 0 5px, transparent 5px 13px),
+        var(--paper-2);
+      filter: saturate(0.72);
+    }
+
+    .road-card.completed::before {
+      background: linear-gradient(180deg, rgba(62, 127, 101, 0.72), rgba(201, 146, 40, 0.62));
+    }
+
     .road-card::after {
       content: "";
       position: absolute;
@@ -913,6 +926,48 @@
       background: var(--red);
       box-shadow: 0 0 0 2px rgba(32, 24, 17, 0.18);
       transform: rotate(45deg);
+    }
+
+    .road-card.completed::after {
+      background: var(--jade);
+    }
+
+    .completion-stamp {
+      position: absolute;
+      right: 0.95rem;
+      top: 0.95rem;
+      z-index: 2;
+      width: 4.25rem;
+      height: 4.25rem;
+      display: grid;
+      place-items: center;
+      border: 3px double rgba(117, 20, 15, 0.72);
+      color: rgba(117, 20, 15, 0.78);
+      background: rgba(255, 250, 240, 0.34);
+      font-family: "DFKai-SB", "KaiTi", "STKaiti", var(--serif);
+      font-size: 1.1rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
+      transform: rotate(-14deg);
+      mix-blend-mode: multiply;
+      box-shadow: inset 0 0 0 2px rgba(117, 20, 15, 0.20);
+      pointer-events: none;
+    }
+
+    .completion-stamp::before,
+    .completion-stamp::after {
+      content: "";
+      position: absolute;
+      inset: 0.28rem;
+      border: 1px solid rgba(117, 20, 15, 0.44);
+    }
+
+    .completion-stamp::after {
+      inset: 0.62rem;
+      border-style: dashed;
+      opacity: 0.65;
     }
 
     .timeline {
@@ -939,6 +994,75 @@
         linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 250, 240, 0.86)),
         var(--paper-2);
       background-attachment: scroll, scroll, scroll;
+    }
+
+    .timeline-card.released {
+      border-color: rgba(62, 127, 101, 0.28);
+      background:
+        linear-gradient(90deg, rgba(62, 127, 101, 0.70) 0 5px, transparent 5px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(240, 236, 225, 0.88)),
+        repeating-linear-gradient(45deg, rgba(32, 24, 17, 0.045) 0 5px, transparent 5px 13px),
+        var(--paper-2);
+      background-attachment: scroll, scroll, scroll, scroll;
+      filter: saturate(0.72);
+    }
+
+    .timeline-card.released .completion-stamp {
+      right: 0.75rem;
+      top: 0.75rem;
+      width: 3.65rem;
+      height: 3.65rem;
+      font-size: 0.98rem;
+      opacity: 0.92;
+    }
+
+    .timeline-card.skipped {
+      border-color: rgba(94, 81, 65, 0.26);
+      background:
+        linear-gradient(90deg, rgba(94, 81, 65, 0.62) 0 5px, transparent 5px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.50), rgba(231, 228, 219, 0.88)),
+        repeating-linear-gradient(135deg, rgba(32, 24, 17, 0.060) 0 4px, transparent 4px 12px),
+        var(--paper-2);
+      background-attachment: scroll, scroll, scroll, scroll;
+      filter: grayscale(0.28) saturate(0.62);
+    }
+
+    .skip-stamp {
+      position: absolute;
+      right: 0.75rem;
+      top: 0.75rem;
+      z-index: 2;
+      width: 3.75rem;
+      height: 3.75rem;
+      display: grid;
+      place-items: center;
+      border: 3px double rgba(94, 81, 65, 0.78);
+      color: rgba(94, 81, 65, 0.86);
+      background: rgba(255, 250, 240, 0.30);
+      font-family: "DFKai-SB", "KaiTi", "STKaiti", var(--serif);
+      font-size: 0.98rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
+      transform: rotate(12deg);
+      mix-blend-mode: multiply;
+      box-shadow: inset 0 0 0 2px rgba(94, 81, 65, 0.18);
+      pointer-events: none;
+    }
+
+    .skip-stamp::before,
+    .skip-stamp::after {
+      content: "";
+      position: absolute;
+      inset: 0.32rem;
+      border: 1px solid rgba(94, 81, 65, 0.42);
+    }
+
+    .skip-stamp::after {
+      inset: 0.66rem;
+      border-style: dashed;
+      opacity: 0.66;
     }
 
     .timeline-card::before {
@@ -1187,7 +1311,7 @@
           <div class="eyebrow" data-i18n="heroEyebrow">A Xianxia Cultivation Mod For Elin</div>
           <h1><span class="brush-title" data-i18n="heroTitle">Nine Realms: Path of the Dao</span></h1>
           <p class="lede" data-i18n="heroLede">Open the first gate, temper flesh into scripture, refine breath into qi, and risk each breakthrough on the long ascent from mortal limits to Dao Ancestor.</p>
-          <p class="hero-copy" data-i18n="heroCopy">Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.</p>
+          <p class="hero-copy" data-i18n="heroCopy">Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a shortcut-based menu, and an expanding lore archive.</p>
           <div class="hero-actions">
             <a class="brush-button primary" href="#getting-started" data-i18n="startGuide">Getting Started</a>
             <a class="brush-button" href="#changelog" data-i18n="readHistory">Read Release History</a>
@@ -1221,9 +1345,9 @@
           </article>
           <aside class="showcase-panel">
             <div>
-              <div class="kicker" data-i18n="journalKicker">Journal Access</div>
-              <h3 data-i18n="journalTitle">Find Cultivation In The Player Journal</h3>
-              <p data-i18n="journalBody">After awakening Cultivation Initiate, open the in-game player journal and use the Nine Realms entry to reach the cultivation menu. That journal route is the main doorway into the system.</p>
+              <div class="kicker" data-i18n="journalKicker">Shortcut Access</div>
+              <h3 data-i18n="journalTitle">Add Nine Realms To The Shortcut Bar</h3>
+              <p data-i18n="journalBody">After awakening Cultivation Initiate, click an empty shortcut slot and add Nine Realms. The shortcut opens the cultivation menu directly from your hotbar.</p>
               <div class="icon-row" aria-label="Ability icons">
                 <img src="https://i.imgur.com/2M8UdF8.png" alt="Cultivate ability icon">
                 <img src="https://i.imgur.com/HeC3TOK.png" alt="Cultivation menu icon">
@@ -1317,7 +1441,7 @@
           <div>
             <div class="eyebrow" data-i18n="startEyebrow">First Steps</div>
             <h2 data-i18n="startTitle">Getting Started</h2>
-            <p data-i18n="startBody">Begin with the first inner gate, open the journal menu, then cultivate until your path begins to take shape.</p>
+            <p data-i18n="startBody">Begin with the first inner gate, add Nine Realms to the shortcut bar, then cultivate until your path begins to take shape.</p>
           </div>
         </div>
 
@@ -1329,8 +1453,8 @@
           </article>
           <article class="feature-card">
             <span class="step-number">02</span>
-            <h3 data-i18n="startStep2Title">Open The Journal Menu</h3>
-            <p data-i18n="startStep2Body">After you have Cultivation Initiate, open the player journal and use the Nine Realms entry to access the cultivation menu.</p>
+            <h3 data-i18n="startStep2Title">Add The Shortcut</h3>
+            <p data-i18n="startStep2Body">After you have Cultivation Initiate, click an empty shortcut bar slot and add Nine Realms. Use that shortcut to open the cultivation menu.</p>
           </article>
           <article class="feature-card">
             <span class="step-number">03</span>
@@ -1370,6 +1494,7 @@
               <button class="tab-button" type="button" data-category="neutral" data-i18n="filterNeutral">Neutral</button>
               <button class="tab-button" type="button" data-category="body" data-i18n="filterBody">Body</button>
               <button class="tab-button" type="button" data-category="qi" data-i18n="filterQi">Qi</button>
+              <button class="tab-button" type="button" data-category="immortal" data-i18n="filterImmortal">Immortal</button>
               <button class="tab-button" type="button" data-category="treasure" data-i18n="filterTreasure">Treasure</button>
               <button class="tab-button" type="button" data-category="world" data-i18n="filterWorld">World</button>
             </div>
@@ -1439,7 +1564,7 @@
           <div>
             <div class="eyebrow" data-i18n="changelogEyebrow">Release History</div>
             <h2 data-i18n="changelogTitle">Changelog</h2>
-            <p data-i18n="changelogBody">Released and upcoming changes for Nine Realms, arranged as a compact timeline.</p>
+            <p data-i18n="changelogBody">Released and upcoming changes for Nine Realms.</p>
           </div>
         </div>
         <div class="scroll-hint" data-i18n="changelogScrollHint">Scroll sideways for older releases</div>
@@ -1577,12 +1702,12 @@
         category: "world",
         title: "Eternal Exchange Pavilion",
         path: "World Lore",
-        tags: ["World", "Auction", "Pavilion"],
-        flavor: "Beyond mortal markets, cultivators whisper of a pavilion where scrolls, natural treasures, and artifacts change hands beneath sealed lanterns and watchful eyes.",
+        tags: ["World", "Auction", "Pavilion", "Unreleased"],
+        flavor: "Beyond mortal markets, cultivators whisper of a pavilion where scrolls, natural treasures, and artifacts change hands beneath sealed lanterns, scheduled openings, and watchful rival bidders.",
         mechanics: [
-          "The pavilion is a sealed auction hall for rare techniques, scrolls, and treasures.",
-          "Its doors are tied to a later exchange-focused content arc.",
-          "Expected to connect long-term item hunting with the broader Nine Realms economy."
+          "Unreleased Version 2.0.0 feature.",
+          "Auctions first open on day 14, then every 60 days for a 1-day window.",
+          "Players bid on lots, can be countered by NPC bidders, and receive won items when bidding closes."
         ]
       },
       {
@@ -1609,6 +1734,32 @@
           "A treasure scroll that can teach hidden cultivation abilities, arts, techniques, and skills.",
           "Some inheritances answer any cultivator; others belong only to a specific path.",
           "To open one is to borrow a voice from an older Dao and carry its method into your own ascent."
+        ]
+      },
+      {
+        category: "world",
+        title: "Ashen Phoenix Feather",
+        path: "Treasure",
+        image: "https://i.imgur.com/cIwNr0P.png",
+        tags: ["Treasure", "Artifact", "Breakthrough", "Rebirth"],
+        flavor: "A necklace charm woven from a phoenix feather cooled in heavenly ash. It lies quiet against the heart until death reaches out; then one ember remembers the sky.",
+        mechanics: [
+          "Equippable amulet treasure.",
+          "While worn, breakthrough chance increases by 10%.",
+          "Once per day, if the wearer would die, restores them to 1/3 max HP and returns 1/5 max MP and stamina instead."
+        ]
+      },
+      {
+        category: "world",
+        title: "Cloud Palace Seal",
+        path: "Treasure",
+        image: "https://i.imgur.com/BrKGfEm.png",
+        tags: ["Treasure", "Artifact", "Auction", "Pavilion"],
+        flavor: "A jade seal pendant once carried by a minor official of a cloudborne palace. Its stamped mist still knows how to make merchants lower their voices and rivals hesitate.",
+        mechanics: [
+          "Equippable amulet treasure tied to the Eternal Exchange Pavilion.",
+          "While worn, minimum player bids are reduced by 10%, never below the current bid + 1.",
+          "NPC counter-bid chance is multiplied by 0.65 while the seal is equipped."
         ]
       },
       {
@@ -1882,6 +2033,71 @@
         ]
       },
       {
+        category: "body",
+        title: "Dragon Marrow Classic",
+        path: "Body Refiner Art",
+        image: "https://i.imgur.com/s3v1fHR.jpeg",
+        tags: ["Body", "Passive", "HP", "Stamina"],
+        flavor: "Old dragon heat sinks into the bones until the marrow grows heavy with life. The body refiner does not merely endure wounds; the body begins to feel like a vault of blood and breath.",
+        mechanics: [
+          "Body Refiner only; learned from its technique scroll.",
+          "Max HP increases by 24 + realm * 8.",
+          "Max stamina increases by 12 + realm * 5."
+        ]
+      },
+      {
+        category: "body",
+        title: "Adamantine Heart",
+        path: "Body Refiner Art",
+        image: "https://i.imgur.com/KEWl8DI.png",
+        tags: ["Body", "Passive", "PV", "Will"],
+        flavor: "Resolve is hammered inward until the heart rings like vajra metal. Each beat says stand, endure, refuse; the price is a body less willing to flow aside.",
+        mechanics: [
+          "Body Refiner only; learned from its technique scroll.",
+          "Will increases by 4 + realm * 2.",
+          "PV increases by 3 + realm / 2, while DV is reduced by 2."
+        ]
+      },
+      {
+        category: "body",
+        title: "Titan Step",
+        path: "Body Refiner Art",
+        image: "https://i.imgur.com/o3AXBQh.png",
+        tags: ["Body", "Passive", "Strength", "Endurance"],
+        flavor: "Each footfall borrows weight from a buried titan. The ground complains, the bones settle, and enemies learn that retreat is easier than stopping the next step.",
+        mechanics: [
+          "Body Refiner only; learned from its technique scroll.",
+          "Strength and Endurance increase by 5 + realm * 2.",
+          "DV is reduced by 3 while the art is active."
+        ]
+      },
+      {
+        category: "body",
+        title: "Bone-Shattering Blow",
+        path: "Body Refiner Ability",
+        image: "https://i.imgur.com/0bJXc8t.png",
+        tags: ["Body", "Ability", "Melee"],
+        flavor: "The shoulder sinks, the spine coils, and bone force gathers into one brutal line. It is not a graceful art; it is the sound of an enemy's foundation being told to crack.",
+        mechanics: [
+          "Body Refiner only; requires an adjacent target and the technique unlocked.",
+          "Costs 8 stamina before realm 5, 6 stamina at realm 5+, and 5 stamina at realm 9+.",
+          "Deals about 16 + realm * 6 + (STR + END) / 7 impact damage."
+        ]
+      },
+      {
+        category: "body",
+        title: "Mountain Breaker",
+        path: "Body Refiner Ability",
+        image: "https://i.imgur.com/lZW84mX.png",
+        tags: ["Body", "Ability", "Melee", "Finisher"],
+        flavor: "A killing form that treats the earth as an anvil. The refiner stamps down, draws up mountain weight, and lets the strike fall as if a peak has chosen one target.",
+        mechanics: [
+          "Body Refiner only; requires an adjacent target and the technique unlocked.",
+          "Costs 18 stamina before realm 5, 15 stamina at realm 5+, and 12 stamina at realm 9+.",
+          "Deals about 34 + realm * 11 + (STR + END) / 4 + PV / 2 impact damage."
+        ]
+      },
+      {
         category: "qi",
         title: "Flowing Meridian",
         path: "Qi Technique",
@@ -1918,6 +2134,97 @@
           "Learned from a future scroll or inheritance source.",
           "Before realm 5, every 5 technique ticks spends 1 MP and restores 1 HP.",
           "Pulses affect the practitioner and PC-party members alive in the current area."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Star Sea Mantra",
+        path: "Qi Practitioner Art",
+        image: "https://i.imgur.com/KzhBb9P.png",
+        tags: ["Qi", "Passive", "MP", "Magic"],
+        flavor: "The inner sky opens and the dantian becomes a dark sea pricked with stars. Mana rises in glittering tides, though the mortal vessel gives up a little raw stamina to contain it.",
+        mechanics: [
+          "Qi Practitioner only; learned from its technique scroll.",
+          "Max MP increases by 20 + realm * 8, and Magic increases by 6 + realm * 2.",
+          "Max stamina is reduced by 4 + realm."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Thunder Vein Method",
+        path: "Qi Practitioner Art",
+        image: "https://i.imgur.com/daEe47a.png",
+        tags: ["Qi", "Passive", "DV", "Magic"],
+        flavor: "Thunder is threaded through the meridians until perception flashes before thought. The practitioner becomes harder to catch and sharper in spellwork, at the cost of some bodily solidity.",
+        mechanics: [
+          "Qi Practitioner only; learned from its technique scroll.",
+          "Perception and Magic increase by 4 + realm * 2.",
+          "DV increases by 2 + realm / 2, while PV is reduced by 2."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Void Lotus Breath",
+        path: "Qi Practitioner Art",
+        image: "https://i.imgur.com/IuzeX48.png",
+        tags: ["Qi", "Passive", "Breakthrough", "Meditation"],
+        flavor: "A lotus blooms where breath meets emptiness. Each petal steadies the mind, clears the will, and makes the next heavenly gate look slightly less impossible.",
+        mechanics: [
+          "Qi Practitioner only; learned from its technique scroll.",
+          "Learning, Will, and Meditation increase by 5 + realm * 2.",
+          "Breakthrough chance increases by 8 + realm percentage points."
+        ]
+      },
+      {
+        category: "qi",
+        title: "Celestial Mirror Art",
+        path: "Qi Practitioner Art",
+        image: "https://i.imgur.com/5LxEhNb.png",
+        tags: ["Qi", "Passive", "Charisma", "Magic"],
+        flavor: "The soul is polished until it reflects a colder heaven. Words carry more weight, spells answer more cleanly, and the cultivator's presence becomes difficult to ignore.",
+        mechanics: [
+          "Qi Practitioner only; learned from its technique scroll.",
+          "Charisma and Magic increase by 5 + realm * 2.",
+          "A high-realm clarity art for social presence and spell scaling."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Heaven-Devouring Sutra",
+        path: "Immortal Art",
+        placeholderIcon: "天",
+        tags: ["Immortal", "Passive", "Progress", "Overpowered"],
+        flavor: "A forbidden scripture that does not ask heaven for permission. It opens its mouth beneath fate itself, swallowing stray opportunities until progress and raw talent drip from the stolen sky.",
+        mechanics: [
+          "Immortal art; requires shared immortal realm access and its technique scroll.",
+          "Every 5 ticks, grants 25 + realm * 10 cultivation progress.",
+          "Every pulse also grants +1 to a random core attribute. This art is intentionally overpowered."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Myriad Dao Body",
+        path: "Immortal Art",
+        placeholderIcon: "道",
+        tags: ["Immortal", "Passive", "Attributes", "Resources"],
+        flavor: "The body ceases to belong to one road. Bone, breath, will, and spirit become a meeting place for ten thousand methods, each Dao leaving its seal without forcing the others away.",
+        mechanics: [
+          "Immortal art; requires shared immortal realm access and its technique scroll.",
+          "All core attributes and Meditation increase by 12 + realm * 3.",
+          "Max HP, MP, and stamina increase by 50 + realm * 15; PV and DV increase by 8 + realm."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Immortal Sovereign Edict",
+        path: "Immortal Art",
+        placeholderIcon: "令",
+        tags: ["Immortal", "Passive", "Breakthrough", "Efficiency"],
+        flavor: "A decree written in the tone of one who expects heaven to obey. Cultivation cost bends, gates grow weaker, and every movement carries the pressure of an immortal command.",
+        mechanics: [
+          "Immortal art; requires shared immortal realm access and its technique scroll.",
+          "All core attributes and Meditation increase by 8 + realm * 2; PV and DV increase by 5 + realm.",
+          "Cultivation costs are halved, and breakthrough chance increases by 20 percentage points."
         ]
       }
     ];
@@ -1993,12 +2300,12 @@
         "Eternal Exchange Pavilion": {
           title: "永恒交易阁",
           path: "未来世界设定",
-          tags: ["世界", "拍卖", "楼阁"],
-          flavor: "凡俗市场之外，修士们低声谈起一座楼阁：在封印灯火与众目窥视之下，卷轴、天材地宝与神器在其中易主。",
+          tags: ["世界", "拍卖", "楼阁", "未发布"],
+          flavor: "凡俗市场之外，修士们低声谈起一座楼阁：卷轴、天材地宝与神器会在封印灯火、定期开阁与竞拍者窥视之下易主。",
           mechanics: [
-            "框架已经建立；当前入口仍被拒绝。",
-            "计划作为稀有功法、卷轴与宝物的拍卖堂。",
-            "预计把长期寻宝与更广阔的九境经济连接起来。"
+            "未发布的 2.0.0 功能。",
+            "拍卖第 14 天首次开放，之后每 60 天开放 1 天。",
+            "玩家可竞拍拍品，可能被 NPC 反超，并在拍卖结束后收到竞得物品。"
           ]
         },
         "Meridian Tide Ring": {
@@ -2021,6 +2328,28 @@
             "宝物卷轴，可教授隐藏修行能力、术式、功法与技能。",
             "有些传承回应所有修士，有些只属于特定道途。",
             "展开卷轴，便是借来旧日大道的一缕声音，将其法门纳入自身登阶之路。"
+          ]
+        },
+        "Ashen Phoenix Feather": {
+          title: "灰烬凤凰羽",
+          path: "宝物",
+          tags: ["宝物", "神器", "突破", "重生"],
+          flavor: "一枚以天灰冷却的凤凰羽编成的护符，平日贴心无声；直到死亡伸手，余烬才重新想起天空。",
+          mechanics: [
+            "可装备的护符宝物。",
+            "佩戴时，突破概率提高 10%。",
+            "每日一次，若佩戴者将要死亡，则改为恢复至最大 HP 的 1/3，并返还最大 MP 与体力的 1/5。"
+          ]
+        },
+        "Cloud Palace Seal": {
+          title: "云宫印",
+          path: "宝物",
+          tags: ["宝物", "神器", "拍卖", "交易阁"],
+          flavor: "一枚曾由云上宫阙小吏携带的玉印。印中雾气仍懂得让商人压低声音，也让竞争者多迟疑一息。",
+          mechanics: [
+            "与永恒交易阁相关的可装备护符宝物。",
+            "佩戴时，玩家最低出价降低 10%，但不会低于当前出价 + 1。",
+            "佩戴时，NPC 反超出价概率乘以 0.65。"
           ]
         },
         "Dao Paths": {
@@ -2254,6 +2583,41 @@
             "开启期间，施术者最大体力保留消耗为 10 + 境界 * 3。"
           ]
         },
+        "Dragon Marrow Classic": {
+          title: "龙髓经",
+          path: "炼体功法",
+          tags: ["炼体", "被动", "生命", "体力"],
+          flavor: "古龙热息沉入骨中，使髓海丰盈如血色宝库。炼体者不只是承伤，而是让肉身本身成为气血与体力的藏府。",
+          mechanics: ["仅炼体修士可用；通过对应功法卷轴学习。", "最大 HP 提高 24 + 境界 * 8。", "最大体力提高 12 + 境界 * 5。"]
+        },
+        "Adamantine Heart": {
+          title: "金刚心",
+          path: "炼体功法",
+          tags: ["炼体", "被动", "PV", "意志"],
+          flavor: "意志被向内锻打，直到心声如金刚震鸣。每一次跳动都在说：站住、承受、不可退；代价是身法不再轻灵。",
+          mechanics: ["仅炼体修士可用；通过对应功法卷轴学习。", "意志提高 4 + 境界 * 2。", "PV 提高 3 + 境界 / 2，同时 DV 降低 2。"]
+        },
+        "Titan Step": {
+          title: "巨灵踏",
+          path: "炼体功法",
+          tags: ["炼体", "被动", "力量", "耐力"],
+          flavor: "每一步都借来埋骨巨灵的重量。大地低鸣，骨架沉稳，敌人会明白：比起挡住下一步，后退更容易。",
+          mechanics: ["仅炼体修士可用；通过对应功法卷轴学习。", "力量与耐力提高 5 + 境界 * 2。", "激活时 DV 降低 3。"]
+        },
+        "Bone-Shattering Blow": {
+          title: "碎骨击",
+          path: "炼体能力",
+          tags: ["炼体", "能力", "近战"],
+          flavor: "沉肩、拧脊，骨劲凝成一线。这不是优雅的术，而是命令敌人的根基裂开的声音。",
+          mechanics: ["仅炼体修士可用；需要贴身目标并解锁此术。", "境界 5 前消耗 8 体力，境界 5+ 消耗 6 体力，境界 9+ 消耗 5 体力。", "造成约 16 + 境界 * 6 + (STR + END) / 7 点冲击伤害。"]
+        },
+        "Mountain Breaker": {
+          title: "破岳式",
+          path: "炼体能力",
+          tags: ["炼体", "能力", "近战", "杀招"],
+          flavor: "此杀招以大地为砧。修士一脚踏落，拔起山岳之重，再让一座峰峦只砸向一个敌人。",
+          mechanics: ["仅炼体修士可用；需要贴身目标并解锁此术。", "境界 5 前消耗 18 体力，境界 5+ 消耗 15 体力，境界 9+ 消耗 12 体力。", "造成约 34 + 境界 * 11 + (STR + END) / 4 + PV / 2 点冲击伤害。"]
+        },
         "Flowing Meridian": {
           title: "流脉术",
           path: "练气功法",
@@ -2286,6 +2650,55 @@
             "境界 5 前，每 5 次功法跳动消耗 1 MP 并恢复 1 HP。",
             "脉冲影响施术者与当前区域内存活的 PC 队友。"
           ]
+        },
+        "Star Sea Mantra": {
+          title: "星海咒",
+          path: "练气术式",
+          tags: ["练气", "被动", "MP", "魔力"],
+          flavor: "内景天空开启，丹田化作缀满星光的深海。法力随潮涌起，但凡躯必须让出少许体力来容纳这片星海。",
+          mechanics: ["仅练气士可用；通过对应功法卷轴学习。", "最大 MP 提高 20 + 境界 * 8，MAG 提高 6 + 境界 * 2。", "最大体力降低 4 + 境界。"]
+        },
+        "Thunder Vein Method": {
+          title: "雷脉法",
+          path: "练气术式",
+          tags: ["练气", "被动", "DV", "魔力"],
+          flavor: "雷意穿过经脉，使感知先于念头闪动。修士更难被捕捉，术法更锋利，但肉身守势稍弱。",
+          mechanics: ["仅练气士可用；通过对应功法卷轴学习。", "感知与 MAG 提高 4 + 境界 * 2。", "DV 提高 2 + 境界 / 2，同时 PV 降低 2。"]
+        },
+        "Void Lotus Breath": {
+          title: "虚莲息",
+          path: "练气术式",
+          tags: ["练气", "被动", "突破", "冥想"],
+          flavor: "呼吸与虚空相接之处，一朵莲花悄然开放。每片莲瓣都稳住心神、澄清意志，使下一道天关少一分不可及。",
+          mechanics: ["仅练气士可用；通过对应功法卷轴学习。", "学习、意志与 Meditation 提高 5 + 境界 * 2。", "突破概率提高 8 + 境界 个百分点。"]
+        },
+        "Celestial Mirror Art": {
+          title: "天镜术",
+          path: "练气术式",
+          tags: ["练气", "被动", "魅力", "魔力"],
+          flavor: "神魂被打磨成映照冷天的明镜。言语更有分量，术法回应更清，修士的存在感也更难被忽视。",
+          mechanics: ["仅练气士可用；通过对应功法卷轴学习。", "魅力与 MAG 提高 5 + 境界 * 2。", "高境界的澄心之术，用于社交气势与术法成长。"]
+        },
+        "Heaven-Devouring Sutra": {
+          title: "吞天经",
+          path: "仙阶功法",
+          tags: ["仙阶", "被动", "进度", "超规格"],
+          flavor: "这门禁忌经文不向天请命，而是在命数之下张口，吞下游离机缘，让修为与资质从被盗来的苍穹中滴落。",
+          mechanics: ["仙阶功法；需要共通仙境并通过对应功法卷轴学习。", "每 5 次跳动获得 25 + 境界 * 10 修行进度。", "每次脉冲还会使随机核心属性 +1。此功法有意做得极强。"]
+        },
+        "Myriad Dao Body": {
+          title: "万道仙体",
+          path: "仙阶功法",
+          tags: ["仙阶", "被动", "属性", "资源"],
+          flavor: "肉身不再只属于一条路。骨、息、意、神成为万法交会之处，每一条道都留下印记，却不驱逐其他道。",
+          mechanics: ["仙阶功法；需要共通仙境并通过对应功法卷轴学习。", "全部核心属性与 Meditation 提高 12 + 境界 * 3。", "最大 HP、MP、体力提高 50 + 境界 * 15；PV 与 DV 提高 8 + 境界。"]
+        },
+        "Immortal Sovereign Edict": {
+          title: "仙君敕令",
+          path: "仙阶功法",
+          tags: ["仙阶", "被动", "突破", "效率"],
+          flavor: "敕令以命令天道的语气写成。修炼消耗为之弯折，关口随之松动，一举一动都带着仙君法旨的威压。",
+          mechanics: ["仙阶功法；需要共通仙境并通过对应功法卷轴学习。", "全部核心属性与 Meditation 提高 8 + 境界 * 2；PV 与 DV 提高 5 + 境界。", "修炼消耗减半，突破概率提高 20 个百分点。"]
         }
       },
       ja: {
@@ -2358,12 +2771,12 @@
         "Eternal Exchange Pavilion": {
           title: "Eternal Exchange Pavilion",
           path: "今後の世界ロア",
-          tags: ["世界", "競売", "楼閣"],
-          flavor: "俗世の市場の外で、修行者は囁きます。封じられた灯と視線の下、巻物、天材地宝、神器が持ち主を変える楼閣があると。",
+          tags: ["世界", "競売", "楼閣", "未公開"],
+          flavor: "俗世の市場の外で、修行者は囁きます。封じられた灯、定期開催、競り相手の視線の下で、巻物、天材地宝、神器が持ち主を変える楼閣があると。",
           mechanics: [
-            "枠組みは用意済みですが、現在は入場できません。",
-            "希少な技法、巻物、宝物の競売場として予定されています。",
-            "長期の宝探しと九境の広い経済をつなぐ想定です。"
+            "未公開の Version 2.0.0 機能です。",
+            "競売は14日目に初回開催され、その後60日ごとに1日だけ開きます。",
+            "プレイヤーは出品に入札し、NPC に上回られることがあり、締切後に落札品を受け取れます。"
           ]
         },
         "Meridian Tide Ring": {
@@ -2387,6 +2800,20 @@
             "すべての修行者に応える継承もあれば、特定の道にしか開かれない継承もあります。",
             "巻物を開くことは、古き Dao の声を借り、その法を自らの上昇へ刻むことです。"
           ]
+        },
+        "Ashen Phoenix Feather": {
+          title: "灰燼鳳凰の羽",
+          path: "宝物",
+          tags: ["宝物", "神器", "突破", "再生"],
+          flavor: "天の灰で冷やされた鳳凰の羽を編んだ護符。普段は胸元で静かに眠り、死が手を伸ばした時だけ、残り火が空を思い出します。",
+          mechanics: ["装備できる護符の宝物です。", "装備中、突破成功率が 10% 上昇します。", "1日1回、装備者が死ぬ時、最大 HP の 1/3 まで回復し、最大 MP とスタミナの 1/5 を戻して踏みとどまります。"]
+        },
+        "Cloud Palace Seal": {
+          title: "雲宮の印",
+          path: "宝物",
+          tags: ["宝物", "神器", "競売", "交易閣"],
+          flavor: "雲上の宮に仕えた小官が携えた玉印。印の霧は今も商人の声を低くし、競り相手を一瞬ためらわせる術を覚えています。",
+          mechanics: ["Eternal Exchange Pavilion に関わる装備可能な護符です。", "装備中、最低入札額が 10% 下がります。ただし現在入札 + 1 より低くはなりません。", "装備中、NPC の対抗入札確率は 0.65 倍になります。"]
         },
         "Dao Paths": {
           title: "Dao の道",
@@ -2619,6 +3046,41 @@
             "発動中、術者の最大スタミナを 10 + 境界 * 3 予約します。"
           ]
         },
+        "Dragon Marrow Classic": {
+          title: "龍髄経",
+          path: "身体技法",
+          tags: ["身体", "受動", "HP", "スタミナ"],
+          flavor: "古き龍の熱が骨に沈み、髄を血と息の宝庫のように満たします。身体修行者は傷に耐えるだけでなく、肉体そのものを生命の蔵に変えます。",
+          mechanics: ["身体修行者専用。対応する技法巻物から学びます。", "最大 HP が 24 + 境界 * 8 増加します。", "最大スタミナが 12 + 境界 * 5 増加します。"]
+        },
+        "Adamantine Heart": {
+          title: "金剛心",
+          path: "身体技法",
+          tags: ["身体", "受動", "PV", "意志"],
+          flavor: "決意を内側へ鍛え、心音を金剛の響きに変えます。立て、耐えよ、退くなと脈打つ代わりに、身のこなしは重くなります。",
+          mechanics: ["身体修行者専用。対応する技法巻物から学びます。", "意志が 4 + 境界 * 2 増加します。", "PV が 3 + 境界 / 2 増加し、DV が 2 低下します。"]
+        },
+        "Titan Step": {
+          title: "巨霊踏",
+          path: "身体技法",
+          tags: ["身体", "受動", "筋力", "耐久"],
+          flavor: "一歩ごとに眠る巨霊の重みを借ります。大地は低く鳴り、骨格は沈み、敵は次の一歩を止めるより退く方が易いと知ります。",
+          mechanics: ["身体修行者専用。対応する技法巻物から学びます。", "筋力と耐久が 5 + 境界 * 2 増加します。", "発動中、DV が 3 低下します。"]
+        },
+        "Bone-Shattering Blow": {
+          title: "砕骨撃",
+          path: "身体能力",
+          tags: ["身体", "能力", "近接"],
+          flavor: "肩を沈め、背を捻り、骨力を一線に凝縮します。優雅な術ではなく、敵の根基へ砕けよと告げる音です。",
+          mechanics: ["身体修行者専用。隣接対象と技法の解放が必要です。", "境界 5 前はスタミナ 8、境界 5+ は 6、境界 9+ は 5 を消費します。", "約 16 + 境界 * 6 + (STR + END) / 7 の衝撃ダメージを与えます。"]
+        },
+        "Mountain Breaker": {
+          title: "破岳式",
+          path: "身体能力",
+          tags: ["身体", "能力", "近接", "大技"],
+          flavor: "大地を金床にする殺招です。修行者は踏み込み、山の重みを引き上げ、一つの峰を一体の敵へ落とします。",
+          mechanics: ["身体修行者専用。隣接対象と技法の解放が必要です。", "境界 5 前はスタミナ 18、境界 5+ は 15、境界 9+ は 12 を消費します。", "約 34 + 境界 * 11 + (STR + END) / 4 + PV / 2 の衝撃ダメージを与えます。"]
+        },
         "Flowing Meridian": {
           title: "流脈術",
           path: "気技法",
@@ -2651,6 +3113,55 @@
             "境界 5 前は 5 technique tick ごとに 1 MP を消費し 1 HP 回復します。",
             "脈動は術者と同じエリアにいる生存中の PC パーティメンバーに及びます。"
           ]
+        },
+        "Star Sea Mantra": {
+          title: "星海呪",
+          path: "気術",
+          tags: ["気", "受動", "MP", "魔力"],
+          flavor: "内なる空が開き、丹田は星を散らした暗い海になります。MP は輝く潮のように満ちますが、器は少しのスタミナを差し出します。",
+          mechanics: ["気修行者専用。対応する技法巻物から学びます。", "最大 MP が 20 + 境界 * 8、魔力が 6 + 境界 * 2 増加します。", "最大スタミナが 4 + 境界 低下します。"]
+        },
+        "Thunder Vein Method": {
+          title: "雷脈法",
+          path: "気術",
+          tags: ["気", "受動", "DV", "魔力"],
+          flavor: "雷を経脈へ通し、知覚を思考より先に閃かせます。術者は捕まえにくく、術も鋭くなりますが、肉体の守りは少し薄くなります。",
+          mechanics: ["気修行者専用。対応する技法巻物から学びます。", "知覚と魔力が 4 + 境界 * 2 増加します。", "DV が 2 + 境界 / 2 増加し、PV が 2 低下します。"]
+        },
+        "Void Lotus Breath": {
+          title: "虚蓮息",
+          path: "気術",
+          tags: ["気", "受動", "突破", "瞑想"],
+          flavor: "息と空が触れる場所に蓮が咲きます。花弁は心を鎮め、意志を澄ませ、次の天門を少しだけ近くします。",
+          mechanics: ["気修行者専用。対応する技法巻物から学びます。", "学習、意志、Meditation が 5 + 境界 * 2 増加します。", "突破成功率が 8 + 境界 パーセントポイント上昇します。"]
+        },
+        "Celestial Mirror Art": {
+          title: "天鏡術",
+          path: "気術",
+          tags: ["気", "受動", "魅力", "魔力"],
+          flavor: "魂を冷たい天を映す鏡のように磨きます。言葉は重みを持ち、術は澄んで応え、その存在感は無視しにくくなります。",
+          mechanics: ["気修行者専用。対応する技法巻物から学びます。", "魅力と魔力が 5 + 境界 * 2 増加します。", "高境界で存在感と術の伸びを支える澄心の術です。"]
+        },
+        "Heaven-Devouring Sutra": {
+          title: "呑天経",
+          path: "仙階技法",
+          tags: ["仙階", "受動", "進度", "超強力"],
+          flavor: "天へ許しを請わない禁忌の経です。運命の下で口を開き、漂う機縁を呑み、盗んだ空から修行進度と資質を滴らせます。",
+          mechanics: ["仙階技法。共有仙境と対応する技法巻物が必要です。", "5 tick ごとに 25 + 境界 * 10 の修行進度を得ます。", "同時にランダムな核心能力が +1 されます。意図的に非常に強力です。"]
+        },
+        "Myriad Dao Body": {
+          title: "万道仙体",
+          path: "仙階技法",
+          tags: ["仙階", "受動", "能力", "資源"],
+          flavor: "身体は一つの道だけのものではなくなります。骨、息、意志、魂が万法の交差点となり、それぞれの Dao が他を退けず印を残します。",
+          mechanics: ["仙階技法。共有仙境と対応する技法巻物が必要です。", "全核心能力と Meditation が 12 + 境界 * 3 増加します。", "最大 HP、MP、スタミナが 50 + 境界 * 15 増加し、PV と DV が 8 + 境界 増加します。"]
+        },
+        "Immortal Sovereign Edict": {
+          title: "仙君勅令",
+          path: "仙階技法",
+          tags: ["仙階", "受動", "突破", "効率"],
+          flavor: "天道へ命じる調子で書かれた勅令です。修行コストは曲がり、門は緩み、すべての動きに仙君の命令の圧が宿ります。",
+          mechanics: ["仙階技法。共有仙境と対応する技法巻物が必要です。", "全核心能力と Meditation が 8 + 境界 * 2 増加し、PV と DV が 5 + 境界 増加します。", "修行コストが半減し、突破成功率が 20 パーセントポイント上昇します。"]
         }
       }
     };
@@ -2658,27 +3169,30 @@
    const roadmap = [
       {
         status: "Completed",
+        completed: true,
         title: "Foundation Arc",
         body: "Cultivation systems, realms, breakthroughs, menu flow, wiki support, changelogs, visual polish, and the first neutral technique stand as the completed first scripture.",
         version: "Versions 1.0.0 through 1.4.0"
       },
       {
-        status: "Planned",
+        status: "Completed",
+        completed: true,
         title: "Completed Techniques & Arts",
         body: "The three cultivation paths receive fuller suites of techniques and arts, giving each route a stronger combat and progression identity.",
-        version: "Versions 1.5.0 through 1.8.0"
+        version: "Versions 1.5.0 through 1.8.0, with 1.8.0 skipped into 2.0.0"
       },
       {
-        status: "Item Update",
+        status: "Completed",
+        completed: true,
         title: "Treasures Of The Mortal And Immortal Worlds",
         body: "Scrolls, Natural Treasures, and Artifacts deepen inheritance hunting, item identity, and long-term build planning.",
-        version: "Version 1.7.0 through 1.9.0"
+        version: "Version 1.7.0 through 1.9.0, with 1.9.0 skipped into 2.0.0"
       },
       {
         status: "Version 2.0.0",
         title: "Eternal Exchange Pavilion",
-        body: "A classic xianxia auction hall where cultivators can buy rare items, techniques, scrolls, and treasures, then sell their own finds.",
-        version: "Auction arc"
+        body: "A classic xianxia auction hall where cultivators can bid on rare items, techniques, scrolls, and treasures through scheduled auctions and rival bidders.",
+        version: "Unreleased auction arc"
       },
       {
         status: "Future Arc",
@@ -2702,6 +3216,40 @@
 
     const changelog = [
       {
+        version: "Version 2.0.0",
+        status: "Unreleased",
+        title: "Eternal Exchange Pavilion",
+        items: [
+          "Adds the Eternal Exchange Pavilion auction hall for rare technique manuals, scrolls, artifacts, and valuable Elin items.",
+          "Auctions open on a schedule, starting on day 14 and returning every 60 days for a 1-day window.",
+          "Players can place bids, hold the leading bid, be countered by rival bidders, and receive won lots directly when bidding closes.",
+          "Cloud Palace Seal support lowers minimum bids and reduces rival counter-bid pressure.",
+          "This is the next active development target after skipping 1.8.0 and 1.9.0."
+        ]
+      },
+      {
+        version: "Version 1.9.0",
+        status: "Skipped",
+        title: "Artifact Treasures",
+        items: [
+          "Planned item batch for Ashen Phoenix Feather and Cloud Palace Seal.",
+          "Ashen Phoenix Feather raises breakthrough chance by 10% and can prevent death once per day.",
+          "Cloud Palace Seal improves Eternal Exchange Pavilion bidding by lowering minimum bids and reducing NPC counter-bid odds.",
+          "This version is being skipped so the work can land with Version 2.0.0."
+        ]
+      },
+      {
+        version: "Version 1.8.0",
+        status: "Skipped",
+        title: "Expanded Body, Qi, And Immortal Arts",
+        items: [
+          "Planned Body Refiner arts: Dragon Marrow Classic, Adamantine Heart, Titan Step, Bone-Shattering Blow, and Mountain Breaker.",
+          "Planned Qi Practitioner arts: Star Sea Mantra, Thunder Vein Method, Void Lotus Breath, and Celestial Mirror Art.",
+          "Planned Immortal arts: Heaven-Devouring Sutra, Myriad Dao Body, and Immortal Sovereign Edict.",
+          "This version is being skipped so development can jump directly toward Version 2.0.0."
+        ]
+      },
+      {
         version: "Version 1.7.0",
         status: "Released",
         title: "New Combat Arts, Support Auras, And Neutral Passives",
@@ -2712,6 +3260,7 @@
           "Added neutral passives: Borrowed Foundation Scripture, Fate-Snatching Insight, and Rootless Meridian.",
           "Added neutral evasion technique: Dust-Step Evasion.",
           "Added technique scrolls that unlock additional cultivation abilities, arts, and techniques; they can appear very rarely at the Black Market Trader or drop from enemies at a very low chance.",
+          "Moved Nine Realms menu access to the shortcut bar: click an empty shortcut slot and add Nine Realms.",
           "Reduced Body Cultivator and Qi Practitioner feat costs from 2 to 1.",
           "Improved Japanese translations across the mod."
         ]
@@ -2764,9 +3313,9 @@
       {
         version: "Version 1.3.0",
         status: "Released",
-        title: "Journal Access And Menu Flow Updates",
+        title: "Menu Flow Updates",
         items: [
-          "Moved access to the Nine Realms menu into the Journal with a dedicated bottom button.",
+          "Updated the Nine Realms menu access flow.",
           "Retired the legacy menu ability path and cleaned up older menu ability data.",
           "Hardened cultivation ability so it is no longer used by auto combat.",
           "Refreshed the cultivation menu layout into a larger tabbed panel.",
@@ -2831,7 +3380,7 @@
         heroEyebrow: "A Xianxia Cultivation Mod For Elin",
         heroTitle: "Nine Realms: Path of the Dao",
         heroLede: "Open the first gate, temper flesh into scripture, refine breath into qi, and risk each breakthrough on the long ascent from mortal limits to Dao Ancestor.",
-        heroCopy: "Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a journal-based menu, and an expanding lore archive.",
+        heroCopy: "Cultivation is deliberate: it drains stamina and mana, pauses at realm gates, and rewards the player who survives the backlash. The mod adds Body, Qi, and Rogue cultivation routes, shared immortal realms, techniques, arts, a shortcut-based menu, and an expanding lore archive.",
         openArchive: "Open The Archive",
         startGuide: "Getting Started",
         readHistory: "Read Release History",
@@ -2843,9 +3392,9 @@
         overviewEyebrow: "Current Scripture",
         overviewTitle: "What This Mod Adds",
         overviewBody: "A cultivation experience built around pacing, path identity, resource pressure, dangerous bottlenecks, and techniques that make the fantasy readable inside Elin.",
-        journalKicker: "Journal Access",
-        journalTitle: "Find Cultivation In The Player Journal",
-        journalBody: "After awakening Cultivation Initiate, open the in-game player journal and use the Nine Realms entry to reach the cultivation menu. That journal route is the main doorway into the system.",
+        journalKicker: "Shortcut Access",
+        journalTitle: "Add Nine Realms To The Shortcut Bar",
+        journalBody: "After awakening Cultivation Initiate, click an empty shortcut slot and add Nine Realms. The shortcut opens the cultivation menu directly from your hotbar.",
         pathsEyebrow: "Three Ways To Walk",
         pathsTitle: "Choose A Cultivation Identity",
         pathsBody: "Formal paths gain stronger efficiencies and breakthroughs. Rogues trade certainty for breadth, advancing without crossing formal realm gates.",
@@ -2860,11 +3409,11 @@
         rogueBody: "A wanderer without formal inheritance. Rogues can train broadly and slowly, but cannot formally break through.",
         startEyebrow: "First Steps",
         startTitle: "Getting Started",
-        startBody: "Begin with the first inner gate, open the journal menu, then cultivate until your path begins to take shape.",
+        startBody: "Begin with the first inner gate, add Nine Realms to the shortcut bar, then cultivate until your path begins to take shape.",
         startStep1Title: "Awaken Cultivation",
         startStep1Body: "Obtain the Cultivation Initiate feat. This is the first spark that unlocks Nine Realms progression.",
-        startStep2Title: "Open The Journal Menu",
-        startStep2Body: "After you have Cultivation Initiate, open the player journal and use the Nine Realms entry to access the cultivation menu.",
+        startStep2Title: "Add The Shortcut",
+        startStep2Body: "After you have Cultivation Initiate, click an empty shortcut bar slot and add Nine Realms. Use that shortcut to open the cultivation menu.",
         startStep3Title: "Cultivate And Rise",
         startStep3Body: "Use Cultivate to gather progress, raise your cultivation level, and push toward the next realm gate.",
         startStep4Title: "Choose A Path",
@@ -2880,6 +3429,7 @@
         filterNeutral: "Neutral",
         filterBody: "Body",
         filterQi: "Qi",
+        filterImmortal: "Immortal",
         filterTreasure: "Treasure",
         filterWorld: "World",
         futureArcs: "View Future Arcs",
@@ -2890,7 +3440,7 @@
         scrollHint: "Scroll sideways to see future milestones",
         changelogEyebrow: "Release History",
         changelogTitle: "Changelog",
-        changelogBody: "Released and upcoming changes for Nine Realms, arranged as a compact timeline.",
+        changelogBody: "Released and upcoming changes for Nine Realms.",
         changelogScrollHint: "Scroll sideways for older releases",
         thanksEyebrow: "Community Acknowledgements",
         thanksTitle: "Thanks For Shaping The Path",
@@ -2911,7 +3461,7 @@
         heroEyebrow: "Elin 仙侠修行模组",
         heroTitle: "九境：道途",
         heroLede: "开启第一道关隘，将血肉淬成经文，将吐纳炼为真气，在由凡入道的长路上冒险突破，直至道祖之境。",
-        heroCopy: "修行是有代价的闭关：它消耗体力与法力，在境界关口停滞，并奖赏能承受反噬的玩家。模组加入炼体、练气、散修路线，共通仙境，功法术式，日志入口菜单，以及持续扩展的设定档案。",
+        heroCopy: "修行是有代价的闭关：它消耗体力与法力，在境界关口停滞，并奖赏能承受反噬的玩家。模组加入炼体、练气、散修路线，共通仙境，功法术式，快捷栏入口菜单，以及持续扩展的设定档案。",
         openArchive: "打开档案",
         startGuide: "入门指南",
         readHistory: "查看更新历史",
@@ -2923,9 +3473,9 @@
         overviewEyebrow: "当前篇章",
         overviewTitle: "模组内容",
         overviewBody: "一个以框架为核心的修行体验，强调节奏、路线身份、资源压力、危险瓶颈，以及能在 Elin 中读得懂的仙侠幻想。",
-        journalKicker: "日志入口",
-        journalTitle: "在玩家日志中找到修行菜单",
-        journalBody: "觉醒修行入门后，打开游戏内玩家日志，并使用 Nine Realms 入口进入修行菜单。该日志入口是当前系统的主要门径。",
+        journalKicker: "快捷栏入口",
+        journalTitle: "将 Nine Realms 加入快捷栏",
+        journalBody: "觉醒修行入门后，点击一个空的快捷栏位置并添加 Nine Realms。该快捷按钮可直接打开修行菜单。",
         pathsEyebrow: "三条道途",
         pathsTitle: "选择修行身份",
         pathsBody: "正式路线拥有更高效率与突破奖励。散修以确定性换取广度，在不跨越正式境界门槛的情况下继续前进。",
@@ -2940,11 +3490,11 @@
         rogueBody: "没有正式传承的行者。散修可以更广、更慢地修炼，但无法正式突破。",
         startEyebrow: "初入道途",
         startTitle: "入门指南",
-        startBody: "先开启体内第一玄关，进入日志菜单，然后不断修炼，直到你的道途逐渐成形。",
+        startBody: "先开启体内第一玄关，将 Nine Realms 加入快捷栏，然后不断修炼，直到你的道途逐渐成形。",
         startStep1Title: "觉醒修行",
         startStep1Body: "获得修行入门 feat。这是开启九境成长的第一缕火种。",
-        startStep2Title: "打开日志菜单",
-        startStep2Body: "拥有修行入门后，打开玩家日志，并使用 Nine Realms 入口进入修行菜单。",
+        startStep2Title: "加入快捷栏",
+        startStep2Body: "拥有修行入门后，点击一个空的快捷栏位置并添加 Nine Realms。之后使用该快捷按钮打开修行菜单。",
         startStep3Title: "修炼并提升",
         startStep3Body: "使用修炼来积累进度，提高修行等级，并逐步逼近下一道境界关口。",
         startStep4Title: "选择道途",
@@ -2960,6 +3510,7 @@
         filterNeutral: "通用",
         filterBody: "炼体",
         filterQi: "练气",
+        filterImmortal: "仙阶",
         filterTreasure: "宝物",
         filterWorld: "世界",
         futureArcs: "查看未来篇章",
@@ -2970,7 +3521,7 @@
         scrollHint: "横向滚动查看未来里程碑",
         changelogEyebrow: "发布历史",
         changelogTitle: "更新日志",
-        changelogBody: "已发布与未发布改动汇总为单页时间线。",
+        changelogBody: "九境的已发布与未发布改动。",
         changelogScrollHint: "横向滚动查看旧版本",
         thanksEyebrow: "社区致谢",
         thanksTitle: "感谢共同塑造道途",
@@ -2991,7 +3542,7 @@
         heroEyebrow: "Elin 向け仙侠修行 Mod",
         heroTitle: "Nine Realms: Path of the Dao",
         heroLede: "最初の門を開き、肉体を経典のように鍛え、呼吸を気へと磨き、凡俗の限界から道祖へ至る長い上昇で突破に挑む。",
-        heroCopy: "修行は意図的な行為です。スタミナとマナを消費し、境界の門で止まり、反動を生き延びた者に報酬を与えます。身体、気、放浪の修行ルート、共有仙境、技法、術、ジャーナル経由のメニュー、拡張されるロア資料を追加します。",
+        heroCopy: "修行は意図的な行為です。スタミナとマナを消費し、境界の門で止まり、反動を生き延びた者に報酬を与えます。身体、気、放浪の修行ルート、共有仙境、技法、術、ショートカット経由のメニュー、拡張されるロア資料を追加します。",
         openArchive: "資料を開く",
         startGuide: "始め方",
         readHistory: "更新履歴を見る",
@@ -3003,9 +3554,9 @@
         overviewEyebrow: "現在の巻",
         overviewTitle: "Mod の追加内容",
         overviewBody: "進行速度、道の個性、資源圧、危険な瓶頸、そして Elin 内で読み取りやすい仙侠感を重視した修行体験です。",
-        journalKicker: "ジャーナル入口",
-        journalTitle: "プレイヤージャーナルで修行メニューを開く",
-        journalBody: "Cultivation Initiate を覚醒した後、ゲーム内のプレイヤージャーナルから Nine Realms の項目を使って修行メニューへ入ります。",
+        journalKicker: "ショートカット入口",
+        journalTitle: "Nine Realms をショートカットバーに追加",
+        journalBody: "Cultivation Initiate を覚醒した後、空いているショートカット枠をクリックして Nine Realms を追加します。そのショートカットから修行メニューを直接開けます。",
         pathsEyebrow: "三つの道",
         pathsTitle: "修行の個性を選ぶ",
         pathsBody: "正式な道は効率と突破報酬に優れます。放浪修行者は確実性を捨てて幅広く成長し、正式な門を越えずに進みます。",
@@ -3020,11 +3571,11 @@
         rogueBody: "正式な継承を持たない放浪者。広くゆっくり鍛えられますが、正式な突破はできません。",
         startEyebrow: "最初の一歩",
         startTitle: "始め方",
-        startBody: "まず最初の内なる門を開き、ジャーナルメニューを開いて、道が形を取り始めるまで修行を重ねます。",
+        startBody: "まず最初の内なる門を開き、Nine Realms をショートカットバーに追加して、道が形を取り始めるまで修行を重ねます。",
         startStep1Title: "修行を目覚めさせる",
         startStep1Body: "Cultivation Initiate feat を取得します。これが Nine Realms の成長を開く最初の火種です。",
-        startStep2Title: "ジャーナルメニューを開く",
-        startStep2Body: "Cultivation Initiate を得たら、プレイヤージャーナルを開き、Nine Realms の項目から修行メニューへ入ります。",
+        startStep2Title: "ショートカットを追加",
+        startStep2Body: "Cultivation Initiate を得たら、空いているショートカット枠をクリックして Nine Realms を追加します。そのショートカットで修行メニューを開きます。",
         startStep3Title: "修行して高める",
         startStep3Body: "Cultivate を使って進度を集め、修行レベルを上げ、次の境界の門へ近づきます。",
         startStep4Title: "道を選ぶ",
@@ -3040,6 +3591,7 @@
         filterNeutral: "共通",
         filterBody: "身体",
         filterQi: "気",
+        filterImmortal: "仙階",
         filterTreasure: "宝物",
         filterWorld: "世界",
         futureArcs: "今後の章を見る",
@@ -3050,7 +3602,7 @@
         scrollHint: "横にスクロールして今後の節目を見る",
         changelogEyebrow: "リリース履歴",
         changelogTitle: "更新履歴",
-        changelogBody: "公開済み・未公開の変更を単一ページの履歴としてまとめています。",
+        changelogBody: "Nine Realms の公開済み・今後の変更。",
         changelogScrollHint: "横にスクロールして過去リリースを見る",
         thanksEyebrow: "コミュニティ謝辞",
         thanksTitle: "道を形作ってくれてありがとう",
@@ -3182,19 +3734,19 @@
 
     const roadmapLocale = {
       zh: [
-        { status: "已完成", title: "基础篇章", body: "修行系统、境界、突破、菜单流程、百科支持、更新记录、视觉打磨与第一门通用功法，已经构成第一卷根基。", version: "1.0.0 至 1.4.0" },
-        { status: "计划中", title: "完整功法与术式", body: "三条修行路线将获得更完整的功法与术式，让每条路拥有更鲜明的战斗与成长身份。", version: "1.5.0 至 1.8.0" },
-        { status: "物品更新", title: "凡界与仙界之宝", body: "卷轴、天材地宝与神器将深化传承搜寻、物品身份与长期养成规划。", version: "1.7.0 至 1.9.0" },
-        { status: "2.0.0", title: "永恒交易阁", body: "经典仙侠拍卖楼，修士可购得稀有物品、功法、卷轴与宝物，也可出售自身所得。", version: "拍卖篇章" },
+        { status: "已完成", completed: true, title: "基础篇章", body: "修行系统、境界、突破、菜单流程、百科支持、更新记录、视觉打磨与第一门通用功法，已经构成第一卷根基。", version: "1.0.0 至 1.4.0" },
+        { status: "已完成", completed: true, title: "完整功法与术式", body: "三条修行路线将获得更完整的功法与术式，让每条路拥有更鲜明的战斗与成长身份。", version: "1.5.0 至 1.8.0，1.8.0 跳入 2.0.0" },
+        { status: "已完成", completed: true, title: "凡界与仙界之宝", body: "卷轴、天材地宝与神器将深化传承搜寻、物品身份与长期养成规划。", version: "1.7.0 至 1.9.0，1.9.0 跳入 2.0.0" },
+        { status: "2.0.0", title: "永恒交易阁", body: "经典仙侠拍卖楼，修士可通过定期开启的拍卖与竞争者出价，竞得稀有物品、功法、卷轴与宝物。", version: "未发布拍卖篇章" },
         { status: "未来篇章", title: "剑道与音律之道", body: "新的道途身份将在当前修行路线之外展开，拥有独立风味、进度轨道与等级系统。", version: "未来系统" },
         { status: "3.0.0", title: "宗门与 NPC", body: "更广阔的九境世界将以宗门、具名修士与 NPC 存在回应玩家，让修行天地真正活起来。", version: "世界篇章" },
         { status: "更远之路", title: "道途不止", body: "前路漫漫，道阻且长。纵使山雾遮住下一道关隘，天意步步试炼，修士仍须一息一息地坚持，直到大道再显新途。", version: "未来经卷" }
       ],
       ja: [
-        { status: "完了", title: "基礎編", body: "修行システム、境界、突破、メニュー導線、Wiki 支援、更新記録、視覚調整、最初の共通技法が第一の経典として整っています。", version: "1.0.0 から 1.4.0" },
-        { status: "予定", title: "技法と術の拡張", body: "三つの修行ルートにより充実した技法と術を追加し、それぞれの戦闘と成長の個性を強めます。", version: "1.5.0 から 1.8.0" },
-        { status: "アイテム更新", title: "凡界と仙界の宝", body: "巻物、天材地宝、神器が継承探し、アイテム個性、長期育成を深めます。", version: "1.7.0 から 1.9.0" },
-        { status: "2.0.0", title: "Eternal Exchange Pavilion", body: "希少な品、技法、巻物、宝を買い、自らの発見も売れる仙侠らしい競売楼です。", version: "競売編" },
+        { status: "完了", completed: true, title: "基礎編", body: "修行システム、境界、突破、メニュー導線、Wiki 支援、更新記録、視覚調整、最初の共通技法が第一の経典として整っています。", version: "1.0.0 から 1.4.0" },
+        { status: "完了", completed: true, title: "技法と術の拡張", body: "三つの修行ルートにより充実した技法と術を追加し、それぞれの戦闘と成長の個性を強めます。", version: "1.5.0 から 1.8.0、1.8.0 は 2.0.0 へ統合" },
+        { status: "完了", completed: true, title: "凡界と仙界の宝", body: "巻物、天材地宝、神器が継承探し、アイテム個性、長期育成を深めます。", version: "1.7.0 から 1.9.0、1.9.0 は 2.0.0 へ統合" },
+        { status: "2.0.0", title: "Eternal Exchange Pavilion", body: "定期競売とライバル入札を通じて、希少な品、技法、巻物、宝を競り落とす仙侠らしい競売楼です。", version: "未公開の競売編" },
         { status: "今後の章", title: "剣の Dao と音楽の Dao", body: "現在の修行ルートを越えて、新しい Dao の個性、進行軌道、独自のレベル体系が開きます。", version: "今後のシステム" },
         { status: "3.0.0", title: "宗派と NPC", body: "宗派、名を持つ修行者、NPC の存在によって、九境の世界が個人の修行を越えた生きた風景になります。", version: "世界編" },
         { status: "その先", title: "道は終わらない", body: "前途は遠く長い。山霧が次の門を隠し、天が一歩ごとに試しても、修行者は一息ずつ進み続け、Dao が次の道を示す時を待ちます。", version: "未来の経典" }
@@ -3203,24 +3755,30 @@
 
     const changelogLocale = {
       zh: [
-        { version: "版本 1.7.0", status: "已发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。", "加入可解锁其他修行能力、术式与功法的功法卷轴；可在黑市商人处极低概率出现，也能以极低概率从敌人身上掉落。", "炼体修士与练气修士 feat 消耗从 2 降至 1。", "改进模组日文翻译。"] },
+        { version: "版本 2.0.0", status: "未发布", title: "永恒交易阁", items: ["加入永恒交易阁拍卖堂，可竞拍稀有功法手册、卷轴、神器与有价值的 Elin 物品。", "拍卖按周期开放：第 14 天首次开放，之后每 60 天开放 1 天。", "玩家可以出价、保持领先、被其他竞拍者反超，并在拍卖结束后收到竞得物品。", "云宫印可降低最低出价，并减少对手反超压力。", "跳过 1.8.0 与 1.9.0 后，2.0.0 是下一项主要开发目标。"] },
+        { version: "版本 1.9.0", status: "跳过", title: "神器宝物", items: ["原计划加入灰烬凤凰羽与云宫印。", "灰烬凤凰羽使突破概率提高 10%，并可每日一次防止死亡。", "云宫印通过降低最低出价与减少 NPC 反超概率，强化永恒交易阁竞拍。", "此版本将被跳过，相关内容并入 2.0.0。"] },
+        { version: "版本 1.8.0", status: "跳过", title: "扩展炼体、练气与仙阶功法", items: ["原计划炼体功法：龙髓经、金刚心、巨灵踏、碎骨击、破岳式。", "原计划练气术式：星海咒、雷脉法、虚莲息、天镜术。", "原计划仙阶功法：吞天经、万道仙体、仙君敕令。", "此版本将被跳过，开发直接推进至 2.0.0。"] },
+        { version: "版本 1.7.0", status: "已发布", title: "新战斗术式、辅助灵域与中立被动", items: ["加入练气士能力：洞玄指与九叠灵矢。", "加入中立战斗能力：散气掌。", "加入炼体辅助灵域：镇岳血域与赤脉生域。", "加入中立被动：借基经、夺机悟与无根脉。", "加入中立闪避功法：尘步遁身。", "加入可解锁其他修行能力、术式与功法的功法卷轴；可在黑市商人处极低概率出现，也能以极低概率从敌人身上掉落。", "将 Nine Realms 菜单入口移至快捷栏：点击空快捷栏位置并添加 Nine Realms。", "炼体修士与练气修士 feat 消耗从 2 降至 1。", "改进模组日文翻译。"] },
         { version: "版本 1.6.0", status: "已发布", title: "新功法、调试设置与平衡调整", items: ["加入新功法与能力：止息经、隐脉术、冲开小脉、淬骨诀、百痕经与血炉。", "加入修行速度倍率、解锁全部能力、重置进度等设置工具；这些是调试选项，可能破坏正常平衡。", "平衡调整：炼体现在提升 STR、END、DEX、PER 与 PV；练气现在提升 CHA、WIL、MAG、PER、LER、Meditation 与 DV。", "永恒交易阁作为封存的未来系统登场。", "加入清泉灵域与玉帘吐纳，作为练气修士术式。"] },
         { version: "版本 1.5.0", status: "已发布", title: "功法图标与首批路线术式", items: ["加入玄气疗伤自定义图标。", "加入铁皮功，作为第一门炼体功法。", "加入流脉术，作为第一门练气功法。", "修复世界地图旅行中开启功法导致卡顿的问题。"] },
         { version: "版本 1.4.0", status: "已发布", title: "通用功法与未来系统基础", items: ["加入第一门通用功法：玄气疗伤。", "开始搭建未来功法、术式与传承卷轴框架。", "加入未来道途与独立等级系统的基础。", "完成修行菜单中的功法页面布局。"] },
         { version: "版本 1.3.1", status: "已发布", title: "表现与能力打磨", items: ["加入修炼能力自定义图标。", "加入百科链接自定义图标。", "加入自定义修行菜单样式。", "修复修炼能力无法放入快捷栏的问题。"] },
-        { version: "版本 1.3.0", status: "已发布", title: "日志入口与菜单流程更新", items: ["将 Nine Realms 菜单入口移入玩家日志，并加入专用底部按钮。", "移除旧菜单能力路径，并清理旧能力数据。", "强化修炼能力，避免被自动战斗使用。", "将修行菜单刷新为更大的分页面板。", "修行消耗从 4、3、2、1 模型调整为 3、2、1 模型。"] },
+        { version: "版本 1.3.0", status: "已发布", title: "菜单流程更新", items: ["更新 Nine Realms 菜单入口流程。", "移除旧菜单能力路径，并清理旧能力数据。", "强化修炼能力，避免被自动战斗使用。", "将修行菜单刷新为更大的分页面板。", "修行消耗从 4、3、2、1 模型调整为 3、2、1 模型。"] },
         { version: "版本 1.2.0", status: "已发布", title: "共通仙境扩展", items: ["将更高共通仙境从五境扩展到九境，当前上限提高到 18000。", "共通仙境现在提供更广泛的修行成长、突破奖励与被动加成。", "修行菜单现在显示每次修行的体力与 MP 消耗。", "共通仙境突破奖励进一步增强。"] },
         { version: "版本 1.1.1", status: "已发布", title: "稳定性与界面修正", items: ["修复修行路线预览条目改变玩家 feat 数据导致的稳定性问题。", "强化修行入门能力同步，使修炼与修行菜单更可靠地授予。", "修正散修菜单进度显示。"] },
         { version: "版本 1.1.0", status: "已发布", title: "本地化与散修成长", items: ["加入中文与日文。", "炼体修士与练气修士 feat 消耗从 5 降至 2。", "移除散修 999 进度上限。"] },
         { version: "版本 1.0.0", status: "已发布", title: "初始发布", items: ["九境：道途初始发布。", "加入修行入门 feat 与修炼长动作。", "加入隐藏修行进度、境界门槛、阶段与突破关口。", "加入炼体修士、练气修士与散修支持。", "加入被动境界加成、突破奖励、修行菜单、游戏内百科与更新窗口。"] }
       ],
       ja: [
-        { version: "Version 1.7.0", status: "公開済み", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。", "追加の修行能力、術、技法を解放できる技法巻物を追加。ブラックマーケット商人にごく稀に並び、敵からもごく低確率でドロップします。", "Body Cultivator と Qi Practitioner の feat コストを 2 から 1 に低下。", "Mod 全体の日本語翻訳を改善。"] },
+        { version: "Version 2.0.0", status: "未公開", title: "Eternal Exchange Pavilion", items: ["希少な技法の手引き、巻物、神器、価値ある Elin アイテムを競る Eternal Exchange Pavilion の競売堂を追加。", "競売は日程で開きます。14日目に初回、その後は60日ごとに1日だけ開催されます。", "プレイヤーは入札し、最高入札を保持し、他の入札者に上回られ、締切後に落札品を受け取れます。", "雲宮の印は最低入札額を下げ、ライバルの対抗入札圧を減らします。", "1.8.0 と 1.9.0 をスキップし、次の主要開発目標は 2.0.0 です。"] },
+        { version: "Version 1.9.0", status: "スキップ", title: "神器宝物", items: ["灰燼鳳凰の羽と雲宮の印の追加を予定していたアイテム版です。", "灰燼鳳凰の羽は突破成功率を 10% 上げ、1日1回死を防ぎます。", "雲宮の印は最低入札額を下げ、NPC の対抗入札確率を減らして Eternal Exchange Pavilion での競売を助けます。", "この版はスキップし、内容は 2.0.0 に合流します。"] },
+        { version: "Version 1.8.0", status: "スキップ", title: "身体・気・仙階技法の拡張", items: ["予定していた身体技法：龍髄経、金剛心、巨霊踏、砕骨撃、破岳式。", "予定していた気術：星海呪、雷脈法、虚蓮息、天鏡術。", "予定していた仙階技法：呑天経、万道仙体、仙君勅令。", "この版はスキップし、開発は直接 2.0.0 へ進みます。"] },
+        { version: "Version 1.7.0", status: "公開済み", title: "新戦闘術、支援霊域、中立受動", items: ["気修行者能力を追加：洞玄指、九重霊矢。", "中立戦闘能力、散気掌を追加。", "身体支援霊域を追加：鎮岳血域、赤脈生域。", "中立受動を追加：借基経、奪機悟、根無しの脈。", "中立回避技法、塵歩遁身を追加。", "追加の修行能力、術、技法を解放できる技法巻物を追加。ブラックマーケット商人にごく稀に並び、敵からもごく低確率でドロップします。", "Nine Realms メニュー入口をショートカットバーへ移動：空き枠をクリックして Nine Realms を追加します。", "Body Cultivator と Qi Practitioner の feat コストを 2 から 1 に低下。", "Mod 全体の日本語翻訳を改善。"] },
         { version: "Version 1.6.0", status: "公開済み", title: "新技法、デバッグ設定、バランス調整", items: ["新技法と能力を追加：静息経、隠脈術、小脈を開く、鍛骨術、百傷経、血炉。", "修行速度倍率、全能力解放、進度リセットの設定ツールを追加。これらはデバッグ用で通常バランスを崩す可能性があります。", "バランス調整：身体修行は STR、END、DEX、PER、PV を伸ばし、気修行は CHA、WIL、MAG、PER、LER、Meditation、DV を伸ばします。", "Eternal Exchange Pavilion を封印された今後のシステムとして追加。", "気修行者向けの術として清泉霊域と玉幕吐納を追加。"] },
         { version: "Version 1.5.0", status: "公開済み", title: "技法アイコンと最初の道の術", items: ["玄気治癒の専用アイコンを追加。", "最初の身体技法として鉄皮功を追加。", "最初の気技法として流脈術を追加。", "ワールドマップ移動中に技法を有効化すると発生する遅延を修正。"] },
         { version: "Version 1.4.0", status: "公開済み", title: "共通技法と今後の基盤", items: ["最初の共通技法、玄気治癒を追加。", "今後の技法、術、継承巻物の基盤を開始。", "今後の Dao と独自レベルシステムの土台を追加。", "修行メニュー内に技法ページを配置。"] },
         { version: "Version 1.3.1", status: "公開済み", title: "表示と能力の調整", items: ["修行能力の専用アイコンを追加。", "Wiki リンク用アイコンを追加。", "専用修行メニュースタイルを追加。", "修行能力をホットバーに置けない問題を修正。"] },
-        { version: "Version 1.3.0", status: "公開済み", title: "ジャーナル導線とメニュー更新", items: ["Nine Realms メニューをプレイヤージャーナルへ移動し、専用ボタンを追加。", "旧メニュー能力経路を廃止し、古い能力データを整理。", "修行能力が自動戦闘で使われないよう強化。", "修行メニューをより大きなタブ式パネルへ刷新。", "修行コストを 4、3、2、1 モデルから 3、2、1 モデルへ調整。"] },
+        { version: "Version 1.3.0", status: "公開済み", title: "メニュー導線更新", items: ["Nine Realms メニューの入口フローを更新。", "旧メニュー能力経路を廃止し、古い能力データを整理。", "修行能力が自動戦闘で使われないよう強化。", "修行メニューをより大きなタブ式パネルへ刷新。", "修行コストを 4、3、2、1 モデルから 3、2、1 モデルへ調整。"] },
         { version: "Version 1.2.0", status: "公開済み", title: "共有仙境の拡張", items: ["上位共有仙境を五境から九境へ拡張し、現在の上限を 18000 に上昇。", "共有仙境が広い成長、突破報酬、受動ボーナスを提供。", "修行メニューに現在のスタミナと MP コストを表示。", "共有仙境の突破報酬を強化。"] },
         { version: "Version 1.1.1", status: "公開済み", title: "安定性と UI 修正", items: ["修行ルートのプレビューが player feat data を変化させる安定性問題を修正。", "Cultivation Initiate の同期を強化し、Cultivate と修行メニューをより安全に付与。", "Rogue Cultivator の進度表示を修正。"] },
         { version: "Version 1.1.0", status: "公開済み", title: "ローカライズと Rogue 成長", items: ["中国語と日本語ローカライズを追加。", "Body Cultivator と Qi Practitioner の feat コストを 5 から 2 に低下。", "Rogue Cultivator の 999 進度上限を撤廃。"] },
@@ -3356,9 +3914,10 @@
       track.style.setProperty("--road-count", items.length);
       items.forEach((item) => {
         const card = document.createElement("article");
-        card.className = "road-card";
+        card.className = `road-card ${item.completed ? "completed" : ""}`;
         card.innerHTML = `
           <span class="tag">${item.status}</span>
+          ${item.completed ? '<span class="completion-stamp" aria-label="Completed stamp">已成</span>' : ""}
           <h3>${item.title}</h3>
           <p>${item.body}</p>
           <span class="status">${item.version}</span>
@@ -3373,13 +3932,18 @@
       timeline.innerHTML = "";
       entries.forEach((entry) => {
         const card = document.createElement("article");
-        card.className = "timeline-card";
-        const statusClass = /Unreleased|未发布|未公開|未実装/.test(entry.status) ? "status unreleased" : "status";
+        const isSkipped = /Skipped|跳过|スキップ/.test(entry.status);
+        const isUnreleased = !isSkipped && /Unreleased|未发布|未公開|未実装/.test(entry.status);
+        const isReleased = !isUnreleased && /Released|已发布|公開済み/.test(entry.status);
+        card.className = `timeline-card ${isReleased ? "released" : ""} ${isSkipped ? "skipped" : ""}`;
+        const statusClass = isUnreleased ? "status unreleased" : "status";
         card.innerHTML = `
           <div class="timeline-head">
             <span class="tag">${entry.version}</span>
             <span class="${statusClass}">${entry.status}</span>
           </div>
+          ${isReleased ? '<span class="completion-stamp" aria-label="Released stamp">已成</span>' : ""}
+          ${isSkipped ? '<span class="skip-stamp" aria-label="Skipped stamp">跳过</span>' : ""}
           <h3>${entry.title}</h3>
         `;
         card.appendChild(createList(entry.items));
