@@ -1120,6 +1120,123 @@
       font-size: 1.1rem;
     }
 
+    @keyframes supporter-breath {
+      0%,
+      100% {
+        box-shadow: 4px 4px 0 rgba(201, 146, 40, 0.18), inset 0 0 0 rgba(201, 146, 40, 0);
+      }
+
+      50% {
+        box-shadow: 4px 4px 0 rgba(201, 146, 40, 0.26), inset 0 0 22px rgba(241, 211, 140, 0.20);
+      }
+    }
+
+    @keyframes first-supporter-breath {
+      0%,
+      100% {
+        box-shadow: 4px 4px 0 rgba(62, 127, 101, 0.14), inset 0 0 0 rgba(62, 127, 101, 0);
+      }
+
+      50% {
+        box-shadow: 4px 4px 0 rgba(62, 127, 101, 0.22), inset 0 0 20px rgba(62, 127, 101, 0.14);
+      }
+    }
+
+    .credit.major-supporter {
+      border-color: rgba(201, 146, 40, 0.72);
+      background:
+        linear-gradient(90deg, rgba(201, 146, 40, 0.20), transparent 42%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.70), rgba(241, 211, 140, 0.20)),
+        rgba(255, 250, 240, 0.78);
+      animation: supporter-breath 5.4s ease-in-out infinite;
+    }
+
+    .credit.major-supporter strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--red-dark);
+      font-style: italic;
+      text-shadow: 0 0 10px rgba(201, 146, 40, 0.36), 1px 1px 0 rgba(255, 250, 240, 0.9);
+    }
+
+    .credit.major-supporter strong::before,
+    .credit.major-supporter strong::after {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border: 1px solid rgba(117, 20, 15, 0.42);
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .credit.first-supporter {
+      border-color: rgba(62, 127, 101, 0.54);
+      border-left: 4px solid var(--jade);
+      background:
+        linear-gradient(90deg, rgba(62, 127, 101, 0.14), transparent 42%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(62, 127, 101, 0.12)),
+        rgba(255, 250, 240, 0.76);
+      animation: first-supporter-breath 6.2s ease-in-out infinite;
+    }
+
+    .credit.first-supporter strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--jade);
+      font-style: italic;
+      text-shadow: 0 0 9px rgba(62, 127, 101, 0.24);
+    }
+
+    .credit.first-supporter strong::before {
+      content: "I";
+      display: inline-grid;
+      place-items: center;
+      width: 1.45rem;
+      height: 1.45rem;
+      border: 1px solid rgba(62, 127, 101, 0.45);
+      color: var(--jade);
+      background: rgba(255, 255, 255, 0.58);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+    }
+
+    .credit.major-supporter span,
+    .credit.first-supporter span {
+      display: block;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .credit.major-supporter,
+      .credit.first-supporter {
+        animation: none;
+      }
+    }
+
+    .support-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .credit-footer {
+      margin-top: auto;
+      padding: 0.85rem 0 0;
+      border: 0;
+      border-top: 1px solid rgba(32, 24, 17, 0.14);
+      background: transparent;
+    }
+
+    .credit-footer strong {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .credit-footer span {
+      font-size: 0.86rem;
+    }
+
     .footer {
       padding: 3rem 0 2.5rem;
       color: var(--ink-soft);
@@ -1315,7 +1432,7 @@
           <div class="hero-actions">
             <a class="brush-button primary" href="#getting-started" data-i18n="startGuide">Getting Started</a>
             <a class="brush-button" href="#changelog" data-i18n="readHistory">Read Release History</a>
-            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>2.0.0</strong></div>
+            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>2.2.3</strong></div>
           </div>
         </div>
       </section>
@@ -1603,14 +1720,26 @@
                 <strong>Tangent Logic</strong>
                 <span data-i18n="contribTangent">Reported the auto combat mage issue where cultivation was being utilized by the auto combat AI.</span>
               </div>
+              <div class="credit">
+                <strong>Nelaroth</strong>
+                <span data-i18n="contribNelaroth">Bug testing and QOL ideas.</span>
+              </div>
             </div>
           </article>
-          <article class="thanks-card">
+          <article class="thanks-card support-card">
             <div class="kicker" data-i18n="supportKicker">Tippers & Supporters</div>
             <h3 data-i18n="supportTitle">Ko-fi Support</h3>
             <p data-i18n="supportBody">Thanks to everyone who has tipped or supported through Ko-fi. Tips and support are never required, but they are greatly appreciated and help keep development of Nine Realms moving.</p>
             <p data-i18n="supportCta">Supporters may be listed here as a small thank-you, with permission.</p>
-            <div class="credit">
+            <div class="credit major-supporter">
+              <strong>MaxDevill</strong>
+              <span data-i18n="supporterMajor">Bestowed a generous trove of spirit stones upon the path.</span>
+            </div>
+            <div class="credit first-supporter">
+              <strong>Fmaxi</strong>
+              <span data-i18n="supporterKofi">The first patron to light an incense flame on the path.</span>
+            </div>
+            <div class="credit credit-footer">
               <strong data-i18n="creditTitle">Credit Notes</strong>
               <span data-i18n="creditBody">Credits are listed with permission where possible. If you would like your name changed, removed, or credited differently, please contact Meowthews on Steam.</span>
             </div>
@@ -3218,6 +3347,32 @@
 
     const changelog = [
       {
+        version: "Version 2.2.0",
+        status: "Released",
+        title: "Nine Realms Widget, Progression Balance, And Combat Clarity",
+        items: [
+          "Added the Nine Realms screen widget with stats, breakthrough attempts, and three technique shortcuts.",
+          "Rebalanced cultivation progression with escalating realm thresholds.",
+          "Improved Cloud Palace Seal auction benefits.",
+          "Made winning-lot claim UI scrollable.",
+          "Added learned-scroll indicators.",
+          "Clarified combat ability tooltips and damage types.",
+          "Added shared hostility handling for cultivation attacks.",
+          "Fixed cultivation menu music mute behavior."
+        ]
+      },
+      {
+        version: "Version 2.1.0",
+        status: "Released",
+        title: "Quest, Sects, And Menu Frameworks",
+        items: [
+          "Implemented Quest framework.",
+          "Implemented Sects framework.",
+          "Added the new menu UI.",
+          "Reduced Eternal Exchange Pavilion NPC counter-bid aggression and added anti-snipe extension."
+        ]
+      },
+      {
         version: "Version 2.0.0",
         status: "Released",
         title: "Eternal Exchange Pavilion",
@@ -3649,6 +3804,9 @@
       ideasLi4: "Lore, naming, and worldbuilding inspiration",
       contribHeadshot: "Suggested aura-like domains that spread their influence through nearby allies, inspiring party-wide effects with a more sect technique feel.",
       contribTangent: "Reported the auto combat mage issue where cultivation was being utilized by the auto combat AI.",
+      contribNelaroth: "Bug testing and QOL ideas.",
+      supporterMajor: "Bestowed a generous trove of spirit stones upon the path.",
+      supporterKofi: "The first patron to light an incense flame on the path.",
       supportCta: "Supporters may be listed here as a small thank-you, with permission.",
       creditTitle: "Credit Notes",
       creditBody: "Credits are listed with permission where possible. If you would like your name changed, removed, or credited differently, please contact Meowthews on Steam."
@@ -3688,6 +3846,9 @@
       ideasLi4: "设定、命名与世界观灵感",
       contribHeadshot: "建议加入能将影响扩散到附近队友的灵域式效果，为更具宗门术法感的队伍效果提供了灵感。",
       contribTangent: "反馈了自动战斗中法师会使用修炼能力的问题。",
+      contribNelaroth: "Bug 测试与 QOL 改进建议。",
+      supporterMajor: "以丰厚灵石相赠，助道途长明。",
+      supporterKofi: "第一位为道途点燃香火的资助者。",
       supportCta: "在获得许可后，支持者的名字可能会作为一份小小的感谢列在这里。",
       creditTitle: "署名说明",
       creditBody: "署名会尽可能在获得许可后列出。如果你希望更改、移除或调整署名，请在 Steam 上联系 Meowthews。"
@@ -3729,6 +3890,9 @@
       ideasLi4: "ロア、命名、世界観のインスピレーション",
       contribHeadshot: "近くの味方へ影響を広げる領域のような効果を提案し、宗派技法らしいパーティ効果の着想になりました。",
       contribTangent: "自動戦闘 AI が修行能力を使ってしまう問題を報告しました。",
+      contribNelaroth: "不具合テストと QOL 改善案。",
+      supporterMajor: "豊かな霊石を捧げ、道の歩みを大きく支えました。",
+      supporterKofi: "道に最初の香火を灯した支援者です。",
       supportCta: "許可を得た支援者は、小さな感謝としてここに掲載される場合があります。",
       creditTitle: "クレジットについて",
       creditBody: "クレジットは可能な限り許可を得て掲載します。名前の変更、削除、表記調整を希望する場合は Steam で Meowthews に連絡してください。"
@@ -3757,6 +3921,8 @@
 
     const changelogLocale = {
       zh: [
+        { version: "版本 2.2.0", status: "已发布", title: "九境小组件、进度平衡与战斗说明", items: ["加入 Nine Realms 屏幕小组件，显示属性、突破尝试，并提供三个功法快捷入口。", "重新平衡修行进度，境界门槛会逐步提高。", "强化云宫印的拍卖收益。", "竞得物品领取界面现在可以滚动。", "加入已学卷轴标记。", "明确战斗能力提示与伤害类型。", "为修行攻击加入共享敌意处理。", "修复修行菜单音乐静音行为。"] },
+        { version: "版本 2.1.0", status: "已发布", title: "任务、宗门与菜单框架", items: ["实现任务框架。", "实现宗门框架。", "加入新的菜单 UI。", "降低永恒交易阁 NPC 反超出价强度，并加入防狙拍延时。"] },
         { version: "版本 2.0.0", status: "已发布", title: "永恒交易阁", items: ["加入永恒交易阁拍卖堂，可竞拍稀有功法手册、卷轴、神器与有价值的 Elin 物品。", "拍卖按周期开放：第 14 天首次开放，之后每 60 天开放 1 天。", "玩家可以出价、保持领先、被其他竞拍者反超，并在拍卖结束后收到竞得物品。", "云宫印可降低最低出价，并减少对手反超压力。", "版本 2.0.0 包含原 1.8.0 与 1.9.0 跳过路线的内容。"] },
         { version: "版本 1.9.0", status: "跳过", title: "神器宝物", items: ["原计划加入灰烬凤凰羽与云宫印。", "灰烬凤凰羽使突破概率提高 10%，并可每日一次防止死亡。", "云宫印通过降低最低出价与减少 NPC 反超概率，强化永恒交易阁竞拍。", "此版本已被跳过，相关内容并入 2.0.0。"] },
         { version: "版本 1.8.0", status: "跳过", title: "扩展炼体、练气与仙阶功法", items: ["原计划炼体功法：龙髓经、金刚心、巨灵踏、碎骨击、破岳式。", "原计划练气术式：星海咒、雷脉法、虚莲息、天镜术。", "原计划仙阶功法：吞天经、万道仙体、仙君敕令。", "此版本已被跳过，使开发直接推进至 2.0.0。"] },
@@ -3772,6 +3938,8 @@
         { version: "版本 1.0.0", status: "已发布", title: "初始发布", items: ["九境：道途初始发布。", "加入修行入门 feat 与修炼长动作。", "加入隐藏修行进度、境界门槛、阶段与突破关口。", "加入炼体修士、练气修士与散修支持。", "加入被动境界加成、突破奖励、修行菜单、游戏内百科与更新窗口。"] }
       ],
       ja: [
+        { version: "Version 2.2.0", status: "公開済み", title: "Nine Realms ウィジェット、進行バランス、戦闘説明", items: ["ステータス、突破挑戦、3つの技法ショートカットを備えた Nine Realms 画面ウィジェットを追加。", "境界しきい値が段階的に上がるよう修行進行を再調整。", "雲宮の印の競売効果を強化。", "落札品受け取り UI をスクロール可能に変更。", "習得済み巻物の表示を追加。", "戦闘能力ツールチップとダメージ種別を明確化。", "修行攻撃に共有敵対処理を追加。", "修行メニューの音楽ミュート挙動を修正。"] },
+        { version: "Version 2.1.0", status: "公開済み", title: "クエスト、宗派、メニューのフレームワーク", items: ["クエストフレームワークを実装。", "宗派フレームワークを実装。", "新しいメニュー UI を追加。", "Eternal Exchange Pavilion の NPC 対抗入札の攻撃性を下げ、終了間際の延長を追加。"] },
         { version: "Version 2.0.0", status: "公開済み", title: "Eternal Exchange Pavilion", items: ["希少な技法の手引き、巻物、神器、価値ある Elin アイテムを競る Eternal Exchange Pavilion の競売堂を追加。", "競売は日程で開きます。14日目に初回、その後は60日ごとに1日だけ開催されます。", "プレイヤーは入札し、最高入札を保持し、他の入札者に上回られ、締切後に落札品を受け取れます。", "雲宮の印は最低入札額を下げ、ライバルの対抗入札圧を減らします。", "Version 2.0.0 には、スキップした 1.8.0 と 1.9.0 のロードマップ内容が含まれます。"] },
         { version: "Version 1.9.0", status: "スキップ", title: "神器宝物", items: ["灰燼鳳凰の羽と雲宮の印の追加を予定していたアイテム版です。", "灰燼鳳凰の羽は突破成功率を 10% 上げ、1日1回死を防ぎます。", "雲宮の印は最低入札額を下げ、NPC の対抗入札確率を減らして Eternal Exchange Pavilion での競売を助けます。", "この版はスキップされ、内容は 2.0.0 に合流しました。"] },
         { version: "Version 1.8.0", status: "スキップ", title: "身体・気・仙階技法の拡張", items: ["予定していた身体技法：龍髄経、金剛心、巨霊踏、砕骨撃、破岳式。", "予定していた気術：星海呪、雷脈法、虚蓮息、天鏡術。", "予定していた仙階技法：呑天経、万道仙体、仙君勅令。", "この版はスキップされ、開発は直接 2.0.0 へ進みました。"] },
