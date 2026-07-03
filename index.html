@@ -625,7 +625,7 @@
         var(--paper-2);
     }
 
-    .unreleased-mark {
+    .roadmap-mark {
       display: inline-flex;
       width: fit-content;
       align-items: center;
@@ -642,7 +642,7 @@
       text-transform: uppercase;
     }
 
-    .unreleased-mark::before {
+    .roadmap-mark::before {
       content: "";
       width: 8px;
       height: 8px;
@@ -790,7 +790,7 @@
     }
 
     .lore-card img,
-    .placeholder-icon {
+    .symbol-icon {
       width: 100%;
       aspect-ratio: 1;
       object-fit: contain;
@@ -800,7 +800,7 @@
       image-rendering: pixelated;
     }
 
-    .placeholder-icon {
+    .symbol-icon {
       display: grid;
       place-items: center;
       color: rgba(120, 27, 19, 0.7);
@@ -1090,7 +1090,7 @@
       text-transform: uppercase;
     }
 
-    .status.unreleased {
+    .status.roadmap {
       border-color: rgba(167, 31, 22, 0.28);
       background: rgba(167, 31, 22, 0.08);
       color: var(--red-dark);
@@ -1178,6 +1178,10 @@
         linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(62, 127, 101, 0.12)),
         rgba(255, 250, 240, 0.76);
       animation: first-supporter-breath 6.2s ease-in-out infinite;
+    }
+
+    .support-card .credit.major-supporter + .credit.first-supporter {
+      margin-top: 0.75rem;
     }
 
     .credit.first-supporter strong {
@@ -1387,7 +1391,7 @@
       }
 
       .lore-card img,
-      .placeholder-icon {
+      .symbol-icon {
         width: 96px;
       }
     }
@@ -1408,6 +1412,7 @@
       <nav class="nav" aria-label="Primary navigation">
         <a href="#home" data-i18n="navHome">Home</a>
         <a href="#paths" data-i18n="navPaths">Paths</a>
+        <a href="#recovery" data-i18n="navRecovery">Recovery</a>
         <a href="#lore" data-i18n="navLore">Lore Wiki</a>
         <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
         <a href="#changelog" data-i18n="navChangelog">Changelog</a>
@@ -1438,7 +1443,7 @@
       </section>
 
       <section class="at-a-glance reveal" aria-label="Mod summary statistics">
-        <div class="stat-card"><strong>18,000</strong><span data-i18n="statCap">current total cultivation cap</span></div>
+        <div class="stat-card"><strong>508,000</strong><span data-i18n="statCap">current total cultivation cap</span></div>
         <div class="stat-card"><strong>18</strong><span data-i18n="statRealms">major realms across mortal and immortal ascent</span></div>
         <div class="stat-card"><strong>3</strong><span data-i18n="statModes">core cultivation modes: Body, Qi, Rogue</span></div>
         <div class="stat-card"><strong>9 + 9</strong><span data-i18n="statSplit">path realms plus shared immortal realms</span></div>
@@ -1511,7 +1516,7 @@
             <p data-i18n="rogueBody">A wanderer without formal inheritance. Rogues can train broadly and slowly, but cannot formally break through.</p>
             <ul>
               <li data-i18n="rogueLi1">Broad stat rolls across physical and spiritual attributes</li>
-              <li data-i18n="rogueLi2">Can progress to the current cap without formal gates</li>
+              <li data-i18n="rogueLi2">Can progress to the peak of realm 9 before immortal ascent</li>
               <li data-i18n="rogueLi3">Best for flexible, uncertain, outsider-style play</li>
             </ul>
           </article>
@@ -1529,7 +1534,7 @@
 
         <div class="dao-grid reveal">
           <article class="dao-card">
-            <span class="unreleased-mark" data-i18n="unreleased">Unreleased</span>
+            <span class="roadmap-mark" data-i18n="roadmapLabel">Roadmap</span>
             <div class="dao-symbol" aria-hidden="true">剑</div>
             <div class="kicker" data-i18n="swordDaoKicker">Sword Dao</div>
             <h3 data-i18n="swordDaoTitle">A Single Edge Splits The Clouds</h3>
@@ -1537,19 +1542,19 @@
           </article>
 
           <article class="dao-card">
-            <span class="unreleased-mark" data-i18n="unreleased">Unreleased</span>
-            <div class="dao-symbol" aria-hidden="true">音</div>
-            <div class="kicker" data-i18n="musicDaoKicker">Dao Of Music</div>
-            <h3 data-i18n="musicDaoTitle">The World Answers The True Note</h3>
-            <p data-i18n="musicDaoBody">The Dao of Music turns rhythm into law and melody into pressure on the soul. One clear note may calm killing intent, call the wind, disturb meridians, or make heaven and earth tremble in harmony.</p>
+            <span class="roadmap-mark" data-i18n="roadmapLabel">Roadmap</span>
+            <div class="dao-symbol" aria-hidden="true">丹</div>
+            <div class="kicker" data-i18n="musicDaoKicker">Alchemy Dao</div>
+            <h3 data-i18n="musicDaoTitle">Pill Fire Refines The Inner World</h3>
+            <p data-i18n="musicDaoBody">The Alchemy Dao is an independent path for pill mastery, utility arts, and alchemical inheritances that level on their own track beside cultivation.</p>
           </article>
 
           <article class="dao-card mystery">
-            <span class="unreleased-mark" data-i18n="futureDaoStatus">Future Dao</span>
+            <span class="roadmap-mark" data-i18n="extraDaoStatus">Roadmap</span>
             <div class="dao-symbol" aria-hidden="true">?</div>
-            <div class="kicker" data-i18n="futureDaoKicker">More Paths Await</div>
-            <h3 data-i18n="futureDaoTitle">The Dao Has Ten Thousand Branches</h3>
-            <p data-i18n="futureDaoBody">Not every inheritance has surfaced. Future Dao paths will open new identities with their own trials, thresholds, and methods of enlightenment.</p>
+            <div class="kicker" data-i18n="extraDaoKicker">Additional Paths</div>
+            <h3 data-i18n="extraDaoTitle">The Dao Has Ten Thousand Branches</h3>
+            <p data-i18n="extraDaoBody">Additional Dao identities follow their own trials, thresholds, and methods of enlightenment as they enter the path.</p>
           </article>
         </div>
       </section>
@@ -1587,7 +1592,35 @@
           <article class="feature-card">
             <span class="step-number">05</span>
             <h3 data-i18n="startStep5Title">Seek Hidden Teachings</h3>
-            <p data-i18n="startStep5Body">Techniques, arts, and skills can be learned from technique scrolls found as rare enemy drops or through the Black Market. Later, deeper treasures will surface through the Eternal Exchange Pavilion.</p>
+            <p data-i18n="startStep5Body">Techniques, arts, and skills can be learned from technique scrolls found as rare enemy drops, through the Black Market, or through the Eternal Exchange Pavilion.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="recovery">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow" data-i18n="recoveryEyebrow">Player Tools</div>
+            <h2 data-i18n="recoveryTitle">Backup And Recovery</h2>
+            <p data-i18n="recoveryBody">Use these Settings tools to repair cultivation state and manage character-scoped recovery snapshots.</p>
+          </div>
+        </div>
+
+        <div class="feature-grid reveal">
+          <article class="feature-card">
+            <span class="step-number">01</span>
+            <h3 data-i18n="recoveryRepairTitle">Repair Cultivation State</h3>
+            <p data-i18n="recoveryRepairBody">Use this first if cultivation records appear lost after an update. It migrates known legacy IDs and resyncs feats, path techniques, and abilities.</p>
+          </article>
+          <article class="feature-card">
+            <span class="step-number">02</span>
+            <h3 data-i18n="recoveryCreateTitle">Create Backup</h3>
+            <p data-i18n="recoveryCreateBody">Creates a JSON snapshot for the current character under BepInEx/config/NineRealmsPathOfDao/.</p>
+          </article>
+          <article class="feature-card">
+            <span class="step-number">03</span>
+            <h3 data-i18n="recoveryRestoreTitle">Restore Backup</h3>
+            <p data-i18n="recoveryRestoreBody">Restores saved progress, path feats, records, techniques, abilities, resource bonuses, and tracked permanent gains.</p>
           </article>
         </div>
       </section>
@@ -1597,9 +1630,9 @@
           <div>
             <div class="eyebrow" data-i18n="loreEyebrow">Archive Of The Nine Realms</div>
             <h2 data-i18n="loreTitle">Lore Wiki</h2>
-            <p data-i18n="loreBody">Records of realms, abilities, techniques, arts, cultivation systems, and future world lore for sects, NPC cultivators, and pavilions. Filter the archive or search by name, path, mechanic, or flavor text.</p>
+            <p data-i18n="loreBody">Records of realms, abilities, techniques, arts, treasures, NPC cultivators, and world lore. Filter the archive or search by name, path, mechanic, or flavor text.</p>
           </div>
-          <a class="brush-button" href="#roadmap" data-i18n="futureArcs">View Future Arcs</a>
+          <a class="brush-button" href="#roadmap" data-i18n="roadmapLink">View Roadmap</a>
         </div>
 
         <div class="lore-layout reveal">
@@ -1623,11 +1656,31 @@
                 <div class="meta"><span class="tag">Progression</span><span class="tag">Realms</span></div>
                 <div class="kicker">Cultivation Structure</div>
                 <h3>Realms &amp; Stages</h3>
-                <p>Every major realm spans 1000 cultivation progress. Formal paths move through Early, Middle, Late, and Peak stages, then pause at the gate until breakthrough succeeds.</p>
+                <p>Major realm thresholds now escalate across the ascent. Formal paths move through Early, Middle, Late, and Peak stages inside each realm, then pause at the gate until breakthrough succeeds.</p>
                 <ul class="mechanics">
-                  <li>Thresholds run from 1000 through the current 18000 cap.</li>
+                  <li>Thresholds run from 1000 through the current 508000 cap.</li>
                   <li>Formal paths stop at the next threshold - 1 until breakthrough.</li>
                   <li>Shared immortal realms unlock after the ninth Body or Qi realm.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="lore-card no-image">
+              <div>
+                <div class="meta"><span class="tag">Progression</span><span class="tag">Thresholds</span></div>
+                <div class="kicker">Cultivation Structure</div>
+                <h3>Progression Threshold Table</h3>
+                <p>The current cultivation curve uses escalating major-realm thresholds instead of equal 1000-progress steps.</p>
+                <ul class="mechanics">
+                  <li>Realm 1: 1000 - Skin Tempering / Qi Gathering.</li>
+                  <li>Realm 2: 2500 - Muscle Forging / Qi Condensation.</li>
+                  <li>Realm 3: 4750 - Tendon Strengthening / Foundation Establishment.</li>
+                  <li>Realm 4: 8000 - Bone Tempering / Core Formation.</li>
+                  <li>Realm 5: 12500 - Marrow Cleansing / Nascent Soul.</li>
+                  <li>Realm 6: 18500 - Blood Refinement / Soul Transformation.</li>
+                  <li>Realm 7: 26500 - Organ Refinement / Void Refinement.</li>
+                  <li>Realm 8: 37000 - Golden Body / Body Integration.</li>
+                  <li>Realm 9: 50500 - Indestructible Body / Tribulation Transcendence.</li>
+                  <li>Shared immortal ascent: 67500, 89000, 116000, 150000, 193000, 247000, 315000, 400000, 508000.</li>
                 </ul>
               </div>
             </article>
@@ -1645,19 +1698,6 @@
                 </ul>
               </div>
             </article>
-            <article class="lore-card no-image">
-              <div>
-                <div class="meta"><span class="tag">Dao</span><span class="tag">Unreleased</span></div>
-                <div class="kicker">Independent Progression</div>
-                <h3>Dao Paths</h3>
-                <p>Dao paths are independent from Body, Qi, and Rogue cultivation. They use their own requirements, progression rules, and leveling systems.</p>
-                <ul class="mechanics">
-                  <li>Current planned Dao paths: Sword Dao and Dao of Music.</li>
-                  <li>Dao progression is separate from cultivation realm progression.</li>
-                  <li>Future Dao paths may introduce their own trials and thresholds.</li>
-                </ul>
-              </div>
-            </article>
           </div>
         </div>
       </section>
@@ -1671,7 +1711,7 @@
           </div>
         </div>
 
-        <div class="scroll-hint" data-i18n="scrollHint">Scroll sideways to see future milestones</div>
+        <div class="scroll-hint" data-i18n="scrollHint">Scroll sideways to browse roadmap milestones</div>
         <div class="scroll-shell reveal">
           <div class="roadmap-track" id="roadmapTrack"></div>
         </div>
@@ -1682,7 +1722,7 @@
           <div>
             <div class="eyebrow" data-i18n="changelogEyebrow">Release History</div>
             <h2 data-i18n="changelogTitle">Changelog</h2>
-            <p data-i18n="changelogBody">Released and upcoming changes for Nine Realms.</p>
+            <p data-i18n="changelogBody">Released changes and roadmap notes for Nine Realms.</p>
           </div>
         </div>
         <div class="scroll-hint" data-i18n="changelogScrollHint">Scroll sideways for older releases</div>
@@ -1761,11 +1801,38 @@
         title: "Realms & Stages",
         path: "Cultivation Structure",
         tags: ["Progression", "Thresholds", "Wiki"],
-        flavor: "Every major realm spans 1000 cultivation progress. Formal paths move through Early, Middle, Late, and Peak stages, then pause at the gate until breakthrough succeeds.",
+        flavor: "Major realm thresholds now escalate across the ascent. Formal paths move through Early, Middle, Late, and Peak stages inside each realm, then pause at the gate until breakthrough succeeds.",
         mechanics: [
-          "Thresholds: 1000, 2000, 3000 ... up to 18000.",
+          "Thresholds: 1000, 2500, 4750, 8000, 12500, 18500, 26500, 37000, 50500, 67500, 89000, 116000, 150000, 193000, 247000, 315000, 400000, 508000.",
           "Formal paths stop at next threshold - 1 until breakthrough.",
           "Shared immortal realms unlock after the ninth Body or Qi realm."
+        ]
+      },
+      {
+        category: "realm",
+        title: "Progression Threshold Table",
+        path: "Cultivation Structure",
+        tags: ["Progression", "Thresholds", "Table", "Current"],
+        flavor: "The current cultivation curve uses escalating major-realm thresholds instead of equal 1000-progress steps.",
+        mechanics: [
+          "Realm 1: 1000 - Skin Tempering / Qi Gathering.",
+          "Realm 2: 2500 - Muscle Forging / Qi Condensation.",
+          "Realm 3: 4750 - Tendon Strengthening / Foundation Establishment.",
+          "Realm 4: 8000 - Bone Tempering / Core Formation.",
+          "Realm 5: 12500 - Marrow Cleansing / Nascent Soul.",
+          "Realm 6: 18500 - Blood Refinement / Soul Transformation.",
+          "Realm 7: 26500 - Organ Refinement / Void Refinement.",
+          "Realm 8: 37000 - Golden Body / Body Integration.",
+          "Realm 9: 50500 - Indestructible Body / Tribulation Transcendence.",
+          "True Immortal: 67500.",
+          "Earth Immortal: 89000.",
+          "Heavenly Immortal: 116000.",
+          "Profound Immortal: 150000.",
+          "Golden Immortal: 193000.",
+          "Taiyi Immortal: 247000.",
+          "Immortal King: 315000.",
+          "Immortal Emperor: 400000.",
+          "Dao Ancestor: 508000."
         ]
       },
       {
@@ -1801,33 +1868,11 @@
         mechanics: [
           "Shared immortal realms provide broad cultivation gains and stronger breakthrough rewards.",
           "Immortal breakthroughs grant all cultivation attributes, PV, DV, Meditation, max HP, max MP, and stamina.",
-          "Current shared cap reaches 18000 cultivation progress."
+          "Current shared cap reaches 508000 cultivation progress."
         ]
       },
-      {
-        category: "world",
-        title: "Sects",
-        path: "World Lore",
-        tags: ["World", "Sects", "Coming Arc"],
-        flavor: "Beyond the player's secluded cultivation, the Nine Realms will be shaped by mountain gates, inheritance halls, rival doctrines, and spheres of influence that give the world a living cultivation order.",
-        mechanics: [
-          "A world arc category for sect identity and influence.",
-          "Built to house future relationships between sects, elders, rivals, and disciples.",
-          "This branch of the archive will expand as named factions enter the mod."
-        ]
-      },
-      {
-        category: "world",
-        title: "Named NPC Cultivators",
-        path: "World Lore",
-        tags: ["World", "NPCs", "Coming Arc"],
-        flavor: "Every long road gathers rivals, elders, wandering immortals, and half-mad geniuses. This archive branch will record the cultivators whose names become part of the Nine Realms.",
-        mechanics: [
-          "Prepared for Version 3.0.0 and beyond.",
-          "Intended for notable cultivators, teachers, rivals, and sect figures.",
-          "Designed to grow as the world gains named characters."
-        ]
-      },
+
+
       {
         category: "world",
         title: "Eternal Exchange Pavilion",
@@ -1888,46 +1933,13 @@
         flavor: "A jade seal pendant once carried by a minor official of a cloudborne palace. Its stamped mist still knows how to make merchants lower their voices and rivals hesitate.",
         mechanics: [
           "Equippable amulet treasure tied to the Eternal Exchange Pavilion.",
-          "While worn, minimum player bids are reduced by 10%, never below the current bid + 1.",
-          "NPC counter-bid chance is multiplied by 0.65 while the seal is equipped."
+          "While worn, minimum player bids are reduced by 20%, never below the current bid + 1.",
+          "NPC counter-bid chance is multiplied by 0.45 while the seal is equipped."
         ]
       },
-      {
-        category: "world",
-        title: "Dao Paths",
-        path: "Independent Progression",
-        tags: ["World", "Dao", "Unreleased"],
-        flavor: "Dao paths are independent from the three core cultivation modes. They are not Body, Qi, or Rogue paths; they use their own requirements, leveling systems, and methods of enlightenment.",
-        mechanics: [
-          "Current planned Dao paths: Sword Dao and Dao of Music.",
-          "Dao progression is separate from cultivation realm progression.",
-          "Future Dao paths may introduce their own trials, unlocks, and thresholds."
-        ]
-      },
-      {
-        category: "world",
-        title: "Sword Dao",
-        path: "Dao Path",
-        tags: ["Dao", "Sword", "Unreleased"],
-        flavor: "The Sword Dao is the way of intent made sharp. A cultivator tempers heart, breath, and blade until one sword light can cross a thousand li and cut through doubt before it cuts through flesh.",
-        mechanics: [
-          "Unreleased.",
-          "Independent from Body, Qi, and Rogue cultivation.",
-          "Planned to use its own requirements and leveling system."
-        ]
-      },
-      {
-        category: "world",
-        title: "Dao Of Music",
-        path: "Dao Path",
-        tags: ["Dao", "Music", "Unreleased"],
-        flavor: "The Dao of Music turns rhythm into law and melody into pressure on the soul. One clear note may calm killing intent, call the wind, disturb meridians, or make heaven and earth tremble in harmony.",
-        mechanics: [
-          "Unreleased.",
-          "Independent from Body, Qi, and Rogue cultivation.",
-          "Planned to use its own requirements and leveling system."
-        ]
-      },
+
+
+
       {
         category: "ability",
         title: "Cultivate",
@@ -1938,7 +1950,7 @@
         mechanics: [
           "Unlocked through Cultivation Initiate.",
           "Each tick spends stamina and MP: 3/3 by default, 2/2 at realm 5+, and 1/1 at realm 9+.",
-          "Realm gates are every 1000 progress. Formal paths pause at the next gate - 1 until breakthrough."
+          "Realm gates use escalating thresholds. Formal paths pause at the next gate - 1 until breakthrough."
         ]
       },
       {
@@ -2066,7 +2078,7 @@
         tags: ["Neutral", "Toggle", "Evasion"],
         flavor: "A drifting footwork that hides loose qi in the joints and lets each step scatter like dust under a passing robe. The body becomes harder to pin down, though the path of cultivation slows while the art is maintained.",
         mechanics: [
-          "Neutral toggle technique learned from a future scroll or inheritance source.",
+          "Neutral toggle technique learned from a technique scroll or inheritance source.",
           "While active, DV +2, with another +1 at realm 4 and realm 8.",
           "While active, cultivation progress gains are reduced to 90%."
         ]
@@ -2248,7 +2260,7 @@
         tags: ["Qi", "MP", "Evasion"],
         flavor: "The practitioner exhales through the dantian until pale jade mist gathers around the meridians. Blades find only a shifting veil.",
         mechanics: [
-          "Learned from a future scroll or inheritance source.",
+          "Learned from a technique scroll or inheritance source.",
           "Max MP increases by 8 + realm * 4.",
           "DV rises by realm while PV receives a penalty that softens over time."
         ]
@@ -2261,7 +2273,7 @@
         tags: ["Qi", "Aura", "Party Support"],
         flavor: "A Qi Practitioner loosens the dantian into a quiet spring and lets its mist drift through trusted meridians nearby.",
         mechanics: [
-          "Learned from a future scroll or inheritance source.",
+          "Learned from a technique scroll or inheritance source.",
           "Before realm 5, every 5 technique ticks spends 1 MP and restores 1 HP.",
           "Pulses affect the practitioner and PC-party members alive in the current area."
         ]
@@ -2322,7 +2334,7 @@
         category: "neutral",
         title: "Heaven-Devouring Sutra",
         path: "Immortal Art",
-        placeholderIcon: "天",
+        symbolIcon: "天",
         tags: ["Immortal", "Passive", "Progress", "Overpowered"],
         flavor: "A forbidden scripture that does not ask heaven for permission. It opens its mouth beneath fate itself, swallowing stray opportunities until progress and raw talent drip from the stolen sky.",
         mechanics: [
@@ -2335,7 +2347,7 @@
         category: "neutral",
         title: "Myriad Dao Body",
         path: "Immortal Art",
-        placeholderIcon: "道",
+        symbolIcon: "道",
         tags: ["Immortal", "Passive", "Attributes", "Resources"],
         flavor: "The body ceases to belong to one road. Bone, breath, will, and spirit become a meeting place for ten thousand methods, each Dao leaving its seal without forcing the others away.",
         mechanics: [
@@ -2348,7 +2360,7 @@
         category: "neutral",
         title: "Immortal Sovereign Edict",
         path: "Immortal Art",
-        placeholderIcon: "令",
+        symbolIcon: "令",
         tags: ["Immortal", "Passive", "Breakthrough", "Efficiency"],
         flavor: "A decree written in the tone of one who expects heaven to obey. Cultivation cost bends, gates grow weaker, and every movement carries the pressure of an immortal command.",
         mechanics: [
@@ -2367,9 +2379,27 @@
           tags: ["进度", "门槛", "百科"],
           flavor: "每个大境界横跨 1000 点修行进度。正式路线会在其中经历初期、中期、后期、巅峰四个阶段，抵达关口后必须突破成功才能继续前进。",
           mechanics: [
-            "门槛：1000、2000、3000……直到 18000。",
+            "门槛：1000、2500、4750、8000、12500、18500、26500、37000、50500、67500、89000、116000、150000、193000、247000、315000、400000、508000。",
             "正式路线会停在下一个门槛 - 1，直到突破成功。",
             "炼体或练气第九境之后会开启共通仙境。"
+          ]
+        },
+        "Progression Threshold Table": {
+          title: "进阶门槛表",
+          path: "修行结构",
+          tags: ["进度", "门槛", "表格", "当前"],
+          flavor: "当前修行曲线采用逐步提高的大境界门槛，不再是每 1000 点一个大境界。",
+          mechanics: [
+            "第 1 境：1000 - 炼皮 / 聚气。",
+            "第 2 境：2500 - 锻肌 / 凝气。",
+            "第 3 境：4750 - 强筋 / 筑基。",
+            "第 4 境：8000 - 淬骨 / 结丹。",
+            "第 5 境：12500 - 洗髓 / 元婴。",
+            "第 6 境：18500 - 炼血 / 化神。",
+            "第 7 境：26500 - 炼脏 / 炼虚。",
+            "第 8 境：37000 - 金身 / 合体。",
+            "第 9 境：50500 - 不灭体 / 渡劫。",
+            "共通仙境：67500、89000、116000、150000、193000、247000、315000、400000、508000。"
           ]
         },
         "Body Realms": {
@@ -2402,7 +2432,7 @@
           mechanics: [
             "共通仙境提供更广泛的修行成长与更强突破奖励。",
             "仙境突破会提升所有修行属性、PV、DV、Meditation、最大 HP、最大 MP 与体力。",
-            "当前共通上限为 18000 修行进度。"
+            "当前共通上限为 508000 修行进度。"
           ]
         },
         "Sects": {
@@ -2478,8 +2508,8 @@
           flavor: "一枚曾由云上宫阙小吏携带的玉印。印中雾气仍懂得让商人压低声音，也让竞争者多迟疑一息。",
           mechanics: [
             "与永恒交易阁相关的可装备护符宝物。",
-            "佩戴时，玩家最低出价降低 10%，但不会低于当前出价 + 1。",
-            "佩戴时，NPC 反超出价概率乘以 0.65。"
+            "佩戴时，玩家最低出价降低 20%，但不会低于当前出价 + 1。",
+            "佩戴时，NPC 反超出价概率乘以 0.45。"
           ]
         },
         "Dao Paths": {
@@ -2504,7 +2534,7 @@
             "计划使用自身条件与等级系统。"
           ]
         },
-        "Dao Of Music": {
+        "Alchemy Dao": {
           title: "音律之道",
           path: "道途",
           tags: ["道", "音律", "未发布"],
@@ -2838,9 +2868,27 @@
           tags: ["進行", "門", "Wiki"],
           flavor: "各大境界は 1000 修行進度で構成されます。正式な道は Early、Middle、Late、Peak を経て、突破に成功するまで門で止まります。",
           mechanics: [
-            "しきい値：1000、2000、3000……18000 まで。",
+            "しきい値：1000、2500、4750、8000、12500、18500、26500、37000、50500、67500、89000、116000、150000、193000、247000、315000、400000、508000。",
             "正式な道は次のしきい値 - 1 で突破まで止まります。",
             "Body または Qi の第九境後に共有仙境が開きます。"
+          ]
+        },
+        "Progression Threshold Table": {
+          title: "進行しきい値表",
+          path: "修行構造",
+          tags: ["進行", "しきい値", "表", "現行"],
+          flavor: "現在の修行曲線は、1000 ずつの均等な段階ではなく、大境界ごとに段階的に上がるしきい値を使います。",
+          mechanics: [
+            "第 1 境：1000 - Skin Tempering / Qi Gathering。",
+            "第 2 境：2500 - Muscle Forging / Qi Condensation。",
+            "第 3 境：4750 - Tendon Strengthening / Foundation Establishment。",
+            "第 4 境：8000 - Bone Tempering / Core Formation。",
+            "第 5 境：12500 - Marrow Cleansing / Nascent Soul。",
+            "第 6 境：18500 - Blood Refinement / Soul Transformation。",
+            "第 7 境：26500 - Organ Refinement / Void Refinement。",
+            "第 8 境：37000 - Golden Body / Body Integration。",
+            "第 9 境：50500 - Indestructible Body / Tribulation Transcendence。",
+            "共有仙境：67500、89000、116000、150000、193000、247000、315000、400000、508000。"
           ]
         },
         "Body Realms": {
@@ -2873,7 +2921,7 @@
           mechanics: [
             "共有仙境は広い成長と強い突破報酬を与えます。",
             "仙境突破は全修行能力、PV、DV、Meditation、最大 HP、最大 MP、スタミナを高めます。",
-            "現在の共有上限は 18000 修行進度です。"
+            "現在の共有上限は 508000 修行進度です。"
           ]
         },
         "Sects": {
@@ -2943,7 +2991,7 @@
           path: "宝物",
           tags: ["宝物", "神器", "競売", "交易閣"],
           flavor: "雲上の宮に仕えた小官が携えた玉印。印の霧は今も商人の声を低くし、競り相手を一瞬ためらわせる術を覚えています。",
-          mechanics: ["Eternal Exchange Pavilion に関わる装備可能な護符です。", "装備中、最低入札額が 10% 下がります。ただし現在入札 + 1 より低くはなりません。", "装備中、NPC の対抗入札確率は 0.65 倍になります。"]
+          mechanics: ["Eternal Exchange Pavilion に関わる装備可能な護符です。", "装備中、最低入札額が 20% 下がります。ただし現在入札 + 1 より低くはなりません。", "装備中、NPC の対抗入札確率は 0.45 倍になります。"]
         },
         "Dao Paths": {
           title: "Dao の道",
@@ -2967,7 +3015,7 @@
             "独自の条件とレベル体系を使う予定です。"
           ]
         },
-        "Dao Of Music": {
+        "Alchemy Dao": {
           title: "音楽の Dao",
           path: "Dao の道",
           tags: ["Dao", "音楽", "未実装"],
@@ -3326,10 +3374,10 @@
         version: "Version 2.0.0"
       },
       {
-        status: "Future Arc",
-        title: "Sword Dao And Dao Of Music",
+        status: "Roadmap",
+        title: "Sword Dao And Alchemy Dao",
         body: "New Dao identities open beyond the current cultivation paths, with their own flavor, progression tracks, and distinct leveling systems.",
-        version: "Future systems"
+        version: "Roadmap systems"
       },
       {
         status: "Version 3.0.0",
@@ -3341,7 +3389,7 @@
         status: "Beyond",
         title: "The Road Does Not End",
         body: "The road ahead is far and long. Though the mountain mist hides the next gate and the heavens test every step, the cultivator must persist, breath by breath, until the Dao reveals another path.",
-        version: "Future scripture"
+        version: "Continuing path"
       }
     ];
 
@@ -3389,7 +3437,7 @@
         status: "Skipped",
         title: "Artifact Treasures",
         items: [
-          "Planned item batch for Ashen Phoenix Feather and Cloud Palace Seal.",
+          "Item batch for Ashen Phoenix Feather and Cloud Palace Seal.",
           "Ashen Phoenix Feather raises breakthrough chance by 10% and can prevent death once per day.",
           "Cloud Palace Seal improves Eternal Exchange Pavilion bidding by lowering minimum bids and reducing NPC counter-bid odds.",
           "This version was skipped, and its work landed with Version 2.0.0."
@@ -3400,9 +3448,9 @@
         status: "Skipped",
         title: "Expanded Body, Qi, And Immortal Arts",
         items: [
-          "Planned Body Refiner arts: Dragon Marrow Classic, Adamantine Heart, Titan Step, Bone-Shattering Blow, and Mountain Breaker.",
-          "Planned Qi Practitioner arts: Star Sea Mantra, Thunder Vein Method, Void Lotus Breath, and Celestial Mirror Art.",
-          "Planned Immortal arts: Heaven-Devouring Sutra, Myriad Dao Body, and Immortal Sovereign Edict.",
+          "Body Refiner arts: Dragon Marrow Classic, Adamantine Heart, Titan Step, Bone-Shattering Blow, and Mountain Breaker.",
+          "Qi Practitioner arts: Star Sea Mantra, Thunder Vein Method, Void Lotus Breath, and Celestial Mirror Art.",
+          "Immortal arts: Heaven-Devouring Sutra, Myriad Dao Body, and Immortal Sovereign Edict.",
           "This version was skipped so development could jump directly to Version 2.0.0."
         ]
       },
@@ -3425,12 +3473,12 @@
       {
         version: "Version 1.6.0",
         status: "Released",
-        title: "New Techniques, Debug Settings, And Balance Pass",
+        title: "New Techniques, Settings Tools, And Balance Pass",
         items: [
           "Added new techniques and abilities: Still Breath Sutra, Hidden Vessel Art, Open Minor Meridian, Bone Tempering Art, Hundred Scars Scripture, and Blood Furnace.",
-          "Added Settings tools for cultivation speed multiplier, unlock all abilities, and reset progress. These are debug options and can break normal balance.",
+          "Added Settings tools for cultivation speed multiplier, unlock all abilities, and reset progress. These tools can break normal balance.",
           "Balance change: Body cultivation now rolls STR, END, DEX, PER, and PV. Qi cultivation now rolls CHA, WIL, MAG, PER, LER, Meditation, and DV.",
-          "Eternal Exchange Pavilion introduced as a sealed future system.",
+          "Eternal Exchange Pavilion introduced as a sealed system.",
           "Added Clear Spring Aura and Jade Veil Breathing as Qi Practitioner arts."
         ]
       },
@@ -3448,11 +3496,11 @@
       {
         version: "Version 1.4.0",
         status: "Released",
-        title: "Neutral Techniques And Future Frameworks",
+        title: "Neutral Techniques And System Foundations",
         items: [
           "Added the first neutral technique, Profound Qi Healing.",
-          "Started frameworks for future techniques, arts, and inheritance scrolls.",
-          "Added groundwork for future Dao paths and unique leveling systems.",
+          "Started foundations for additional techniques, arts, and inheritance scrolls.",
+          "Added groundwork for Dao paths and unique leveling systems.",
           "Laid out the Techniques page in the cultivation menu."
         ]
       },
@@ -3529,6 +3577,7 @@
         pageTitle: "Nine Realms: Path of the Dao",
         navHome: "Home",
         navPaths: "Paths",
+        navRecovery: "Recovery",
         navLore: "Lore Wiki",
         navRoadmap: "Roadmap",
         navChangelog: "Changelog",
@@ -3576,10 +3625,19 @@
         startStep4Title: "Choose A Path",
         startStep4Body: "When you are ready to commit, take the next cultivation feat to choose Body, Qi, or the slower outsider road of Rogue cultivation.",
         startStep5Title: "Seek Hidden Teachings",
-        startStep5Body: "Techniques, arts, and skills can be learned from technique scrolls found as rare enemy drops or through the Black Market. Later, deeper treasures will surface through the Eternal Exchange Pavilion.",
+        startStep5Body: "Techniques, arts, and skills can be learned from technique scrolls found as rare enemy drops, through the Black Market, or through the Eternal Exchange Pavilion.",
+        recoveryEyebrow: "Player Tools",
+        recoveryTitle: "Backup And Recovery",
+        recoveryBody: "Use these Settings tools to repair cultivation state and manage character-scoped recovery snapshots.",
+        recoveryRepairTitle: "Repair Cultivation State",
+        recoveryRepairBody: "Use this first if cultivation records appear lost after an update. It migrates known legacy IDs and resyncs feats, path techniques, and abilities.",
+        recoveryCreateTitle: "Create Backup",
+        recoveryCreateBody: "Creates a JSON snapshot for the current character under BepInEx/config/NineRealmsPathOfDao/.",
+        recoveryRestoreTitle: "Restore Backup",
+        recoveryRestoreBody: "Restores saved progress, path feats, records, techniques, abilities, resource bonuses, and tracked permanent gains.",
         loreEyebrow: "Archive Of The Nine Realms",
         loreTitle: "Lore Wiki",
-        loreBody: "Records of realms, abilities, techniques, arts, cultivation systems, and future world lore for sects, NPC cultivators, and pavilions. Filter the archive or search by name, path, mechanic, or flavor text.",
+        loreBody: "Records of realms, abilities, techniques, arts, treasures, NPC cultivators, and world lore. Filter the archive or search by name, path, mechanic, or flavor text.",
         filterAll: "All",
         filterRealms: "Realms",
         filterAbilities: "Abilities",
@@ -3589,15 +3647,15 @@
         filterImmortal: "Immortal",
         filterTreasure: "Treasure",
         filterWorld: "World",
-        futureArcs: "View Future Arcs",
+        roadmapLink: "View Roadmap",
         searchPlaceholder: "Search the archive",
         roadmapEyebrow: "Heavenly Route",
         roadmapTitle: "Roadmap",
         roadmapBody: "The foundation arc, expanded arts, treasure batch, and Eternal Exchange Pavilion are complete. The next ascents focus on new Dao identities and a living sect world.",
-        scrollHint: "Scroll sideways to see future milestones",
+        scrollHint: "Scroll sideways to browse roadmap milestones",
         changelogEyebrow: "Release History",
         changelogTitle: "Changelog",
-        changelogBody: "Released and upcoming changes for Nine Realms.",
+        changelogBody: "Released changes and roadmap notes for Nine Realms.",
         changelogScrollHint: "Scroll sideways for older releases",
         thanksEyebrow: "Community Acknowledgements",
         thanksTitle: "Thanks For Shaping The Path",
@@ -3610,6 +3668,7 @@
         pageTitle: "九境：道途",
         navHome: "首页",
         navPaths: "修行路线",
+        navRecovery: "恢复",
         navLore: "设定百科",
         navRoadmap: "路线图",
         navChangelog: "更新日志",
@@ -3658,9 +3717,18 @@
         startStep4Body: "准备正式踏上道路时，获取下一项修行 feat，选择炼体、练气，或更缓慢的散修之路。",
         startStep5Title: "寻得隐藏传承",
         startStep5Body: "功法、术式与技能可通过功法卷轴学习。卷轴可由敌人稀有掉落，或在黑市中寻得；之后，更深的宝物会在永恒交易阁中显现。",
+        recoveryEyebrow: "玩家工具",
+        recoveryTitle: "备份与恢复",
+        recoveryBody: "使用这些设置工具修复修行状态，并管理按角色保存的恢复快照。",
+        recoveryRepairTitle: "修复修行状态",
+        recoveryRepairBody: "如果更新后修行记录像是丢失，先使用此功能。它会迁移已知旧 ID，并重新同步 feat、路线功法与能力。",
+        recoveryCreateTitle: "创建备份",
+        recoveryCreateBody: "为当前角色创建 JSON 快照，存放在 BepInEx/config/NineRealmsPathOfDao/ 下。",
+        recoveryRestoreTitle: "恢复备份",
+        recoveryRestoreBody: "恢复已保存的进度、路线 feat、记录、功法、能力、资源加成与追踪的永久成长。",
         loreEyebrow: "九境档案",
         loreTitle: "设定百科",
-        loreBody: "这里记录境界、能力、功法、术式、修行系统，以及未来关于宗门、NPC 修士与楼阁的世界设定。可按名称、路线、机制或风味文本搜索筛选。",
+        loreBody: "这里记录境界、能力、功法、术式、修行系统、宗门、NPC 修士与楼阁等世界设定。可按名称、路线、机制或风味文本搜索筛选。",
         filterAll: "全部",
         filterRealms: "境界",
         filterAbilities: "能力",
@@ -3670,15 +3738,15 @@
         filterImmortal: "仙阶",
         filterTreasure: "宝物",
         filterWorld: "世界",
-        futureArcs: "查看未来篇章",
+        roadmapLink: "查看路线图",
         searchPlaceholder: "搜索档案",
         roadmapEyebrow: "登天路线",
         roadmapTitle: "路线图",
         roadmapBody: "基础篇章、扩展功法、宝物批次与永恒交易阁已经完成。后续将推进新的道途身份与更鲜活的宗门世界。",
-        scrollHint: "横向滚动查看未来里程碑",
+        scrollHint: "横向滚动查看路线图里程碑",
         changelogEyebrow: "发布历史",
         changelogTitle: "更新日志",
-        changelogBody: "九境的已发布与未发布改动。",
+        changelogBody: "九境的已发布改动与路线图记录。",
         changelogScrollHint: "横向滚动查看旧版本",
         thanksEyebrow: "社区致谢",
         thanksTitle: "感谢共同塑造道途",
@@ -3691,6 +3759,7 @@
         pageTitle: "九境：道の道",
         navHome: "ホーム",
         navPaths: "修行路",
+        navRecovery: "復元",
         navLore: "設定 Wiki",
         navRoadmap: "ロードマップ",
         navChangelog: "更新履歴",
@@ -3739,9 +3808,18 @@
         startStep4Body: "正式に歩む準備ができたら、次の修行 feat を取得して身体、気、または遅く険しい放浪の道を選びます。",
         startStep5Title: "隠された継承を探す",
         startStep5Body: "技法、術、技能は技法巻物から学べます。巻物は敵から稀に落ちるほか、ブラックマーケットで見つかることがあります。後には、より深い宝物が Eternal Exchange Pavilion に現れます。",
+        recoveryEyebrow: "プレイヤーツール",
+        recoveryTitle: "バックアップと復元",
+        recoveryBody: "これらの設定ツールで修行状態を修復し、キャラ別の復元スナップショットを管理できます。",
+        recoveryRepairTitle: "修行状態を修復",
+        recoveryRepairBody: "更新後に修行記録が失われたように見える場合は、まずこれを使います。既知の旧 ID を移行し、feat、ルート技法、能力を再同期します。",
+        recoveryCreateTitle: "バックアップ作成",
+        recoveryCreateBody: "現在のキャラ用の JSON スナップショットを BepInEx/config/NineRealmsPathOfDao/ に作成します。",
+        recoveryRestoreTitle: "バックアップ復元",
+        recoveryRestoreBody: "保存された進度、ルート feat、記録、技法、能力、リソースボーナス、追跡された永続成長を復元します。",
         loreEyebrow: "九境資料",
         loreTitle: "ロア Wiki",
-        loreBody: "境界、能力、技法、術、修行システム、そして宗派・NPC 修行者・楼閣など今後の世界ロアの記録です。名前、道、仕組み、フレーバーで検索できます。",
+        loreBody: "境界、能力、技法、術、修行システム、宗派、NPC 修行者、楼閣などの世界ロアの記録です。名前、道、仕組み、フレーバーで検索できます。",
         filterAll: "全て",
         filterRealms: "境界",
         filterAbilities: "能力",
@@ -3751,15 +3829,15 @@
         filterImmortal: "仙階",
         filterTreasure: "宝物",
         filterWorld: "世界",
-        futureArcs: "今後の章を見る",
+        roadmapLink: "ロードマップを見る",
         searchPlaceholder: "資料を検索",
         roadmapEyebrow: "天へ至る道",
         roadmapTitle: "ロードマップ",
         roadmapBody: "基礎編、拡張技法、宝物群、Eternal Exchange Pavilion は完成済みです。次は新たな Dao と宗派世界へ進みます。",
-        scrollHint: "横にスクロールして今後の節目を見る",
+        scrollHint: "横にスクロールしてロードマップの節目を見る",
         changelogEyebrow: "リリース履歴",
         changelogTitle: "更新履歴",
-        changelogBody: "Nine Realms の公開済み・今後の変更。",
+        changelogBody: "Nine Realms の公開済み変更とロードマップ記録。",
         changelogScrollHint: "横にスクロールして過去リリースを見る",
         thanksEyebrow: "コミュニティ謝辞",
         thanksTitle: "道を形作ってくれてありがとう",
@@ -3775,17 +3853,17 @@
       daoEyebrow: "Dao Paths",
       daoTitle: "Arts Beyond The Three Roads",
       daoBody: "Dao paths are independent from Body, Qi, and Rogue cultivation. They follow separate requirements, progression rules, and leveling systems, allowing a cultivator's chosen Dao to grow beside their realm without replacing it.",
-      unreleased: "Unreleased",
+      roadmapLabel: "Roadmap",
       swordDaoKicker: "Sword Dao",
       swordDaoTitle: "A Single Edge Splits The Clouds",
       swordDaoBody: "The Sword Dao is the way of intent made sharp. A cultivator tempers heart, breath, and blade until one sword light can cross a thousand li and cut through doubt before it cuts through flesh.",
-      musicDaoKicker: "Dao Of Music",
-      musicDaoTitle: "The World Answers The True Note",
-      musicDaoBody: "The Dao of Music turns rhythm into law and melody into pressure on the soul. One clear note may calm killing intent, call the wind, disturb meridians, or make heaven and earth tremble in harmony.",
-      futureDaoStatus: "Future Dao",
-      futureDaoKicker: "More Paths Await",
-      futureDaoTitle: "The Dao Has Ten Thousand Branches",
-      futureDaoBody: "Not every inheritance has surfaced. Future Dao paths will open new identities with their own trials, thresholds, and methods of enlightenment.",
+      musicDaoKicker: "Alchemy Dao",
+      musicDaoTitle: "Pill Fire Refines The Inner World",
+      musicDaoBody: "The Alchemy Dao is an independent path for pill mastery, utility arts, and alchemical inheritances that level on their own track beside cultivation.",
+      extraDaoStatus: "Roadmap",
+      extraDaoKicker: "Additional Paths",
+      extraDaoTitle: "The Dao Has Ten Thousand Branches",
+      extraDaoBody: "Additional Dao identities follow their own trials, thresholds, and methods of enlightenment as they enter the path.",
       bodyLi1: "Primary growth: STR, END, DEX, PER, WIL, PV",
       bodyLi2: "Resource reward focus: max HP and stamina",
       bodyLi3: "Realms culminate in Indestructible Body before immortality",
@@ -3793,7 +3871,7 @@
       qiLi2: "Resource reward focus: max HP and MP",
       qiLi3: "Realms culminate in Tribulation Transcendence before immortality",
       rogueLi1: "Broad stat rolls across physical and spiritual attributes",
-      rogueLi2: "Can progress to the current cap without formal gates",
+      rogueLi2: "Can progress to the peak of realm 9 before immortal ascent",
       rogueLi3: "Best for flexible, uncertain, outsider-style play",
       ideasKicker: "Ideas & Feedback",
       ideasTitle: "Community Contributions",
@@ -3817,17 +3895,17 @@
       daoEyebrow: "道途",
       daoTitle: "三路之外的艺与法",
       daoBody: "道途独立于炼体、练气与散修。它们拥有各自的条件、进度规则与等级系统，能让修士的所悟之道与境界并行成长，而不替代境界。",
-      unreleased: "未发布",
+      roadmapLabel: "路线图",
       swordDaoKicker: "剑道",
       swordDaoTitle: "一剑光寒，分云裂霄",
       swordDaoBody: "剑道是意志化锋之路。修士淬炼心、息与刃，直至一缕剑光可越千里，先斩心中迟疑，再斩眼前血肉。",
-      musicDaoKicker: "音律之道",
-      musicDaoTitle: "真音一起，天地相应",
-      musicDaoBody: "音律之道以节拍成法，以旋律压魂。一声清音可平杀意、唤长风、乱经脉，也可令天地随之共鸣震颤。",
-      futureDaoStatus: "未来道途",
-      futureDaoKicker: "更多道途尚在雾中",
-      futureDaoTitle: "大道三千，支流万象",
-      futureDaoBody: "并非所有传承都已现世。未来道途将带来新的身份、试炼、门槛与悟道方法。",
+      musicDaoKicker: "丹道",
+      musicDaoTitle: "炉火炼心，丹成一界",
+      musicDaoBody: "丹道是独立道途，围绕丹药造诣、实用术法与炼丹传承展开，并会在修行境界之外独立成长。",
+      extraDaoStatus: "路线图",
+      extraDaoKicker: "更多道途",
+      extraDaoTitle: "大道三千，支流万象",
+      extraDaoBody: "额外道途会以自身的试炼、门槛与悟道方法进入修行体系。",
       bodyLi1: "主要成长：STR、END、DEX、PER、WIL、PV",
       bodyLi2: "资源奖励重点：最大 HP 与体力",
       bodyLi3: "凡境终点为不灭体，之后进入仙境",
@@ -3835,7 +3913,7 @@
       qiLi2: "资源奖励重点：最大 HP 与 MP",
       qiLi3: "凡境终点为渡劫，之后进入仙境",
       rogueLi1: "在肉身与灵性属性之间进行更广泛成长",
-      rogueLi2: "可推进到当前上限，但不经过正式关口",
+      rogueLi2: "可推进到第九境巅峰，然后停在成仙之前",
       rogueLi3: "适合灵活、不确定、散修风格的玩法",
       ideasKicker: "想法与反馈",
       ideasTitle: "社区贡献",
@@ -3861,17 +3939,17 @@
       daoEyebrow: "Dao の道",
       daoTitle: "三つの道を越える術",
       daoBody: "Dao の道は身体、気、放浪の修行から独立しています。それぞれ別の条件、進行規則、レベル体系を持ち、境界を置き換えずに修行者の Dao を育てます。",
-      unreleased: "未実装",
+      roadmapLabel: "ロードマップ",
       swordDaoKicker: "剣の Dao",
       swordDaoTitle: "一筋の刃が雲を分かつ",
       swordDaoBody: "剣の Dao は、意志を刃に変える道です。修行者は心、呼吸、刃を鍛え、一筋の剣光が千里を越え、肉を斬る前に迷いを断つまで磨きます。",
-      musicDaoKicker: "音楽の Dao",
-      musicDaoTitle: "真の音に世界が応える",
-      musicDaoBody: "音楽の Dao は律を法に、旋律を魂への圧に変えます。一つの澄んだ音は殺意を鎮め、風を呼び、経脈を乱し、天地を調和の中で震わせます。",
-      futureDaoStatus: "未来の Dao",
-      futureDaoKicker: "さらなる道が待つ",
-      futureDaoTitle: "Dao には万の枝がある",
-      futureDaoBody: "すべての継承が現れたわけではありません。今後の Dao は、独自の試練、門、悟りの方法を持つ新しい個性を開きます。",
+      musicDaoKicker: "錬丹の Dao",
+      musicDaoTitle: "丹火が内なる世界を精錬する",
+      musicDaoBody: "錬丹の Dao は、丹薬の熟達、実用術、錬丹の継承を扱う独立した道で、修行境界とは別の軌道で成長します。",
+      extraDaoStatus: "ロードマップ",
+      extraDaoKicker: "さらなる道",
+      extraDaoTitle: "Dao には万の枝がある",
+      extraDaoBody: "追加の Dao は、独自の試練、しきい値、悟りの方法を持って修行体系に加わります。",
       bodyLi1: "主な成長：STR、END、DEX、PER、WIL、PV",
       bodyLi2: "資源報酬：最大 HP とスタミナ",
       bodyLi3: "凡境は Indestructible Body で頂点に達し、その後仙境へ進みます",
@@ -3879,7 +3957,7 @@
       qiLi2: "資源報酬：最大 HP と MP",
       qiLi3: "凡境は Tribulation Transcendence で頂点に達し、その後仙境へ進みます",
       rogueLi1: "肉体と霊的能力を幅広く伸ばします",
-      rogueLi2: "正式な門を越えずに現在の上限まで進めます",
+      rogueLi2: "仙境へ上る前に第九境の頂点で止まります",
       rogueLi3: "柔軟で不確かな放浪者らしい遊び方に向きます",
       ideasKicker: "アイデアとフィードバック",
       ideasTitle: "コミュニティ貢献",
@@ -4035,7 +4113,7 @@
       entries.forEach((sourceEntry) => {
         const entry = getLoreEntry(sourceEntry);
         const card = document.createElement("article");
-        const hasIcon = entry.image || entry.placeholderIcon;
+        const hasIcon = entry.image || entry.symbolIcon;
         card.className = `lore-card ${hasIcon ? "" : "no-image"}`;
 
         if (entry.image) {
@@ -4043,12 +4121,12 @@
           img.src = entry.image;
           img.alt = `${entry.title} icon`;
           card.appendChild(img);
-        } else if (entry.placeholderIcon) {
-          const placeholder = document.createElement("div");
-          placeholder.className = "placeholder-icon";
-          placeholder.setAttribute("aria-label", `${entry.title} placeholder icon`);
-          placeholder.textContent = entry.placeholderIcon;
-          card.appendChild(placeholder);
+        } else if (entry.symbolIcon) {
+          const symbol = document.createElement("div");
+          symbol.className = "symbol-icon";
+          symbol.setAttribute("aria-label", `${entry.title} symbol`);
+          symbol.textContent = entry.symbolIcon;
+          card.appendChild(symbol);
         }
 
         const body = document.createElement("div");
@@ -4103,10 +4181,10 @@
       entries.forEach((entry) => {
         const card = document.createElement("article");
         const isSkipped = /Skipped|跳过|スキップ/.test(entry.status);
-        const isUnreleased = !isSkipped && /Unreleased|未发布|未公開|未実装/.test(entry.status);
-        const isReleased = !isUnreleased && /Released|已发布|公開済み/.test(entry.status);
+        const isRoadmap = !isSkipped && /Roadmap|未发布|未公開|未実装/.test(entry.status);
+        const isReleased = !isRoadmap && /Released|已发布|公開済み/.test(entry.status);
         card.className = `timeline-card ${isReleased ? "released" : ""} ${isSkipped ? "skipped" : ""}`;
-        const statusClass = isUnreleased ? "status unreleased" : "status";
+        const statusClass = isRoadmap ? "status roadmap" : "status";
         card.innerHTML = `
           <div class="timeline-head">
             <span class="tag">${entry.version}</span>
