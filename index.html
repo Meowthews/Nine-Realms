@@ -1437,7 +1437,7 @@
           <div class="hero-actions">
             <a class="brush-button primary" href="#getting-started" data-i18n="startGuide">Getting Started</a>
             <a class="brush-button" href="#changelog" data-i18n="readHistory">Read Release History</a>
-            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>2.2.3</strong></div>
+            <div class="version-badge"><span data-i18n="statVersion">current released version</span><strong>2.3.0</strong></div>
           </div>
         </div>
       </section>
@@ -1937,6 +1937,19 @@
           "NPC counter-bid chance is multiplied by 0.45 while the seal is equipped."
         ]
       },
+      {
+        category: "world",
+        title: "Rusted Sword",
+        path: "Treasure",
+        image: "https://i.imgur.com/M9wBY38.png",
+        tags: ["Treasure", "Weapon", "Artifact", "Instant Slay"],
+        flavor: "A length of worthless rust. Probably. Beneath the corrosion, something old still dreams of severing fate.",
+        mechanics: [
+          "A suspiciously humble weapon added in Version 2.3.0.",
+          "After damaging an enemy, has a 1% chance to instantly slay the target.",
+          "The fate-severing effect does not trigger against the player, party members, unique characters, bosses, or protected targets."
+        ]
+      },
 
 
 
@@ -2094,6 +2107,19 @@
           "Passive resource technique that does not scale with realm.",
           "Rogue cultivators gain +6 max MP and +6 max stamina.",
           "Formal Body or Qi paths gain +3 max MP and +3 max stamina."
+        ]
+      },
+      {
+        category: "neutral",
+        title: "Earth-Tethered Dantian",
+        path: "Neutral Technique",
+        image: "https://i.imgur.com/I8pwjjl.jpeg",
+        tags: ["Neutral", "Toggle", "Gathering", "Resources"],
+        flavor: "The cultivator anchors part of the dantian into soil, stone, and root. Honest labor answers with a second breath, though a portion of inner qi must remain bound to the earth.",
+        mechanics: [
+          "Neutral toggle technique learned from a technique scroll or inheritance source.",
+          "While active, reserves exactly 50 max MP.",
+          "Gathering, harvesting, mining, woodcutting, and the shared harvest task flow yield double resource stack counts."
         ]
       },
       {
@@ -3395,6 +3421,18 @@
 
     const changelog = [
       {
+        version: "Version 2.3.0",
+        status: "Released",
+        title: "Earth-Tethered Dantian And The Rusted Sword",
+        items: [
+          "Added Earth-Tethered Dantian, a neutral toggle technique that reserves exactly 50 max MP while active.",
+          "Earth-Tethered Dantian doubles resource stack counts from player gathering actions, including harvesting, mining, woodcutting, and the shared harvest task flow.",
+          "Added the Rusted Sword, a suspiciously humble weapon with a 1% chance to instantly slay non-unique enemies after it deals damage.",
+          "Rusted Sword fate-severing is blocked for the player, party members, unique characters, bosses, and protected targets.",
+          "Added new item and technique wiki records with their release artwork."
+        ]
+      },
+      {
         version: "Version 2.2.0",
         status: "Released",
         title: "Nine Realms Widget, Progression Balance, And Combat Clarity",
@@ -3987,6 +4025,7 @@
         { status: "更远之路", title: "道途不止", body: "前路漫漫，道阻且长。纵使山雾遮住下一道关隘，天意步步试炼，修士仍须一息一息地坚持，直到大道再显新途。", version: "未来经卷" }
       ],
       ja: [
+        { version: "Version 2.3.0", status: "Released", title: "Earth-Tethered Dantian And The Rusted Sword", items: ["Added Earth-Tethered Dantian, a neutral toggle technique that reserves exactly 50 max MP while active.", "Earth-Tethered Dantian doubles resource stack counts from player gathering actions, including harvesting, mining, woodcutting, and the shared harvest task flow.", "Added the Rusted Sword, a suspiciously humble weapon with a 1% chance to instantly slay non-unique enemies after it deals damage.", "Rusted Sword fate-severing is blocked for the player, party members, unique characters, bosses, and protected targets.", "Added new item and technique wiki records with their release artwork."] },
         { status: "完了", completed: true, title: "基礎編", body: "修行システム、境界、突破、メニュー導線、Wiki 支援、更新記録、視覚調整、最初の共通技法が第一の経典として整っています。", version: "1.0.0 から 1.4.0" },
         { status: "完了", completed: true, title: "技法と術の拡張", body: "三つの修行ルートにより充実した技法と術を追加し、それぞれの戦闘と成長の個性を強めます。", version: "1.5.0 から 1.8.0、1.8.0 は 2.0.0 へ統合" },
         { status: "完了", completed: true, title: "凡界と仙界の宝", body: "巻物、天材地宝、神器が継承探し、アイテム個性、長期育成を深めます。", version: "1.7.0 から 1.9.0、1.9.0 は 2.0.0 へ統合" },
@@ -3999,6 +4038,7 @@
 
     const changelogLocale = {
       zh: [
+        { version: "Version 2.3.0", status: "Released", title: "Earth-Tethered Dantian And The Rusted Sword", items: ["Added Earth-Tethered Dantian, a neutral toggle technique that reserves exactly 50 max MP while active.", "Earth-Tethered Dantian doubles resource stack counts from player gathering actions, including harvesting, mining, woodcutting, and the shared harvest task flow.", "Added the Rusted Sword, a suspiciously humble weapon with a 1% chance to instantly slay non-unique enemies after it deals damage.", "Rusted Sword fate-severing is blocked for the player, party members, unique characters, bosses, and protected targets.", "Added new item and technique wiki records with their release artwork."] },
         { version: "版本 2.2.0", status: "已发布", title: "九境小组件、进度平衡与战斗说明", items: ["加入 Nine Realms 屏幕小组件，显示属性、突破尝试，并提供三个功法快捷入口。", "重新平衡修行进度，境界门槛会逐步提高。", "强化云宫印的拍卖收益。", "竞得物品领取界面现在可以滚动。", "加入已学卷轴标记。", "明确战斗能力提示与伤害类型。", "为修行攻击加入共享敌意处理。", "修复修行菜单音乐静音行为。"] },
         { version: "版本 2.1.0", status: "已发布", title: "任务、宗门与菜单框架", items: ["实现任务框架。", "实现宗门框架。", "加入新的菜单 UI。", "降低永恒交易阁 NPC 反超出价强度，并加入防狙拍延时。"] },
         { version: "版本 2.0.0", status: "已发布", title: "永恒交易阁", items: ["加入永恒交易阁拍卖堂，可竞拍稀有功法手册、卷轴、神器与有价值的 Elin 物品。", "拍卖按周期开放：第 14 天首次开放，之后每 60 天开放 1 天。", "玩家可以出价、保持领先、被其他竞拍者反超，并在拍卖结束后收到竞得物品。", "云宫印可降低最低出价，并减少对手反超压力。", "版本 2.0.0 包含原 1.8.0 与 1.9.0 跳过路线的内容。"] },
